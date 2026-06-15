@@ -36,6 +36,9 @@ Before implementing any feature:
 6. Verify error handling.
 7. Verify TypeScript type safety.
 
+For design guidance see:
+./DESIGN.md
+
 For complete project guidance see:
 
 .github/copilot-instructions.md
