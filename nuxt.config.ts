@@ -6,6 +6,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt'
+    ['@vite-pwa/nuxt', {
+      manifest: {
+        name: 'KP Sporting Wroclaw',
+        short_name: 'SW'
+      }
+    }]
   ]
 })
