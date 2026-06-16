@@ -1,0 +1,208 @@
+/*
+ * Global stylesheet that imports Tailwind, self-hosted Inter, shadcn variable
+ * mappings, and shared layout/component primitives for the app shell.
+ */
+@import '@fontsource-variable/inter';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Keep HSL shadcn tokens in sync with the hex tokens in tailwind.config.ts. */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 211 73% 37%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 213 82% 27%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 209 80% 94%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 209 80% 94%;
+  --accent-foreground: 211 73% 37%;
+  --destructive: 14 79% 71%;
+  --destructive-foreground: 15 71% 17%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 211 73% 37%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 222 47% 7%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 213 68% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 213 68% 55%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1 {
+    @apply text-h1 font-medium;
+    color: var(--color-text-primary);
+  }
+
+  h2 {
+    @apply text-h2 font-medium;
+    color: var(--color-text-primary);
+  }
+
+  h3 {
+    @apply text-h3 font-medium;
+    color: var(--color-text-primary);
+  }
+}
+
+@layer components {
+  .app-topbar {
+    @apply fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4;
+    height: var(--topbar-height);
+    background: var(--color-brand-800);
+    color: white;
+  }
+
+  .app-bottomnav {
+    @apply fixed inset-x-0 bottom-0 z-50 flex border-t border-border bg-surface lg:hidden;
+    height: calc(var(--bottomnav-height) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .app-bottomnav-item {
+    @apply flex min-h-[44px] flex-1 flex-col items-center justify-center gap-0.5 px-2 text-xs2;
+    color: var(--color-text-tertiary);
+    transition: color 150ms ease;
+  }
+
+  .app-bottomnav-item.active {
+    color: var(--color-brand-700);
+  }
+
+  .app-sidebar {
+    @apply fixed inset-y-0 left-0 z-40 flex flex-col;
+    width: var(--sidebar-width);
+    background: var(--color-brand-800);
+    color: white;
+  }
+
+  .app-sidebar-item {
+    @apply flex min-h-[44px] items-center gap-3 rounded-pill px-4 py-3 text-sm font-medium;
+    color: var(--color-brand-100);
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .app-sidebar-item:hover,
+  .app-sidebar-item:focus-visible {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+  }
+
+  .app-sidebar-item.active {
+    background: var(--color-brand-700);
+    color: white;
+  }
+
+  .page-with-topbar {
+    padding-top: var(--topbar-height);
+  }
+
+  .page-with-bottomnav {
+    padding-bottom: calc(var(--bottomnav-height) + env(safe-area-inset-bottom));
+  }
+
+  .page-with-sidebar {
+    margin-left: var(--sidebar-width);
+  }
+
+  .card {
+    @apply rounded-card border border-border bg-surface p-4 shadow-card;
+  }
+
+  .badge-base {
+    @apply inline-flex items-center rounded-pill px-2.5 py-1 text-xs font-medium;
+  }
+
+  .badge-confirmed {
+    background: var(--status-confirmed-bg);
+    color: var(--status-confirmed-text);
+  }
+
+  .badge-declined {
+    background: var(--status-declined-bg);
+    color: var(--status-declined-text);
+  }
+
+  .badge-pending {
+    background: var(--status-pending-bg);
+    color: var(--status-pending-text);
+  }
+
+  .badge-neutral {
+    background: var(--status-neutral-bg);
+    color: var(--status-neutral-text);
+  }
+
+  .avatar-chip {
+    @apply flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full bg-brand-50 text-label font-medium;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .avatar-chip-confirmed {
+    background: var(--status-confirmed-bg);
+    border-color: var(--status-confirmed-ring);
+    color: var(--status-confirmed-text);
+  }
+
+  .avatar-chip-declined {
+    background: var(--status-declined-bg);
+    border-color: var(--status-declined-ring);
+    color: var(--status-declined-text);
+  }
+
+  .avatar-chip-pending {
+    background: var(--status-pending-bg);
+    border-color: var(--status-pending-ring);
+    color: var(--status-pending-text);
+  }
+
+  .avatar-chip-neutral {
+    background: var(--status-neutral-bg);
+    border-color: var(--status-neutral-ring);
+    color: var(--status-neutral-text);
+  }
+
+  .eyebrow {
+    @apply text-xs2 font-medium uppercase tracking-[0.12em];
+    color: var(--color-brand-200);
+  }
+}
