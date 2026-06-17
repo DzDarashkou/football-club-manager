@@ -41,6 +41,7 @@ export default defineNuxtConfig({
       },
       meta: [
         { name: 'theme-color', content: '#0C447C' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
         { name: 'apple-mobile-web-app-title', content: 'Sporting Wroclaw' },
@@ -56,6 +57,11 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     devOptions: {
       enabled: false,
+    },
+    workbox: {
+      // This project is served through SSR, so "/" is not a precached static asset.
+      // Disabling the default navigation fallback avoids a broken SW route on deploy.
+      navigateFallback: null,
     },
     manifest: {
       name: 'Sporting Wroclaw Football Club Manager',
