@@ -10,10 +10,10 @@ import {
   Settings,
   ShieldAlert,
   Shirt,
+  Trophy,
   UserCircle2,
   Users,
   Volleyball,
-  Whistle,
   X,
 } from 'lucide-vue-next'
 import type { Component } from 'vue'
@@ -39,7 +39,7 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Users', icon: 'Users', iconComponent: Users, to: '/admin/users', role: ['admin'] },
   { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/admin/teams', role: ['admin'] },
   { label: 'Players', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
-  { label: 'Coaches', icon: 'Whistle', iconComponent: Whistle, to: '/admin/coaches', role: ['admin'] },
+  { label: 'Coaches', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'] },
   { label: 'Settings', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'] },
 ]
 
@@ -59,7 +59,7 @@ const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${
 
 <template>
   <div class="min-h-screen bg-[var(--color-surface-sunken)]">
-    <header v-if="hasTopbar" class="app-topbar">
+    <header v-if="hasTopbar" class="app-topbar" :class="{ 'lg:hidden': hasSidebar }">
       <div class="flex items-center gap-3">
         <button
           v-if="role === 'admin'"

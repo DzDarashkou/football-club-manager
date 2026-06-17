@@ -18,7 +18,7 @@ export function useLayout() {
     if (path.startsWith('/coach')) {
       return 'coach'
     }
-    if (path === '/' || path === '/login' || path === '/forgot-password') {
+    if (path === '/' || path === '/login' || path === '/forgot-password' || path === '/test-tokens') {
       return 'public'
     }
     return 'parent'

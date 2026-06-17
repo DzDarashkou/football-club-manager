@@ -1,6 +1,6 @@
 <!-- Button primitive aligned with shadcn-vue conventions and club semantic tokens. -->
 <script setup lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { computed, useAttrs } from 'vue'
 import { cn } from '@@/lib/utils'
 
@@ -29,9 +29,14 @@ const buttonVariants = cva(
   },
 )
 
-interface ButtonProps extends VariantProps<typeof buttonVariants> {
+type ButtonVariant = 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'
+type ButtonSize = 'default' | 'sm' | 'lg' | 'icon'
+
+type ButtonProps = {
   as?: string
   class?: string
+  size?: ButtonSize
+  variant?: ButtonVariant
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {

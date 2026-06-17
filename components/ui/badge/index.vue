@@ -1,6 +1,6 @@
 <!-- Badge primitive with optional status color mapping for attendance states. -->
 <script setup lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { computed } from 'vue'
 import { cn } from '@@/lib/utils'
 import type { StatusKey } from '@@/types/design'
@@ -21,9 +21,12 @@ const badgeVariants = cva(
   },
 )
 
-interface BadgeProps extends VariantProps<typeof badgeVariants> {
+type BadgeVariant = 'default' | 'secondary' | 'outline'
+
+type BadgeProps = {
   status?: StatusKey
   class?: string
+  variant?: BadgeVariant
 }
 
 const props = withDefaults(defineProps<BadgeProps>(), {
