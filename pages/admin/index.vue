@@ -1,5 +1,8 @@
-<!-- Admin overview sample page to validate the sidebar shell on large screens. -->
 <script setup lang="ts">
+definePageMeta({
+  allowedRoles: ['admin'],
+})
+
 const metrics = [
   { label: 'Teams', value: '6' },
   { label: 'Players', value: '94' },

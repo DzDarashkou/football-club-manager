@@ -1,27 +1,20 @@
-/**
- * Derives the active shell role from the current route so layouts can stay
- * declarative and role-aware.
- */
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { isPublicPath } from '@@/lib/auth'
+import type { AppRole } from '@@/types/auth'
 
-export type LayoutRole = 'public' | 'parent' | 'coach' | 'admin'
+export type LayoutRole = 'public' | AppRole
 
 export function useLayout() {
   const route = useRoute()
+  const { role: authRole } = useAppAuth()
 
   const role = computed<LayoutRole>(() => {
-    const path = route.path
-    if (path.startsWith('/admin')) {
-      return 'admin'
-    }
-    if (path.startsWith('/coach')) {
-      return 'coach'
-    }
-    if (path === '/' || path === '/login' || path === '/forgot-password' || path === '/test-tokens') {
+    if (route.meta.public === true || isPublicPath(route.path)) {
       return 'public'
     }
-    return 'parent'
+
+    return authRole.value ?? 'public'
   })
 
   const hasTopbar = computed(() => role.value !== 'public')

@@ -1,5 +1,10 @@
-<!-- Parent dashboard sample page to exercise topbar and bottom-nav layout tokens. -->
 <script setup lang="ts">
+definePageMeta({
+  allowedRoles: ['parent'],
+})
+
+const { profile } = useAppAuth()
+
 const squad = [
   { initials: 'MK', name: 'Marek', className: 'avatar-chip avatar-chip-confirmed' },
   { initials: 'JN', name: 'Jan', className: 'avatar-chip avatar-chip-confirmed' },
@@ -18,7 +23,7 @@ const upcoming = [
   <div class="mx-auto max-w-3xl space-y-6">
     <div class="space-y-2 pt-2">
       <p class="text-h2 text-[color:var(--color-text-secondary)]">Good afternoon</p>
-      <h1>Anna Kowalska</h1>
+      <h1>{{ profile?.full_name || profile?.email || 'Parent account' }}</h1>
     </div>
 
     <Card class="space-y-4">

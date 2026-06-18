@@ -1,7 +1,7 @@
 /**
  * Shared design-system types for status-driven UI primitives and role-aware nav.
  */
-import type { LayoutRole } from '@@/composables/useLayout'
+import type { AppRole } from '@@/types/auth'
 
 export type StatusKey = 'confirmed' | 'declined' | 'pending' | 'neutral'
 
@@ -15,5 +15,5 @@ export type NavItem = {
   label: string
   icon: string
   to: string
-  role: LayoutRole[]
+  role: AppRole[]
 }

@@ -6,6 +6,7 @@ import {
   Calendar,
   ChevronRight,
   LayoutDashboard,
+  LogOut,
   Menu,
   Settings,
   ShieldAlert,
@@ -17,17 +18,22 @@ import {
   X,
 } from 'lucide-vue-next'
 import type { Component } from 'vue'
+import { getProfileDisplayName, getProfileInitials } from '@@/lib/auth'
 import { useLayout } from '@@/composables/useLayout'
 import type { NavItem } from '@@/types/design'
+import type { AppRole } from '@@/types/auth'
 
 const route = useRoute()
+const router = useRouter()
 const drawerOpen = ref(false)
 const { role, hasTopbar, hasBottomNav, hasSidebar } = useLayout()
+const { profile, signOut } = useAppAuth()
 
 type NavItemWithIcon = NavItem & { iconComponent: Component }
 
-const bottomNavItems: NavItemWithIcon[] = [
+const memberNavItems: NavItemWithIcon[] = [
   { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/dashboard', role: ['parent'] },
+  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'] },
   { label: 'My children', icon: 'Users', iconComponent: Users, to: '/my-children', role: ['parent'] },
   { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/games', role: ['parent', 'coach'] },
   { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/calendar', role: ['parent', 'coach'] },
@@ -44,7 +50,7 @@ const adminNavItems: NavItemWithIcon[] = [
 ]
 
 const filteredBottomNavItems = computed(() =>
-  bottomNavItems.filter((item) => item.role.includes(role.value)),
+  memberNavItems.filter((item) => item.role.includes(role.value as AppRole)),
 )
 
 const mainClass = computed(() => [
@@ -55,6 +61,15 @@ const mainClass = computed(() => [
 ])
 
 const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${to}/`)
+const displayName = computed(() => getProfileDisplayName(profile.value))
+const initials = computed(() => getProfileInitials(profile.value))
+const email = computed(() => profile.value?.email ?? '')
+
+async function handleSignOut() {
+  await signOut()
+  drawerOpen.value = false
+  await router.push('/login')
+}
 </script>
 
 <template>
@@ -73,13 +88,24 @@ const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${
         </button>
         <ClubLogo variant="full" />
       </div>
-      <button
-        type="button"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
-        aria-label="Open notifications"
-      >
-        <Bell class="h-5 w-5" />
-      </button>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          aria-label="Open notifications"
+        >
+          <Bell class="h-5 w-5" />
+        </button>
+        <Button
+          variant="ghost"
+          size="icon"
+          class="text-white hover:bg-white/10 hover:text-white"
+          aria-label="Sign out"
+          @click="handleSignOut"
+        >
+          <LogOut class="h-5 w-5" />
+        </Button>
+      </div>
     </header>
 
     <aside v-if="hasSidebar" class="app-sidebar hidden lg:flex">
@@ -99,14 +125,25 @@ const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${
         </NuxtLink>
       </nav>
       <div class="border-t border-white/15 px-4 py-5">
-        <div class="flex items-center gap-3">
-          <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white">
-            AK
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white">
+              {{ initials }}
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white">{{ displayName }}</p>
+              <p class="text-label text-brand-100">{{ email }}</p>
+            </div>
           </div>
-          <div>
-            <p class="text-sm font-medium text-white">Admin</p>
-            <p class="text-label text-brand-100">admin@sporting.pl</p>
-          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            class="text-white hover:bg-white/10 hover:text-white"
+            aria-label="Sign out"
+            @click="handleSignOut"
+          >
+            <LogOut class="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </aside>
@@ -153,6 +190,16 @@ const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${
               <span>{{ item.label }}</span>
             </NuxtLink>
           </nav>
+          <div class="border-t border-white/15 px-4 py-5">
+            <Button
+              variant="ghost"
+              class="w-full justify-start text-white hover:bg-white/10 hover:text-white"
+              @click="handleSignOut"
+            >
+              <LogOut class="mr-2 h-5 w-5" />
+              Sign out
+            </Button>
+          </div>
         </aside>
       </div>
     </Transition>

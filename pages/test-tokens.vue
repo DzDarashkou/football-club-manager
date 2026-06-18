@@ -2,6 +2,11 @@
 <script setup lang="ts">
 import type { StatusKey } from '@@/types/design'
 
+definePageMeta({
+  layout: 'public',
+  public: true,
+})
+
 const brandSwatches = [
   { name: 'brand-50', className: 'bg-brand-50 text-brand-900' },
   { name: 'brand-100', className: 'bg-brand-100 text-brand-900' },

@@ -1,7 +1,7 @@
-<!-- Password reset placeholder using the public layout shell. -->
 <script setup lang="ts">
 definePageMeta({
   layout: 'public',
+  public: true,
 })
 </script>
 
@@ -11,15 +11,11 @@ definePageMeta({
       <p class="eyebrow text-brand-700">Account recovery</p>
       <h1>Forgot password</h1>
       <p class="mt-2 text-body text-[color:var(--color-text-secondary)]">
-        Enter your email and we&apos;ll send reset instructions.
+        Password reset will be added in a later phase. For now, please contact a club administrator to regain access.
       </p>
     </div>
     <div class="space-y-4">
-      <div class="space-y-2">
-        <Label for="recovery-email">Email</Label>
-        <Input id="recovery-email" type="email" placeholder="parent@sporting.pl" />
-      </div>
-      <Button class="w-full">Send reset link</Button>
+      <Button as="a" href="/login" class="w-full">Back to sign in</Button>
     </div>
   </div>
 </template>
