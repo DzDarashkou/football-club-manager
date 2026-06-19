@@ -1,4 +1,4 @@
-import type { AppRole } from '@@/types/auth'
+import type { AppRole, AppUserStatus } from '@@/types/auth'
 
 export type Database = {
   public: {
@@ -8,6 +8,7 @@ export type Database = {
           id: string
           email: string
           role: AppRole
+          status: AppUserStatus
           full_name: string | null
           created_at: string
           updated_at: string
@@ -16,6 +17,7 @@ export type Database = {
           id: string
           email: string
           role: AppRole
+          status?: AppUserStatus
           full_name?: string | null
           created_at?: string
           updated_at?: string
@@ -24,6 +26,7 @@ export type Database = {
           id?: string
           email?: string
           role?: AppRole
+          status?: AppUserStatus
           full_name?: string | null
           created_at?: string
           updated_at?: string
@@ -35,6 +38,7 @@ export type Database = {
     Functions: Record<string, never>
     Enums: {
       app_role: AppRole
+      user_status: AppUserStatus
     }
     CompositeTypes: Record<string, never>
   }

@@ -14,6 +14,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   const isPublicRoute = to.meta.public === true || isPublicPath(to.path)
+  const blockedReason = authStore.authError?.includes('inactive') ? 'inactive' : null
 
   if (isPublicRoute) {
     if (to.path === '/login' && authStore.isAuthenticated && authStore.role) {
@@ -24,7 +25,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   if (!authStore.isAuthenticated || !authStore.role) {
-    return navigateTo('/login')
+    return navigateTo(blockedReason ? `/login?reason=${blockedReason}` : '/login')
   }
 
   const allowedRoles = to.meta.allowedRoles as AppRole[] | undefined

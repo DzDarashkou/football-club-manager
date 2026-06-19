@@ -126,19 +126,19 @@ async function handleSignOut() {
       </nav>
       <div class="border-t border-white/15 px-4 py-5">
         <div class="flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white">
+          <div class="flex min-w-0 items-center gap-3">
+            <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white">
               {{ initials }}
             </div>
-            <div>
-              <p class="text-sm font-medium text-white">{{ displayName }}</p>
-              <p class="text-label text-brand-100">{{ email }}</p>
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-white">{{ displayName }}</p>
+              <p class="truncate text-label text-brand-100">{{ email }}</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            class="text-white hover:bg-white/10 hover:text-white"
+            class="flex-shrink-0 text-white hover:bg-white/10 hover:text-white"
             aria-label="Sign out"
             @click="handleSignOut"
           >

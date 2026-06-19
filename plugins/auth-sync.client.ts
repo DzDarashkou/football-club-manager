@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
       }
 
       if (!userId) {
-        authStore.reset()
+        authStore.reset({ preserveError: true })
         return
       }
 

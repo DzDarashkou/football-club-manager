@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Session, SupabaseClient, User } from '@supabase/supabase-js'
-import { isAppRole } from '@@/lib/auth'
+import { extractUserId, isAppRole, isAppUserStatus } from '@@/lib/auth'
 import type { Database } from '@@/types/database'
 import type { AppProfile, AppRole, LoginCredentials } from '@@/types/auth'
 
@@ -19,24 +19,6 @@ async function resolveSupabaseUser(client: SupabaseClient<Database>) {
   return data.user
 }
 
-function extractUserId(candidate: unknown) {
-  if (!candidate || typeof candidate !== 'object') {
-    return null
-  }
-
-  const value = candidate as { id?: unknown, sub?: unknown }
-
-  if (typeof value.id === 'string' && value.id.length > 0) {
-    return value.id
-  }
-
-  if (typeof value.sub === 'string' && value.sub.length > 0) {
-    return value.sub
-  }
-
-  return null
-}
-
 export const useAuthStore = defineStore('auth', () => {
   const client = useSupabaseClient<Database>()
   const supabaseSession = useSupabaseSession()
@@ -52,17 +34,18 @@ export const useAuthStore = defineStore('auth', () => {
   const user = computed(() => (session.value?.user ?? null) as User | null)
   const role = computed<AppRole | null>(() => profile.value?.role ?? null)
   const isAuthenticated = computed(() => Boolean(session.value?.access_token))
+  const isActive = computed(() => profile.value?.status === 'active')
 
-  function reset() {
+  function reset(options: { preserveError?: boolean } = {}) {
     profile.value = null
-    authError.value = null
+    authError.value = options.preserveError ? authError.value : null
     loadedUserId.value = null
   }
 
   async function loadProfileForUser(userId: string) {
     const { data, error } = await client
       .from('profiles')
-      .select('id, email, role, full_name, created_at, updated_at')
+      .select('id, email, role, status, full_name, created_at, updated_at')
       .eq('id', userId)
       .maybeSingle()
 
@@ -70,10 +53,18 @@ export const useAuthStore = defineStore('auth', () => {
       throw error
     }
 
-    if (!data || !isAppRole(data.role)) {
+    if (!data || !isAppRole(data.role) || !isAppUserStatus(data.status)) {
       profile.value = null
       loadedUserId.value = null
       authError.value = 'Your account is missing an application role. Please contact the club administrator.'
+      await client.auth.signOut()
+      return
+    }
+
+    if (data.status !== 'active') {
+      profile.value = null
+      loadedUserId.value = null
+      authError.value = 'Your account is inactive. Please contact the club administrator.'
       await client.auth.signOut()
       return
     }
@@ -82,6 +73,7 @@ export const useAuthStore = defineStore('auth', () => {
       id: data.id,
       email: data.email,
       role: data.role,
+      status: data.status,
       full_name: data.full_name,
       created_at: data.created_at,
       updated_at: data.updated_at,
@@ -106,7 +98,7 @@ export const useAuthStore = defineStore('auth', () => {
         const activeUserId = resolvedUserId ?? sessionUserId ?? moduleUserId
 
         if (!activeUserId) {
-          reset()
+          reset({ preserveError: true })
           return
         }
 
@@ -160,9 +152,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return {
+    return {
     authError,
     initialize,
+    isActive,
     isAuthenticated,
     isInitializing,
     profile,

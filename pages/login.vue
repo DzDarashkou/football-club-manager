@@ -17,6 +17,18 @@ const form = reactive<LoginCredentials>({
 
 const isSubmitting = ref(false)
 const errorMessage = ref<string | null>(null)
+const route = useRoute()
+
+watchEffect(() => {
+  if (route.query.reason === 'inactive') {
+    errorMessage.value = 'Your account is inactive. Please contact the club administrator.'
+    return
+  }
+
+  if (route.query.reset === 'success') {
+    errorMessage.value = null
+  }
+})
 
 async function handleSubmit() {
   errorMessage.value = null
@@ -75,11 +87,16 @@ async function handleSubmit() {
       <p v-if="errorMessage" class="text-label text-[var(--status-declined-text)]">
         {{ errorMessage }}
       </p>
+      <p v-if="route.query.reset === 'success'" class="text-label text-[var(--status-confirmed-text)]">
+        Your password has been updated. Please sign in with the new password.
+      </p>
       <Button class="w-full" type="submit" :disabled="isSubmitting || isInitializing">
         {{ isSubmitting ? 'Signing in...' : 'Continue' }}
       </Button>
       <p class="text-center text-label text-[color:var(--color-text-secondary)]">
-        Password recovery is planned for a later phase.
+        <NuxtLink to="/forgot-password" class="font-medium text-brand-700 hover:text-brand-800">
+          Forgot your password?
+        </NuxtLink>
       </p>
     </form>
   </div>
