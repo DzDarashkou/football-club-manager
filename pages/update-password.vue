@@ -15,6 +15,28 @@ const errorMessage = ref<string | null>(null)
 const successMessage = ref<string | null>(null)
 const recoveryReady = ref(false)
 
+const passwordError = computed(() => {
+  if (!password.value) {
+    return null
+  }
+
+  return password.value.length >= 8
+    ? null
+    : 'Password must be at least 8 characters long.'
+})
+
+const confirmPasswordError = computed(() => {
+  if (!confirmPassword.value) {
+    return null
+  }
+
+  return password.value === confirmPassword.value
+    ? null
+    : 'Passwords do not match.'
+})
+
+const isFormValid = computed(() => !passwordError.value && !confirmPasswordError.value)
+
 if (session.value) {
   recoveryReady.value = true
 }
@@ -40,13 +62,13 @@ async function handleSubmit() {
     return
   }
 
-  if (password.value.length < 8) {
-    errorMessage.value = 'Password must be at least 8 characters long.'
+  if (passwordError.value) {
+    errorMessage.value = passwordError.value
     return
   }
 
-  if (password.value !== confirmPassword.value) {
-    errorMessage.value = 'Passwords do not match.'
+  if (confirmPasswordError.value) {
+    errorMessage.value = confirmPasswordError.value
     return
   }
 
@@ -87,11 +109,32 @@ async function handleSubmit() {
     <form class="space-y-4" @submit.prevent="handleSubmit">
       <div class="space-y-2">
         <Label for="password">New password</Label>
-        <Input id="password" v-model="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" required />
+        <Input
+          id="password"
+          v-model="password"
+          type="password"
+          autocomplete="new-password"
+          placeholder="At least 8 characters"
+          minlength="8"
+          required
+        />
+        <p v-if="passwordError" class="text-label text-[var(--status-declined-text)]">
+          {{ passwordError }}
+        </p>
       </div>
       <div class="space-y-2">
         <Label for="confirm_password">Confirm password</Label>
-        <Input id="confirm_password" v-model="confirmPassword" type="password" autocomplete="new-password" placeholder="Repeat your password" required />
+        <Input
+          id="confirm_password"
+          v-model="confirmPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Repeat your password"
+          required
+        />
+        <p v-if="confirmPasswordError" class="text-label text-[var(--status-declined-text)]">
+          {{ confirmPasswordError }}
+        </p>
       </div>
       <p v-if="successMessage" class="text-label text-[var(--status-confirmed-text)]">
         {{ successMessage }}
@@ -99,7 +142,7 @@ async function handleSubmit() {
       <p v-if="errorMessage" class="text-label text-[var(--status-declined-text)]">
         {{ errorMessage }}
       </p>
-      <Button class="w-full" type="submit" :disabled="isSubmitting">
+      <Button class="w-full" type="submit" :disabled="isSubmitting || !isFormValid">
         {{ isSubmitting ? 'Saving...' : 'Update password' }}
       </Button>
       <p class="text-center text-label text-[color:var(--color-text-secondary)]">
