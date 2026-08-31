@@ -45,6 +45,7 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Users', icon: 'Users', iconComponent: Users, to: '/admin/users', role: ['admin'] },
   { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/admin/teams', role: ['admin'] },
   { label: 'Players', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
+  { label: 'Games', icon: 'Calendar', iconComponent: Calendar, to: '/admin/games', role: ['admin'] },
   { label: 'Coaches', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'] },
   { label: 'Settings', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'] },
 ]

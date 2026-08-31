@@ -1,0 +1,4 @@
+import { readBody } from 'h3'
+import { competitionSchema } from '@@/server/utils/admin-games'
+import { handleApiError, requireAdminAccess } from '@@/server/utils/admin-users'
+export default defineEventHandler(async (event) => { const { adminClient } = await requireAdminAccess(event); const payload = competitionSchema.parse(await readBody(event)); try { const { data: season } = await adminClient.from('seasons').select('id').eq('id', payload.season_id).eq('is_active', true).maybeSingle(); if (!season) handleApiError(new Error('Select an active season.'), 'Unable to create competition.', 400); const { data, error } = await adminClient.from('competitions').insert(payload).select('id, season_id, name, type, is_active').single(); if (error) handleApiError(error, 'Unable to create competition.', 400); return { competition: data } } catch (error) { handleApiError(error, 'Unable to create competition.', 400) } })

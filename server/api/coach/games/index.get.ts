@@ -1,0 +1,5 @@
+import { getGames } from '@@/server/utils/admin-games'
+import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
+import { extractUserId } from '@@/lib/auth'
+import type { Database } from '@@/types/database'
+export default defineEventHandler(async (event) => { const coachId = extractUserId(await serverSupabaseUser(event)); if (!coachId) throw createError({ statusCode: 401, statusMessage: 'You must be signed in.' }); const adminClient = serverSupabaseServiceRole<Database>(event); const { data: profile } = await adminClient.from('profiles').select('id').eq('id', coachId).eq('role', 'coach').eq('status', 'active').maybeSingle(); if (!profile) throw createError({ statusCode: 403, statusMessage: 'Coach access is required.' }); const { data: assignments } = await adminClient.from('coach_teams').select('team_id').eq('coach_id', coachId); const teamIds = (assignments ?? []).map((item) => item.team_id); return { games: (await getGames(adminClient)).filter((game) => teamIds.includes(game.team_id)) } })
