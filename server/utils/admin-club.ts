@@ -29,6 +29,7 @@ export const teamUpdateSchema = teamCreateSchema.partial().refine((value) => Obj
 
 export const playerCreateSchema = z.object({
   full_name: nameSchema,
+  shirt_number: z.coerce.number().int().min(1).max(99).nullable().optional().default(null),
   date_of_birth: z.iso.date().refine((value) => value <= new Date().toISOString().slice(0, 10), {
     message: 'Date of birth cannot be in the future.',
   }),
@@ -126,7 +127,7 @@ export async function getTeams(adminClient: AdminClient): Promise<AdminTeam[]> {
 export async function getPlayers(adminClient: AdminClient, query: z.infer<typeof playerListQuerySchema>): Promise<AdminPlayer[]> {
   let request = adminClient
     .from('players')
-    .select('id, full_name, date_of_birth, team_id, is_active, created_at, updated_at')
+    .select('id, full_name, shirt_number, date_of_birth, team_id, is_active, created_at, updated_at')
     .order('full_name')
     .limit(100)
 
@@ -149,7 +150,7 @@ export async function getPlayers(adminClient: AdminClient, query: z.infer<typeof
 
 export async function getPlayerById(adminClient: AdminClient, playerId: string): Promise<AdminPlayer | null> {
   const [playerResult, teams] = await Promise.all([
-    adminClient.from('players').select('id, full_name, date_of_birth, team_id, is_active, created_at, updated_at').eq('id', playerId).maybeSingle(),
+    adminClient.from('players').select('id, full_name, shirt_number, date_of_birth, team_id, is_active, created_at, updated_at').eq('id', playerId).maybeSingle(),
     getTeams(adminClient),
   ])
 

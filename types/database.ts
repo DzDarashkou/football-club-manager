@@ -106,6 +106,7 @@ export type Database = {
         Row: {
           id: string
           full_name: string
+          shirt_number: number | null
           date_of_birth: string
           team_id: string
           is_active: boolean
@@ -115,6 +116,7 @@ export type Database = {
         Insert: {
           id?: string
           full_name: string
+          shirt_number?: number | null
           date_of_birth: string
           team_id: string
           is_active?: boolean
@@ -124,6 +126,7 @@ export type Database = {
         Update: {
           id?: string
           full_name?: string
+          shirt_number?: number | null
           date_of_birth?: string
           team_id?: string
           is_active?: boolean

@@ -22,6 +22,7 @@ export type AdminTeam = {
 export type AdminPlayer = {
   id: string
   full_name: string
+  shirt_number: number | null
   date_of_birth: string
   team_id: string
   is_active: boolean
@@ -38,7 +39,7 @@ export type AdminPlayersResponse = { players: AdminPlayer[] }
 
 export type AdminAgeGroupInput = Pick<AdminAgeGroup, 'name' | 'birth_year_from' | 'birth_year_to'>
 export type AdminTeamInput = Pick<AdminTeam, 'name' | 'age_group_id'> & { is_active?: boolean }
-export type AdminPlayerInput = Pick<AdminPlayer, 'full_name' | 'date_of_birth' | 'team_id'> & { is_active?: boolean }
+export type AdminPlayerInput = Pick<AdminPlayer, 'full_name' | 'date_of_birth' | 'team_id' | 'shirt_number'> & { is_active?: boolean }
 
 export type GameStatus = 'scheduled' | 'completed' | 'postponed' | 'cancelled'
 export type CompetitionType = 'league' | 'cup' | 'friendly' | 'tournament'
