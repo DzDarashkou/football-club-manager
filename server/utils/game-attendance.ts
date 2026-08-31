@@ -17,21 +17,44 @@ async function currentActor(event: Parameters<typeof serverSupabaseUser>[0], req
   const userId = extractUserId(await serverSupabaseUser(event))
   if (!userId) throw createError({ statusCode: 401, statusMessage: 'You must be signed in.' })
   const adminClient = serverSupabaseServiceRole<Database>(event)
-  const { data, error } = await adminClient.from('profiles').select('id').eq('id', userId).eq('role', requiredRole).eq('status', 'active').maybeSingle()
+  let request = adminClient.from('profiles').select('id, role').eq('id', userId).eq('status', 'active')
+  request = requiredRole === 'coach'
+    ? request.in('role', ['admin', 'coach'])
+    : request.eq('role', 'parent')
+  const { data, error } = await request.maybeSingle()
   if (error) fail(error, 'Unable to verify your account.')
   if (!data) throw createError({ statusCode: 403, statusMessage: 'You do not have access to this action.' })
-  return { userId, adminClient }
+  return { userId, adminClient, role: data.role }
+}
+
+export async function requireCoachAccess(event: Parameters<typeof serverSupabaseUser>[0]) {
+  return currentActor(event, 'coach')
 }
 
 export async function requireCoachGame(event: Parameters<typeof serverSupabaseUser>[0], gameId: string) {
-  const { userId, adminClient } = await currentActor(event, 'coach')
+  const { userId, adminClient, role } = await requireCoachAccess(event)
   const { data: game, error: gameError } = await adminClient.from('games').select('id, team_id, status').eq('id', gameId).maybeSingle()
   if (gameError) fail(gameError, 'Unable to load the game.')
   if (!game) throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
-  const { data: assignment, error: assignmentError } = await adminClient.from('coach_teams').select('coach_id').eq('coach_id', userId).eq('team_id', game.team_id).maybeSingle()
-  if (assignmentError) fail(assignmentError, 'Unable to verify team assignment.')
-  if (!assignment) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to this team.' })
+  if (role === 'coach') {
+    const { data: assignment, error: assignmentError } = await adminClient.from('coach_teams').select('coach_id').eq('coach_id', userId).eq('team_id', game.team_id).maybeSingle()
+    if (assignmentError) fail(assignmentError, 'Unable to verify team assignment.')
+    if (!assignment) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to this team.' })
+  }
   return { adminClient, game }
+}
+
+export async function requireCoachPlayer(event: Parameters<typeof serverSupabaseUser>[0], playerId: string) {
+  const { userId, adminClient, role } = await requireCoachAccess(event)
+  const { data: player, error: playerError } = await adminClient.from('players').select('id, team_id').eq('id', playerId).maybeSingle()
+  if (playerError) fail(playerError, 'Unable to load the player.')
+  if (!player) throw createError({ statusCode: 404, statusMessage: 'Player not found.' })
+  if (role === 'coach') {
+    const { data: assignment, error: assignmentError } = await adminClient.from('coach_teams').select('coach_id').eq('coach_id', userId).eq('team_id', player.team_id).maybeSingle()
+    if (assignmentError) fail(assignmentError, 'Unable to verify team assignment.')
+    if (!assignment) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to this team.' })
+  }
+  return { adminClient, player }
 }
 
 export async function requireParentGamePlayer(event: Parameters<typeof serverSupabaseUser>[0], gameId: string, playerId: string) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AdminGame } from '@@/types/admin-club'
-definePageMeta({ allowedRoles: ['coach'] })
+definePageMeta({ allowedRoles: ['admin', 'coach'] })
 const { data, pending } = await useFetch<{ games: AdminGame[] }>('/api/coach/games', { default: () => ({ games: [] }) })
 function format(value: string) { return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) }
 </script>

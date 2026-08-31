@@ -1,6 +1,7 @@
 <!-- Main application shell that switches between parent, coach, and admin navigation patterns. -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useSessionStorage } from '@vueuse/core'
 import {
   Bell,
   Calendar,
@@ -26,6 +27,8 @@ import type { AppRole } from '@@/types/auth'
 const route = useRoute()
 const router = useRouter()
 const drawerOpen = ref(false)
+type AdminNavigationMode = 'admin' | 'coach'
+const adminNavigationMode = useSessionStorage<AdminNavigationMode>('sporting-admin-navigation-mode', 'admin')
 const { role, hasTopbar, hasBottomNav, hasSidebar } = useLayout()
 const { profile, signOut } = useAppAuth()
 
@@ -50,9 +53,19 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Settings', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'] },
 ]
 
+const coachNavItems: NavItemWithIcon[] = [
+  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'] },
+  { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/coach/teams', role: ['coach'] },
+  { label: 'Players', icon: 'Users', iconComponent: Users, to: '/coach/players', role: ['coach'] },
+  { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
+  { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/calendar', role: ['coach'] },
+  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
+]
+
 const filteredBottomNavItems = computed(() =>
   memberNavItems.filter((item) => item.role.includes(role.value as AppRole)),
 )
+const activeSidebarNavItems = computed(() => adminNavigationMode.value === 'coach' ? coachNavItems : adminNavItems)
 
 const mainClass = computed(() => [
   'min-h-screen bg-[var(--color-surface-sunken)] px-4 py-4 sm:px-5',
@@ -70,6 +83,13 @@ async function handleSignOut() {
   await signOut()
   drawerOpen.value = false
   await router.push('/login')
+}
+
+async function setAdminNavigationMode(mode: AdminNavigationMode) {
+  if (adminNavigationMode.value === mode) return
+  adminNavigationMode.value = mode
+  drawerOpen.value = false
+  await router.push(mode === 'coach' ? '/coach' : '/admin')
 }
 </script>
 
@@ -112,10 +132,14 @@ async function handleSignOut() {
     <aside v-if="hasSidebar" class="app-sidebar hidden lg:flex">
       <div class="border-b border-white/15 px-4 py-8">
         <ClubLogo variant="full" />
+        <div class="mt-5 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs" aria-label="Navigation mode">
+          <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'admin' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('admin')">Admin</button>
+          <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'coach' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('coach')">Coach</button>
+        </div>
       </div>
       <nav class="flex-1 space-y-2 px-4 py-6">
         <NuxtLink
-          v-for="item in adminNavItems"
+          v-for="item in activeSidebarNavItems"
           :key="item.to"
           :to="item.to"
           class="app-sidebar-item"
@@ -177,10 +201,14 @@ async function handleSignOut() {
                 <X class="h-5 w-5" />
               </button>
             </div>
+            <div class="mt-4 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs" aria-label="Navigation mode">
+              <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'admin' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('admin')">Admin</button>
+              <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'coach' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('coach')">Coach</button>
+            </div>
           </div>
           <nav class="flex-1 space-y-2 px-4 py-6">
             <NuxtLink
-              v-for="item in adminNavItems"
+              v-for="item in activeSidebarNavItems"
               :key="item.to"
               :to="item.to"
               class="app-sidebar-item"

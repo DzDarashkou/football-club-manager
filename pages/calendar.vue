@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  allowedRoles: ['parent', 'coach'],
+  allowedRoles: ['admin', 'parent', 'coach'],
 })
 
 const items = [

@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 
 definePageMeta({
-  allowedRoles: ['parent', 'coach'],
+  allowedRoles: ['admin', 'parent', 'coach'],
 })
 
 const { profile } = useAppAuth()
