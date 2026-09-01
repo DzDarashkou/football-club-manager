@@ -13,14 +13,16 @@ export const availabilitySchema = z.object({ availability_status: z.enum(['avail
 export const statisticsSchema = z.object({ selection_status: z.enum(['selected', 'started', 'substitute', 'not_selected']), participated: z.boolean(), minutes_played: z.coerce.number().int().min(0).max(180), goals: z.coerce.number().int().min(0).max(30), assists: z.coerce.number().int().min(0).max(30), yellow_cards: z.coerce.number().int().min(0).max(2), red_cards: z.coerce.number().int().min(0).max(1), coach_note: z.string().trim().max(500).nullable().optional().default(null) })
 
 function fail(error: unknown, message: string): never { handleApiError(error, message, 400) }
-async function currentActor(event: Parameters<typeof serverSupabaseUser>[0], requiredRole: 'coach' | 'parent') {
+async function currentActor(event: Parameters<typeof serverSupabaseUser>[0], requiredRole: 'coach' | 'parent' | 'calendar') {
   const userId = extractUserId(await serverSupabaseUser(event))
   if (!userId) throw createError({ statusCode: 401, statusMessage: 'You must be signed in.' })
   const adminClient = serverSupabaseServiceRole<Database>(event)
   let request = adminClient.from('profiles').select('id, role').eq('id', userId).eq('status', 'active')
   request = requiredRole === 'coach'
     ? request.in('role', ['admin', 'coach'])
-    : request.eq('role', 'parent')
+    : requiredRole === 'parent'
+      ? request.eq('role', 'parent')
+      : request.in('role', ['admin', 'coach', 'parent'])
   const { data, error } = await request.maybeSingle()
   if (error) fail(error, 'Unable to verify your account.')
   if (!data) throw createError({ statusCode: 403, statusMessage: 'You do not have access to this action.' })
@@ -29,6 +31,10 @@ async function currentActor(event: Parameters<typeof serverSupabaseUser>[0], req
 
 export async function requireCoachAccess(event: Parameters<typeof serverSupabaseUser>[0]) {
   return currentActor(event, 'coach')
+}
+
+export async function requireCalendarAccess(event: Parameters<typeof serverSupabaseUser>[0]) {
+  return currentActor(event, 'calendar')
 }
 
 export async function requireCoachGame(event: Parameters<typeof serverSupabaseUser>[0], gameId: string) {

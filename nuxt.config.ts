@@ -47,9 +47,8 @@ export default defineNuxtConfig({
         { name: 'apple-mobile-web-app-title', content: 'Sporting Wroclaw' },
       ],
       link: [
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/images/icon-192.png' },
-        { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/images/icon-192.png' },
-        { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/images/icon-512.png' },
+        { rel: 'apple-touch-icon', href: '/images/logo-trans.png' },
+        { rel: 'icon', type: 'image/png', href: '/images/logo-trans.png' },
       ],
     },
   },
@@ -71,18 +70,18 @@ export default defineNuxtConfig({
       display: 'standalone',
       icons: [
         {
-          src: '/images/icon-192.png',
-          sizes: '192x192',
+          src: '/images/logo-trans.png',
+          sizes: '1254x1254',
           type: 'image/png',
         },
         {
-          src: '/images/icon-512.png',
-          sizes: '512x512',
+          src: '/images/logo-trans.png',
+          sizes: '1254x1254',
           type: 'image/png',
         },
         {
-          src: '/images/icon-512.png',
-          sizes: '512x512',
+          src: '/images/logo-trans.png',
+          sizes: '1254x1254',
           type: 'image/png',
           purpose: 'maskable',
         },

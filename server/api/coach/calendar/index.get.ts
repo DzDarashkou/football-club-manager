@@ -1,7 +1,7 @@
 import { getQuery } from 'h3'
 import { z } from 'zod'
 import { getGames } from '@@/server/utils/admin-games'
-import { requireCoachAccess } from '@@/server/utils/game-attendance'
+import { requireCalendarAccess } from '@@/server/utils/game-attendance'
 
 const dateTime = z.string().refine((value) => !Number.isNaN(Date.parse(value)), 'A valid date is required.')
 const querySchema = z.object({
@@ -13,10 +13,10 @@ const querySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   const { starts_at: startsAt, ends_before: endsBefore } = querySchema.parse(getQuery(event))
-  const { adminClient } = await requireCoachAccess(event)
+  const { adminClient } = await requireCalendarAccess(event)
 
-  // The first calendar release deliberately exposes every game to authenticated
-  // coaches and admins. Team-based scope can be applied here later.
+  // The calendar is visible to every authenticated club member. Coach-specific
+  // team scope can be applied here later without changing the calendar UI.
   const games = await getGames(adminClient, { startsAt, endsBefore, ascending: true })
   return { games }
 })

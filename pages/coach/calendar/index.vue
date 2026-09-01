@@ -4,11 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/vue3'
 import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from 'lucide-vue-next'
-import type { CalendarOptions, EventClickArg } from '@fullcalendar/core'
+import type { CalendarOptions, DayCellContentArg, EventClickArg, EventMountArg } from '@fullcalendar/core'
 import type { DateClickArg } from '@fullcalendar/interaction'
 import type { AdminGame } from '@@/types/admin-club'
 
-definePageMeta({ allowedRoles: ['admin', 'coach'] })
+definePageMeta({ allowedRoles: ['admin', 'coach', 'parent'] })
 
 const router = useRouter()
 const today = new Date()
@@ -49,7 +49,9 @@ const calendarOptions = computed<CalendarOptions>(() => ({
   eventDisplay: 'block',
   events: games.value.map((game) => ({ id: game.id, title: `${game.team.name} vs ${game.opponent_name}`, start: game.scheduled_at, classNames: [`game-event--${game.status}`] })),
   eventClick: handleEventClick,
+  eventDidMount: addGameTooltip,
   dateClick: handleDateClick,
+  dayCellClassNames: (info: DayCellContentArg) => toDateKey(info.date) === selectedDate.value ? ['coach-calendar__selected-day'] : [],
 }))
 
 function previousMonth() {
@@ -71,6 +73,18 @@ function handleEventClick(info: EventClickArg) {
 
 function handleDateClick(info: DateClickArg) {
   selectedDate.value = info.dateStr
+}
+
+function addGameTooltip(info: EventMountArg) {
+  const game = games.value.find((item) => item.id === info.event.id)
+  if (!game) return
+
+  info.el.title = [
+    `${game.team.name} vs ${game.opponent_name}`,
+    formatTime(game.scheduled_at),
+    game.venue?.name || 'Venue to be confirmed',
+    game.status,
+  ].join(' · ')
 }
 
 function formatTime(value: string) {
@@ -103,7 +117,7 @@ function formatSelectedDate(value: string) {
       </div>
       <div v-if="pending" class="p-8 text-center text-sm text-[color:var(--color-text-secondary)]">Loading games...</div>
       <ClientOnly v-else>
-        <FullCalendar :key="range.startsAt" class="coach-calendar" :options="calendarOptions" />
+        <FullCalendar :key="`${range.startsAt}-${selectedDate}`" class="coach-calendar" :options="calendarOptions" />
       </ClientOnly>
     </Card>
 
@@ -125,9 +139,13 @@ function formatSelectedDate(value: string) {
 :deep(.coach-calendar .fc-col-header-cell) { padding: 0.625rem 0.25rem; color: var(--color-text-secondary); font-weight: 500; }
 :deep(.coach-calendar .fc-daygrid-day-number) { padding: 0.5rem; color: var(--color-text-primary); }
 :deep(.coach-calendar .fc-daygrid-day-frame) { min-height: 6rem; }
-:deep(.coach-calendar .fc-daygrid-event) { margin: 0.125rem 0.25rem; border: 0; border-radius: 0.375rem; padding: 0.25rem 0.375rem; white-space: normal; font-weight: 500; }
+:deep(.coach-calendar .coach-calendar__selected-day .fc-daygrid-day-frame) { background: color-mix(in srgb, var(--color-brand-700) 12%, transparent); box-shadow: inset 0 0 0 2px var(--color-brand-700); }
+:deep(.coach-calendar .coach-calendar__selected-day .fc-daygrid-day-number) { font-weight: 500; color: var(--color-brand-800); }
+:deep(.coach-calendar .fc-daygrid-event) { margin: 0.125rem 0.25rem; border: 0; border-radius: 0.375rem; padding: 0.25rem 0.375rem; white-space: normal; overflow-wrap: anywhere; font-size: 0.75rem; font-weight: 500; line-height: 1.2; cursor: pointer; }
+:deep(.coach-calendar .fc-daygrid-event .fc-event-main) { white-space: normal; }
+:deep(.coach-calendar .fc-daygrid-event:focus-visible) { outline: 2px solid var(--color-brand-400); outline-offset: 1px; }
 :deep(.coach-calendar .game-event--scheduled), :deep(.coach-calendar .game-event--postponed) { background: var(--status-pending-bg); color: var(--status-pending-text); }
 :deep(.coach-calendar .game-event--completed) { background: var(--status-confirmed-bg); color: var(--status-confirmed-text); }
 :deep(.coach-calendar .game-event--cancelled) { background: var(--status-declined-bg); color: var(--status-declined-text); text-decoration: line-through; }
-@media (max-width: 640px) { :deep(.coach-calendar .fc-col-header-cell-cushion) { font-size: 0; } :deep(.coach-calendar .fc-col-header-cell-cushion::first-letter) { font-size: 0.75rem; } :deep(.coach-calendar .fc-daygrid-day-frame) { min-height: 4.5rem; } :deep(.coach-calendar .fc-daygrid-event) { font-size: 0.6875rem; line-height: 1.15; } }
+@media (max-width: 640px) { :deep(.coach-calendar .fc-col-header-cell-cushion) { font-size: 0; } :deep(.coach-calendar .fc-col-header-cell-cushion::first-letter) { font-size: 0.75rem; } :deep(.coach-calendar .fc-daygrid-day-frame) { min-height: 4.75rem; } :deep(.coach-calendar .fc-daygrid-event) { margin-inline: 0.125rem; padding: 0.1875rem 0.25rem; font-size: 0.625rem; line-height: 1.15; } }
 </style>

@@ -8,7 +8,7 @@ export const PUBLIC_PATHS = ['/', '/login', '/forgot-password', '/update-passwor
 export const ROLE_HOME: Record<AppRole, string> = {
   admin: '/admin',
   coach: '/coach',
-  parent: '/dashboard',
+  parent: '/coach/calendar',
 }
 
 export function isAppRole(value: unknown): value is AppRole {

@@ -21,6 +21,10 @@ export default defineNuxtRouteMiddleware(async (to) => {
       return navigateTo(getRoleHome(authStore.role))
     }
 
+    if (to.path === '/' && !authStore.isAuthenticated) {
+      return navigateTo('/login')
+    }
+
     return
   }
 

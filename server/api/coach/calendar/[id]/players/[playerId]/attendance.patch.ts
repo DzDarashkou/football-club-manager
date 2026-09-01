@@ -1,13 +1,14 @@
 import { readBody } from 'h3'
 import { z } from 'zod'
-import { availabilitySchema, requireCoachAccess } from '@@/server/utils/game-attendance'
+import { availabilitySchema, requireCalendarAccess } from '@@/server/utils/game-attendance'
 import { handleApiError } from '@@/server/utils/admin-users'
 
 export default defineEventHandler(async (event) => {
   const gameId = z.uuid().parse(event.context.params?.id)
   const playerId = z.uuid().parse(event.context.params?.playerId)
   const payload = availabilitySchema.parse(await readBody(event))
-  const { adminClient } = await requireCoachAccess(event)
+  // The demo has one parent account, which manages availability for the full squad.
+  const { adminClient } = await requireCalendarAccess(event)
 
   const { data: game, error: gameError } = await adminClient.from('games').select('id').eq('id', gameId).maybeSingle()
   if (gameError) handleApiError(gameError, 'Unable to load the game.', 400)

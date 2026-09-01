@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CircleUserRound, ShieldCheck, Trash2 } from 'lucide-vue-next'
+import { CircleUserRound, MessageCircle, ShieldCheck, Trash2 } from 'lucide-vue-next'
 import type { AdminGame, GamePlayer } from '@@/types/admin-club'
 
 definePageMeta({ allowedRoles: ['admin', 'coach'] })
@@ -22,6 +22,37 @@ const attendanceCounts = computed(() => roster.value.reduce((counts, player) => 
   counts[player.availability_status] += 1
   return counts
 }, { pending: 0, available: 0, unavailable: 0 }))
+const confirmedPlayers = computed(() => roster.value.filter((player) => player.availability_status === 'available' && player.selection_status !== 'not_selected'))
+const pendingPlayers = computed(() => roster.value.filter((player) => player.availability_status === 'pending' && player.selection_status !== 'not_selected'))
+const whatsAppShareUrl = computed(() => {
+  const game = gameData.value?.game
+  if (!game) return null
+
+  const venue = [game.venue?.name, game.venue?.address, game.venue?.city].filter(Boolean).join(', ') || 'Venue to be confirmed'
+  const confirmedList = confirmedPlayers.value.length
+    ? confirmedPlayers.value.map((player) => `- ${player.player.full_name}`).join('\n')
+    : 'No players have confirmed availability yet.'
+  const pendingList = pendingPlayers.value.length
+    ? pendingPlayers.value.map((player) => `- ${player.player.full_name}`).join('\n')
+    : 'Everyone has responded.'
+  const message = [
+    `⚽ *${game.team.name} vs ${game.opponent_name}*`,
+    '',
+    '📅 *Date & time*',
+    format(game.scheduled_at),
+    '',
+    '📍 *Place*',
+    venue,
+    '',
+    '✅ *Confirmed players*',
+    confirmedList,
+    '',
+    '⏳ *Awaiting parent confirmation*',
+    pendingList,
+  ].join('\n')
+
+  return `https://wa.me/?text=${encodeURIComponent(message)}`
+})
 
 function format(value: string) {
   return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value))
@@ -96,6 +127,8 @@ async function removePlayer(player: GamePlayer) {
       <div class="space-y-2"><p class="eyebrow text-brand-700">Game</p><h1>{{ gameData.game.team.name }} vs {{ gameData.game.opponent_name }}</h1><p class="text-body text-[color:var(--color-text-secondary)]">{{ format(gameData.game.scheduled_at) }} · {{ gameData.game.location_type }}</p></div>
 
       <Card class="grid gap-4 sm:grid-cols-2"><div><p class="text-label text-[color:var(--color-text-secondary)]">Competition</p><p>{{ gameData.game.competition?.name || gameData.game.season.name }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Venue</p><p>{{ gameData.game.venue?.name || 'To be confirmed' }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Game status</p><Badge :status="gameData.game.status === 'completed' ? 'confirmed' : gameData.game.status === 'cancelled' ? 'declined' : 'pending'">{{ gameData.game.status }}</Badge></div><div v-if="gameData.game.status === 'completed'"><p class="text-label text-[color:var(--color-text-secondary)]">Score</p><p>{{ gameData.game.home_score }}–{{ gameData.game.away_score }}</p></div><div v-if="gameData.game.notes" class="sm:col-span-2"><p class="text-label text-[color:var(--color-text-secondary)]">Notes</p><p>{{ gameData.game.notes }}</p></div></Card>
+
+      <a v-if="whatsAppShareUrl" :href="whatsAppShareUrl" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#25D366] px-3 text-sm font-medium text-white hover:bg-[#1da851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"><MessageCircle class="h-4 w-4" aria-hidden="true" />Share to WhatsApp group</a>
 
       <p v-if="actionError" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ actionError }}</p>
       <p v-if="rosterError || eligibleError" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ rosterError?.statusMessage || eligibleError?.statusMessage || 'Unable to load the game squad.' }}</p>

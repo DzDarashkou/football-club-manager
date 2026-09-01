@@ -32,15 +32,17 @@ const adminNavigationMode = useSessionStorage<AdminNavigationMode>('sporting-adm
 const { role, hasTopbar, hasBottomNav, hasSidebar } = useLayout()
 const { profile, signOut } = useAppAuth()
 
-type NavItemWithIcon = NavItem & { iconComponent: Component }
+type NavItemWithIcon = NavItem & { iconComponent: Component, hidden?: boolean }
 
 const memberNavItems: NavItemWithIcon[] = [
-  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/dashboard', role: ['parent'] },
+  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/dashboard', role: ['parent'], hidden: true },
   { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'] },
-  { label: 'My children', icon: 'Users', iconComponent: Users, to: '/my-children', role: ['parent'] },
-  { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/games', role: ['parent', 'coach'] },
-  { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/calendar', role: ['parent', 'coach'] },
-  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['parent', 'coach'] },
+  { label: 'My children', icon: 'Users', iconComponent: Users, to: '/my-children', role: ['parent'], hidden: true },
+  { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/games', role: ['parent'], hidden: true },
+  { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
+  { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['parent', 'coach'] },
+  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['parent'], hidden: true },
+  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
 ]
 
 const adminNavItems: NavItemWithIcon[] = [
@@ -49,29 +51,29 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/admin/teams', role: ['admin'] },
   { label: 'Players', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
   { label: 'Games', icon: 'Calendar', iconComponent: Calendar, to: '/admin/games', role: ['admin'] },
-  { label: 'Coaches', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'] },
-  { label: 'Settings', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'] },
+  { label: 'Coaches', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'], hidden: true },
+  { label: 'Settings', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'], hidden: true },
 ]
 
 const coachNavItems: NavItemWithIcon[] = [
-  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'] },
-  { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/coach/teams', role: ['coach'] },
+  { label: 'Dashboard', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'], hidden: true },
+  { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/coach/teams', role: ['coach'], hidden: true },
   { label: 'Players', icon: 'Users', iconComponent: Users, to: '/coach/players', role: ['coach'] },
   { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
   { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['coach'] },
-  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
+  { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'], hidden: true },
 ]
 
 const filteredBottomNavItems = computed(() =>
-  memberNavItems.filter((item) => item.role.includes(role.value as AppRole)),
+  memberNavItems.filter((item) => item.role.includes(role.value as AppRole) && !item.hidden),
 )
-const activeSidebarNavItems = computed(() => adminNavigationMode.value === 'coach' ? coachNavItems : adminNavItems)
+const activeSidebarNavItems = computed(() => (adminNavigationMode.value === 'coach' ? coachNavItems : adminNavItems).filter((item) => !item.hidden))
 
 const mainClass = computed(() => [
   'min-h-screen bg-[var(--color-surface-sunken)] px-4 py-4 sm:px-5',
-  hasTopbar.value ? 'page-with-topbar' : '',
-  hasBottomNav.value ? 'page-with-bottomnav' : '',
-  hasSidebar.value ? 'lg:page-with-sidebar lg:px-6 lg:py-6' : '',
+  hasTopbar.value ? 'pt-[calc(var(--topbar-height)+1rem)]' : '',
+  hasBottomNav.value ? 'pb-[calc(var(--bottomnav-height)+env(safe-area-inset-bottom)+1rem)]' : '',
+  hasSidebar.value ? 'lg:page-with-sidebar lg:px-6 lg:pb-6 lg:pt-6' : '',
 ])
 
 const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${to}/`)
@@ -89,7 +91,7 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
   if (adminNavigationMode.value === mode) return
   adminNavigationMode.value = mode
   drawerOpen.value = false
-  await router.push(mode === 'coach' ? '/coach' : '/admin')
+  await router.push(mode === 'coach' ? '/coach/players' : '/admin')
 }
 </script>
 
@@ -110,6 +112,15 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
         <ClubLogo variant="full" />
       </div>
       <div class="flex items-center gap-2">
+        <NuxtLink
+          v-if="role === 'parent'"
+          to="/coach/calendar"
+          class="inline-flex h-11 items-center gap-2 rounded-full px-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          aria-label="Open calendar"
+        >
+          <Calendar class="h-5 w-5" />
+          <span class="hidden sm:inline">Calendar</span>
+        </NuxtLink>
         <button
           type="button"
           class="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"

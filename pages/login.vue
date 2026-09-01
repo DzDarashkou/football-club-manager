@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getRoleHome } from '@@/lib/auth'
-import type { LoginCredentials } from '@@/types/auth'
+import type { AppRole, LoginCredentials } from '@@/types/auth'
 
 definePageMeta({
   layout: 'public',
@@ -8,7 +8,7 @@ definePageMeta({
 })
 
 const router = useRouter()
-const { authError, isInitializing, role, signInWithPassword } = useAppAuth()
+const { authError, isInitializing, role, signInWithPassword, signOut } = useAppAuth()
 
 const form = reactive<LoginCredentials>({
   email: '',
@@ -17,6 +17,7 @@ const form = reactive<LoginCredentials>({
 
 const isSubmitting = ref(false)
 const errorMessage = ref<string | null>(null)
+const selectedRole = ref<Extract<AppRole, 'admin' | 'parent'> | null>(null)
 const route = useRoute()
 
 watchEffect(() => {
@@ -31,6 +32,8 @@ watchEffect(() => {
 })
 
 async function handleSubmit() {
+  if (!selectedRole.value) return
+
   errorMessage.value = null
   isSubmitting.value = true
 
@@ -44,6 +47,12 @@ async function handleSubmit() {
       throw new Error('Missing role after sign-in.')
     }
 
+    if (role.value !== selectedRole.value) {
+      await signOut()
+      errorMessage.value = `This account does not have ${selectedRole.value} access.`
+      return
+    }
+
     await router.push(getRoleHome(role.value))
   }
   catch {
@@ -53,6 +62,11 @@ async function handleSubmit() {
     isSubmitting.value = false
   }
 }
+
+function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
+  selectedRole.value = value
+  errorMessage.value = null
+}
 </script>
 
 <template>
@@ -61,7 +75,15 @@ async function handleSubmit() {
       <p class="eyebrow text-brand-700">Welcome back</p>
       <h1>Sign in</h1>
     </div>
-    <form class="space-y-4" @submit.prevent="handleSubmit">
+    <div v-if="!selectedRole" class="grid gap-3">
+      <Button class="w-full" @click="selectRole('parent')">Parent login</Button>
+      <Button class="w-full" variant="outline" @click="selectRole('admin')">Admin login</Button>
+    </div>
+    <form v-else class="space-y-4" @submit.prevent="handleSubmit">
+      <div class="flex items-center justify-between gap-3">
+        <p class="text-sm font-medium text-[color:var(--color-text-primary)]">{{ selectedRole === 'parent' ? 'Parent login' : 'Admin login' }}</p>
+        <Button type="button" variant="ghost" size="sm" @click="selectedRole = null">Change role</Button>
+      </div>
       <div class="space-y-2">
         <Label for="email">Email</Label>
         <Input

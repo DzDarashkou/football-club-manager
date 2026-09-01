@@ -150,7 +150,7 @@ const config: Config = {
           '--status-neutral-bg': '#D3D1C7',
           '--status-neutral-text': '#2C2C2A',
           '--status-neutral-ring': '#B4B2A9',
-          '--topbar-height': '56px',
+          '--topbar-height': '72px',
           '--sidebar-width': '200px',
           '--bottomnav-height': '60px',
         },
