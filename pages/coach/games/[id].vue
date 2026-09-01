@@ -1,15 +1,112 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { GamePlayer } from '@@/types/admin-club'
+import { CircleUserRound, ShieldCheck, Trash2 } from 'lucide-vue-next'
+import type { AdminGame, GamePlayer } from '@@/types/admin-club'
+
 definePageMeta({ allowedRoles: ['admin', 'coach'] })
+
 const gameId = useRoute().params.id as string
-const selectedIds = ref<string[]>([]); const saving = ref(false); const error = ref<string | null>(null)
-const { data: rosterData, pending: rosterPending, error: rosterLoadError, refresh } = await useFetch<{ players: GamePlayer[] }>(`/api/coach/games/${gameId}/players`, { default: () => ({ players: [] }) })
-const { data: eligibleData, error: eligibleLoadError } = await useFetch<{ players: Array<{ id: string, full_name: string }> }>(`/api/coach/games/${gameId}/eligible-players`, { default: () => ({ players: [] }) })
-const roster = computed(() => rosterData.value?.players ?? []); const selected = computed(() => new Set(roster.value.map((item) => item.player_id)))
-async function addPlayers() { saving.value = true; error.value = null; try { await $fetch(`/api/coach/games/${gameId}/players`, { method: 'POST', body: { player_ids: selectedIds.value } }); selectedIds.value = []; await refresh() } catch (value) { error.value = (value as { data?: { statusMessage?: string } }).data?.statusMessage || 'Unable to add players.' } finally { saving.value = false } }
-async function save(player: GamePlayer) { saving.value = true; try { await $fetch(`/api/coach/games/${gameId}/players/${player.player_id}`, { method: 'PATCH', body: { selection_status: player.selection_status, participated: player.participated, minutes_played: player.minutes_played, goals: player.goals, assists: player.assists, yellow_cards: player.yellow_cards, red_cards: player.red_cards, coach_note: player.coach_note } }); await refresh() } catch (value) { error.value = (value as { data?: { statusMessage?: string } }).data?.statusMessage || 'Unable to update player.' } finally { saving.value = false } }
+const selectedIds = ref<string[]>([])
+const adding = ref(false)
+const removingPlayerId = ref<string | null>(null)
+const actionError = ref<string | null>(null)
+
+const { data: gameData, pending: gamePending, error: gameError } = await useFetch<{ game: AdminGame }>(`/api/coach/games/${gameId}`)
+const { data: rosterData, pending: rosterPending, error: rosterError, refresh } = await useFetch<{ players: GamePlayer[] }>(`/api/coach/games/${gameId}/players`, { default: () => ({ players: [] }) })
+const { data: eligibleData, error: eligibleError } = await useFetch<{ players: Array<{ id: string, full_name: string }> }>(`/api/coach/games/${gameId}/eligible-players`, { default: () => ({ players: [] }) })
+
+const roster = computed(() => rosterData.value?.players ?? [])
+const selectedPlayerIds = computed(() => new Set(roster.value.map((player) => player.player_id)))
+const availablePlayers = computed(() => (eligibleData.value?.players ?? []).filter((player) => !selectedPlayerIds.value.has(player.id)))
+const attendanceCounts = computed(() => roster.value.reduce((counts, player) => {
+  counts[player.availability_status] += 1
+  return counts
+}, { pending: 0, available: 0, unavailable: 0 }))
+
+function format(value: string) {
+  return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value))
+}
+
+function attendanceStatus(status: GamePlayer['availability_status']) {
+  return status === 'available' ? 'confirmed' : status === 'unavailable' ? 'declined' : 'pending'
+}
+
+function attendanceLabel(status: GamePlayer['availability_status']) {
+  return status === 'available' ? 'Available' : status === 'unavailable' ? 'Unavailable' : 'Awaiting response'
+}
+
+function selectionStatus(status: GamePlayer['selection_status']) {
+  return status === 'started' ? 'confirmed' : status === 'substitute' ? 'neutral' : status === 'not_selected' ? 'declined' : 'pending'
+}
+
+function selectionLabel(status: GamePlayer['selection_status']) {
+  return status === 'started' ? 'Started' : status === 'substitute' ? 'Substitute' : status === 'not_selected' ? 'Not selected' : 'Selected'
+}
+
+function attendanceTooltip(status: GamePlayer['availability_status']) {
+  return `Parent response: ${attendanceLabel(status).toLowerCase()}.`
+}
+
+function selectionTooltip(status: GamePlayer['selection_status']) {
+  return `Coach selection: ${selectionLabel(status).toLowerCase()}.`
+}
+
+async function addPlayers() {
+  actionError.value = null
+  adding.value = true
+  try {
+    await $fetch(`/api/coach/games/${gameId}/players`, { method: 'POST', body: { player_ids: selectedIds.value } })
+    selectedIds.value = []
+    await refresh()
+  }
+  catch (value) {
+    actionError.value = (value as { data?: { statusMessage?: string } }).data?.statusMessage || 'Unable to add players.'
+  }
+  finally {
+    adding.value = false
+  }
+}
+
+async function removePlayer(player: GamePlayer) {
+  if (!window.confirm(`Remove ${player.player.full_name} from this game squad? Their attendance response and game statistics will be removed.`)) return
+
+  actionError.value = null
+  removingPlayerId.value = player.player_id
+  try {
+    await $fetch(`/api/coach/games/${gameId}/players/${player.player_id}`, { method: 'DELETE' })
+    await refresh()
+  }
+  catch (value) {
+    actionError.value = (value as { data?: { statusMessage?: string } }).data?.statusMessage || 'Unable to remove player from the game.'
+  }
+  finally {
+    removingPlayerId.value = null
+  }
+}
 </script>
+
 <template>
-  <div class="mx-auto max-w-4xl space-y-6"><NuxtLink to="/coach/games" class="text-sm text-brand-700">← All games</NuxtLink><div><h1>Game squad</h1><p class="text-body text-[color:var(--color-text-secondary)]">Assign players, review parent responses, and record match statistics.</p></div><p v-if="error" class="rounded-lg bg-[var(--status-declined-bg)] p-3 text-sm text-[var(--status-declined-text)]">{{ error }}</p><p v-if="rosterLoadError || eligibleLoadError" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ rosterLoadError?.statusMessage || eligibleLoadError?.statusMessage || 'Unable to load this game. Confirm that you have access to its team.' }}</p><template v-else><Card class="space-y-4"><h2>Add players</h2><div class="grid gap-2 sm:grid-cols-2"><label v-for="player in eligibleData?.players.filter((item) => !selected.has(item.id))" :key="player.id" class="flex min-h-[44px] items-center gap-3 rounded-lg border border-border px-3"><input v-model="selectedIds" type="checkbox" :value="player.id">{{ player.full_name }}</label></div><p v-if="!eligibleData?.players.filter((item) => !selected.has(item.id)).length" class="text-sm text-[color:var(--color-text-secondary)]">All active team players are already in the squad.</p><Button :disabled="saving || !selectedIds.length" @click="addPlayers">Add selected players</Button></Card><Card class="overflow-hidden p-0"><div class="border-b border-border p-4"><h2>Availability and statistics</h2></div><p v-if="rosterPending" class="p-6 text-center text-sm text-[color:var(--color-text-secondary)]">Loading squad...</p><p v-else-if="!roster.length" class="p-6 text-center text-sm text-[color:var(--color-text-secondary)]">No players have been added to this game yet.</p><div v-for="player in roster" :key="player.player_id" class="space-y-3 border-b border-border p-4 last:border-b-0"><div class="flex items-center justify-between gap-3"><p class="font-medium">{{ player.player.full_name }}</p><Badge :status="player.availability_status === 'available' ? 'confirmed' : player.availability_status === 'unavailable' ? 'declined' : 'pending'">{{ player.availability_status }}</Badge></div><p v-if="player.availability_note" class="text-sm text-[color:var(--color-text-secondary)]">Parent note: {{ player.availability_note }}</p><div class="grid gap-3 sm:grid-cols-4"><select v-model="player.selection_status" class="min-h-[40px] rounded-lg border border-input px-2 text-sm"><option value="selected">Selected</option><option value="started">Started</option><option value="substitute">Substitute</option><option value="not_selected">Not selected</option></select><label class="flex items-center gap-2 text-sm"><input v-model="player.participated" type="checkbox">Played</label><Input v-model="player.minutes_played" type="number" min="0" placeholder="Minutes" /><Input v-model="player.goals" type="number" min="0" placeholder="Goals" /><Input v-model="player.assists" type="number" min="0" placeholder="Assists" /><Input v-model="player.yellow_cards" type="number" min="0" max="2" placeholder="Yellow" /><Input v-model="player.red_cards" type="number" min="0" max="1" placeholder="Red" /></div><Button size="sm" variant="outline" :disabled="saving" @click="save(player)">Save player record</Button></div></Card></template></div>
+  <div class="mx-auto max-w-4xl space-y-6">
+    <NuxtLink to="/coach/games" class="text-sm text-brand-700">← All games</NuxtLink>
+
+    <div v-if="gamePending" class="text-sm text-[color:var(--color-text-secondary)]">Loading game...</div>
+    <p v-else-if="gameError || !gameData" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ gameError?.statusMessage || 'Unable to load this game. Confirm that you have access to its team.' }}</p>
+
+    <template v-else>
+      <div class="space-y-2"><p class="eyebrow text-brand-700">Game</p><h1>{{ gameData.game.team.name }} vs {{ gameData.game.opponent_name }}</h1><p class="text-body text-[color:var(--color-text-secondary)]">{{ format(gameData.game.scheduled_at) }} · {{ gameData.game.location_type }}</p></div>
+
+      <Card class="grid gap-4 sm:grid-cols-2"><div><p class="text-label text-[color:var(--color-text-secondary)]">Competition</p><p>{{ gameData.game.competition?.name || gameData.game.season.name }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Venue</p><p>{{ gameData.game.venue?.name || 'To be confirmed' }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Game status</p><Badge :status="gameData.game.status === 'completed' ? 'confirmed' : gameData.game.status === 'cancelled' ? 'declined' : 'pending'">{{ gameData.game.status }}</Badge></div><div v-if="gameData.game.status === 'completed'"><p class="text-label text-[color:var(--color-text-secondary)]">Score</p><p>{{ gameData.game.home_score }}–{{ gameData.game.away_score }}</p></div><div v-if="gameData.game.notes" class="sm:col-span-2"><p class="text-label text-[color:var(--color-text-secondary)]">Notes</p><p>{{ gameData.game.notes }}</p></div></Card>
+
+      <p v-if="actionError" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ actionError }}</p>
+      <p v-if="rosterError || eligibleError" class="rounded-lg border border-[color:var(--status-declined-ring)] bg-[var(--status-declined-bg)] p-4 text-sm text-[var(--status-declined-text)]">{{ rosterError?.statusMessage || eligibleError?.statusMessage || 'Unable to load the game squad.' }}</p>
+
+      <template v-else>
+        <Card class="space-y-4"><div><h2>Add players</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">Add active players from {{ gameData.game.team.name }} to request a parent response.</p></div><div v-if="availablePlayers.length" class="grid gap-2 sm:grid-cols-2"><label v-for="player in availablePlayers" :key="player.id" class="flex min-h-11 items-center gap-3 rounded-lg border border-border px-3"><input v-model="selectedIds" type="checkbox" :value="player.id"><span>{{ player.full_name }}</span></label></div><p v-else class="text-sm text-[color:var(--color-text-secondary)]">All active team players are already in this game squad.</p><Button :disabled="adding || !selectedIds.length" @click="addPlayers">{{ adding ? 'Adding players...' : 'Add selected players' }}</Button></Card>
+
+        <div class="grid grid-cols-3 gap-3"><Card><p class="text-label text-[color:var(--color-text-secondary)]">Approved</p><p class="mt-1 text-h2 text-[var(--status-confirmed-text)]">{{ attendanceCounts.available }}</p></Card><Card><p class="text-label text-[color:var(--color-text-secondary)]">Not approved</p><p class="mt-1 text-h2 text-[var(--status-declined-text)]">{{ attendanceCounts.unavailable }}</p></Card><Card><p class="text-label text-[color:var(--color-text-secondary)]">Pending</p><p class="mt-1 text-h2 text-[var(--status-pending-text)]">{{ attendanceCounts.pending }}</p></Card></div>
+
+        <Card class="overflow-hidden p-0"><div class="border-b border-border p-4"><h2>Game squad</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">Parent availability and coach selection are shown separately. Hover over a badge for details.</p></div><p v-if="rosterPending" class="p-6 text-center text-sm text-[color:var(--color-text-secondary)]">Loading squad...</p><p v-else-if="!roster.length" class="p-6 text-center text-sm text-[color:var(--color-text-secondary)]">No players have been added to this game yet.</p><div v-for="player in roster" :key="player.player_id" class="flex flex-col gap-3 border-b border-border p-4 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"><div><p class="font-medium">{{ player.player.full_name }}</p><p v-if="player.availability_note" class="mt-1 text-sm text-[color:var(--color-text-secondary)]">Parent note: {{ player.availability_note }}</p></div><div class="flex flex-wrap items-center gap-2"><Badge :status="attendanceStatus(player.availability_status)" class="gap-1.5" :title="attendanceTooltip(player.availability_status)"><CircleUserRound class="h-3.5 w-3.5" aria-hidden="true" /><span>Parent: {{ attendanceLabel(player.availability_status) }}</span></Badge><Badge :status="selectionStatus(player.selection_status)" class="gap-1.5" :title="selectionTooltip(player.selection_status)"><ShieldCheck class="h-3.5 w-3.5" aria-hidden="true" /><span>Coach: {{ selectionLabel(player.selection_status) }}</span></Badge><Button variant="ghost" size="icon" class="text-[var(--status-declined-text)] hover:bg-[var(--status-declined-bg)]" :disabled="removingPlayerId !== null" :title="`Remove ${player.player.full_name} from game squad`" :aria-label="`Remove ${player.player.full_name} from game squad`" @click="removePlayer(player)"><Trash2 class="h-4 w-4" aria-hidden="true" /><span class="sr-only">Remove player</span></Button></div></div></Card>
+      </template>
+    </template>
+  </div>
 </template>

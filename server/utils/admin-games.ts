@@ -62,9 +62,27 @@ export async function validateGameReferences(adminClient: AdminClient, payload: 
   if (payload.venue_id && !setup.venues.some((venue) => venue.id === payload.venue_id && venue.is_active)) throw createError({ statusCode: 400, statusMessage: 'Select an active venue.' })
 }
 
-export async function getGames(adminClient: AdminClient): Promise<AdminGame[]> {
+type GameListOptions = {
+  startsAt?: string
+  endsBefore?: string
+  limit?: number
+  ascending?: boolean
+  includeAll?: boolean
+}
+
+export async function getGames(adminClient: AdminClient, options: GameListOptions = {}): Promise<AdminGame[]> {
+  let gamesQuery = adminClient
+    .from('games')
+    .select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes')
+    .order('scheduled_at', { ascending: options.ascending ?? false })
+
+  if (options.startsAt) gamesQuery = gamesQuery.gte('scheduled_at', options.startsAt)
+  if (options.endsBefore) gamesQuery = gamesQuery.lt('scheduled_at', options.endsBefore)
+  if (options.limit !== undefined) gamesQuery = gamesQuery.limit(options.limit)
+  else if (!options.startsAt && !options.endsBefore && !options.includeAll) gamesQuery = gamesQuery.limit(100)
+
   const [gameResult, setup] = await Promise.all([
-    adminClient.from('games').select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes').order('scheduled_at', { ascending: false }).limit(100),
+    gamesQuery,
     getGameSetup(adminClient),
   ])
   if (gameResult.error) fail(gameResult.error, 'Unable to load games.')
@@ -77,6 +95,6 @@ export async function getGames(adminClient: AdminClient): Promise<AdminGame[]> {
     if (!team || !season) return []
     const competition = game.competition_id ? competitions.get(game.competition_id) ?? null : null
     const venue = game.venue_id ? venues.get(game.venue_id) ?? null : null
-    return [{ ...game, location_type: game.location_type as GameLocationType, status: game.status as GameStatus, team: { id: team.id, name: team.name }, season: { id: season.id, name: season.name }, competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null, venue: venue ? { id: venue.id, name: venue.name, city: venue.city } : null }]
+    return [{ ...game, location_type: game.location_type as GameLocationType, status: game.status as GameStatus, team: { id: team.id, name: team.name }, season: { id: season.id, name: season.name }, competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null, venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city } : null }]
   })
 }

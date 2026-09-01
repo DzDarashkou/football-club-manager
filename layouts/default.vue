@@ -58,7 +58,7 @@ const coachNavItems: NavItemWithIcon[] = [
   { label: 'Teams', icon: 'Shirt', iconComponent: Shirt, to: '/coach/teams', role: ['coach'] },
   { label: 'Players', icon: 'Users', iconComponent: Users, to: '/coach/players', role: ['coach'] },
   { label: 'Games', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
-  { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/calendar', role: ['coach'] },
+  { label: 'Calendar', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['coach'] },
   { label: 'Profile', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
 ]
 

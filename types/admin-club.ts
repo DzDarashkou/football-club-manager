@@ -65,7 +65,7 @@ export type AdminGame = {
   team: Pick<AdminTeam, 'id' | 'name'>
   season: Pick<AdminSeason, 'id' | 'name'>
   competition: Pick<AdminCompetition, 'id' | 'name' | 'type'> | null
-  venue: Pick<AdminVenue, 'id' | 'name' | 'city'> | null
+  venue: Pick<AdminVenue, 'id' | 'name' | 'address' | 'city'> | null
 }
 export type AdminSeasonInput = Pick<AdminSeason, 'name' | 'starts_on' | 'ends_on'>
 export type AdminCompetitionInput = Pick<AdminCompetition, 'season_id' | 'name' | 'type'>
