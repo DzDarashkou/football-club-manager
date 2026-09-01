@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
-import { Pencil, Plus, Shirt } from 'lucide-vue-next'
+import { Pencil, Plus, Shirt, Trash2 } from 'lucide-vue-next'
 import type { AdminAgeGroup, AdminAgeGroupInput, AdminTeam, AdminTeamInput, AdminAgeGroupsResponse, AdminTeamsResponse } from '@@/types/admin-club'
 
 definePageMeta({ allowedRoles: ['admin'] })
@@ -8,6 +8,7 @@ definePageMeta({ allowedRoles: ['admin'] })
 const selectClass = 'flex min-h-[44px] w-full rounded-lg border border-input bg-surface px-3 py-2 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400'
 const selectedTeamId = ref<string | null>(null)
 const isSubmitting = ref(false)
+const deletingTeamId = ref<string | null>(null)
 const isCreatingAgeGroup = ref(false)
 const pageError = ref<string | null>(null)
 const pageSuccess = ref<string | null>(null)
@@ -75,6 +76,17 @@ async function createAgeGroup() {
   }
   finally { isCreatingAgeGroup.value = false }
 }
+async function deleteTeam(team: AdminTeam) {
+  if (!window.confirm(`Delete ${team.name}? This also deletes its players, games, attendance, and assignments.`)) return
+  pageError.value = null; pageSuccess.value = null; deletingTeamId.value = team.id
+  try {
+    await $fetch(`/api/admin/teams/${team.id}`, { method: 'DELETE' })
+    if (selectedTeamId.value === team.id) resetTeamForm()
+    await refreshTeams(); pageSuccess.value = 'Team deleted.'
+  }
+  catch (error) { const details = error as { data?: { statusMessage?: string }, message?: string }; pageError.value = details.data?.statusMessage || details.message || 'Unable to delete the team.' }
+  finally { deletingTeamId.value = null }
+}
 </script>
 
 <template>
@@ -92,7 +104,7 @@ async function createAgeGroup() {
         <div v-else-if="!teams.length" class="px-4 py-8 text-center text-sm text-[color:var(--color-text-secondary)]">Create an age group and then add the first team.</div>
         <div v-for="team in teams" :key="team.id" class="flex flex-col gap-4 border-b border-border px-4 py-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between" :class="selectedTeamId === team.id ? 'bg-brand-50/50' : ''">
           <div class="flex min-w-0 items-start gap-3"><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700"><Shirt class="h-5 w-5" /></div><div class="min-w-0 space-y-1"><div class="flex flex-wrap items-center gap-2"><p class="font-medium">{{ team.name }}</p><Badge :status="team.is_active ? 'confirmed' : 'neutral'">{{ team.is_active ? 'Active' : 'Inactive' }}</Badge></div><p class="text-sm text-[color:var(--color-text-secondary)]">{{ team.age_group.name }} · {{ team.age_group.birth_year_from }}–{{ team.age_group.birth_year_to }}</p><p class="text-label text-[color:var(--color-text-secondary)]">{{ team.player_count }} player{{ team.player_count === 1 ? '' : 's' }}</p></div></div>
-          <Button variant="outline" size="sm" class="gap-2" @click="editTeam(team)"><Pencil class="h-4 w-4" />Edit</Button>
+          <div class="flex gap-2"><Button variant="outline" size="sm" class="gap-2" @click="editTeam(team)"><Pencil class="h-4 w-4" />Edit</Button><Button variant="destructive" size="sm" class="gap-2" :disabled="deletingTeamId === team.id" @click="deleteTeam(team)"><Trash2 class="h-4 w-4" />{{ deletingTeamId === team.id ? 'Deleting...' : 'Delete' }}</Button></div>
         </div>
       </Card>
       <div class="space-y-6">

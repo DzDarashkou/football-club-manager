@@ -10,10 +10,11 @@ type AdminClient = ReturnType<typeof serverSupabaseServiceRole<Database>>
 const name = z.string().trim().min(2).max(120)
 const id = z.uuid('A valid record id is required.')
 const nullableId = z.union([id, z.null()]).optional().default(null)
-export const seasonSchema = z.object({ name, starts_on: z.iso.date(), ends_on: z.iso.date() }).refine((value) => value.ends_on >= value.starts_on, { path: ['ends_on'], message: 'Season end date must be after its start date.' })
+const seasonFields = z.object({ name, starts_on: z.iso.date(), ends_on: z.iso.date() })
+export const seasonSchema = seasonFields.refine((value) => value.ends_on >= value.starts_on, { path: ['ends_on'], message: 'Season end date must be after its start date.' })
 export const competitionSchema = z.object({ season_id: id, name, type: z.enum(['league', 'cup', 'friendly', 'tournament']) })
 export const venueSchema = z.object({ name, address: z.string().trim().max(200).nullable().optional().default(null), city: z.string().trim().max(80).nullable().optional().default(null) })
-export const gameSchema = z.object({
+const gameFields = z.object({
   team_id: id,
   season_id: id,
   competition_id: nullableId,
@@ -27,11 +28,25 @@ export const gameSchema = z.object({
   home_score: z.coerce.number().int().min(0).nullable().optional().default(null),
   away_score: z.coerce.number().int().min(0).nullable().optional().default(null),
   notes: z.string().trim().max(1000).nullable().optional().default(null),
-}).superRefine((value, context) => {
+})
+export const gameSchema = gameFields.superRefine((value, context) => {
   if (value.status === 'completed' && (value.home_score === null || value.away_score === null)) {
     context.addIssue({ code: 'custom', path: ['home_score'], message: 'Completed games require both scores.' })
   }
 })
+
+function updateSchema<T extends z.ZodObject<z.ZodRawShape>>(schema: T) {
+  return schema.partial().refine((value) => Object.keys(value).length > 0, {
+    message: 'At least one field must be updated.',
+  })
+}
+
+export const seasonUpdateSchema = updateSchema(seasonFields).refine((value) => !value.starts_on || !value.ends_on || value.ends_on >= value.starts_on, {
+  path: ['ends_on'], message: 'Season end date must be after its start date.',
+})
+export const competitionUpdateSchema = updateSchema(competitionSchema)
+export const venueUpdateSchema = updateSchema(venueSchema)
+export const gameUpdateSchema = updateSchema(gameFields)
 
 function fail(error: unknown, message: string): never { handleApiError(error, message, 400) }
 

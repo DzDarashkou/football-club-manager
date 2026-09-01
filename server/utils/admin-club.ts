@@ -8,11 +8,20 @@ import type { Database } from '@@/types/database'
 const nameSchema = z.string().trim().min(2, 'Name must contain at least 2 characters.').max(120, 'Name is too long.')
 const uuidSchema = z.uuid('A valid record id is required.')
 
-export const ageGroupCreateSchema = z.object({
+const ageGroupFields = z.object({
   name: nameSchema,
   birth_year_from: z.coerce.number().int().min(1900).max(2100),
   birth_year_to: z.coerce.number().int().min(1900).max(2100),
-}).refine(({ birth_year_from, birth_year_to }) => birth_year_to >= birth_year_from, {
+})
+
+export const ageGroupCreateSchema = ageGroupFields.refine(({ birth_year_from, birth_year_to }) => birth_year_to >= birth_year_from, {
+  message: 'The final birth year must not be earlier than the first birth year.',
+  path: ['birth_year_to'],
+})
+
+export const ageGroupUpdateSchema = ageGroupFields.partial().refine((value) => Object.keys(value).length > 0, {
+  message: 'At least one field must be updated.',
+}).refine((value) => value.birth_year_from === undefined || value.birth_year_to === undefined || value.birth_year_to >= value.birth_year_from, {
   message: 'The final birth year must not be earlier than the first birth year.',
   path: ['birth_year_to'],
 })
