@@ -40,9 +40,9 @@ export type Database = {
         Relationships: []
       }
       games: {
-        Row: { id: string, team_id: string, season_id: string, competition_id: string | null, venue_id: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday: number | null, round_label: string | null, status: string, home_score: number | null, away_score: number | null, notes: string | null, created_at: string, updated_at: string }
-        Insert: { id?: string, team_id: string, season_id: string, competition_id?: string | null, venue_id?: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number | null, away_score?: number | null, notes?: string | null, created_at?: string, updated_at?: string }
-        Update: { id?: string, team_id?: string, season_id?: string, competition_id?: string | null, venue_id?: string | null, opponent_name?: string, location_type?: string, scheduled_at?: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number | null, away_score?: number | null, notes?: string | null, created_at?: string, updated_at?: string }
+        Row: { id: string, team_id: string, season_id: string, competition_id: string | null, venue_id: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday: number | null, round_label: string | null, status: string, home_score: number, away_score: number, notes: string | null, created_at: string, updated_at: string }
+        Insert: { id?: string, team_id: string, season_id: string, competition_id?: string | null, venue_id?: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { id?: string, team_id?: string, season_id?: string, competition_id?: string | null, venue_id?: string | null, opponent_name?: string, location_type?: string, scheduled_at?: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
         Relationships: []
       }
       age_groups: {

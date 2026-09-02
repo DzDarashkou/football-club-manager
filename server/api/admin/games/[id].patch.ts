@@ -1,4 +1,4 @@
-import { gameUpdateSchema, validateGameReferences } from '@@/server/utils/admin-games'
+import { gameSchema, gameUpdateSchema, validateGameReferences } from '@@/server/utils/admin-games'
 import { recordIdSchema } from '@@/server/utils/admin-club'
 import { handleApiError, requireAdminAccess } from '@@/server/utils/admin-users'
 import type { Database } from '@@/types/database'
@@ -11,7 +11,8 @@ export default defineEventHandler(async (event) => {
     if (current.error) handleApiError(current.error, 'Unable to load the game.', 400)
     if (!current.data) throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
     const complete = { ...current.data, ...payload }
-    await validateGameReferences(adminClient, complete as Parameters<typeof validateGameReferences>[1])
+    const validatedGame = gameSchema.parse(complete)
+    await validateGameReferences(adminClient, validatedGame)
     const update = { ...payload, ...(typeof payload.scheduled_at === 'string' ? { scheduled_at: new Date(payload.scheduled_at).toISOString() } : {}) } as Database['public']['Tables']['games']['Update']
     const { error } = await adminClient.from('games').update(update).eq('id', id)
     if (error) handleApiError(error, 'Unable to update the game.', 400)

@@ -25,8 +25,8 @@ const gameFields = z.object({
   matchday: z.coerce.number().int().positive().nullable().optional().default(null),
   round_label: z.string().trim().max(80).nullable().optional().default(null),
   status: z.enum(['scheduled', 'completed', 'postponed', 'cancelled']).default('scheduled'),
-  home_score: z.coerce.number().int().min(0).nullable().optional().default(null),
-  away_score: z.coerce.number().int().min(0).nullable().optional().default(null),
+  home_score: z.coerce.number().int().min(0).optional().default(0),
+  away_score: z.coerce.number().int().min(0).optional().default(0),
   notes: z.string().trim().max(1000).nullable().optional().default(null),
 })
 export const gameSchema = gameFields.superRefine((value, context) => {
@@ -47,6 +47,12 @@ export const seasonUpdateSchema = updateSchema(seasonFields).refine((value) => !
 export const competitionUpdateSchema = updateSchema(competitionSchema)
 export const venueUpdateSchema = updateSchema(venueSchema)
 export const gameUpdateSchema = updateSchema(gameFields)
+
+export const gameResultSchema = z.object({
+  home_score: z.coerce.number().int().min(0),
+  away_score: z.coerce.number().int().min(0),
+  status: z.literal('completed'),
+})
 
 function fail(error: unknown, message: string): never { handleApiError(error, message, 400) }
 

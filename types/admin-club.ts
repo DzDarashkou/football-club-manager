@@ -59,8 +59,8 @@ export type AdminGame = {
   matchday: number | null
   round_label: string | null
   status: GameStatus
-  home_score: number | null
-  away_score: number | null
+  home_score: number
+  away_score: number
   notes: string | null
   team: Pick<AdminTeam, 'id' | 'name'>
   season: Pick<AdminSeason, 'id' | 'name'>
