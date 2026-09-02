@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<FeaturePlaceholderProps>(), {
     </div>
 
     <Card class="space-y-4">
-      <p class="text-h3">What&apos;s ready in this phase</p>
+      <p class="text-h3">Co jest gotowe na tym etapie</p>
       <div class="grid gap-3 sm:grid-cols-2">
         <div
           v-for="item in props.items"

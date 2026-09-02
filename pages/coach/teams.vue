@@ -4,16 +4,16 @@ definePageMeta({
 })
 
 const items = [
-  { label: 'Assigned teams', value: 'Role filtered' },
-  { label: 'Future scope', value: 'Team roster views' },
+  { label: 'Przypisane drużyny', value: 'Filtrowane według roli' },
+  { label: 'Przyszły zakres', value: 'Widoki składów drużyn' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Coach area"
-    title="Teams"
-    description="This protected coach route is ready for team-level views and assignments."
+    eyebrow="Strefa trenera"
+    title="Drużyny"
+    description="Ta chroniona trasa trenera jest gotowa na widoki i przypisania na poziomie drużyny."
     :items="items"
   />
 </template>

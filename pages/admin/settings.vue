@@ -4,16 +4,16 @@ definePageMeta({
 })
 
 const items = [
-  { label: 'Access', value: 'Admin only' },
-  { label: 'Next scope', value: 'Club configuration' },
+  { label: 'Dostęp', value: 'Tylko administrator' },
+  { label: 'Następny zakres', value: 'Konfiguracja klubu' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Admin area"
-    title="Settings"
-    description="The protected settings area is ready for future club-level configuration work."
+    eyebrow="Strefa administratora"
+    title="Ustawienia"
+    description="Chroniona strefa ustawień jest gotowa na przyszłą konfigurację klubu."
     :items="items"
   />
 </template>

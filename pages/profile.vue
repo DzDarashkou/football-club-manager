@@ -8,16 +8,16 @@ definePageMeta({
 const { profile } = useAppAuth()
 
 const items = computed(() => [
-  { label: 'Signed in as', value: profile.value?.email ?? 'Unknown' },
-  { label: 'Current role', value: profile.value?.role ?? 'Unknown' },
+  { label: 'Zalogowano jako', value: profile.value?.email ?? 'Nieznany użytkownik' },
+  { label: 'Aktualna rola', value: profile.value?.role ?? 'Nieznana' },
 ])
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Account"
-    title="Profile"
-    description="Authenticated users can reach this protected profile area. Account editing and password changes remain out of scope for this phase."
+    eyebrow="Konto"
+    title="Profil"
+    description="Zalogowani użytkownicy mogą przejść do tej chronionej strefy profilu. Edycja konta i zmiana hasła nie są jeszcze dostępne."
     :items="items"
   />
 </template>

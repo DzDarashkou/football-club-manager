@@ -23,8 +23,8 @@ const totals = computed(() => games.value.reduce((sum, item) => ({
   redCards: sum.redCards + item.record.red_cards,
 }), { appearances: 0, minutes: 0, goals: 0, assists: 0, yellowCards: 0, redCards: 0 }))
 
-function formatDate(value: string) { return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium' }).format(new Date(`${value}T00:00:00`)) }
-function formatGameDate(value: string) { return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) }
+function formatDate(value: string) { return new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium' }).format(new Date(`${value}T00:00:00`)) }
+function formatGameDate(value: string) { return new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) }
 function availabilityStatus(status: GamePlayer['availability_status']) { return status === 'available' ? 'confirmed' : status === 'unavailable' ? 'declined' : 'pending' }
 function selectionStatus(status: GamePlayer['selection_status']) { return status === 'started' ? 'confirmed' : status === 'substitute' ? 'neutral' : status === 'not_selected' ? 'declined' : 'pending' }
 function availabilityLabel(status: GamePlayer['availability_status']) { return status === 'available' ? 'Parent: available' : status === 'unavailable' ? 'Parent: unavailable' : 'Parent: awaiting response' }

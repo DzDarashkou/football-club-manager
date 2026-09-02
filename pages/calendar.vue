@@ -4,16 +4,16 @@ definePageMeta({
 })
 
 const items = [
-  { label: 'Visible to', value: 'Parents and coaches' },
-  { label: 'Next scope', value: 'Training and match calendar' },
+  { label: 'Widoczne dla', value: 'Rodziców i trenerów' },
+  { label: 'Następny zakres', value: 'Kalendarz treningów i meczów' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Shared area"
-    title="Calendar"
-    description="The protected calendar route is in place and ready for scheduling features."
+    eyebrow="Wspólna strefa"
+    title="Kalendarz"
+    description="Chroniona trasa kalendarza jest gotowa na funkcje planowania."
     :items="items"
   />
 </template>

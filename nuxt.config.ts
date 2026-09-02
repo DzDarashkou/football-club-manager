@@ -37,14 +37,14 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en',
+        lang: 'pl',
       },
       meta: [
         { name: 'theme-color', content: '#0C447C' },
         { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-        { name: 'apple-mobile-web-app-title', content: 'Sporting Wroclaw' },
+        { name: 'apple-mobile-web-app-title', content: 'Sporting Wrocław' },
       ],
       link: [
         { rel: 'manifest', href: '/manifest.webmanifest' },
@@ -65,9 +65,9 @@ export default defineNuxtConfig({
     },
     manifest: {
       id: '/',
-      name: 'Sporting Wroclaw Football Club Manager',
+      name: 'Menedżer Klubu Piłkarskiego Sporting Wrocław',
       short_name: 'Sporting',
-      description: 'Manage Sporting Wroclaw teams, players, games, and attendance.',
+      description: 'Zarządzaj drużynami, zawodnikami, meczami i obecnością w Sporting Wrocław.',
       start_url: '/',
       scope: '/',
       theme_color: '#0C447C',

@@ -9,17 +9,17 @@ definePageMeta({
 <template>
   <div class="space-y-5">
     <div>
-      <p class="eyebrow text-brand-700">Youth Football PWA</p>
+      <p class="eyebrow text-brand-700">PWA dla młodzieżowej piłki nożnej</p>
       <h1>Sporting Wroclaw</h1>
       <p class="mt-2 text-body text-[color:var(--color-text-secondary)]">
-        The design system foundation is in place and ready for feature screens.
+        Podstawa systemu projektowego jest gotowa na kolejne ekrany aplikacji.
       </p>
     </div>
 
     <div class="grid gap-3">
-      <Button as="a" href="/test-tokens">Open token showcase</Button>
-      <Button as="a" href="/dashboard" variant="outline">Open parent shell</Button>
-      <Button as="a" href="/admin" variant="outline">Open admin shell</Button>
+      <Button as="a" href="/test-tokens">Otwórz prezentację tokenów</Button>
+      <Button as="a" href="/dashboard" variant="outline">Otwórz widok rodzica</Button>
+      <Button as="a" href="/admin" variant="outline">Otwórz widok administratora</Button>
     </div>
   </div>
 </template>

@@ -22,7 +22,7 @@ const route = useRoute()
 
 watchEffect(() => {
   if (route.query.reason === 'inactive') {
-    errorMessage.value = 'Your account is inactive. Please contact the club administrator.'
+    errorMessage.value = 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
     return
   }
 
@@ -44,19 +44,19 @@ async function handleSubmit() {
     })
 
     if (!role.value) {
-      throw new Error('Missing role after sign-in.')
+      throw new Error('Brak roli po zalogowaniu.')
     }
 
     if (role.value !== selectedRole.value) {
       await signOut()
-      errorMessage.value = `This account does not have ${selectedRole.value} access.`
+      errorMessage.value = `To konto nie ma dostępu w roli: ${selectedRole.value === 'admin' ? 'administrator' : 'rodzic'}.`
       return
     }
 
     await router.push(getRoleHome(role.value))
   }
   catch {
-    errorMessage.value = authError.value || 'Unable to sign in with that email and password.'
+    errorMessage.value = authError.value || 'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
   }
   finally {
     isSubmitting.value = false
@@ -72,17 +72,17 @@ function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
 <template>
   <div class="space-y-5">
     <div>
-      <p class="eyebrow text-brand-700">Welcome back</p>
-      <h1>Sign in</h1>
+      <p class="eyebrow text-brand-700">Witamy ponownie</p>
+      <h1>Zaloguj się</h1>
     </div>
     <div v-if="!selectedRole" class="grid gap-3">
-      <Button class="w-full" @click="selectRole('parent')">Parent login</Button>
-      <Button class="w-full" variant="outline" @click="selectRole('admin')">Admin login</Button>
+      <Button class="w-full" @click="selectRole('parent')">Logowanie rodzica</Button>
+      <Button class="w-full" variant="outline" @click="selectRole('admin')">Logowanie administratora</Button>
     </div>
     <form v-else class="space-y-4" @submit.prevent="handleSubmit">
       <div class="flex items-center justify-between gap-3">
-        <p class="text-sm font-medium text-[color:var(--color-text-primary)]">{{ selectedRole === 'parent' ? 'Parent login' : 'Admin login' }}</p>
-        <Button type="button" variant="ghost" size="sm" @click="selectedRole = null">Change role</Button>
+        <p class="text-sm font-medium text-[color:var(--color-text-primary)]">{{ selectedRole === 'parent' ? 'Logowanie rodzica' : 'Logowanie administratora' }}</p>
+        <Button type="button" variant="ghost" size="sm" @click="selectedRole = null">Zmień rolę</Button>
       </div>
       <div class="space-y-2">
         <Label for="email">Email</Label>
@@ -96,7 +96,7 @@ function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
         />
       </div>
       <div class="space-y-2">
-        <Label for="password">Password</Label>
+        <Label for="password">Hasło</Label>
         <Input
           id="password"
           v-model="form.password"
@@ -110,14 +110,14 @@ function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
         {{ errorMessage }}
       </p>
       <p v-if="route.query.reset === 'success'" class="text-label text-[var(--status-confirmed-text)]">
-        Your password has been updated. Please sign in with the new password.
+        Twoje hasło zostało zmienione. Zaloguj się nowym hasłem.
       </p>
       <Button class="w-full" type="submit" :disabled="isSubmitting || isInitializing">
-        {{ isSubmitting ? 'Signing in...' : 'Continue' }}
+        {{ isSubmitting ? 'Logowanie...' : 'Kontynuuj' }}
       </Button>
       <p class="text-center text-label text-[color:var(--color-text-secondary)]">
         <NuxtLink to="/forgot-password" class="font-medium text-brand-700 hover:text-brand-800">
-          Forgot your password?
+          Nie pamiętasz hasła?
         </NuxtLink>
       </p>
     </form>

@@ -4,16 +4,16 @@ definePageMeta({
 })
 
 const items = [
-  { label: 'Linked children', value: 'Coming next' },
-  { label: 'Role access', value: 'Parent only' },
+  { label: 'Powiązane dzieci', value: 'Wkrótce' },
+  { label: 'Dostęp', value: 'Tylko rodzic' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Parent area"
-    title="My children"
-    description="This protected page is reserved for parent-linked player information and quick stats."
+    eyebrow="Strefa rodzica"
+    title="Moje dzieci"
+    description="Ta chroniona strona jest przeznaczona na informacje o powiązanych zawodnikach i szybkie statystyki."
     :items="items"
   />
 </template>

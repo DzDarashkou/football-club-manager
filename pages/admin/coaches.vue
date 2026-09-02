@@ -4,16 +4,16 @@ definePageMeta({
 })
 
 const items = [
-  { label: 'Access', value: 'Admin only' },
-  { label: 'Next scope', value: 'Coach assignments and permissions' },
+  { label: 'Dostęp', value: 'Tylko administrator' },
+  { label: 'Następny zakres', value: 'Przypisania i uprawnienia trenerów' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Admin area"
-    title="Coaches"
-    description="Coach administration will be implemented on top of this protected route."
+    eyebrow="Strefa administratora"
+    title="Trenerzy"
+    description="Zarządzanie trenerami zostanie wdrożone na tej chronionej trasie."
     :items="items"
   />
 </template>

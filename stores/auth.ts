@@ -56,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (!data || !isAppRole(data.role) || !isAppUserStatus(data.status)) {
       profile.value = null
       loadedUserId.value = null
-      authError.value = 'Your account is missing an application role. Please contact the club administrator.'
+      authError.value = 'Twoje konto nie ma roli w aplikacji. Skontaktuj się z administratorem klubu.'
       await client.auth.signOut()
       return
     }
@@ -64,7 +64,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (data.status !== 'active') {
       profile.value = null
       loadedUserId.value = null
-      authError.value = 'Your account is inactive. Please contact the club administrator.'
+      authError.value = 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
       await client.auth.signOut()
       return
     }
@@ -123,7 +123,7 @@ export const useAuthStore = defineStore('auth', () => {
     const { data, error } = await client.auth.signInWithPassword(credentials)
 
     if (error) {
-      authError.value = 'Unable to sign in with that email and password.'
+      authError.value = 'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
       throw error
     }
 

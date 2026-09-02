@@ -10,6 +10,7 @@ import type {
   AdminUserUpsertInput,
   AdminUsersListResponse,
 } from '@@/types/admin-users'
+import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({
   allowedRoles: ['admin'],
@@ -32,6 +33,7 @@ const actionUserId = ref<string | null>(null)
 const pageError = ref<string | null>(null)
 const pageSuccess = ref<string | null>(null)
 const confirmAction = ref<ConfirmAction>(null)
+const { roleLabel } = usePolishLocale()
 
 const form = reactive<AdminUserUpsertInput>({
   email: '',
@@ -65,7 +67,7 @@ const selectedUser = computed(() => (
 
 const emptyStateMessage = computed(() => {
   if (pending.value) {
-    return 'Loading users...'
+    return 'Wczytywanie użytkowników...'
   }
 
   if (users.value.length > 0) {
@@ -73,10 +75,10 @@ const emptyStateMessage = computed(() => {
   }
 
   if (search.value || roleFilter.value !== 'all' || statusFilter.value !== 'all') {
-    return 'No users match the current search and filters.'
+    return 'Żaden użytkownik nie spełnia bieżących kryteriów wyszukiwania i filtrów.'
   }
 
-  return 'No parent or coach accounts have been created yet.'
+  return 'Nie utworzono jeszcze kont rodziców ani trenerów.'
 })
 
 watch(selectedUser, (user) => {
@@ -141,8 +143,8 @@ async function submitForm() {
       })
 
       pageSuccess.value = response.setupEmailSent
-        ? 'User created and password setup email sent.'
-        : 'User created. Password setup email could not be sent yet.'
+        ? 'Użytkownik został utworzony, a wiadomość do ustawienia hasła została wysłana.'
+        : 'Użytkownik został utworzony, ale nie udało się jeszcze wysłać wiadomości do ustawienia hasła.'
 
       if (!response.setupEmailSent && response.setupEmailError) {
         pageError.value = response.setupEmailError
@@ -156,7 +158,7 @@ async function submitForm() {
         body: payload,
       })
 
-      pageSuccess.value = 'User updated.'
+      pageSuccess.value = 'Użytkownik został zaktualizowany.'
       openEditForm(response.user)
     }
 
@@ -164,7 +166,7 @@ async function submitForm() {
   }
   catch (fetchError) {
     const details = fetchError as { data?: { statusMessage?: string }, message?: string }
-    pageError.value = details.data?.statusMessage || details.message || 'Unable to save the user.'
+    pageError.value = details.data?.statusMessage || details.message || 'Nie udało się zapisać użytkownika.'
   }
   finally {
     isSubmitting.value = false
@@ -181,11 +183,11 @@ async function sendSetupEmail(user: AdminManagedUser) {
       method: 'POST',
     })
 
-    pageSuccess.value = `Password setup email sent to ${user.email}.`
+    pageSuccess.value = `Wiadomość do ustawienia hasła została wysłana na adres ${user.email}.`
   }
   catch (fetchError) {
     const details = fetchError as { data?: { statusMessage?: string }, message?: string }
-    pageError.value = details.data?.statusMessage || details.message || 'Unable to send the setup email.'
+    pageError.value = details.data?.statusMessage || details.message || 'Nie udało się wysłać wiadomości do ustawienia hasła.'
   }
   finally {
     actionUserId.value = null
@@ -206,8 +208,8 @@ async function applyStatusChange(user: AdminManagedUser, nextStatus: 'active' | 
     })
 
     pageSuccess.value = nextStatus === 'inactive'
-      ? `${user.email} has been deactivated.`
-      : `${user.email} has been reactivated.`
+      ? `Konto ${user.email} zostało dezaktywowane.`
+      : `Konto ${user.email} zostało ponownie aktywowane.`
 
     if (selectedUserId.value === user.id) {
       openEditForm(response.user)
@@ -217,7 +219,7 @@ async function applyStatusChange(user: AdminManagedUser, nextStatus: 'active' | 
   }
   catch (fetchError) {
     const details = fetchError as { data?: { statusMessage?: string }, message?: string }
-    pageError.value = details.data?.statusMessage || details.message || 'Unable to update the user status.'
+    pageError.value = details.data?.statusMessage || details.message || 'Nie udało się zaktualizować statusu użytkownika.'
   }
   finally {
     actionUserId.value = null
@@ -239,12 +241,12 @@ async function deleteUser(user: AdminManagedUser) {
       openCreateForm()
     }
 
-    pageSuccess.value = `${user.email} has been permanently deleted.`
+    pageSuccess.value = `Konto ${user.email} zostało trwale usunięte.`
     await refresh()
   }
   catch (fetchError) {
     const details = fetchError as { data?: { statusMessage?: string }, message?: string }
-    pageError.value = details.data?.statusMessage || details.message || 'Unable to delete the user.'
+    pageError.value = details.data?.statusMessage || details.message || 'Nie udało się usunąć użytkownika.'
   }
   finally {
     actionUserId.value = null
@@ -266,7 +268,7 @@ async function confirmCurrentAction() {
 }
 
 function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
+  return new Intl.DateTimeFormat('pl-PL', {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(value))
@@ -274,15 +276,15 @@ function formatDate(value: string) {
 
 function getStatusBadge(user: AdminManagedUser) {
   return user.status === 'active'
-    ? { label: 'Active', tone: 'confirmed' as const }
-    : { label: 'Inactive', tone: 'neutral' as const }
+    ? { label: 'Aktywne', tone: 'confirmed' as const }
+    : { label: 'Nieaktywne', tone: 'neutral' as const }
 }
 
-const editorTitle = computed(() => isCreateMode.value ? 'Create user' : 'Edit user')
+const editorTitle = computed(() => isCreateMode.value ? 'Utwórz użytkownika' : 'Edytuj użytkownika')
 const editorDescription = computed(() => (
   isCreateMode.value
-    ? 'Create a coach or parent account and send a password setup email.'
-    : 'Update account details, change access status, or resend password setup.'
+    ? 'Utwórz konto trenera lub rodzica i wyślij wiadomość do ustawienia hasła.'
+    : 'Zaktualizuj dane konta, zmień status dostępu lub wyślij wiadomość do ustawienia hasła ponownie.'
 ))
 </script>
 
@@ -290,15 +292,15 @@ const editorDescription = computed(() => (
   <div class="mx-auto max-w-7xl space-y-6">
     <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div class="space-y-2">
-        <p class="eyebrow text-brand-700">Admin area</p>
-        <h1>Users</h1>
+        <p class="eyebrow text-brand-700">Strefa administratora</p>
+        <h1>Użytkownicy</h1>
         <p class="max-w-2xl text-body text-[color:var(--color-text-secondary)]">
-          Create and manage parent and coach accounts, control access, and resend password setup emails.
+          Twórz i zarządzaj kontami rodziców oraz trenerów, kontroluj dostęp i wysyłaj wiadomości do ustawienia hasła ponownie.
         </p>
       </div>
       <Button class="gap-2" @click="openCreateForm">
         <UserPlus class="h-4 w-4" />
-        Create user
+        Utwórz użytkownika
       </Button>
     </div>
 
@@ -314,31 +316,31 @@ const editorDescription = computed(() => (
         <Card class="space-y-4">
           <div class="flex items-center justify-between gap-3">
             <div>
-              <h2>Directory</h2>
+              <h2>Katalog</h2>
               <p class="mt-1 text-label text-[color:var(--color-text-secondary)]">
-                Search by email or full name and filter by role or account status.
+                Wyszukuj po adresie e-mail lub imieniu i nazwisku oraz filtruj według roli i statusu konta.
               </p>
             </div>
           </div>
           <div class="grid gap-3 md:grid-cols-3">
             <div class="md:col-span-2">
-              <Label for="user-search">Search</Label>
-              <Input id="user-search" v-model="searchInput" placeholder="Search by email or full name" />
+              <Label for="user-search">Szukaj</Label>
+              <Input id="user-search" v-model="searchInput" placeholder="Szukaj po adresie e-mail lub imieniu i nazwisku" />
             </div>
             <div>
-              <Label for="role-filter">Role</Label>
+              <Label for="role-filter">Rola</Label>
               <select id="role-filter" v-model="roleFilter" :class="selectClass">
-                <option value="all">All roles</option>
-                <option value="parent">Parents</option>
-                <option value="coach">Coaches</option>
+                <option value="all">Wszystkie role</option>
+                <option value="parent">Rodzice</option>
+                <option value="coach">Trenerzy</option>
               </select>
             </div>
             <div class="md:col-span-3">
               <Label for="status-filter">Status</Label>
               <select id="status-filter" v-model="statusFilter" :class="selectClass">
-                <option value="all">All statuses</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="all">Wszystkie statusy</option>
+                <option value="active">Aktywne</option>
+                <option value="inactive">Nieaktywne</option>
               </select>
             </div>
           </div>
@@ -348,12 +350,12 @@ const editorDescription = computed(() => (
           <div class="border-b border-border px-4 py-4">
             <div class="flex items-center justify-between gap-3">
               <div>
-                <h2>Accounts</h2>
+                <h2>Konta</h2>
                 <p class="mt-1 text-label text-[color:var(--color-text-secondary)]">
-                  {{ users.length }} managed account{{ users.length === 1 ? '' : 's' }}
+                  Liczba zarządzanych kont: {{ users.length }}
                 </p>
               </div>
-              <Badge variant="secondary">{{ pending ? 'Refreshing' : 'Live' }}</Badge>
+              <Badge variant="secondary">{{ pending ? 'Odświeżanie' : 'Aktualne' }}</Badge>
             </div>
           </div>
 
@@ -371,22 +373,22 @@ const editorDescription = computed(() => (
               <div class="min-w-0 space-y-3">
                 <div class="flex flex-wrap items-center gap-2">
                   <p class="text-base font-medium text-[color:var(--color-text-primary)]">
-                    {{ user.full_name || 'No name set' }}
+                    {{ user.full_name || 'Brak imienia i nazwiska' }}
                   </p>
                   <Badge :status="getStatusBadge(user).tone">{{ getStatusBadge(user).label }}</Badge>
-                  <Badge variant="outline">{{ user.role }}</Badge>
+                  <Badge variant="outline">{{ roleLabel(user.role) }}</Badge>
                 </div>
                 <div class="space-y-1 text-sm text-[color:var(--color-text-secondary)]">
                   <p class="truncate">{{ user.email }}</p>
-                  <p>Created {{ formatDate(user.created_at) }}</p>
-                  <p>Updated {{ formatDate(user.updated_at) }}</p>
+                  <p>Utworzono: {{ formatDate(user.created_at) }}</p>
+                  <p>Zaktualizowano: {{ formatDate(user.updated_at) }}</p>
                 </div>
               </div>
 
               <div class="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm" class="gap-2" @click="openEditForm(user)">
                   <UserRoundPen class="h-4 w-4" />
-                  Edit
+                  Edytuj
                 </Button>
                 <Button
                   variant="outline"
@@ -394,7 +396,7 @@ const editorDescription = computed(() => (
                   :disabled="actionUserId === user.id"
                   @click="sendSetupEmail(user)"
                 >
-                  {{ actionUserId === user.id ? 'Sending...' : 'Send setup email' }}
+                  {{ actionUserId === user.id ? 'Wysyłanie...' : 'Wyślij wiadomość do ustawienia hasła' }}
                 </Button>
                 <Button
                   variant="ghost"
@@ -403,7 +405,7 @@ const editorDescription = computed(() => (
                   :disabled="actionUserId === user.id"
                   @click="confirmAction = { type: 'status', user, nextStatus: user.status === 'active' ? 'inactive' : 'active' }"
                 >
-                  {{ user.status === 'active' ? 'Deactivate' : 'Reactivate' }}
+                  {{ user.status === 'active' ? 'Dezaktywuj' : 'Aktywuj ponownie' }}
                 </Button>
                 <Button
                   variant="destructive"
@@ -411,7 +413,7 @@ const editorDescription = computed(() => (
                   :disabled="actionUserId === user.id"
                   @click="confirmAction = { type: 'delete', user }"
                 >
-                  Delete
+                  Usuń
                 </Button>
               </div>
             </div>
@@ -429,8 +431,8 @@ const editorDescription = computed(() => (
 
         <form class="space-y-4" @submit.prevent="submitForm">
           <div class="space-y-2">
-            <Label for="full_name">Full name</Label>
-            <Input id="full_name" v-model="form.full_name" placeholder="Parent or coach full name" required />
+            <Label for="full_name">Imię i nazwisko</Label>
+            <Input id="full_name" v-model="form.full_name" placeholder="Imię i nazwisko rodzica lub trenera" required />
           </div>
 
           <div class="space-y-2">
@@ -440,28 +442,28 @@ const editorDescription = computed(() => (
 
           <div class="grid gap-4 sm:grid-cols-2">
             <div class="space-y-2">
-              <Label for="role">Role</Label>
+              <Label for="role">Rola</Label>
               <select id="role" v-model="form.role" :class="selectClass">
-                <option value="parent">Parent</option>
-                <option value="coach">Coach</option>
+                <option value="parent">Rodzic</option>
+                <option value="coach">Trener</option>
               </select>
             </div>
 
             <div class="space-y-2">
               <Label for="status">Status</Label>
               <select id="status" v-model="form.status" :class="selectClass">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="active">Aktywne</option>
+                <option value="inactive">Nieaktywne</option>
               </select>
             </div>
           </div>
 
           <div class="flex flex-col gap-3 sm:flex-row">
             <Button type="submit" class="sm:flex-1" :disabled="isSubmitting">
-              {{ isSubmitting ? 'Saving...' : isCreateMode ? 'Create user' : 'Save changes' }}
+              {{ isSubmitting ? 'Zapisywanie...' : isCreateMode ? 'Utwórz użytkownika' : 'Zapisz zmiany' }}
             </Button>
             <Button type="button" variant="outline" class="sm:flex-1" @click="openCreateForm">
-              Clear form
+              Wyczyść formularz
             </Button>
           </div>
         </form>
@@ -470,9 +472,9 @@ const editorDescription = computed(() => (
           <div class="flex items-start gap-3">
             <ShieldAlert class="mt-0.5 h-5 w-5 text-brand-700" />
             <div class="space-y-2 text-sm text-[color:var(--color-text-secondary)]">
-              <p class="font-medium text-[color:var(--color-text-primary)]">Useful next steps</p>
-              <p>Use “Send setup email” after changing an email address or when a user reports they never set a password.</p>
-              <p>Deactivated users keep their record but lose protected-route access on the next authenticated app check.</p>
+              <p class="font-medium text-[color:var(--color-text-primary)]">Przydatne kolejne kroki</p>
+              <p>Użyj „Wyślij wiadomość do ustawienia hasła” po zmianie adresu e-mail lub gdy użytkownik zgłasza, że nie ustawił hasła.</p>
+              <p>Dezaktywowani użytkownicy zachowują swój rekord, ale tracą dostęp do chronionych tras przy następnym sprawdzeniu uwierzytelnienia.</p>
             </div>
           </div>
         </div>
@@ -482,23 +484,23 @@ const editorDescription = computed(() => (
     <div v-if="confirmAction" class="fixed inset-0 z-50 flex items-center justify-center bg-brand-950/50 px-4">
       <Card class="w-full max-w-md space-y-4">
         <div class="space-y-2">
-          <h2>{{ confirmAction.type === 'delete' ? 'Delete user' : confirmAction.nextStatus === 'inactive' ? 'Deactivate user' : 'Reactivate user' }}</h2>
+          <h2>{{ confirmAction.type === 'delete' ? 'Usuń użytkownika' : confirmAction.nextStatus === 'inactive' ? 'Dezaktywuj użytkownika' : 'Aktywuj użytkownika ponownie' }}</h2>
           <p class="text-body text-[color:var(--color-text-secondary)]">
             <template v-if="confirmAction.type === 'delete'">
-              Permanently delete {{ confirmAction.user.email }} from Supabase Auth and the app profile table. This cannot be undone.
+              Trwale usuń {{ confirmAction.user.email }} z Supabase Auth i tabeli profili aplikacji. Tej operacji nie można cofnąć.
             </template>
             <template v-else-if="confirmAction.nextStatus === 'inactive'">
-              Deactivate {{ confirmAction.user.email }} so they can no longer use protected areas of the app.
+              Dezaktywuj {{ confirmAction.user.email }}, aby nie mógł już korzystać z chronionych obszarów aplikacji.
             </template>
             <template v-else>
-              Reactivate {{ confirmAction.user.email }} so they can sign in again.
+              Aktywuj ponownie {{ confirmAction.user.email }}, aby mógł znów się zalogować.
             </template>
           </p>
         </div>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
           <Button variant="outline" @click="confirmAction = null">
-            Cancel
+            Anuluj
           </Button>
           <Button
             :variant="confirmAction.type === 'delete' ? 'destructive' : 'default'"
@@ -506,7 +508,7 @@ const editorDescription = computed(() => (
             @click="confirmCurrentAction"
           >
             <Trash2 v-if="confirmAction.type === 'delete'" class="mr-2 h-4 w-4" />
-            {{ actionUserId === confirmAction.user.id ? 'Working...' : confirmAction.type === 'delete' ? 'Delete permanently' : confirmAction.nextStatus === 'inactive' ? 'Deactivate user' : 'Reactivate user' }}
+            {{ actionUserId === confirmAction.user.id ? 'Wykonywanie...' : confirmAction.type === 'delete' ? 'Usuń trwale' : confirmAction.nextStatus === 'inactive' ? 'Dezaktywuj użytkownika' : 'Aktywuj użytkownika ponownie' }}
           </Button>
         </div>
       </Card>

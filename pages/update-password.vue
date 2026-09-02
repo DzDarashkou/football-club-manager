@@ -22,7 +22,7 @@ const passwordError = computed(() => {
 
   return password.value.length >= 8
     ? null
-    : 'Password must be at least 8 characters long.'
+    : 'Hasło musi mieć co najmniej 8 znaków.'
 })
 
 const confirmPasswordError = computed(() => {
@@ -32,7 +32,7 @@ const confirmPasswordError = computed(() => {
 
   return password.value === confirmPassword.value
     ? null
-    : 'Passwords do not match.'
+    : 'Hasła nie są takie same.'
 })
 
 const isFormValid = computed(() => !passwordError.value && !confirmPasswordError.value)
@@ -58,7 +58,7 @@ async function handleSubmit() {
   successMessage.value = null
 
   if (!recoveryReady.value) {
-    errorMessage.value = 'This recovery link is not active anymore. Please request a new one.'
+    errorMessage.value = 'Ten link do odzyskania hasła nie jest już aktywny. Poproś o nowy.'
     return
   }
 
@@ -84,11 +84,11 @@ async function handleSubmit() {
     }
 
     await client.auth.signOut()
-    successMessage.value = 'Password updated. Redirecting you back to sign in...'
+    successMessage.value = 'Hasło zostało zmienione. Przekierowujemy do logowania...'
     await router.push('/login?reset=success')
   }
   catch {
-    errorMessage.value = 'Unable to update your password right now.'
+    errorMessage.value = 'Nie udało się teraz zmienić hasła.'
   }
   finally {
     isSubmitting.value = false
@@ -99,22 +99,22 @@ async function handleSubmit() {
 <template>
   <div class="space-y-5">
     <div>
-      <p class="eyebrow text-brand-700">Account recovery</p>
-      <h1>Set a new password</h1>
+      <p class="eyebrow text-brand-700">Odzyskiwanie konta</p>
+      <h1>Ustaw nowe hasło</h1>
       <p class="mt-2 text-body text-[color:var(--color-text-secondary)]">
-        Choose a new password for your Sporting account.
+        Wybierz nowe hasło do swojego konta Sporting.
       </p>
     </div>
 
     <form class="space-y-4" @submit.prevent="handleSubmit">
       <div class="space-y-2">
-        <Label for="password">New password</Label>
+        <Label for="password">Nowe hasło</Label>
         <Input
           id="password"
           v-model="password"
           type="password"
           autocomplete="new-password"
-          placeholder="At least 8 characters"
+          placeholder="Co najmniej 8 znaków"
           minlength="8"
           required
         />
@@ -123,13 +123,13 @@ async function handleSubmit() {
         </p>
       </div>
       <div class="space-y-2">
-        <Label for="confirm_password">Confirm password</Label>
+        <Label for="confirm_password">Potwierdź hasło</Label>
         <Input
           id="confirm_password"
           v-model="confirmPassword"
           type="password"
           autocomplete="new-password"
-          placeholder="Repeat your password"
+          placeholder="Powtórz hasło"
           required
         />
         <p v-if="confirmPasswordError" class="text-label text-[var(--status-declined-text)]">
@@ -143,10 +143,10 @@ async function handleSubmit() {
         {{ errorMessage }}
       </p>
       <Button class="w-full" type="submit" :disabled="isSubmitting || !isFormValid">
-        {{ isSubmitting ? 'Saving...' : 'Update password' }}
+        {{ isSubmitting ? 'Zapisywanie...' : 'Zmień hasło' }}
       </Button>
       <p class="text-center text-label text-[color:var(--color-text-secondary)]">
-        If this link expired, request a new recovery email from the sign-in screen.
+        Jeśli ten link wygasł, poproś o nową wiadomość odzyskiwania na ekranie logowania.
       </p>
     </form>
   </div>

@@ -24,10 +24,10 @@ async function handleSubmit() {
       throw error
     }
 
-    successMessage.value = 'Password reset instructions have been sent if an account exists for that email.'
+    successMessage.value = 'Jeśli konto z tym adresem e-mail istnieje, wysłaliśmy instrukcję resetowania hasła.'
   }
   catch {
-    errorMessage.value = 'Unable to send reset instructions right now.'
+    errorMessage.value = 'Nie udało się teraz wysłać instrukcji resetowania.'
   }
   finally {
     isSubmitting.value = false
@@ -38,10 +38,10 @@ async function handleSubmit() {
 <template>
   <div class="space-y-5">
     <div>
-      <p class="eyebrow text-brand-700">Account recovery</p>
-      <h1>Forgot password</h1>
+      <p class="eyebrow text-brand-700">Odzyskiwanie konta</p>
+      <h1>Nie pamiętasz hasła?</h1>
       <p class="mt-2 text-body text-[color:var(--color-text-secondary)]">
-        Enter your email and we will send a secure link so you can set a new password.
+        Wpisz adres e-mail, a wyślemy bezpieczny link do ustawienia nowego hasła.
       </p>
     </div>
     <form class="space-y-4" @submit.prevent="handleSubmit">
@@ -56,9 +56,9 @@ async function handleSubmit() {
         {{ errorMessage }}
       </p>
       <Button class="w-full" type="submit" :disabled="isSubmitting">
-        {{ isSubmitting ? 'Sending...' : 'Send reset link' }}
+        {{ isSubmitting ? 'Wysyłanie...' : 'Wyślij link do resetowania' }}
       </Button>
-      <Button as="a" href="/login" variant="outline" class="w-full">Back to sign in</Button>
+      <Button as="a" href="/login" variant="outline" class="w-full">Wróć do logowania</Button>
     </form>
   </div>
 </template>

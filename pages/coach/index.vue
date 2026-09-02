@@ -4,18 +4,18 @@ definePageMeta({
 })
 
 const quickStats = [
-  { label: 'Assigned teams', value: '2 active squads' },
-  { label: 'Next session', value: 'Today at 17:30' },
-  { label: 'Pending RSVPs', value: '6 players' },
-  { label: 'Matchday prep', value: '2 lineups to confirm' },
+  { label: 'Przypisane drużyny', value: '2 aktywne zespoły' },
+  { label: 'Następne zajęcia', value: 'Dzisiaj o 17:30' },
+  { label: 'Oczekujące odpowiedzi', value: '6 zawodników' },
+  { label: 'Przygotowanie meczu', value: '2 składy do potwierdzenia' },
 ]
 </script>
 
 <template>
   <FeaturePlaceholder
-    eyebrow="Coach area"
-    title="Coach dashboard"
-    description="This is the landing page for coach accounts. Authentication and role guards are active, and the next coach workflows can build on this protected shell."
+    eyebrow="Strefa trenera"
+    title="Panel trenera"
+    description="To strona startowa kont trenerskich. Uwierzytelnianie i kontrola ról są aktywne, a kolejne funkcje trenera mogą korzystać z tej chronionej struktury."
     :items="quickStats"
   />
 </template>
