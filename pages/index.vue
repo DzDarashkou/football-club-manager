@@ -17,6 +17,7 @@ definePageMeta({
     </div>
 
     <div class="grid gap-3">
+      <Button as="a" href="/quiz">Zagraj w piłkarski quiz</Button>
       <Button as="a" href="/test-tokens">Otwórz prezentację tokenów</Button>
       <Button as="a" href="/dashboard" variant="outline">Otwórz widok rodzica</Button>
       <Button as="a" href="/admin" variant="outline">Otwórz widok administratora</Button>

@@ -165,13 +165,53 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_questions: {
+        Row: { id: string, question: string, option_a: string, option_b: string, option_c: string, option_d: string, correct_option: 'a' | 'b' | 'c' | 'd', difficulty: QuizDifficulty, topic: string, explanation: string, source_url: string | null, is_active: boolean, created_at: string, updated_at: string }
+        Insert: { id?: string, question: string, option_a: string, option_b: string, option_c: string, option_d: string, correct_option: 'a' | 'b' | 'c' | 'd', difficulty: QuizDifficulty, topic: string, explanation: string, source_url?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Update: { id?: string, question?: string, option_a?: string, option_b?: string, option_c?: string, option_d?: string, correct_option?: 'a' | 'b' | 'c' | 'd', difficulty?: QuizDifficulty, topic?: string, explanation?: string, source_url?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Relationships: []
+      }
+      quiz_sessions: {
+        Row: { id: string, score: number, lives_remaining: number, status: 'in_progress' | 'finished' | 'leaderboard_submitted', current_question_id: string | null, started_at: string, finished_at: string | null, leaderboard_submitted_at: string | null, expires_at: string }
+        Insert: { id?: string, score?: number, lives_remaining?: number, status?: 'in_progress' | 'finished' | 'leaderboard_submitted', current_question_id?: string | null, started_at?: string, finished_at?: string | null, leaderboard_submitted_at?: string | null, expires_at?: string }
+        Update: { id?: string, score?: number, lives_remaining?: number, status?: 'in_progress' | 'finished' | 'leaderboard_submitted', current_question_id?: string | null, started_at?: string, finished_at?: string | null, leaderboard_submitted_at?: string | null, expires_at?: string }
+        Relationships: []
+      }
+      quiz_session_questions: {
+        Row: { session_id: string, question_id: string, sequence_number: number, selected_option: 'a' | 'b' | 'c' | 'd' | null, is_correct: boolean | null, points_awarded: number, presented_at: string, answered_at: string | null }
+        Insert: { session_id: string, question_id: string, sequence_number: number, selected_option?: 'a' | 'b' | 'c' | 'd' | null, is_correct?: boolean | null, points_awarded?: number, presented_at?: string, answered_at?: string | null }
+        Update: { session_id?: string, question_id?: string, sequence_number?: number, selected_option?: 'a' | 'b' | 'c' | 'd' | null, is_correct?: boolean | null, points_awarded?: number, presented_at?: string, answered_at?: string | null }
+        Relationships: []
+      }
+      quiz_leaderboard_entries: {
+        Row: { id: string, display_name: string, score: number, correct_answers: number, created_at: string }
+        Insert: { id?: string, display_name: string, score: number, correct_answers: number, created_at?: string }
+        Update: { id?: string, display_name?: string, score?: number, correct_answers?: number, created_at?: string }
+        Relationships: []
+      }
     }
     Views: Record<string, never>
-    Functions: Record<string, never>
+    Functions: {
+      draw_quiz_question: {
+        Args: { p_session_id: string }
+        Returns: { id: string, question: string, option_a: string, option_b: string, option_c: string, option_d: string, difficulty: QuizDifficulty, topic: string }[]
+      }
+      answer_quiz_question: {
+        Args: { p_session_id: string, p_question_id: string, p_selected_option: string }
+        Returns: unknown
+      }
+      submit_quiz_leaderboard_entry: {
+        Args: { p_session_id: string, p_display_name: string }
+        Returns: unknown
+      }
+    }
     Enums: {
       app_role: AppRole
       user_status: AppUserStatus
+      quiz_difficulty: QuizDifficulty
     }
     CompositeTypes: Record<string, never>
   }
 }
+
+export type QuizDifficulty = 'easy' | 'medium' | 'hard'
