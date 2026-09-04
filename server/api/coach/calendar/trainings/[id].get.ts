@@ -13,10 +13,6 @@ export default defineEventHandler(async (event) => {
     const { data } = await adminClient.from('coach_teams').select('team_id').eq('coach_id', userId).eq('team_id', training.team_id).maybeSingle()
     if (!data) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to this team.' })
   }
-  if (role === 'parent') {
-    const { data } = await adminClient.from('players').select('id, player_parents!inner(parent_id)').eq('team_id', training.team_id).eq('player_parents.parent_id', userId).limit(1)
-    if (!data?.length) throw createError({ statusCode: 403, statusMessage: 'You do not have access to this team.' })
-  }
   const weather = await getMatchWeather(adminClient, { gameId: training.id, kickoff: training.scheduled_at, status: training.status, city: training.venue?.city ?? null, latitude: training.venue?.latitude ?? null, longitude: training.venue?.longitude ?? null, expectedDurationMinutes: training.duration_minutes, cacheKind: 'training' })
   return { training, weather, weatherAttribution: openMeteoAttribution }
 })

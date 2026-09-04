@@ -16,8 +16,9 @@ export default defineEventHandler(async (event) => {
   const { starts_at: startsAt, ends_before: endsBefore } = querySchema.parse(getQuery(event))
   const { adminClient, role, userId } = await requireCalendarAccess(event)
 
-  // The calendar is visible to every authenticated club member. Coach-specific
-  // team scope can be applied here later without changing the calendar UI.
+  // The shared calendar is visible to every authenticated club member. Coaches
+  // are limited to their assigned teams; parents intentionally see the club
+  // calendar without requiring a player_parents assignment.
   const [games, trainings] = await Promise.all([
     getGames(adminClient, { startsAt, endsBefore, ascending: true }),
     getTrainingSessions(adminClient, startsAt, endsBefore),
@@ -27,10 +28,6 @@ export default defineEventHandler(async (event) => {
     const { data, error } = await adminClient.from('coach_teams').select('team_id').eq('coach_id', userId)
     if (error) throw createError({ statusCode: 500, statusMessage: 'Unable to load coach teams.' })
     allowedTeamIds = new Set((data ?? []).map(item => item.team_id))
-  } else if (role === 'parent') {
-    const { data, error } = await adminClient.from('player_parents').select('players!inner(team_id)').eq('parent_id', userId)
-    if (error) throw createError({ statusCode: 500, statusMessage: 'Unable to load parent teams.' })
-    allowedTeamIds = new Set((data ?? []).map(item => (item.players as unknown as { team_id: string }).team_id))
   }
   const permitted = <T extends { team_id: string }>(items: T[]) => allowedTeamIds ? items.filter(item => allowedTeamIds!.has(item.team_id)) : items
   return { games: permitted(games), trainings: permitted(trainings) }
