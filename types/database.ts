@@ -3,6 +3,36 @@ import type { AppRole, AppUserStatus } from '@@/types/auth'
 export type Database = {
   public: {
     Tables: {
+      training_weather_cache: {
+        Row: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, wind_speed_kmh: number, max_wind_gust_kmh: number, wind_direction_degrees: number, cloud_cover_percentage: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { training_session_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Relationships: []
+      }
+      training_series: {
+        Row: { id: string, team_id: string, venue_id: string | null, weekday: number, starts_on: string, ends_on: string, starts_at: string, duration_minutes: number, notes: string | null, created_at: string, updated_at: string }
+        Insert: { id?: string, team_id: string, venue_id?: string | null, weekday: number, starts_on: string, ends_on: string, starts_at: string, duration_minutes?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { id?: string, team_id?: string, venue_id?: string | null, weekday?: number, starts_on?: string, ends_on?: string, starts_at?: string, duration_minutes?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Relationships: []
+      }
+      training_sessions: {
+        Row: { id: string, series_id: string, team_id: string, venue_id: string | null, scheduled_at: string, duration_minutes: number, status: string, notes: string | null, created_at: string, updated_at: string }
+        Insert: { id?: string, series_id: string, team_id: string, venue_id?: string | null, scheduled_at: string, duration_minutes: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { id?: string, series_id?: string, team_id?: string, venue_id?: string | null, scheduled_at?: string, duration_minutes?: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Relationships: []
+      }
+      weather_location_cache: {
+        Row: { city_key: string, city: string, latitude: number, longitude: number, updated_at: string }
+        Insert: { city_key: string, city: string, latitude: number, longitude: number, updated_at?: string }
+        Update: { city_key?: string, city?: string, latitude?: number, longitude?: number, updated_at?: string }
+        Relationships: []
+      }
+      match_weather_cache: {
+        Row: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, wind_speed_kmh: number, max_wind_gust_kmh: number, wind_direction_degrees: number, cloud_cover_percentage: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { game_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Relationships: []
+      }
       game_players: {
         Row: { game_id: string, player_id: string, availability_status: string, availability_note: string | null, responded_at: string | null, selection_status: string, participated: boolean, minutes_played: number, goals: number, assists: number, yellow_cards: number, red_cards: number, coach_note: string | null, created_at: string, updated_at: string }
         Insert: { game_id: string, player_id: string, availability_status?: string, availability_note?: string | null, responded_at?: string | null, selection_status?: string, participated?: boolean, minutes_played?: number, goals?: number, assists?: number, yellow_cards?: number, red_cards?: number, coach_note?: string | null, created_at?: string, updated_at?: string }
@@ -21,6 +51,12 @@ export type Database = {
         Update: { player_id?: string, parent_id?: string, relationship_label?: string | null, created_at?: string }
         Relationships: []
       }
+      player_teams: {
+        Row: { player_id: string, team_id: string, created_at: string }
+        Insert: { player_id: string, team_id: string, created_at?: string }
+        Update: { player_id?: string, team_id?: string, created_at?: string }
+        Relationships: []
+      }
       seasons: {
         Row: { id: string, name: string, starts_on: string, ends_on: string, is_active: boolean, created_at: string, updated_at: string }
         Insert: { id?: string, name: string, starts_on: string, ends_on: string, is_active?: boolean, created_at?: string, updated_at?: string }
@@ -34,9 +70,9 @@ export type Database = {
         Relationships: []
       }
       venues: {
-        Row: { id: string, name: string, address: string | null, city: string | null, is_active: boolean, created_at: string, updated_at: string }
-        Insert: { id?: string, name: string, address?: string | null, city?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
-        Update: { id?: string, name?: string, address?: string | null, city?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Row: { id: string, name: string, address: string | null, city: string | null, latitude: number | null, longitude: number | null, is_active: boolean, created_at: string, updated_at: string }
+        Insert: { id?: string, name: string, address?: string | null, city?: string | null, latitude?: number | null, longitude?: number | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Update: { id?: string, name?: string, address?: string | null, city?: string | null, latitude?: number | null, longitude?: number | null, is_active?: boolean, created_at?: string, updated_at?: string }
         Relationships: []
       }
       games: {
@@ -108,7 +144,6 @@ export type Database = {
           full_name: string
           shirt_number: number | null
           date_of_birth: string
-          team_id: string
           is_active: boolean
           created_at: string
           updated_at: string
@@ -118,7 +153,6 @@ export type Database = {
           full_name: string
           shirt_number?: number | null
           date_of_birth: string
-          team_id: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
@@ -128,7 +162,6 @@ export type Database = {
           full_name?: string
           shirt_number?: number | null
           date_of_birth?: string
-          team_id?: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
@@ -204,6 +237,7 @@ export type Database = {
         Args: { p_session_id: string, p_display_name: string }
         Returns: unknown
       }
+      create_training_series: { Args: { p_team_id: string, p_venue_id: string | null, p_weekday: number, p_starts_on: string, p_ends_on: string, p_starts_at: string, p_duration_minutes: number, p_notes: string | null }, Returns: string }
     }
     Enums: {
       app_role: AppRole

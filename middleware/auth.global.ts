@@ -21,8 +21,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
       return navigateTo(getRoleHome(authStore.role))
     }
 
-    if (to.path === '/' && !authStore.isAuthenticated) {
-      return navigateTo('/login')
+    if (to.path === '/') {
+      return navigateTo(authStore.isAuthenticated && authStore.role ? getRoleHome(authStore.role) : '/login')
     }
 
     return
@@ -30,6 +30,16 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   if (!authStore.isAuthenticated || !authStore.role) {
     return navigateTo(blockedReason ? `/login?reason=${blockedReason}` : '/login')
+  }
+
+  // Installed PWAs commonly resume the last URL. These routes were former
+  // role landing pages but only render static design placeholders, so never
+  // allow a resumed session to land there instead of a real data view.
+  if (
+    (authStore.role === 'parent' && to.path === '/dashboard')
+    || (authStore.role === 'coach' && to.path === '/coach')
+  ) {
+    return navigateTo(getRoleHome(authStore.role))
   }
 
   const allowedRoles = to.meta.allowedRoles as AppRole[] | undefined

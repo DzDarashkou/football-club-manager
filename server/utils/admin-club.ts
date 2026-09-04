@@ -42,7 +42,7 @@ export const playerCreateSchema = z.object({
   date_of_birth: z.iso.date().refine((value) => value <= new Date().toISOString().slice(0, 10), {
     message: 'Date of birth cannot be in the future.',
   }),
-  team_id: uuidSchema,
+  team_ids: z.array(uuidSchema).min(1, 'Assign the player to at least one team.').max(30).transform((ids) => [...new Set(ids)]),
   is_active: z.boolean().optional().default(true),
 })
 
@@ -105,7 +105,7 @@ export async function getTeams(adminClient: AdminClient): Promise<AdminTeam[]> {
   const [teamResult, ageGroupResult, playerResult] = await Promise.all([
     adminClient.from('teams').select('id, name, age_group_id, is_active, created_at, updated_at').order('name'),
     getAgeGroups(adminClient),
-    adminClient.from('players').select('team_id'),
+    adminClient.from('player_teams').select('team_id'),
   ])
 
   if (teamResult.error) asError(teamResult.error, 'Unable to load teams.')
@@ -134,44 +134,45 @@ export async function getTeams(adminClient: AdminClient): Promise<AdminTeam[]> {
 }
 
 export async function getPlayers(adminClient: AdminClient, query: z.infer<typeof playerListQuerySchema>): Promise<AdminPlayer[]> {
-  let request = adminClient
-    .from('players')
-    .select('id, full_name, shirt_number, date_of_birth, team_id, is_active, created_at, updated_at')
-    .order('full_name')
-    .limit(100)
-
-  if (query.team_id !== 'all') request = request.eq('team_id', query.team_id)
+  let request = adminClient.from('players').select('id, full_name, shirt_number, date_of_birth, is_active, created_at, updated_at').order('full_name').limit(100)
   if (query.q) request = request.ilike('full_name', `%${query.q.replaceAll('%', '\\%').replaceAll('_', '\\_')}%`)
 
   const [playerResult, teams] = await Promise.all([request, getTeams(adminClient)])
   if (playerResult.error) asError(playerResult.error, 'Unable to load players.')
+  const playerIds = (playerResult.data ?? []).map((player) => player.id)
+  if (!playerIds.length) return []
+  const { data: memberships, error: membershipsError } = await adminClient.from('player_teams').select('player_id, team_id').in('player_id', playerIds)
+  if (membershipsError) asError(membershipsError, 'Unable to load player team assignments.')
 
   const teamsById = new Map(teams.map((team) => [team.id, team]))
+  const teamsByPlayerId = new Map<string, AdminPlayer['teams']>()
+  for (const membership of memberships ?? []) {
+    const team = teamsById.get(membership.team_id)
+    if (!team) continue
+    teamsByPlayerId.set(membership.player_id, [...(teamsByPlayerId.get(membership.player_id) ?? []), { id: team.id, name: team.name, age_group: team.age_group }])
+  }
   return (playerResult.data ?? []).flatMap((player) => {
-    const team = teamsById.get(player.team_id)
-    if (!team) return []
-    return [{
-      ...player,
-      team: { id: team.id, name: team.name, age_group: team.age_group },
-    }]
+    const playerTeams = teamsByPlayerId.get(player.id) ?? []
+    return query.team_id === 'all' || playerTeams.some((team) => team.id === query.team_id) ? [{ ...player, teams: playerTeams }] : []
   })
 }
 
 export async function getPlayerById(adminClient: AdminClient, playerId: string): Promise<AdminPlayer | null> {
-  const [playerResult, teams] = await Promise.all([
-    adminClient.from('players').select('id, full_name, shirt_number, date_of_birth, team_id, is_active, created_at, updated_at').eq('id', playerId).maybeSingle(),
+  const [playerResult, teams, membershipsResult] = await Promise.all([
+    adminClient.from('players').select('id, full_name, shirt_number, date_of_birth, is_active, created_at, updated_at').eq('id', playerId).maybeSingle(),
     getTeams(adminClient),
+    adminClient.from('player_teams').select('team_id').eq('player_id', playerId),
   ])
 
   if (playerResult.error) asError(playerResult.error, 'Unable to load the player.')
+  if (membershipsResult.error) asError(membershipsResult.error, 'Unable to load player team assignments.')
   const player = playerResult.data
   if (!player) return null
 
-  const team = teams.find((item) => item.id === player.team_id)
-  if (!team) return null
-
-  return {
-    ...player,
-    team: { id: team.id, name: team.name, age_group: team.age_group },
-  }
+  const teamsById = new Map(teams.map((team) => [team.id, team]))
+  const playerTeams = (membershipsResult.data ?? []).flatMap(({ team_id }) => {
+    const team = teamsById.get(team_id)
+    return team ? [{ id: team.id, name: team.name, age_group: team.age_group }] : []
+  })
+  return { ...player, teams: playerTeams }
 }

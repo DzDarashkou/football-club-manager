@@ -52,15 +52,32 @@ export async function requireCoachGame(event: Parameters<typeof serverSupabaseUs
 
 export async function requireCoachPlayer(event: Parameters<typeof serverSupabaseUser>[0], playerId: string) {
   const { userId, adminClient, role } = await requireCoachAccess(event)
-  const { data: player, error: playerError } = await adminClient.from('players').select('id, team_id').eq('id', playerId).maybeSingle()
+  const { data: player, error: playerError } = await adminClient.from('players').select('id').eq('id', playerId).maybeSingle()
   if (playerError) fail(playerError, 'Unable to load the player.')
   if (!player) throw createError({ statusCode: 404, statusMessage: 'Player not found.' })
+  let allowedTeamIds: Set<string> | undefined
   if (role === 'coach') {
-    const { data: assignment, error: assignmentError } = await adminClient.from('coach_teams').select('coach_id').eq('coach_id', userId).eq('team_id', player.team_id).maybeSingle()
+    const [{ data: memberships, error: membershipsError }, { data: assignments, error: assignmentError }] = await Promise.all([
+      adminClient.from('player_teams').select('team_id').eq('player_id', playerId),
+      adminClient.from('coach_teams').select('team_id').eq('coach_id', userId),
+    ])
+    if (membershipsError) fail(membershipsError, 'Unable to verify player team assignments.')
     if (assignmentError) fail(assignmentError, 'Unable to verify team assignment.')
-    if (!assignment) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to this team.' })
+    const playerTeamIds = new Set((memberships ?? []).map((membership) => membership.team_id))
+    allowedTeamIds = new Set((assignments ?? []).map((assignment) => assignment.team_id).filter((teamId) => playerTeamIds.has(teamId)))
+    if (!allowedTeamIds.size) throw createError({ statusCode: 403, statusMessage: 'You are not assigned to any of this player’s teams.' })
   }
-  return { adminClient, player }
+  return { adminClient, player, allowedTeamIds }
+}
+
+export async function getActiveTeamPlayers(adminClient: AdminClient, teamId: string) {
+  const { data: memberships, error: membershipsError } = await adminClient.from('player_teams').select('player_id').eq('team_id', teamId)
+  if (membershipsError) fail(membershipsError, 'Unable to load team players.')
+  const playerIds = (memberships ?? []).map((membership) => membership.player_id)
+  if (!playerIds.length) return []
+  const { data, error } = await adminClient.from('players').select('id, full_name, shirt_number').in('id', playerIds).eq('is_active', true).order('full_name')
+  if (error) fail(error, 'Unable to load team players.')
+  return data ?? []
 }
 
 export async function requireParentGamePlayer(event: Parameters<typeof serverSupabaseUser>[0], gameId: string, playerId: string) {

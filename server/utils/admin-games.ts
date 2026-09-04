@@ -13,7 +13,12 @@ const nullableId = z.union([id, z.null()]).optional().default(null)
 const seasonFields = z.object({ name, starts_on: z.iso.date(), ends_on: z.iso.date() })
 export const seasonSchema = seasonFields.refine((value) => value.ends_on >= value.starts_on, { path: ['ends_on'], message: 'Season end date must be after its start date.' })
 export const competitionSchema = z.object({ season_id: id, name, type: z.enum(['league', 'cup', 'friendly', 'tournament']) })
-export const venueSchema = z.object({ name, address: z.string().trim().max(200).nullable().optional().default(null), city: z.string().trim().max(80).nullable().optional().default(null) })
+const coordinate = z.coerce.number().finite()
+const venueFields = z.object({ name, address: z.string().trim().max(200).nullable().optional().default(null), city: z.string().trim().max(80).nullable().optional().default(null), latitude: coordinate.min(-90).max(90).nullable().optional().default(null), longitude: coordinate.min(-180).max(180).nullable().optional().default(null) })
+const coordinatesProvidedTogether = (value: { latitude?: number | null, longitude?: number | null }, context: z.RefinementCtx) => {
+  if ((value.latitude === null) !== (value.longitude === null)) context.addIssue({ code: 'custom', path: ['latitude'], message: 'Latitude and longitude must be provided together.' })
+}
+export const venueSchema = venueFields.superRefine(coordinatesProvidedTogether)
 const gameFields = z.object({
   team_id: id,
   season_id: id,
@@ -45,7 +50,7 @@ export const seasonUpdateSchema = updateSchema(seasonFields).refine((value) => !
   path: ['ends_on'], message: 'Season end date must be after its start date.',
 })
 export const competitionUpdateSchema = updateSchema(competitionSchema)
-export const venueUpdateSchema = updateSchema(venueSchema)
+export const venueUpdateSchema = venueFields.partial().refine((value) => Object.keys(value).length > 0, { message: 'At least one field must be updated.' }).superRefine(coordinatesProvidedTogether)
 export const gameUpdateSchema = updateSchema(gameFields)
 
 export const gameResultSchema = z.object({
@@ -60,7 +65,7 @@ export async function getGameSetup(adminClient: AdminClient): Promise<AdminGameS
   const [seasonResult, competitionResult, venueResult, teams] = await Promise.all([
     adminClient.from('seasons').select('id, name, starts_on, ends_on, is_active').order('starts_on', { ascending: false }),
     adminClient.from('competitions').select('id, season_id, name, type, is_active').order('name'),
-    adminClient.from('venues').select('id, name, address, city, is_active').order('name'),
+    adminClient.from('venues').select('id, name, address, city, latitude, longitude, is_active').order('name'),
     getTeams(adminClient),
   ])
   if (seasonResult.error) fail(seasonResult.error, 'Unable to load seasons.')
@@ -116,6 +121,6 @@ export async function getGames(adminClient: AdminClient, options: GameListOption
     if (!team || !season) return []
     const competition = game.competition_id ? competitions.get(game.competition_id) ?? null : null
     const venue = game.venue_id ? venues.get(game.venue_id) ?? null : null
-    return [{ ...game, location_type: game.location_type as GameLocationType, status: game.status as GameStatus, team: { id: team.id, name: team.name }, season: { id: season.id, name: season.name }, competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null, venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city } : null }]
+    return [{ ...game, location_type: game.location_type as GameLocationType, status: game.status as GameStatus, team: { id: team.id, name: team.name }, season: { id: season.id, name: season.name }, competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null, venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city, latitude: venue.latitude, longitude: venue.longitude } : null }]
   })
 }

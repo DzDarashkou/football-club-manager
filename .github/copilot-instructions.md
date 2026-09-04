@@ -112,7 +112,7 @@ Each team belongs to one age group.
 
 A player:
 
-* belongs to one team
+* can be assigned to one or more teams
 * has one or more parents
 * participates in games
 

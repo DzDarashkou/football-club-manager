@@ -6,8 +6,9 @@ import type { AdminGame, GamePlayer } from '@@/types/admin-club'
 
 export default defineEventHandler(async (event) => {
   const playerId = z.uuid().parse(event.context.params?.id)
-  const { adminClient } = await requireCoachPlayer(event, playerId)
-  const player = await getPlayerById(adminClient, playerId)
+  const { adminClient, allowedTeamIds } = await requireCoachPlayer(event, playerId)
+  const fullPlayer = await getPlayerById(adminClient, playerId)
+  const player = fullPlayer && allowedTeamIds ? { ...fullPlayer, teams: fullPlayer.teams.filter((team) => allowedTeamIds.has(team.id)) } : fullPlayer
   if (!player) throw createError({ statusCode: 404, statusMessage: 'Player not found.' })
 
   const { data: records, error: recordsError } = await adminClient
@@ -19,14 +20,9 @@ export default defineEventHandler(async (event) => {
   if (!records?.length) return { player, games: [] }
 
   const gameIds = records.map((record) => record.game_id)
-  const [{ data: gameRows, error: gamesError }, setup] = await Promise.all([
-    adminClient
-      .from('games')
-      .select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes')
-      .in('id', gameIds)
-      .order('scheduled_at', { ascending: false }),
-    getGameSetup(adminClient),
-  ])
+  let gamesRequest = adminClient.from('games').select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes').in('id', gameIds).order('scheduled_at', { ascending: false })
+  if (allowedTeamIds) gamesRequest = gamesRequest.in('team_id', [...allowedTeamIds])
+  const [{ data: gameRows, error: gamesError }, setup] = await Promise.all([gamesRequest, getGameSetup(adminClient)])
 
   if (gamesError) throw createError({ statusCode: 500, statusMessage: 'Unable to load player games.' })
 
@@ -51,7 +47,7 @@ export default defineEventHandler(async (event) => {
       team: { id: team.id, name: team.name },
       season: { id: season.id, name: season.name },
       competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null,
-      venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city } : null,
+      venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city, latitude: venue.latitude, longitude: venue.longitude } : null,
     }
     const gamePlayer: GamePlayer = {
       ...record,
