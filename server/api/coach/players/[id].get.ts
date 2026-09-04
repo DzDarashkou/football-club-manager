@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
       team: { id: team.id, name: team.name },
       season: { id: season.id, name: season.name },
       competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null,
-      venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city } : null,
+      venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city, latitude: venue.latitude, longitude: venue.longitude } : null,
     }
     const gamePlayer: GamePlayer = {
       ...record,

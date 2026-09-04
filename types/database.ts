@@ -3,6 +3,18 @@ import type { AppRole, AppUserStatus } from '@@/types/auth'
 export type Database = {
   public: {
     Tables: {
+      weather_location_cache: {
+        Row: { city_key: string, city: string, latitude: number, longitude: number, updated_at: string }
+        Insert: { city_key: string, city: string, latitude: number, longitude: number, updated_at?: string }
+        Update: { city_key?: string, city?: string, latitude?: number, longitude?: number, updated_at?: string }
+        Relationships: []
+      }
+      match_weather_cache: {
+        Row: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { game_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Relationships: []
+      }
       game_players: {
         Row: { game_id: string, player_id: string, availability_status: string, availability_note: string | null, responded_at: string | null, selection_status: string, participated: boolean, minutes_played: number, goals: number, assists: number, yellow_cards: number, red_cards: number, coach_note: string | null, created_at: string, updated_at: string }
         Insert: { game_id: string, player_id: string, availability_status?: string, availability_note?: string | null, responded_at?: string | null, selection_status?: string, participated?: boolean, minutes_played?: number, goals?: number, assists?: number, yellow_cards?: number, red_cards?: number, coach_note?: string | null, created_at?: string, updated_at?: string }
@@ -34,9 +46,9 @@ export type Database = {
         Relationships: []
       }
       venues: {
-        Row: { id: string, name: string, address: string | null, city: string | null, is_active: boolean, created_at: string, updated_at: string }
-        Insert: { id?: string, name: string, address?: string | null, city?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
-        Update: { id?: string, name?: string, address?: string | null, city?: string | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Row: { id: string, name: string, address: string | null, city: string | null, latitude: number | null, longitude: number | null, is_active: boolean, created_at: string, updated_at: string }
+        Insert: { id?: string, name: string, address?: string | null, city?: string | null, latitude?: number | null, longitude?: number | null, is_active?: boolean, created_at?: string, updated_at?: string }
+        Update: { id?: string, name?: string, address?: string | null, city?: string | null, latitude?: number | null, longitude?: number | null, is_active?: boolean, created_at?: string, updated_at?: string }
         Relationships: []
       }
       games: {

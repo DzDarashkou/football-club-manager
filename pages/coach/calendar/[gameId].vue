@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { CalendarClock, CalendarPlus, Check, ExternalLink, MapPin, X } from 'lucide-vue-next'
 import type { AdminGame, AvailabilityStatus, GamePlayer } from '@@/types/admin-club'
+import type { MatchWeatherResult } from '@@/types/weather'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({ allowedRoles: ['admin', 'coach', 'parent'] })
@@ -11,9 +12,10 @@ const { role } = useAppAuth()
 const { availabilityLabel, gameStatusLabel, locationLabel } = usePolishLocale()
 const savingPlayerId = ref<string | null>(null)
 const actionError = ref<string | null>(null)
-const { data, pending, error, refresh } = await useFetch<{ game: AdminGame, players: GamePlayer[] }>(`/api/coach/calendar/${gameId}`)
+const { data, pending, error, refresh } = await useFetch<{ game: AdminGame, players: GamePlayer[], weather: MatchWeatherResult, weatherAttribution: { label: string, url: string } }>(`/api/coach/calendar/${gameId}`)
 
 const game = computed(() => data.value?.game)
+const weather = computed(() => data.value?.weather)
 const players = computed(() => data.value?.players ?? [])
 const counts = computed(() => players.value.reduce((result, player) => {
   result[player.availability_status] += 1
@@ -78,6 +80,9 @@ async function setAttendance(player: GamePlayer, status: 'available' | 'unavaila
       <div class="space-y-2"><p class="eyebrow text-brand-700">Dzień meczu</p><h1>{{ game.team.name }} – {{ game.opponent_name }}</h1><p class="flex items-center gap-2 text-body text-[color:var(--color-text-secondary)]"><CalendarClock class="h-4 w-4" />{{ formatDate(game.scheduled_at) }}</p></div>
 
       <Card class="grid gap-4 sm:grid-cols-2"><div><p class="text-label text-[color:var(--color-text-secondary)]">Lokalizacja</p><p>{{ locationLabel(game.location_type) }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Rozgrywki</p><p>{{ game.competition?.name || 'Mecz towarzyski' }}</p></div><div v-if="game.matchday || game.round_label"><p class="text-label text-[color:var(--color-text-secondary)]">Kolejka</p><p>{{ game.round_label || `Kolejka ${game.matchday}` }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Status</p><Badge :status="game.status === 'completed' ? 'confirmed' : game.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(game.status) }}</Badge></div><div v-if="game.status === 'completed'"><p class="text-label text-[color:var(--color-text-secondary)]">Wynik</p><p>{{ game.home_score }}–{{ game.away_score }}</p></div><div v-if="game.notes" class="sm:col-span-2"><p class="text-label text-[color:var(--color-text-secondary)]">Notatki</p><p>{{ game.notes }}</p></div></Card>
+
+      <AppMatchWeatherCard v-if="weather?.status === 'available' && data" :weather="weather" :attribution="data.weatherAttribution" />
+      <Card v-else-if="weather?.status === 'forecast-not-available-yet'" class="text-sm text-[color:var(--color-text-secondary)]">Prognoza pogody nie jest jeszcze dostępna.</Card>
 
       <Card class="space-y-3"><div class="flex items-start gap-3"><MapPin class="mt-0.5 h-5 w-5 shrink-0 text-brand-700" /><div class="min-w-0 flex-1"><p class="text-label text-[color:var(--color-text-secondary)]">Miejsce</p><p class="font-medium">{{ game.venue?.name || 'Miejsce do potwierdzenia' }}</p><p v-if="game.venue?.address || game.venue?.city" class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ [game.venue?.address, game.venue?.city].filter(Boolean).join(', ') }}</p></div></div><div class="flex flex-wrap gap-2"><a v-if="mapsUrl" :href="mapsUrl" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-input px-3 text-sm font-medium text-brand-700 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"><ExternalLink class="h-4 w-4" />Otwórz w Mapach Google</a><a v-if="googleCalendarUrl" :href="googleCalendarUrl" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-input px-3 text-sm font-medium text-brand-700 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"><CalendarPlus class="h-4 w-4" />Dodaj do Kalendarza Google</a></div></Card>
 

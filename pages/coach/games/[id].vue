@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { CheckCheck, CircleUserRound, MessageCircle, ShieldCheck, Trash2, X } from 'lucide-vue-next'
 import type { AdminGame, GamePlayer } from '@@/types/admin-club'
+import type { MatchWeatherResult } from '@@/types/weather'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({ allowedRoles: ['admin', 'coach'] })
@@ -14,7 +15,7 @@ const savingResult = ref(false)
 const actionError = ref<string | null>(null)
 const { availabilityLabel, gameStatusLabel, locationLabel, selectionLabel } = usePolishLocale()
 
-const { data: gameData, pending: gamePending, error: gameError, refresh: refreshGame } = await useFetch<{ game: AdminGame }>(`/api/coach/games/${gameId}`)
+const { data: gameData, pending: gamePending, error: gameError, refresh: refreshGame } = await useFetch<{ game: AdminGame, weather: MatchWeatherResult, weatherAttribution: { label: string, url: string } }>(`/api/coach/games/${gameId}`)
 const { data: rosterData, pending: rosterPending, error: rosterError, refresh } = await useFetch<{ players: GamePlayer[] }>(`/api/coach/games/${gameId}/players`, { default: () => ({ players: [] }) })
 const { data: eligibleData, error: eligibleError } = await useFetch<{ players: Array<{ id: string, full_name: string }> }>(`/api/coach/games/${gameId}/eligible-players`, { default: () => ({ players: [] }) })
 
@@ -32,6 +33,13 @@ const whatsAppShareUrl = computed(() => {
   const game = gameData.value?.game
   if (!game) return null
 
+  const weather = gameData.value?.weather
+  const weatherSummary = !weather || weather.status !== 'available' ? null : [
+    '🌤️ *Pogoda*',
+    `${weather.temperatureMin}–${weather.temperatureMax}°C · ${weather.precipitationProbability}% szans na opady`,
+    `Przewidywane opady: ${weather.precipitationMm} mm`,
+  ].join('\n')
+
   const venue = [game.venue?.name, game.venue?.address, game.venue?.city].filter(Boolean).join(', ') || 'Miejsce do potwierdzenia'
   const confirmedList = confirmedPlayers.value.length
     ? confirmedPlayers.value.map((player) => `- ${player.player.full_name}`).join('\n')
@@ -47,6 +55,7 @@ const whatsAppShareUrl = computed(() => {
     '',
     '📍 *Miejsce*',
     venue,
+    ...(weatherSummary ? ['', weatherSummary] : []),
     '',
     '✅ *Dostępni zawodnicy*',
     confirmedList,
@@ -147,6 +156,9 @@ async function saveResult() {
       <div class="space-y-2"><p class="eyebrow text-brand-700">Mecz</p><h1>{{ gameData.game.team.name }} – {{ gameData.game.opponent_name }}</h1><p class="text-body text-[color:var(--color-text-secondary)]">{{ format(gameData.game.scheduled_at) }} · {{ locationLabel(gameData.game.location_type) }}</p></div>
 
       <Card class="grid gap-4 sm:grid-cols-2"><div><p class="text-label text-[color:var(--color-text-secondary)]">Rozgrywki</p><p>{{ gameData.game.competition?.name || gameData.game.season.name }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Miejsce</p><p>{{ gameData.game.venue?.name || 'Do potwierdzenia' }}</p></div><div><p class="text-label text-[color:var(--color-text-secondary)]">Status meczu</p><Badge :status="gameData.game.status === 'completed' ? 'confirmed' : gameData.game.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(gameData.game.status) }}</Badge></div><div v-if="gameData.game.status === 'completed'"><p class="text-label text-[color:var(--color-text-secondary)]">Wynik</p><p>{{ gameData.game.home_score }}–{{ gameData.game.away_score }}</p></div><div v-if="gameData.game.notes" class="sm:col-span-2"><p class="text-label text-[color:var(--color-text-secondary)]">Notatki</p><p>{{ gameData.game.notes }}</p></div></Card>
+
+      <AppMatchWeatherCard v-if="gameData.weather.status === 'available'" :weather="gameData.weather" :attribution="gameData.weatherAttribution" />
+      <Card v-else-if="gameData.weather.status === 'forecast-not-available-yet'" class="text-sm text-[color:var(--color-text-secondary)]">Prognoza pogody nie jest jeszcze dostępna.</Card>
 
       <Card class="space-y-4"><div><h2>Wynik meczu</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">Mecz rozpoczyna się od 0–0. Zapisanie wyniku kończy mecz.</p></div><form class="flex flex-wrap items-end gap-3" @submit.prevent="saveResult"><div><Label for="coach-home-score">Gospodarze</Label><Input id="coach-home-score" v-model.number="gameData.game.home_score" type="number" min="0" required /></div><span class="pb-2 text-h2">–</span><div><Label for="coach-away-score">Goście</Label><Input id="coach-away-score" v-model.number="gameData.game.away_score" type="number" min="0" required /></div><Button type="submit" :disabled="savingResult">{{ savingResult ? 'Zapisywanie...' : 'Zapisz wynik' }}</Button></form></Card>
 

@@ -46,7 +46,7 @@ export type CompetitionType = 'league' | 'cup' | 'friendly' | 'tournament'
 export type GameLocationType = 'home' | 'away' | 'neutral'
 export type AdminSeason = { id: string, name: string, starts_on: string, ends_on: string, is_active: boolean }
 export type AdminCompetition = { id: string, season_id: string, name: string, type: CompetitionType, is_active: boolean, season: Pick<AdminSeason, 'id' | 'name'> }
-export type AdminVenue = { id: string, name: string, address: string | null, city: string | null, is_active: boolean }
+export type AdminVenue = { id: string, name: string, address: string | null, city: string | null, latitude: number | null, longitude: number | null, is_active: boolean }
 export type AdminGame = {
   id: string
   team_id: string
@@ -65,11 +65,11 @@ export type AdminGame = {
   team: Pick<AdminTeam, 'id' | 'name'>
   season: Pick<AdminSeason, 'id' | 'name'>
   competition: Pick<AdminCompetition, 'id' | 'name' | 'type'> | null
-  venue: Pick<AdminVenue, 'id' | 'name' | 'address' | 'city'> | null
+  venue: Pick<AdminVenue, 'id' | 'name' | 'address' | 'city' | 'latitude' | 'longitude'> | null
 }
 export type AdminSeasonInput = Pick<AdminSeason, 'name' | 'starts_on' | 'ends_on'>
 export type AdminCompetitionInput = Pick<AdminCompetition, 'season_id' | 'name' | 'type'>
-export type AdminVenueInput = Pick<AdminVenue, 'name' | 'address' | 'city'>
+export type AdminVenueInput = Pick<AdminVenue, 'name' | 'address' | 'city' | 'latitude' | 'longitude'>
 export type AdminGameInput = Omit<AdminGame, 'id' | 'team' | 'season' | 'competition' | 'venue'>
 export type AdminGameSetupResponse = { seasons: AdminSeason[], competitions: AdminCompetition[], venues: AdminVenue[], teams: AdminTeam[] }
 export type AdminGamesResponse = { games: AdminGame[] }
