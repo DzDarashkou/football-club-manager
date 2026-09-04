@@ -11,14 +11,14 @@ const teamFilter = ref('all')
 const { data, pending, error } = await useFetch<AdminPlayersResponse>('/api/coach/players', { default: () => ({ players: [] }) })
 const players = computed(() => data.value?.players ?? [])
 const teams = computed(() => {
-  const uniqueTeams = new Map(players.value.map((player) => [player.team.id, player.team]))
+  const uniqueTeams = new Map(players.value.flatMap((player) => player.teams.map((team) => [team.id, team] as const)))
   return [...uniqueTeams.values()].sort((first, second) => first.name.localeCompare(second.name, 'pl'))
 })
 const filteredPlayers = computed(() => {
   const normalizedName = nameFilter.value.trim().toLocaleLowerCase('pl-PL')
 
   return players.value.filter((player) => {
-    const matchesTeam = teamFilter.value === 'all' || player.team_id === teamFilter.value
+    const matchesTeam = teamFilter.value === 'all' || player.teams.some((team) => team.id === teamFilter.value)
     const matchesName = !normalizedName || player.full_name.toLocaleLowerCase('pl-PL').includes(normalizedName)
     return matchesTeam && matchesName
   })
@@ -48,7 +48,7 @@ const filteredPlayers = computed(() => {
       <p v-else-if="!filteredPlayers.length" class="p-6 text-center text-sm text-[color:var(--color-text-secondary)]">Żaden zawodnik nie spełnia wybranych filtrów.</p>
       <NuxtLink v-for="player in filteredPlayers" :key="player.id" :to="`/coach/players/${player.id}`" class="flex items-center gap-3 border-b border-border p-4 last:border-b-0 hover:bg-brand-50/50">
         <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700"><UserRound class="h-5 w-5" /></div>
-        <div class="min-w-0"><p class="font-medium">{{ player.full_name }}{{ player.shirt_number ? ` · #${player.shirt_number}` : '' }}</p><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ player.team.name }} · {{ player.team.age_group.name }}</p></div>
+        <div class="min-w-0"><p class="font-medium">{{ player.full_name }}{{ player.shirt_number ? ` · #${player.shirt_number}` : '' }}</p><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ player.teams.map((team) => `${team.name} · ${team.age_group.name}`).join(', ') }}</p></div>
         <Badge class="ml-auto" :status="player.is_active ? 'confirmed' : 'neutral'">{{ player.is_active ? 'Aktywny' : 'Nieaktywny' }}</Badge>
       </NuxtLink>
     </Card>

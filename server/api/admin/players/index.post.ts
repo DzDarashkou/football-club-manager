@@ -7,9 +7,12 @@ export default defineEventHandler(async (event): Promise<{ player: AdminPlayer }
   const { adminClient } = await requireAdminAccess(event)
   const payload = playerCreateSchema.parse(await readBody(event))
   try {
-    await requireActiveTeam(adminClient, payload.team_id)
-    const { data, error } = await adminClient.from('players').insert(payload).select('id').single()
+    await Promise.all(payload.team_ids.map((teamId) => requireActiveTeam(adminClient, teamId)))
+    const { team_ids, ...playerPayload } = payload
+    const { data, error } = await adminClient.from('players').insert(playerPayload).select('id').single()
     if (error) handleApiError(error, 'Unable to create the player.', 400)
+    const { error: assignmentError } = await adminClient.from('player_teams').insert(team_ids.map((team_id) => ({ player_id: data.id, team_id })))
+    if (assignmentError) handleApiError(assignmentError, 'Unable to assign the player to teams.', 400)
     const player = await getPlayerById(adminClient, data.id)
     if (!player) throw new Error('Created player could not be loaded.')
     return { player }

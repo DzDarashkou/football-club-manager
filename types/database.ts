@@ -51,6 +51,12 @@ export type Database = {
         Update: { player_id?: string, parent_id?: string, relationship_label?: string | null, created_at?: string }
         Relationships: []
       }
+      player_teams: {
+        Row: { player_id: string, team_id: string, created_at: string }
+        Insert: { player_id: string, team_id: string, created_at?: string }
+        Update: { player_id?: string, team_id?: string, created_at?: string }
+        Relationships: []
+      }
       seasons: {
         Row: { id: string, name: string, starts_on: string, ends_on: string, is_active: boolean, created_at: string, updated_at: string }
         Insert: { id?: string, name: string, starts_on: string, ends_on: string, is_active?: boolean, created_at?: string, updated_at?: string }
@@ -138,7 +144,6 @@ export type Database = {
           full_name: string
           shirt_number: number | null
           date_of_birth: string
-          team_id: string
           is_active: boolean
           created_at: string
           updated_at: string
@@ -148,7 +153,6 @@ export type Database = {
           full_name: string
           shirt_number?: number | null
           date_of_birth: string
-          team_id: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
@@ -158,7 +162,6 @@ export type Database = {
           full_name?: string
           shirt_number?: number | null
           date_of_birth?: string
-          team_id?: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
