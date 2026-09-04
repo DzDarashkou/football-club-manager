@@ -11,6 +11,7 @@ type MatchLocation = {
   latitude: number | null
   longitude: number | null
   expectedDurationMinutes?: number
+  cacheKind?: 'game' | 'training'
 }
 type Coordinates = { latitude: number, longitude: number }
 type OpenMeteoForecast = {
@@ -72,7 +73,8 @@ function finiteNumber(value: unknown): number | null {
   return typeof value === 'number' && Number.isFinite(value) ? value : null
 }
 
-function mapCachedWeather(cache: Database['public']['Tables']['match_weather_cache']['Row']): MatchWeather {
+type WeatherCache = Database['public']['Tables']['match_weather_cache']['Row'] | Database['public']['Tables']['training_weather_cache']['Row']
+function mapCachedWeather(cache: WeatherCache): MatchWeather {
   return {
     status: 'available', temperatureMin: cache.temperature_min, temperatureMax: cache.temperature_max,
     precipitationProbability: cache.precipitation_probability, precipitationMm: cache.precipitation_mm,
@@ -144,7 +146,10 @@ async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Pr
   if (match.status !== 'scheduled' || Number.isNaN(kickoff.getTime())) return { status: 'unavailable' }
   if (kickoff.getTime() - now.getTime() > FORECAST_LIMIT_MS) return { status: 'forecast-not-available-yet' }
 
-  const { data: cached, error: cacheError } = await client.from('match_weather_cache').select('*').eq('game_id', match.gameId).maybeSingle()
+  const cacheQuery = match.cacheKind === 'training'
+    ? client.from('training_weather_cache').select('*').eq('training_session_id', match.gameId).maybeSingle()
+    : client.from('match_weather_cache').select('*').eq('game_id', match.gameId).maybeSingle()
+  const { data: cached, error: cacheError } = await cacheQuery
   if (cacheError) weatherWarning('Unable to read the match weather cache.', cacheError)
   const cachedMatchesKickoff = cached && new Date(cached.kickoff_at).getTime() === kickoff.getTime()
   if (cachedMatchesKickoff && new Date(cached.expires_at) > now) return mapCachedWeather(cached)
@@ -168,13 +173,16 @@ async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Pr
     if (!calculated) throw new Error('Open-Meteo response did not contain complete match-hour data.')
     const fetchedAt = now.toISOString()
     const weather: MatchWeather = { status: 'available', ...calculated, fetchedAt }
-    const { error } = await client.from('match_weather_cache').upsert({
-      game_id: match.gameId, kickoff_at: kickoff.toISOString(), ...coordinates,
+    const cacheRecord = {
+      kickoff_at: kickoff.toISOString(), ...coordinates,
       temperature_min: weather.temperatureMin, temperature_max: weather.temperatureMax,
       precipitation_probability: weather.precipitationProbability, precipitation_mm: weather.precipitationMm,
       max_rain_mm: weather.maxRainMm, snowfall_mm: weather.snowfallMm, condition: weather.condition, fetched_at: fetchedAt,
       expires_at: new Date(now.getTime() + cacheTtlMs(kickoff, now)).toISOString(),
-    })
+    }
+    const { error } = match.cacheKind === 'training'
+      ? await client.from('training_weather_cache').upsert({ training_session_id: match.gameId, ...cacheRecord })
+      : await client.from('match_weather_cache').upsert({ game_id: match.gameId, ...cacheRecord })
     if (error) weatherWarning('Unable to write the match weather cache.', error)
     return weather
   }

@@ -73,6 +73,21 @@ export type AdminVenueInput = Pick<AdminVenue, 'name' | 'address' | 'city' | 'la
 export type AdminGameInput = Omit<AdminGame, 'id' | 'team' | 'season' | 'competition' | 'venue'>
 export type AdminGameSetupResponse = { seasons: AdminSeason[], competitions: AdminCompetition[], venues: AdminVenue[], teams: AdminTeam[] }
 export type AdminGamesResponse = { games: AdminGame[] }
+export type TrainingStatus = 'scheduled' | 'cancelled'
+export type TrainingCreateInput = { team_id: string, venue_id: string | null, weekday: number, starts_on: string, ends_on: string, starts_at: string, duration_minutes: number, notes: string | null }
+export type AdminTrainingSession = {
+  id: string
+  series_id: string
+  team_id: string
+  venue_id: string | null
+  scheduled_at: string
+  duration_minutes: number
+  status: TrainingStatus
+  notes: string | null
+  team: Pick<AdminTeam, 'id' | 'name'>
+  venue: Pick<AdminVenue, 'id' | 'name' | 'address' | 'city' | 'latitude' | 'longitude'> | null
+}
+export type AdminTrainingsResponse = { trainings: AdminTrainingSession[] }
 export type CoachTeamAssignment = { coach_id: string, team_id: string }
 export type PlayerParentAssignment = { player_id: string, parent_id: string, relationship_label: string | null }
 export type AvailabilityStatus = 'pending' | 'available' | 'unavailable'

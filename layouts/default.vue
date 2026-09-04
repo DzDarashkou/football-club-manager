@@ -5,6 +5,7 @@ import { useSessionStorage } from '@vueuse/core'
 import {
   Bell,
   Calendar,
+  Dumbbell,
   ChevronRight,
   LayoutDashboard,
   LogOut,
@@ -51,6 +52,7 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Drużyny', icon: 'Shirt', iconComponent: Shirt, to: '/admin/teams', role: ['admin'] },
   { label: 'Zawodnicy', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
   { label: 'Mecze', icon: 'Calendar', iconComponent: Calendar, to: '/admin/games', role: ['admin'] },
+  { label: 'Treningi', icon: 'Dumbbell', iconComponent: Dumbbell, to: '/admin/trainings', role: ['admin'] },
   { label: 'Trenerzy', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'], hidden: true },
   { label: 'Ustawienia', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'], hidden: true },
 ]

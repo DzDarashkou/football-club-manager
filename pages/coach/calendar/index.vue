@@ -3,10 +3,10 @@ import { computed, nextTick, ref } from 'vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import FullCalendar from '@fullcalendar/vue3'
-import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from 'lucide-vue-next'
+import { CalendarDays, ChevronLeft, ChevronRight, Dumbbell, MapPin } from 'lucide-vue-next'
 import type { CalendarOptions, DayCellContentArg, DayCellMountArg } from '@fullcalendar/core'
 import type { DateClickArg } from '@fullcalendar/interaction'
-import type { AdminGame } from '@@/types/admin-club'
+import type { AdminGame, AdminTrainingSession } from '@@/types/admin-club'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({ allowedRoles: ['admin', 'coach', 'parent'] })
@@ -30,13 +30,19 @@ const range = computed(() => {
   return { startsAt: start.toISOString(), endsBefore: end.toISOString() }
 })
 
-const { data, pending, error, refresh } = await useFetch<{ games: AdminGame[] }>('/api/coach/calendar', {
+const { data, pending, error } = await useFetch<{ games: AdminGame[], trainings: AdminTrainingSession[] }>('/api/coach/calendar', {
   query: computed(() => ({ starts_at: range.value.startsAt, ends_before: range.value.endsBefore })),
-  default: () => ({ games: [] }),
+  default: () => ({ games: [], trainings: [] }),
 })
 
 const games = computed(() => data.value?.games ?? [])
+const trainings = computed(() => data.value?.trainings ?? [])
 const selectedDayGames = computed(() => games.value.filter((game) => toDateKey(game.scheduled_at) === selectedDate.value))
+const selectedDayTrainings = computed(() => trainings.value.filter((training) => toDateKey(training.scheduled_at) === selectedDate.value))
+const selectedEvents = computed(() => [
+  ...selectedDayGames.value.map(game => ({ ...game, eventType: 'game' as const })),
+  ...selectedDayTrainings.value.map(training => ({ ...training, eventType: 'training' as const })),
+].sort((a, b) => a.scheduled_at.localeCompare(b.scheduled_at)))
 const monthLabel = computed(() => month(currentMonth.value))
 
 const calendarOptions = computed<CalendarOptions>(() => ({
@@ -52,7 +58,7 @@ const calendarOptions = computed<CalendarOptions>(() => ({
   events: [],
   dateClick: handleDateClick,
   dayCellClassNames: (info: DayCellContentArg) => toDateKey(info.date) === selectedDate.value ? ['coach-calendar__selected-day'] : [],
-  dayCellDidMount: addMatchIndicator,
+  dayCellDidMount: addEventIndicators,
 }))
 
 function previousMonth() {
@@ -72,30 +78,20 @@ function handleDateClick(info: DateClickArg) {
   selectedDate.value = info.dateStr
 }
 
-function addMatchIndicator(info: DayCellMountArg) {
+function addEventIndicators(info: DayCellMountArg) {
   const date = toDateKey(info.date)
-  const count = games.value.filter((game) => toDateKey(game.scheduled_at) === date).length
-  if (!count) return
-
   const eventContainer = info.el.querySelector<HTMLElement>('.fc-daygrid-day-events')
   if (!eventContainer) return
-
-  const indicator = document.createElement('button')
-  indicator.type = 'button'
-  indicator.className = 'coach-calendar__match-indicator'
-  const icon = document.createElement('span')
-  icon.setAttribute('aria-hidden', 'true')
-  icon.textContent = '⚽'
-  const label = document.createElement('span')
-  label.textContent = String(count)
-  indicator.append(icon, label)
-  indicator.title = `Pokaż ${count} ${count === 1 ? 'mecz' : 'mecze'} z tego dnia`
-  indicator.setAttribute('aria-label', `${count === 1 ? 'Jeden mecz' : `${count} mecze`}. Pokaż listę meczów z tego dnia.`)
-  indicator.addEventListener('click', (event) => {
-    event.stopPropagation()
-    void selectDateAndShowGames(date)
-  })
-  eventContainer.append(indicator)
+  const add = (count: number, type: 'game' | 'training') => {
+    if (!count) return
+    const label = type === 'game' ? (count === 1 ? 'mecz' : 'mecze') : (count === 1 ? 'trening' : 'treningi')
+    const indicator = document.createElement('button'); indicator.type = 'button'; indicator.className = `coach-calendar__event-indicator coach-calendar__event-indicator--${type}`
+    indicator.innerHTML = `<span aria-hidden="true">${type === 'game' ? '⚽' : '🏋'}</span><span>${count}</span>`
+    indicator.title = `Pokaż ${count} ${label} z tego dnia`; indicator.setAttribute('aria-label', `${count} ${label}. Pokaż listę wydarzeń z tego dnia.`)
+    indicator.addEventListener('click', event => { event.stopPropagation(); void selectDateAndShowGames(date) }); eventContainer.append(indicator)
+  }
+  add(games.value.filter(game => toDateKey(game.scheduled_at) === date).length, 'game')
+  add(trainings.value.filter(training => toDateKey(training.scheduled_at) === date).length, 'training')
 }
 
 async function selectDateAndShowGames(date: string) {
@@ -140,12 +136,12 @@ function formatSelectedDate(value: string) {
 
     <div ref="gamesSection" class="scroll-mt-4">
       <Card class="space-y-4">
-        <div class="flex items-start gap-3"><CalendarDays class="mt-0.5 h-5 w-5 text-brand-700" /><div><h2>{{ formatSelectedDate(selectedDate) }}</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ selectedDayGames.length ? `Zaplanowane mecze: ${selectedDayGames.length}` : 'Brak zaplanowanych meczów' }}</p></div></div>
-        <p v-if="!selectedDayGames.length" class="rounded-lg bg-[var(--color-surface-sunken)] p-4 text-sm text-[color:var(--color-text-secondary)]">Wybierz inną datę w kalendarzu, aby zobaczyć jej mecze.</p>
-        <NuxtLink v-for="game in selectedDayGames" :key="game.id" :to="`/coach/calendar/${game.id}`" class="flex min-h-11 items-center gap-3 rounded-lg border border-border p-3 transition hover:bg-brand-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
-          <p class="w-12 shrink-0 text-sm font-medium text-brand-700">{{ formatTime(game.scheduled_at) }}</p>
-          <div class="min-w-0 flex-1"><p class="truncate font-medium">{{ game.team.name }} – {{ game.opponent_name }}</p><p class="mt-0.5 flex items-center gap-1 truncate text-sm text-[color:var(--color-text-secondary)]"><MapPin class="h-3.5 w-3.5 shrink-0" />{{ game.venue?.name || 'Miejsce do potwierdzenia' }}</p></div>
-          <Badge :status="game.status === 'completed' ? 'confirmed' : game.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(game.status) }}</Badge>
+        <div class="flex items-start gap-3"><CalendarDays class="mt-0.5 h-5 w-5 text-brand-700" /><div><h2>{{ formatSelectedDate(selectedDate) }}</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ selectedEvents.length ? `Zaplanowane wydarzenia: ${selectedEvents.length}` : 'Brak zaplanowanych wydarzeń' }}</p></div></div>
+        <p v-if="!selectedEvents.length" class="rounded-lg bg-[var(--color-surface-sunken)] p-4 text-sm text-[color:var(--color-text-secondary)]">Wybierz inną datę w kalendarzu, aby zobaczyć wydarzenia.</p>
+        <NuxtLink v-for="item in selectedEvents" :key="`${item.eventType}-${item.id}`" :to="item.eventType === 'game' ? `/coach/calendar/${item.id}` : `/coach/calendar/trainings/${item.id}`" class="flex min-h-11 items-center gap-3 rounded-lg border border-border p-3 transition hover:bg-brand-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
+          <component :is="item.eventType === 'game' ? CalendarDays : Dumbbell" class="h-4 w-4 shrink-0 text-brand-700" /><p class="w-12 shrink-0 text-sm font-medium text-brand-700">{{ formatTime(item.scheduled_at) }}</p>
+          <div class="min-w-0 flex-1"><p class="truncate font-medium">{{ item.eventType === 'game' ? `${item.team.name} – ${item.opponent_name}` : `${item.team.name} · Trening` }}</p><p class="mt-0.5 flex items-center gap-1 truncate text-sm text-[color:var(--color-text-secondary)]"><MapPin class="h-3.5 w-3.5 shrink-0" />{{ item.venue?.name || 'Miejsce do potwierdzenia' }}</p></div>
+          <Badge v-if="item.eventType === 'game'" :status="item.status === 'completed' ? 'confirmed' : item.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(item.status) }}</Badge><Badge v-else :status="item.status === 'scheduled' ? 'confirmed' : 'declined'">{{ item.status === 'scheduled' ? 'Trening' : 'Odwołany' }}</Badge>
         </NuxtLink>
       </Card>
     </div>
@@ -160,9 +156,9 @@ function formatSelectedDate(value: string) {
 :deep(.coach-calendar .fc-daygrid-day-frame) { min-height: 6rem; }
 :deep(.coach-calendar .coach-calendar__selected-day .fc-daygrid-day-frame) { background: color-mix(in srgb, var(--color-brand-700) 12%, transparent); box-shadow: inset 0 0 0 2px var(--color-brand-700); }
 :deep(.coach-calendar .coach-calendar__selected-day .fc-daygrid-day-number) { font-weight: 500; color: var(--color-brand-800); }
-:deep(.coach-calendar .fc-daygrid-day-events) { display: flex; min-height: 2rem; justify-content: center; margin: 0.125rem 0.25rem; }
-:deep(.coach-calendar .coach-calendar__match-indicator) { display: inline-flex; min-width: 3rem; min-height: 2rem; align-items: center; justify-content: center; gap: 0.1875rem; border: 0; border-radius: 9999px; background: var(--color-brand-700); padding: 0.25rem 0.375rem; color: white; font-size: 0.75rem; font-weight: 500; line-height: 1; cursor: pointer; box-shadow: 0 1px 2px rgb(4 44 83 / 20%); }
-:deep(.coach-calendar .coach-calendar__match-indicator:hover) { background: var(--color-brand-800); }
-:deep(.coach-calendar .coach-calendar__match-indicator:focus-visible) { outline: 2px solid var(--color-brand-400); outline-offset: 2px; }
+:deep(.coach-calendar .fc-daygrid-day-events) { display: flex; min-height: 2rem; justify-content: center; gap: 0.25rem; margin: 0.125rem 0.25rem; }
+:deep(.coach-calendar .coach-calendar__event-indicator) { display: inline-flex; min-width: 2rem; min-height: 2rem; align-items: center; justify-content: center; gap: 0.1875rem; border: 0; border-radius: 9999px; padding: 0.25rem 0.375rem; color: white; font-size: 0.75rem; font-weight: 500; line-height: 1; cursor: pointer; box-shadow: 0 1px 2px rgb(4 44 83 / 20%); }
+:deep(.coach-calendar .coach-calendar__event-indicator--game) { background: var(--color-brand-700); }:deep(.coach-calendar .coach-calendar__event-indicator--training) { background: #639922; }
+:deep(.coach-calendar .coach-calendar__event-indicator:focus-visible) { outline: 2px solid var(--color-brand-400); outline-offset: 2px; }
 @media (max-width: 640px) { :deep(.coach-calendar .fc-col-header-cell-cushion) { font-size: 0; } :deep(.coach-calendar .fc-col-header-cell-cushion::first-letter) { font-size: 0.75rem; } :deep(.coach-calendar .fc-daygrid-day-frame) { min-height: 4.75rem; } :deep(.coach-calendar .fc-daygrid-day-events) { margin-inline: 0.125rem; } }
 </style>

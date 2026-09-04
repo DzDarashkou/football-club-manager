@@ -3,6 +3,24 @@ import type { AppRole, AppUserStatus } from '@@/types/auth'
 export type Database = {
   public: {
     Tables: {
+      training_weather_cache: {
+        Row: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { training_session_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Relationships: []
+      }
+      training_series: {
+        Row: { id: string, team_id: string, venue_id: string | null, weekday: number, starts_on: string, ends_on: string, starts_at: string, duration_minutes: number, notes: string | null, created_at: string, updated_at: string }
+        Insert: { id?: string, team_id: string, venue_id?: string | null, weekday: number, starts_on: string, ends_on: string, starts_at: string, duration_minutes?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { id?: string, team_id?: string, venue_id?: string | null, weekday?: number, starts_on?: string, ends_on?: string, starts_at?: string, duration_minutes?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Relationships: []
+      }
+      training_sessions: {
+        Row: { id: string, series_id: string, team_id: string, venue_id: string | null, scheduled_at: string, duration_minutes: number, status: string, notes: string | null, created_at: string, updated_at: string }
+        Insert: { id?: string, series_id: string, team_id: string, venue_id?: string | null, scheduled_at: string, duration_minutes: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { id?: string, series_id?: string, team_id?: string, venue_id?: string | null, scheduled_at?: string, duration_minutes?: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Relationships: []
+      }
       weather_location_cache: {
         Row: { city_key: string, city: string, latitude: number, longitude: number, updated_at: string }
         Insert: { city_key: string, city: string, latitude: number, longitude: number, updated_at?: string }
@@ -179,7 +197,9 @@ export type Database = {
       }
     }
     Views: Record<string, never>
-    Functions: Record<string, never>
+    Functions: {
+      create_training_series: { Args: { p_team_id: string, p_venue_id: string | null, p_weekday: number, p_starts_on: string, p_ends_on: string, p_starts_at: string, p_duration_minutes: number, p_notes: string | null }, Returns: string }
+    }
     Enums: {
       app_role: AppRole
       user_status: AppUserStatus
