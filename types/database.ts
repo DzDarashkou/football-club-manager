@@ -4,9 +4,9 @@ export type Database = {
   public: {
     Tables: {
       training_weather_cache: {
-        Row: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, condition: string, fetched_at: string, expires_at: string }
-        Insert: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, condition: string, fetched_at?: string, expires_at: string }
-        Update: { training_session_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Row: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, wind_speed_kmh: number, max_wind_gust_kmh: number, wind_direction_degrees: number, cloud_cover_percentage: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { training_session_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition?: string, fetched_at?: string, expires_at?: string }
         Relationships: []
       }
       training_series: {
@@ -28,9 +28,9 @@ export type Database = {
         Relationships: []
       }
       match_weather_cache: {
-        Row: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, condition: string, fetched_at: string, expires_at: string }
-        Insert: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, condition: string, fetched_at?: string, expires_at: string }
-        Update: { game_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, condition?: string, fetched_at?: string, expires_at?: string }
+        Row: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, wind_speed_kmh: number, max_wind_gust_kmh: number, wind_direction_degrees: number, cloud_cover_percentage: number, condition: string, fetched_at: string, expires_at: string }
+        Insert: { game_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition: string, fetched_at?: string, expires_at: string }
+        Update: { game_id?: string, kickoff_at?: string, latitude?: number, longitude?: number, temperature_min?: number, temperature_max?: number, precipitation_probability?: number, precipitation_mm?: number, max_rain_mm?: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition?: string, fetched_at?: string, expires_at?: string }
         Relationships: []
       }
       game_players: {

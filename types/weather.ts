@@ -8,6 +8,10 @@ export type MatchWeather = {
   precipitationMm: number
   maxRainMm: number
   snowfallMm: number
+  windSpeedKmh: number
+  maxWindGustKmh: number
+  windDirectionDegrees: number
+  cloudCoverPercentage: number
   condition: MatchWeatherCondition
   fetchedAt: string
 }

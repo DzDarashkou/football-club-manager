@@ -23,6 +23,10 @@ type OpenMeteoForecast = {
     precipitation?: unknown[]
     rain?: unknown[]
     snowfall?: unknown[]
+    wind_speed_10m?: unknown[]
+    wind_direction_10m?: unknown[]
+    wind_gusts_10m?: unknown[]
+    cloud_cover?: unknown[]
   }
 }
 type OpenMeteoGeocoding = { results?: Array<{ latitude?: unknown, longitude?: unknown }> }
@@ -73,12 +77,21 @@ function finiteNumber(value: unknown): number | null {
   return typeof value === 'number' && Number.isFinite(value) ? value : null
 }
 
+function averageWindDirection(directions: number[]) {
+  const radians = directions.map((direction) => direction * Math.PI / 180)
+  const northSouth = radians.reduce((sum, direction) => sum + Math.cos(direction), 0)
+  const eastWest = radians.reduce((sum, direction) => sum + Math.sin(direction), 0)
+  return Math.round((Math.atan2(eastWest, northSouth) * 180 / Math.PI + 360) % 360)
+}
+
 type WeatherCache = Database['public']['Tables']['match_weather_cache']['Row'] | Database['public']['Tables']['training_weather_cache']['Row']
 function mapCachedWeather(cache: WeatherCache): MatchWeather {
   return {
     status: 'available', temperatureMin: cache.temperature_min, temperatureMax: cache.temperature_max,
     precipitationProbability: cache.precipitation_probability, precipitationMm: cache.precipitation_mm,
-    maxRainMm: cache.max_rain_mm, snowfallMm: cache.snowfall_mm, condition: cache.condition as MatchWeatherCondition, fetchedAt: cache.fetched_at,
+    maxRainMm: cache.max_rain_mm, snowfallMm: cache.snowfall_mm, windSpeedKmh: cache.wind_speed_kmh,
+    maxWindGustKmh: cache.max_wind_gust_kmh, windDirectionDegrees: cache.wind_direction_degrees,
+    cloudCoverPercentage: cache.cloud_cover_percentage, condition: cache.condition as MatchWeatherCondition, fetchedAt: cache.fetched_at,
   }
 }
 
@@ -87,6 +100,7 @@ function calculateWeather(forecast: OpenMeteoForecast, kickoff: Date, durationMi
   const start = formatLocal(kickoff, forecast.timezone).slice(0, 14) + '00'
   const end = formatLocal(new Date(kickoff.getTime() + durationMinutes * 60_000), forecast.timezone).slice(0, 14) + '00'
   const temperature: number[] = []; const probability: number[] = []; const precipitation: number[] = []; const rain: number[] = []; const snowfall: number[] = []
+  const windSpeed: number[] = []; const windGusts: number[] = []; const windDirection: number[] = []; const cloudCover: number[] = []
   for (let index = 0; index < forecast.hourly.time.length; index += 1) {
     const time = forecast.hourly.time[index]
     if (typeof time !== 'string' || time < start || time > end) continue
@@ -95,17 +109,28 @@ function calculateWeather(forecast: OpenMeteoForecast, kickoff: Date, durationMi
     const precipitationValue = finiteNumber(forecast.hourly.precipitation?.[index])
     const rainValue = finiteNumber(forecast.hourly.rain?.[index])
     const snowfallValue = finiteNumber(forecast.hourly.snowfall?.[index])
+    const windSpeedValue = finiteNumber(forecast.hourly.wind_speed_10m?.[index])
+    const windGustValue = finiteNumber(forecast.hourly.wind_gusts_10m?.[index])
+    const windDirectionValue = finiteNumber(forecast.hourly.wind_direction_10m?.[index])
+    const cloudCoverValue = finiteNumber(forecast.hourly.cloud_cover?.[index])
     if (temp !== null) temperature.push(temp)
     if (chance !== null) probability.push(chance)
     if (precipitationValue !== null) precipitation.push(precipitationValue)
     if (rainValue !== null) rain.push(rainValue)
     if (snowfallValue !== null) snowfall.push(snowfallValue)
+    if (windSpeedValue !== null) windSpeed.push(windSpeedValue)
+    if (windGustValue !== null) windGusts.push(windGustValue)
+    if (windDirectionValue !== null) windDirection.push(windDirectionValue)
+    if (cloudCoverValue !== null) cloudCover.push(cloudCoverValue)
   }
-  if (!temperature.length || !probability.length || !precipitation.length || !rain.length) return null
+  if (!temperature.length || !probability.length || !precipitation.length || !rain.length || !windSpeed.length || !windGusts.length || !windDirection.length || !cloudCover.length) return null
   const precipitationProbability = Math.max(...probability)
   return {
     temperatureMin: Math.min(...temperature), temperatureMax: Math.max(...temperature), precipitationProbability,
-    precipitationMm: precipitation.reduce((sum, value) => sum + value, 0), maxRainMm: Math.max(...rain), snowfallMm: snowfall.reduce((sum, value) => sum + value, 0), condition: conditionFor(precipitationProbability),
+    precipitationMm: precipitation.reduce((sum, value) => sum + value, 0), maxRainMm: Math.max(...rain), snowfallMm: snowfall.reduce((sum, value) => sum + value, 0),
+    windSpeedKmh: windSpeed.reduce((sum, value) => sum + value, 0) / windSpeed.length,
+    maxWindGustKmh: Math.max(...windGusts), windDirectionDegrees: averageWindDirection(windDirection),
+    cloudCoverPercentage: Math.round(cloudCover.reduce((sum, value) => sum + value, 0) / cloudCover.length), condition: conditionFor(precipitationProbability),
   }
 }
 
@@ -165,7 +190,7 @@ async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Pr
     // This safely covers all IANA offsets and DST while retaining a tiny, match-specific response.
     url.search = new URLSearchParams({
       latitude: String(coordinates.latitude), longitude: String(coordinates.longitude),
-      hourly: 'temperature_2m,precipitation_probability,precipitation,rain,snowfall', timezone: 'auto',
+      hourly: 'temperature_2m,precipitation_probability,precipitation,rain,snowfall,wind_speed_10m,wind_direction_10m,wind_gusts_10m,cloud_cover', wind_speed_unit: 'kmh', timezone: 'auto',
       start_date: dateAround(kickoff, -1), end_date: dateAround(new Date(kickoff.getTime() + (match.expectedDurationMinutes ?? DEFAULT_MATCH_DURATION_MINUTES) * 60_000), 1),
     }).toString()
     const forecast = await fetchJson<OpenMeteoForecast>(url)
@@ -177,7 +202,9 @@ async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Pr
       kickoff_at: kickoff.toISOString(), ...coordinates,
       temperature_min: weather.temperatureMin, temperature_max: weather.temperatureMax,
       precipitation_probability: weather.precipitationProbability, precipitation_mm: weather.precipitationMm,
-      max_rain_mm: weather.maxRainMm, snowfall_mm: weather.snowfallMm, condition: weather.condition, fetched_at: fetchedAt,
+      max_rain_mm: weather.maxRainMm, snowfall_mm: weather.snowfallMm, wind_speed_kmh: weather.windSpeedKmh,
+      max_wind_gust_kmh: weather.maxWindGustKmh, wind_direction_degrees: weather.windDirectionDegrees,
+      cloud_cover_percentage: weather.cloudCoverPercentage, condition: weather.condition, fetched_at: fetchedAt,
       expires_at: new Date(now.getTime() + cacheTtlMs(kickoff, now)).toISOString(),
     }
     const { error } = match.cacheKind === 'training'
