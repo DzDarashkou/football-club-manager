@@ -17,6 +17,10 @@ export default defineEventHandler(async (event): Promise<{ question: QuizQuestio
   }
 
   const question = await drawQuizQuestion(client, session.id)
+  if (!question) {
+    throw createError({ statusCode: 409, statusMessage: 'Brak dostępnych pytań. Spróbuj ponownie później.' })
+  }
+
   setCookie(event, QUIZ_SESSION_COOKIE, session.id, {
     httpOnly: true,
     sameSite: 'lax',

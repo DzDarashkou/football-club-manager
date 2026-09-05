@@ -47,7 +47,7 @@ export function getQuizSessionId(event: Parameters<typeof getCookie>[0]): string
   return sessionId
 }
 
-export async function drawQuizQuestion(client: QuizServiceClient, sessionId: string): Promise<QuizQuestion> {
+export async function drawQuizQuestion(client: QuizServiceClient, sessionId: string): Promise<QuizQuestion | null> {
   const { data, error } = await client.rpc('draw_quiz_question', { p_session_id: sessionId })
   if (error) {
     throw createError({ statusCode: 409, statusMessage: error.message || 'Nie udało się pobrać kolejnego pytania.' })
@@ -55,7 +55,7 @@ export async function drawQuizQuestion(client: QuizServiceClient, sessionId: str
 
   const question = data[0]
   if (!question) {
-    throw createError({ statusCode: 409, statusMessage: 'Brak dostępnych pytań. Spróbuj ponownie później.' })
+    return null
   }
 
   const options: QuizQuestion['options'] = [

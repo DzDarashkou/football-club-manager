@@ -10,7 +10,7 @@ type StartQuizResponse = {
 }
 
 type AnswerQuizResponse = { result: QuizAnswerResult }
-type NextQuizResponse = { question: QuizQuestion }
+type NextQuizResponse = { question: QuizQuestion | null }
 type LeaderboardResponse = { entries: QuizLeaderboardEntry[] }
 type SubmitLeaderboardResponse = { submitted: boolean, qualifies: boolean }
 
@@ -115,9 +115,16 @@ export function useQuiz() {
     errorMessage.value = null
     try {
       const response = await $fetch<NextQuizResponse>('/api/quiz/next', { method: 'POST' })
-      question.value = response.question
-      answerResult.value = null
-      phase.value = 'question'
+      if (response.question) {
+        question.value = response.question
+        answerResult.value = null
+        phase.value = 'question'
+      }
+      else {
+        answerResult.value = { ...answerResult.value, finished: true }
+        await loadLeaderboard()
+        phase.value = 'finished'
+      }
     }
     catch (error) {
       errorMessage.value = getErrorMessage(error, 'Nie udało się pobrać kolejnego pytania.')

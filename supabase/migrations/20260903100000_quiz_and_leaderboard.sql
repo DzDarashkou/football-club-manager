@@ -137,21 +137,26 @@ begin
     else 'hard'::public.quiz_difficulty
   end;
 
-  select quiz_questions.id into v_question_id
-  from public.quiz_questions
-  where is_active
-    and difficulty = v_difficulty
+  select q.id into v_question_id
+  from public.quiz_questions q
+  where q.is_active
+    and q.difficulty = v_difficulty
     and not exists (
       select 1
       from public.quiz_session_questions
       where session_id = p_session_id
-        and question_id = quiz_questions.id
+        and question_id = q.id
     )
   order by random()
   limit 1;
 
   if v_question_id is null then
-    raise exception 'No more questions are currently available.' using errcode = 'P0001';
+    update public.quiz_sessions
+    set status = 'finished',
+        finished_at = timezone('utc', now())
+    where quiz_sessions.id = p_session_id;
+
+    return;
   end if;
 
   insert into public.quiz_session_questions (session_id, question_id, sequence_number)
@@ -223,7 +228,7 @@ begin
 
   v_lives_remaining := v_session.lives_remaining - case when v_is_correct then 0 else 1 end;
   v_finished := v_lives_remaining = 0;
-  v_score := v_session.score + v_points;
+  v_score := greatest(0, v_session.score + v_points - case when v_is_correct then 0 else 30 end);
 
   update public.quiz_session_questions
   set selected_option = p_selected_option,

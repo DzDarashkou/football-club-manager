@@ -1,0 +1,3610 @@
+{
+  "title": "200 pytań do quizu piłkarskiego",
+  "language": "pl",
+  "licenseNote": "Pytania wygenerowano na podstawie danych strukturalnych Wikidata dostępnych na licencji CC0.",
+  "generatedAt": "2026-09-04",
+  "questionCount": 200,
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "id": "WQ-001",
+      "question": "Który kraj reprezentuje lub reprezentował Xabi Alonso?",
+      "answers": [
+        "Grecja",
+        "Peru",
+        "Hiszpania",
+        "Chorwacja"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q208104",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q208104",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-002",
+      "question": "Który kraj reprezentuje lub reprezentował Álvaro Negredo?",
+      "answers": [
+        "Bułgaria",
+        "Republika Federalna Niemiec (1949–1990)",
+        "Hiszpania",
+        "Finlandia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q210916",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q210916",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-003",
+      "question": "Który kraj reprezentuje lub reprezentował Edwin van der Sar?",
+      "answers": [
+        "Anglia",
+        "Chorwacja",
+        "Holandia",
+        "Czarnogóra"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Holandia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q482955",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q482955",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-004",
+      "question": "Który kraj reprezentuje lub reprezentował Cristiano Ronaldo?",
+      "answers": [
+        "Kamerun",
+        "Portugalia",
+        "Korea Południowa",
+        "Austria"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Portugalia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q11571",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11571",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-005",
+      "question": "Który kraj reprezentuje lub reprezentował Ałan Dzagojew?",
+      "answers": [
+        "Szwajcaria",
+        "Rosja",
+        "Urugwaj",
+        "Niemcy"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Rosja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q20469",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20469",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-006",
+      "question": "Który kraj reprezentuje lub reprezentował Christian Panucci?",
+      "answers": [
+        "Szkocja",
+        "Ukraina",
+        "Czarnogóra",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Włochy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q168287",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q168287",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-007",
+      "question": "Który kraj reprezentuje lub reprezentował Thomas Hitzlsperger?",
+      "answers": [
+        "Bośnia i Hercegowina",
+        "Gruzja",
+        "Niemcy",
+        "Dania"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Niemcy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q57152",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q57152",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-008",
+      "question": "Który kraj reprezentuje lub reprezentował Henrik Larsson?",
+      "answers": [
+        "Polska",
+        "Togo",
+        "Serbia",
+        "Szwecja"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Szwecja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q179334",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q179334",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-009",
+      "question": "Który kraj reprezentuje lub reprezentował Niko Kranjčar?",
+      "answers": [
+        "Dania",
+        "Togo",
+        "Chorwacja",
+        "Szkocja"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Chorwacja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q84272",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q84272",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-010",
+      "question": "Który kraj reprezentuje lub reprezentował Jonny Evans?",
+      "answers": [
+        "Ghana",
+        "Irlandia Północna",
+        "Słowenia",
+        "Serbia"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Irlandia Północna",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q29495",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q29495",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-011",
+      "question": "Który kraj reprezentuje lub reprezentował Fabio Cannavaro?",
+      "answers": [
+        "Norwegia",
+        "Południowa Afryka",
+        "Ekwador",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Włochy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q102027",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q102027",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-012",
+      "question": "Który kraj reprezentuje lub reprezentował Andrés Iniesta?",
+      "answers": [
+        "Maroko",
+        "Hiszpania",
+        "Togo",
+        "Mali"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Hiszpania",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q43729",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q43729",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-013",
+      "question": "Który kraj reprezentuje lub reprezentował Rui Costa?",
+      "answers": [
+        "Chorwacja",
+        "Portugalia",
+        "Bułgaria",
+        "Chile"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Portugalia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q190608",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q190608",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-014",
+      "question": "Który kraj reprezentuje lub reprezentował Deco?",
+      "answers": [
+        "Liberia",
+        "Hiszpania",
+        "Portugalia",
+        "Czarnogóra"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Portugalia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q659634",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q659634",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-015",
+      "question": "Który kraj reprezentuje lub reprezentował Aaron Ramsey?",
+      "answers": [
+        "Maroko",
+        "Czarnogóra",
+        "Niemcy",
+        "Walia"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Walia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q213427",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q213427",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-016",
+      "question": "Który kraj reprezentuje lub reprezentował Klaas-Jan Huntelaar?",
+      "answers": [
+        "Portugalia",
+        "Stany Zjednoczone",
+        "Holandia",
+        "Anglia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Holandia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q26069",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q26069",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-017",
+      "question": "Który kraj reprezentuje lub reprezentował Adriano Leite Ribeiro?",
+      "answers": [
+        "Urugwaj",
+        "Niemcy",
+        "Francja",
+        "Brazylia"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Brazylia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q170452",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q170452",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-018",
+      "question": "Który kraj reprezentuje lub reprezentował Sergio Romero?",
+      "answers": [
+        "Anglia",
+        "Argentyna",
+        "Holandia",
+        "Gruzja"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Argentyna",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q215463",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q215463",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-019",
+      "question": "Który kraj reprezentuje lub reprezentował Jürgen Kohler?",
+      "answers": [
+        "Argentyna",
+        "Niemcy",
+        "Polska",
+        "Białoruś"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Niemcy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q308925",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q308925",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-020",
+      "question": "Który kraj reprezentuje lub reprezentował Clarence Seedorf?",
+      "answers": [
+        "Mali",
+        "Holandia",
+        "Kostaryka",
+        "Algieria"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Holandia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q484909",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q484909",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-021",
+      "question": "Który kraj reprezentuje lub reprezentował Vedran Ćorluka?",
+      "answers": [
+        "Chorwacja",
+        "Stany Zjednoczone",
+        "Peru",
+        "Rosja"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Chorwacja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q206306",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q206306",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-022",
+      "question": "Który kraj reprezentuje lub reprezentował Ashley Cole?",
+      "answers": [
+        "Anglia",
+        "Ukraina",
+        "Francja",
+        "Austria"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Anglia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q133556",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q133556",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-023",
+      "question": "Który kraj reprezentuje lub reprezentował Darren Fletcher?",
+      "answers": [
+        "Szkocja",
+        "Urugwaj",
+        "Bułgaria",
+        "Republika Federalna Niemiec (1949–1990)"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Szkocja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q172792",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q172792",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-024",
+      "question": "Który kraj reprezentuje lub reprezentował Jérémy Ménez?",
+      "answers": [
+        "Austria",
+        "Francja",
+        "Czarnogóra",
+        "Polska"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Francja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q1923",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1923",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-025",
+      "question": "Który kraj reprezentuje lub reprezentował Daniel van Buyten?",
+      "answers": [
+        "Belgia",
+        "Stany Zjednoczone",
+        "Bośnia i Hercegowina",
+        "Togo"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Belgia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q44309",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q44309",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-026",
+      "question": "Który kraj reprezentuje lub reprezentował Samuel Umtiti?",
+      "answers": [
+        "Serbia",
+        "Bułgaria",
+        "Francja",
+        "Ukraina"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Francja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q13308",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q13308",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-027",
+      "question": "Który kraj reprezentuje lub reprezentował Éver Banega?",
+      "answers": [
+        "Słowenia",
+        "Argentyna",
+        "Dania",
+        "Irlandia Północna"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Argentyna",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19392",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19392",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-028",
+      "question": "Który kraj reprezentuje lub reprezentował Emre Belözoğlu?",
+      "answers": [
+        "Urugwaj",
+        "Niemcy",
+        "Turcja",
+        "Anglia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Turcja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q202569",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q202569",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-029",
+      "question": "Który kraj reprezentuje lub reprezentował Claudio Caniggia?",
+      "answers": [
+        "Kostaryka",
+        "Turcja",
+        "Czarnogóra",
+        "Argentyna"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Argentyna",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q270890",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q270890",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-030",
+      "question": "Który kraj reprezentuje lub reprezentował Gianfranco Zola?",
+      "answers": [
+        "Algieria",
+        "Liberia",
+        "Nigeria",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Włochy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q9354",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q9354",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-031",
+      "question": "Który kraj reprezentuje lub reprezentował Pep Guardiola?",
+      "answers": [
+        "Indie",
+        "Stany Zjednoczone",
+        "Hiszpania",
+        "Chile"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q164038",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q164038",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-032",
+      "question": "Który kraj reprezentuje lub reprezentował David Beckham?",
+      "answers": [
+        "Brazylia",
+        "Anglia",
+        "Urugwaj",
+        "Argentyna"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Anglia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q10520",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q10520",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-033",
+      "question": "Który kraj reprezentuje lub reprezentował Nemanja Matić?",
+      "answers": [
+        "Serbia",
+        "Niemcy",
+        "Ghana",
+        "Argentyna"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Serbia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q297603",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q297603",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-034",
+      "question": "Który kraj reprezentuje lub reprezentował Gilberto Silva?",
+      "answers": [
+        "Brazylia",
+        "Bośnia i Hercegowina",
+        "Turcja",
+        "Kostaryka"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Brazylia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q190142",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q190142",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-035",
+      "question": "Który kraj reprezentuje lub reprezentował Rüştü Reçber?",
+      "answers": [
+        "Szwecja",
+        "Ekwador",
+        "Turcja",
+        "Maroko"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Turcja",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q201900",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q201900",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-036",
+      "question": "Który kraj reprezentuje lub reprezentował Ali Daei?",
+      "answers": [
+        "Serbia",
+        "Ekwador",
+        "Czarnogóra",
+        "Iran"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Iran",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q159622",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q159622",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-037",
+      "question": "Który kraj reprezentuje lub reprezentował Enner Valencia?",
+      "answers": [
+        "Ekwador",
+        "Meksyk",
+        "Wybrzeże Kości Słoniowej",
+        "Czechy"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Ekwador",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q2843080",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2843080",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-038",
+      "question": "Który kraj reprezentuje lub reprezentował Fabio Grosso?",
+      "answers": [
+        "Szwajcaria",
+        "Włochy",
+        "Mali",
+        "Argentyna"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Włochy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q230529",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q230529",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-039",
+      "question": "Który kraj reprezentuje lub reprezentował Ernesto Valverde?",
+      "answers": [
+        "Białoruś",
+        "Ukraina",
+        "Hiszpania",
+        "Szwajcaria"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q359118",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q359118",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-040",
+      "question": "Który kraj reprezentuje lub reprezentował Riyad Mahrez?",
+      "answers": [
+        "Ukraina",
+        "Algieria",
+        "Chorwacja",
+        "Iran"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Algieria",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q8338725",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8338725",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-041",
+      "question": "Który kraj reprezentuje lub reprezentował Michael Owen?",
+      "answers": [
+        "Słowenia",
+        "Brazylia",
+        "Anglia",
+        "Turcja"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Anglia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q128829",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q128829",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-042",
+      "question": "Który kraj reprezentuje lub reprezentował Hiroshi Nanami?",
+      "answers": [
+        "Kostaryka",
+        "Japonia",
+        "Włochy",
+        "Kamerun"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Japonia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q1208375",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1208375",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-043",
+      "question": "Który kraj reprezentuje lub reprezentował Miroslav Klose?",
+      "answers": [
+        "Holandia",
+        "Rumunia",
+        "Czarnogóra",
+        "Niemcy"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Niemcy",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q80471",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q80471",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-044",
+      "question": "Który kraj reprezentuje lub reprezentował Sol Campbell?",
+      "answers": [
+        "Anglia",
+        "Portugalia",
+        "Włochy",
+        "Kostaryka"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Anglia",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q214734",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q214734",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-045",
+      "question": "Który kraj reprezentuje lub reprezentował Martín Cáceres?",
+      "answers": [
+        "Urugwaj",
+        "Chile",
+        "Serbia",
+        "Niemcy"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Urugwaj",
+      "category": "zawodnicy — reprezentacja",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q194107",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q194107",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-046",
+      "question": "W którym roku urodził się Steven Pienaar?",
+      "answers": [
+        "1948",
+        "2004",
+        "1982",
+        "1949"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1982",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q193488",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q193488",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-047",
+      "question": "W którym roku urodził się Fabio Cannavaro?",
+      "answers": [
+        "1964",
+        "1973",
+        "1977",
+        "1943"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1973",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q102027",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q102027",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-048",
+      "question": "W którym roku urodził się Riyad Mahrez?",
+      "answers": [
+        "2003",
+        "1965",
+        "1991",
+        "1952"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1991",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q8338725",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8338725",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-049",
+      "question": "W którym roku urodził się Ronaldinho?",
+      "answers": [
+        "1944",
+        "1987",
+        "1980",
+        "1959"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1980",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q39444",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q39444",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-050",
+      "question": "W którym roku urodził się Emre Belözoğlu?",
+      "answers": [
+        "1952",
+        "1979",
+        "1980",
+        "1993"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1980",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q202569",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q202569",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-051",
+      "question": "W którym roku urodził się Seigō Narazaki?",
+      "answers": [
+        "1981",
+        "1962",
+        "1976",
+        "1936"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1976",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q331963",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q331963",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-052",
+      "question": "W którym roku urodził się Yūki Ōtsu?",
+      "answers": [
+        "1990",
+        "1983",
+        "1994",
+        "1968"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1990",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q509079",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q509079",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-053",
+      "question": "W którym roku urodził się Dino Zoff?",
+      "answers": [
+        "1990",
+        "1961",
+        "2001",
+        "1942"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1942",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q180661",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q180661",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-054",
+      "question": "W którym roku urodził się Keylor Navas?",
+      "answers": [
+        "1991",
+        "1971",
+        "1986",
+        "1994"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1986",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q969423",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q969423",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-055",
+      "question": "W którym roku urodził się Masashi Ōguro?",
+      "answers": [
+        "1972",
+        "1962",
+        "1973",
+        "1980"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1980",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q359749",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q359749",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-056",
+      "question": "W którym roku urodził się Diego Simeone?",
+      "answers": [
+        "1970",
+        "1972",
+        "1995",
+        "2004"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1970",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q258115",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q258115",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-057",
+      "question": "W którym roku urodził się Niko Kovač?",
+      "answers": [
+        "2003",
+        "1971",
+        "1960",
+        "1964"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1971",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q154305",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q154305",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-058",
+      "question": "W którym roku urodził się Miloš Krasić?",
+      "answers": [
+        "1958",
+        "1964",
+        "1947",
+        "1984"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1984",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q201910",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q201910",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-059",
+      "question": "W którym roku urodził się Angelos Charisteas?",
+      "answers": [
+        "1946",
+        "2001",
+        "1980",
+        "1994"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1980",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q109417",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q109417",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-060",
+      "question": "W którym roku urodził się Lucas Neill?",
+      "answers": [
+        "1997",
+        "1941",
+        "1949",
+        "1978"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1978",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q215358",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q215358",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-061",
+      "question": "W którym roku urodził się James Milner?",
+      "answers": [
+        "1948",
+        "1986",
+        "1987",
+        "1971"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1986",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q191136",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q191136",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-062",
+      "question": "W którym roku urodził się Thomas Vermaelen?",
+      "answers": [
+        "1985",
+        "1984",
+        "1974",
+        "1981"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1985",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q184177",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q184177",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-063",
+      "question": "W którym roku urodził się Marc Overmars?",
+      "answers": [
+        "1973",
+        "1944",
+        "1983",
+        "1995"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1973",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q219248",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q219248",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-064",
+      "question": "W którym roku urodził się Cafu?",
+      "answers": [
+        "1981",
+        "1993",
+        "1937",
+        "1970"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1970",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q178683",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q178683",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-065",
+      "question": "W którym roku urodził się Ibrahim Afellay?",
+      "answers": [
+        "1950",
+        "1998",
+        "1973",
+        "1986"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1986",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q165014",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q165014",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-066",
+      "question": "W którym roku urodził się Claudio Caniggia?",
+      "answers": [
+        "1968",
+        "2002",
+        "1979",
+        "1967"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1967",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q270890",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q270890",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-067",
+      "question": "W którym roku urodził się Esteban Cambiasso?",
+      "answers": [
+        "1983",
+        "1940",
+        "1980",
+        "1988"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1980",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q192122",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q192122",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-068",
+      "question": "W którym roku urodził się John Obi Mikel?",
+      "answers": [
+        "1941",
+        "1987",
+        "1997",
+        "2006"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1987",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q166984",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q166984",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-069",
+      "question": "W którym roku urodził się Javier Mascherano?",
+      "answers": [
+        "1972",
+        "1955",
+        "1939",
+        "1984"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1984",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q161571",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q161571",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-070",
+      "question": "W którym roku urodził się Dimitri Payet?",
+      "answers": [
+        "1941",
+        "1992",
+        "1983",
+        "1987"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1987",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q376247",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q376247",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-071",
+      "question": "W którym roku urodził się Miroslav Klose?",
+      "answers": [
+        "1965",
+        "1978",
+        "1984",
+        "1998"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1978",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q80471",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q80471",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-072",
+      "question": "W którym roku urodził się Jari Litmanen?",
+      "answers": [
+        "1971",
+        "2001",
+        "1984",
+        "2005"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1971",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q209650",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q209650",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-073",
+      "question": "W którym roku urodził się Paulo Wanchope?",
+      "answers": [
+        "1974",
+        "1976",
+        "2000",
+        "1937"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1976",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q211126",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q211126",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-074",
+      "question": "W którym roku urodził się Ángel Di María?",
+      "answers": [
+        "1967",
+        "1983",
+        "1975",
+        "1988"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1988",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q251683",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q251683",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-075",
+      "question": "W którym roku urodził się Jordan Ayew?",
+      "answers": [
+        "1945",
+        "1991",
+        "1986",
+        "2001"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1991",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q367861",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q367861",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-076",
+      "question": "W którym roku urodził się Frank de Boer?",
+      "answers": [
+        "1984",
+        "1970",
+        "1960",
+        "1994"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1970",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q219657",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q219657",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-077",
+      "question": "W którym roku urodził się Iker Casillas?",
+      "answers": [
+        "1995",
+        "1972",
+        "1981",
+        "1989"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1981",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q11584",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11584",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-078",
+      "question": "W którym roku urodził się Teddy Sheringham?",
+      "answers": [
+        "1986",
+        "2001",
+        "1966",
+        "1938"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1966",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q234576",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q234576",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-079",
+      "question": "W którym roku urodził się Toshihiro Hattori?",
+      "answers": [
+        "1985",
+        "1961",
+        "2002",
+        "1973"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1973",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q495803",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q495803",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-080",
+      "question": "W którym roku urodził się Leroy Sané?",
+      "answers": [
+        "1970",
+        "1996",
+        "1995",
+        "1936"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1996",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q16499882",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16499882",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-081",
+      "question": "W którym roku urodził się Sylvain Wiltord?",
+      "answers": [
+        "1984",
+        "1974",
+        "1991",
+        "1980"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1974",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q217760",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q217760",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-082",
+      "question": "W którym roku urodził się Bastian Schweinsteiger?",
+      "answers": [
+        "1981",
+        "1959",
+        "1984",
+        "1941"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1984",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q44298",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q44298",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-083",
+      "question": "W którym roku urodził się Gary Neville?",
+      "answers": [
+        "1975",
+        "1937",
+        "1981",
+        "1997"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1975",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q348857",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q348857",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-084",
+      "question": "W którym roku urodził się David Villa?",
+      "answers": [
+        "1977",
+        "1992",
+        "1973",
+        "1981"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1981",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q83006",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q83006",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-085",
+      "question": "W którym roku urodził się Jérémy Toulalan?",
+      "answers": [
+        "1949",
+        "1992",
+        "1983",
+        "1955"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1983",
+      "category": "zawodnicy — rok urodzenia",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q1944",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1944",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-086",
+      "question": "W jakim mieście lub miejscowości urodził się Frank de Boer?",
+      "answers": [
+        "Taszkent",
+        "Armthorpe",
+        "Hoorn",
+        "Warszawa"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hoorn",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q219657",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q219657",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-087",
+      "question": "W jakim mieście lub miejscowości urodził się Davor Šuker?",
+      "answers": [
+        "Helsingborg",
+        "Karlsruhe",
+        "Osijek",
+        "Antwerpia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Osijek",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q189217",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q189217",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-088",
+      "question": "W jakim mieście lub miejscowości urodził się Niko Kranjčar?",
+      "answers": [
+        "Utrecht",
+        "São Bernardo do Campo",
+        "Zagrzeb",
+        "São Vicente"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Zagrzeb",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q84272",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q84272",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-089",
+      "question": "W jakim mieście lub miejscowości urodził się Giovanni van Bronckhorst?",
+      "answers": [
+        "Leicester",
+        "Rotterdam",
+        "Sendai",
+        "Podgorica"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Rotterdam",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q173360",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q173360",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-090",
+      "question": "W jakim mieście lub miejscowości urodził się Gilberto Silva?",
+      "answers": [
+        "Fuentealbilla",
+        "Lagoa da Prata",
+        "Sens",
+        "Pampeluna"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Lagoa da Prata",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q190142",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q190142",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-091",
+      "question": "W jakim mieście lub miejscowości urodził się Berti Vogts?",
+      "answers": [
+        "Büttgen",
+        "Błagojewgrad",
+        "Chimay",
+        "Haltern am See"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Büttgen",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q828203",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q828203",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-092",
+      "question": "W jakim mieście lub miejscowości urodził się Jan Vertonghen?",
+      "answers": [
+        "Tourcoing",
+        "Katwijk",
+        "Barking",
+        "Sint-Niklaas"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Sint-Niklaas",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q313170",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q313170",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-093",
+      "question": "W jakim mieście lub miejscowości urodził się Nemanja Matić?",
+      "answers": [
+        "Monrovia",
+        "Huyton",
+        "L’Hospitalet de Llobregat",
+        "Šabac"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Šabac",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q297603",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q297603",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-094",
+      "question": "W jakim mieście lub miejscowości urodził się Djibril Cissé?",
+      "answers": [
+        "North Brunswick Township",
+        "Arles",
+        "Clichy-la-Garenne",
+        "Chiba"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Arles",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q1936",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1936",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-095",
+      "question": "W jakim mieście lub miejscowości urodził się Luiz Gustavo?",
+      "answers": [
+        "Pindamonhangaba",
+        "Aliança",
+        "Narashino",
+        "Eskilstuna"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Pindamonhangaba",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q329451",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q329451",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-096",
+      "question": "W jakim mieście lub miejscowości urodził się Makoto Hasebe?",
+      "answers": [
+        "Emst",
+        "Praga",
+        "Fujieda",
+        "Warszawa"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Fujieda",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q164676",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q164676",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-097",
+      "question": "W jakim mieście lub miejscowości urodził się Claudio Pizarro?",
+      "answers": [
+        "Beckton",
+        "Katwijk",
+        "Lavelanet",
+        "Callao"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Callao",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q109397",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q109397",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-098",
+      "question": "W jakim mieście lub miejscowości urodził się Yohan Cabaye?",
+      "answers": [
+        "Tourcoing",
+        "Prefektura Kagoshima",
+        "Dortmund",
+        "Barcelona"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Tourcoing",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q1910",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1910",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-099",
+      "question": "W jakim mieście lub miejscowości urodził się Romário?",
+      "answers": [
+        "Adapazarı",
+        "Rio de Janeiro",
+        "Ciudadela",
+        "Lambsheim"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Rio de Janeiro",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q178649",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q178649",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-100",
+      "question": "W jakim mieście lub miejscowości urodził się Joan Capdevila?",
+      "answers": [
+        "Würselen",
+        "Tàrrega",
+        "Macclesfield",
+        "Kolbermoor"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Tàrrega",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q188793",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q188793",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-101",
+      "question": "W jakim mieście lub miejscowości urodził się Łukasz Fabiański?",
+      "answers": [
+        "Kostrzyn nad Odrą",
+        "São Paulo",
+        "Morioka",
+        "Maasbracht"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Kostrzyn nad Odrą",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q40596",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q40596",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-102",
+      "question": "W jakim mieście lub miejscowości urodził się Víctor Valdés?",
+      "answers": [
+        "Maringá",
+        "16th arrondissement of Marseille",
+        "Osijek",
+        "L’Hospitalet de Llobregat"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "L’Hospitalet de Llobregat",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q47548",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q47548",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-103",
+      "question": "W jakim mieście lub miejscowości urodził się Darwin Núñez?",
+      "answers": [
+        "Hiroszima",
+        "Gladbeck",
+        "Artigas (miasto)",
+        "Les Ulis"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Artigas (miasto)",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q46372260",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q46372260",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-104",
+      "question": "W jakim mieście lub miejscowości urodził się Raúl González Blanco?",
+      "answers": [
+        "Santiago",
+        "Kono",
+        "Madryt",
+        "Fukuyama"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Madryt",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q11576",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11576",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-105",
+      "question": "W jakim mieście lub miejscowości urodził się Manuel Neuer?",
+      "answers": [
+        "Corigliano Calabro",
+        "Gelsenkirchen",
+        "Kawachinagano",
+        "Ontario"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Gelsenkirchen",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q107365",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q107365",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-106",
+      "question": "W jakim mieście lub miejscowości urodził się Robin van Persie?",
+      "answers": [
+        "Kawachinagano",
+        "Rotterdam",
+        "São Paulo",
+        "Belgrad"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Rotterdam",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q2339",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2339",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-107",
+      "question": "W jakim mieście lub miejscowości urodził się Alessandro Del Piero?",
+      "answers": [
+        "Salto",
+        "Rotherham",
+        "Tambow",
+        "Conegliano"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Conegliano",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q624",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q624",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-108",
+      "question": "W jakim mieście lub miejscowości urodził się Edin Džeko?",
+      "answers": [
+        "Emst",
+        "Reykjavík",
+        "Sarajewo",
+        "Seul"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Sarajewo",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q153786",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q153786",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-109",
+      "question": "W jakim mieście lub miejscowości urodził się Martín Cáceres?",
+      "answers": [
+        "Noheji",
+        "Fiesole",
+        "Bamako",
+        "Montevideo"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Montevideo",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q194107",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q194107",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-110",
+      "question": "W jakim mieście lub miejscowości urodził się Kazumichi Takagi?",
+      "answers": [
+        "Ōita",
+        "Henderson",
+        "Yasu",
+        "Kono"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Yasu",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q982151",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q982151",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-111",
+      "question": "W jakim mieście lub miejscowości urodził się Cristiano Ronaldo?",
+      "answers": [
+        "Ontario",
+        "Bedum",
+        "Maasbracht",
+        "Funchal"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Funchal",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q11571",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11571",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-112",
+      "question": "W jakim mieście lub miejscowości urodził się Alessandro Nesta?",
+      "answers": [
+        "Oumé",
+        "Rzym",
+        "Neuilly-sur-Marne",
+        "Kushiro"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Rzym",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q227892",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q227892",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-113",
+      "question": "W jakim mieście lub miejscowości urodził się Daiki Niwa?",
+      "answers": [
+        "Wodonga",
+        "Würselen",
+        "Johannesburg",
+        "Kawachinagano"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Kawachinagano",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q763939",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q763939",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-114",
+      "question": "W jakim mieście lub miejscowości urodził się Keita Suzuki?",
+      "answers": [
+        "Samtredia",
+        "Jaunde",
+        "Praga",
+        "Shimizu-ku"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Shimizu-ku",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q558896",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q558896",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-115",
+      "question": "W jakim mieście lub miejscowości urodził się Fabio Grosso?",
+      "answers": [
+        "Rzym",
+        "Rubineia",
+        "Madryt",
+        "Pelotas"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Rzym",
+      "category": "zawodnicy — miejsce urodzenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q230529",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q230529",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-116",
+      "question": "Na jakiej pozycji występował lub występuje Matheus Cunha?",
+      "answers": [
+        "boczny pomocnik",
+        "napastnik",
+        "lewy skrzydłowy",
+        "bramkarz"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q35831063",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q35831063",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-117",
+      "question": "Na jakiej pozycji występował lub występuje Seigō Narazaki?",
+      "answers": [
+        "środkowy pomocnik",
+        "bramkarz",
+        "obrońca",
+        "ofensywny pomocnik"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "bramkarz",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q331963",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q331963",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-118",
+      "question": "Na jakiej pozycji występował lub występuje Emmanuel Adebayor?",
+      "answers": [
+        "defensywny pomocnik",
+        "środkowy pomocnik",
+        "libero",
+        "napastnik"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q386876",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q386876",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-119",
+      "question": "Na jakiej pozycji występował lub występuje Sergio Busquets?",
+      "answers": [
+        "defensywny pomocnik",
+        "skrzydłowy",
+        "boczny pomocnik",
+        "środkowy pomocnik"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "defensywny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q49704",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q49704",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-120",
+      "question": "Na jakiej pozycji występował lub występuje Niko Kranjčar?",
+      "answers": [
+        "środkowy obrońca",
+        "ofensywny pomocnik",
+        "pomocnik",
+        "obrońca"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q84272",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q84272",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-121",
+      "question": "Na jakiej pozycji występował lub występuje Wynton Rufer?",
+      "answers": [
+        "środkowy napastnik",
+        "bramkarz",
+        "pomocnik",
+        "napastnik"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q124043",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q124043",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-122",
+      "question": "Na jakiej pozycji występował lub występuje John Heitinga?",
+      "answers": [
+        "skrzydłowy",
+        "środkowy napastnik",
+        "środkowy obrońca",
+        "lewy skrzydłowy"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "środkowy obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q946457",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q946457",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-123",
+      "question": "Na jakiej pozycji występował lub występuje Gabriel Heinze?",
+      "answers": [
+        "pomocnik",
+        "środkowy obrońca",
+        "obrońca",
+        "skrzydłowy"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q63659",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q63659",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-124",
+      "question": "Na jakiej pozycji występował lub występuje Frank Rijkaard?",
+      "answers": [
+        "lewy skrzydłowy",
+        "środkowy pomocnik",
+        "defensywny pomocnik",
+        "obrońca"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "defensywny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q169098",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q169098",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-125",
+      "question": "Na jakiej pozycji występował lub występuje Park Ji-sung?",
+      "answers": [
+        "obrońca",
+        "pomocnik",
+        "środkowy pomocnik",
+        "boczny pomocnik"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "boczny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q50603",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q50603",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-126",
+      "question": "Na jakiej pozycji występował lub występuje Takayuki Morimoto?",
+      "answers": [
+        "bramkarz",
+        "skrzydłowy",
+        "napastnik",
+        "lewy skrzydłowy"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q310602",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q310602",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-127",
+      "question": "Na jakiej pozycji występował lub występuje Gervinho?",
+      "answers": [
+        "środkowy pomocnik",
+        "środkowy napastnik",
+        "boczny pomocnik",
+        "defensywny pomocnik"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "boczny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q208025",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q208025",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-128",
+      "question": "Na jakiej pozycji występował lub występuje Paul Scholes?",
+      "answers": [
+        "bramkarz",
+        "pomocnik",
+        "libero",
+        "środkowy pomocnik"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q45613",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q45613",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-129",
+      "question": "Na jakiej pozycji występował lub występuje Shunsuke Nakamura?",
+      "answers": [
+        "pomocnik",
+        "bramkarz",
+        "lewy skrzydłowy",
+        "środkowy napastnik"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q191138",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q191138",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-130",
+      "question": "Na jakiej pozycji występował lub występuje Éric Maxim Choupo-Moting?",
+      "answers": [
+        "bramkarz",
+        "napastnik",
+        "boczny pomocnik",
+        "środkowy obrońca"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q309532",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q309532",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-131",
+      "question": "Na jakiej pozycji występował lub występuje Gary Lineker?",
+      "answers": [
+        "defensywny pomocnik",
+        "bramkarz",
+        "środkowy obrońca",
+        "napastnik"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q47778",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q47778",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-132",
+      "question": "Na jakiej pozycji występował lub występuje Gaël Clichy?",
+      "answers": [
+        "lewy skrzydłowy",
+        "środkowy pomocnik",
+        "boczny obrońca",
+        "bramkarz"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "boczny obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q1929",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1929",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-133",
+      "question": "Na jakiej pozycji występował lub występuje Shū Kurata?",
+      "answers": [
+        "pomocnik",
+        "napastnik",
+        "środkowy napastnik",
+        "ofensywny pomocnik"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q210117",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q210117",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-134",
+      "question": "Na jakiej pozycji występował lub występuje Luke Shaw?",
+      "answers": [
+        "obrońca",
+        "lewy skrzydłowy",
+        "boczny pomocnik",
+        "boczny obrońca"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "boczny obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q93563",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q93563",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-135",
+      "question": "Na jakiej pozycji występował lub występuje Sokratis Papastatopulos?",
+      "answers": [
+        "napastnik",
+        "libero",
+        "boczny obrońca",
+        "środkowy obrońca"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "środkowy obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q192923",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q192923",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-136",
+      "question": "Na jakiej pozycji występował lub występuje Robinho?",
+      "answers": [
+        "boczny pomocnik",
+        "defensywny pomocnik",
+        "pomocnik",
+        "ofensywny pomocnik"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "boczny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q58441",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q58441",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-137",
+      "question": "Na jakiej pozycji występował lub występuje Mark van Bommel?",
+      "answers": [
+        "pomocnik",
+        "boczny obrońca",
+        "ofensywny pomocnik",
+        "boczny pomocnik"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q151853",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q151853",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-138",
+      "question": "Na jakiej pozycji występował lub występuje Eduardo da Silva?",
+      "answers": [
+        "boczny obrońca",
+        "środkowy pomocnik",
+        "napastnik",
+        "libero"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "napastnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q180444",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q180444",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-139",
+      "question": "Na jakiej pozycji występował lub występuje Javier Pastore?",
+      "answers": [
+        "skrzydłowy",
+        "boczny pomocnik",
+        "defensywny pomocnik",
+        "ofensywny pomocnik"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "boczny pomocnik",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q276434",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q276434",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-140",
+      "question": "Na jakiej pozycji występował lub występuje Giovanni van Bronckhorst?",
+      "answers": [
+        "defensywny pomocnik",
+        "bramkarz",
+        "boczny obrońca",
+        "pomocnik"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "boczny obrońca",
+      "category": "zawodnicy — pozycja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q173360",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q173360",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-141",
+      "question": "W jakim kraju ma siedzibę klub CD Lugo?",
+      "answers": [
+        "Czechy",
+        "Hiszpania",
+        "Ukraina",
+        "Brazylia"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Hiszpania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q11984",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11984",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-142",
+      "question": "W jakim kraju ma siedzibę klub Ebbsfleet United F.C.?",
+      "answers": [
+        "Urugwaj",
+        "Słowacja",
+        "Wielka Brytania",
+        "Bośnia i Hercegowina"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q18511",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18511",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-143",
+      "question": "W jakim kraju ma siedzibę klub CA Osasuna?",
+      "answers": [
+        "Arabia Saudyjska",
+        "Gruzja",
+        "Hiszpania",
+        "Francja"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q10286",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q10286",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-144",
+      "question": "W jakim kraju ma siedzibę klub Portsmouth F.C.?",
+      "answers": [
+        "Ukraina",
+        "Urugwaj",
+        "Grecja",
+        "Wielka Brytania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19604",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19604",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-145",
+      "question": "W jakim kraju ma siedzibę klub Bolton Wanderers F.C.?",
+      "answers": [
+        "Wielka Brytania",
+        "Słowacja",
+        "Niemcy",
+        "Hiszpania"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19451",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19451",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-146",
+      "question": "W jakim kraju ma siedzibę klub FC United of Manchester?",
+      "answers": [
+        "Austria",
+        "Gruzja",
+        "Grecja",
+        "Wielka Brytania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q18274",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18274",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-147",
+      "question": "W jakim kraju ma siedzibę klub 1. FC Kaiserslautern?",
+      "answers": [
+        "Niemcy",
+        "Albania",
+        "Macedonia Północna",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Niemcy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q8466",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8466",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-148",
+      "question": "W jakim kraju ma siedzibę klub West Bromwich Albion F.C.?",
+      "answers": [
+        "Francja",
+        "Brazylia",
+        "Wielka Brytania",
+        "Belgia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q18744",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18744",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-149",
+      "question": "W jakim kraju ma siedzibę klub Udinese Calcio?",
+      "answers": [
+        "Tunezja",
+        "Włochy",
+        "Peru",
+        "Macedonia Północna"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Włochy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q2798",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2798",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-150",
+      "question": "W jakim kraju ma siedzibę klub Dinamo Moskwa?",
+      "answers": [
+        "Turcja",
+        "Bośnia i Hercegowina",
+        "Wielka Brytania",
+        "Rosja"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Rosja",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q17497",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17497",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-151",
+      "question": "W jakim kraju ma siedzibę klub Getafe CF?",
+      "answers": [
+        "Niemcy",
+        "Ukraina",
+        "Hiszpania",
+        "Belgia"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Hiszpania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q8806",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8806",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-152",
+      "question": "W jakim kraju ma siedzibę klub ND Triglav Kranj?",
+      "answers": [
+        "Japonia",
+        "Czechy",
+        "Słowacja",
+        "Słowenia"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Słowenia",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q44308",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q44308",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-153",
+      "question": "W jakim kraju ma siedzibę klub Hellas Verona?",
+      "answers": [
+        "Hiszpania",
+        "Włochy",
+        "Macedonia Północna",
+        "Bośnia i Hercegowina"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Włochy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q8639",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8639",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-154",
+      "question": "W jakim kraju ma siedzibę klub FC Sochaux-Montbéliard?",
+      "answers": [
+        "Francja",
+        "Macedonia Północna",
+        "Kolumbia",
+        "Rosja"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Francja",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19512",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19512",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-155",
+      "question": "W jakim kraju ma siedzibę klub West Ham United F.C.?",
+      "answers": [
+        "Ukraina",
+        "Włochy",
+        "Macedonia Północna",
+        "Wielka Brytania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q18747",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18747",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-156",
+      "question": "W jakim kraju ma siedzibę klub Tottenham Hotspur?",
+      "answers": [
+        "Rosja",
+        "Wielka Brytania",
+        "Macedonia Północna",
+        "Urugwaj"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q18741",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18741",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-157",
+      "question": "W jakim kraju ma siedzibę klub Dinamo Tirana?",
+      "answers": [
+        "Kirgistan",
+        "Tunezja",
+        "Hiszpania",
+        "Albania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Albania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q34120",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q34120",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-158",
+      "question": "W jakim kraju ma siedzibę klub Real Sociedad?",
+      "answers": [
+        "Kirgistan",
+        "Urugwaj",
+        "Gruzja",
+        "Hiszpania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Hiszpania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q10315",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q10315",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-159",
+      "question": "W jakim kraju ma siedzibę klub FK Senica?",
+      "answers": [
+        "Austria",
+        "Holandia",
+        "Turcja",
+        "Słowacja"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Słowacja",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19384",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19384",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-160",
+      "question": "W jakim kraju ma siedzibę klub ACR Siena 1904?",
+      "answers": [
+        "Kolumbia",
+        "Rosja",
+        "Włochy",
+        "Arabia Saudyjska"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Włochy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q2756",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2756",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-161",
+      "question": "W jakim kraju ma siedzibę klub Doncaster Rovers F.C.?",
+      "answers": [
+        "Rosja",
+        "Wielka Brytania",
+        "Macedonia Północna",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19589",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19589",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-162",
+      "question": "W jakim kraju ma siedzibę klub Brentford F.C.?",
+      "answers": [
+        "Hiszpania",
+        "Wielka Brytania",
+        "Argentyna",
+        "Ukraina"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19571",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19571",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-163",
+      "question": "W jakim kraju ma siedzibę klub Sampdoria Genua?",
+      "answers": [
+        "Czechy",
+        "Bośnia i Hercegowina",
+        "Grecja",
+        "Włochy"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Włochy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q1457",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1457",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-164",
+      "question": "W jakim kraju ma siedzibę klub Hartlepool United F.C.?",
+      "answers": [
+        "Belgia",
+        "Tunezja",
+        "Japonia",
+        "Wielka Brytania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19592",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19592",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-165",
+      "question": "W jakim kraju ma siedzibę klub FC Crotone?",
+      "answers": [
+        "Niemcy",
+        "Wielka Brytania",
+        "Włochy",
+        "Kirgistan"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Włochy",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q6690",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6690",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-166",
+      "question": "W jakim kraju ma siedzibę klub Colchester United F.C.?",
+      "answers": [
+        "Wielka Brytania",
+        "Peru",
+        "Niemcy",
+        "Rosja"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19578",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19578",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-167",
+      "question": "W jakim kraju ma siedzibę klub Preston North End F.C.?",
+      "answers": [
+        "Niemcy",
+        "Belgia",
+        "Rosja",
+        "Wielka Brytania"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19612",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19612",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-168",
+      "question": "W jakim kraju ma siedzibę klub Charlton Athletic F.C.?",
+      "answers": [
+        "Ukraina",
+        "Arabia Saudyjska",
+        "Wielka Brytania",
+        "Peru"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19462",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19462",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-169",
+      "question": "W jakim kraju ma siedzibę klub Corporación Deportiva Once Caldas?",
+      "answers": [
+        "Kolumbia",
+        "Urugwaj",
+        "Kirgistan",
+        "Brazylia"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Kolumbia",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q47533",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q47533",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-170",
+      "question": "W jakim kraju ma siedzibę klub Huddersfield Town F.C.?",
+      "answers": [
+        "Wielka Brytania",
+        "Turcja",
+        "Ukraina",
+        "Tunezja"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Wielka Brytania",
+      "category": "kluby — kraj",
+      "difficulty": "łatwe",
+      "source": "Wikidata",
+      "sourceId": "Q19473",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19473",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-171",
+      "question": "W którym roku założono klub AS Bari?",
+      "answers": [
+        "1860",
+        "1971",
+        "1930",
+        "1908"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1908",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q6641",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6641",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-172",
+      "question": "W którym roku założono klub Tamworth F.C.?",
+      "answers": [
+        "1933",
+        "1871",
+        "1934",
+        "1971"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1933",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18527",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18527",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-173",
+      "question": "W którym roku założono klub Gateshead F.C.?",
+      "answers": [
+        "1989",
+        "1977",
+        "1941",
+        "1967"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1977",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18513",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18513",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-174",
+      "question": "W którym roku założono klub VfB Stuttgart?",
+      "answers": [
+        "1893",
+        "1886",
+        "2000",
+        "1957"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1893",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q4512",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q4512",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-175",
+      "question": "W którym roku założono klub Scunthorpe United F.C.?",
+      "answers": [
+        "1972",
+        "2008",
+        "1892",
+        "1899"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1899",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q19615",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19615",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-176",
+      "question": "W którym roku założono klub Dinamo Moskwa?",
+      "answers": [
+        "1984",
+        "1923",
+        "1897",
+        "1989"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1923",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q17497",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17497",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-177",
+      "question": "W którym roku założono klub Bayern Monachium?",
+      "answers": [
+        "1941",
+        "1876",
+        "1900",
+        "1994"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1900",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q15789",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q15789",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-178",
+      "question": "W którym roku założono klub Leicester City?",
+      "answers": [
+        "1956",
+        "1884",
+        "1898",
+        "1933"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1884",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q19481",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19481",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-179",
+      "question": "W którym roku założono klub Atlético Madryt?",
+      "answers": [
+        "1903",
+        "1953",
+        "1949",
+        "1896"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1903",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q8701",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8701",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-180",
+      "question": "W którym roku założono klub Luton Town F.C.?",
+      "answers": [
+        "1938",
+        "1885",
+        "1994",
+        "1879"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1885",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18520",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18520",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-181",
+      "question": "W którym roku założono klub FC United of Manchester?",
+      "answers": [
+        "1969",
+        "1935",
+        "1908",
+        "2005"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "2005",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18274",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18274",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-182",
+      "question": "W którym roku założono klub Tottenham Hotspur?",
+      "answers": [
+        "1875",
+        "2015",
+        "1882",
+        "1944"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1882",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18741",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18741",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-183",
+      "question": "W którym roku założono klub CD Mirandés?",
+      "answers": [
+        "2013",
+        "1921",
+        "2000",
+        "1927"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1927",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q11997",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q11997",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-184",
+      "question": "W którym roku założono klub RCD Mallorca?",
+      "answers": [
+        "1916",
+        "1975",
+        "2003",
+        "1987"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1916",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q8835",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8835",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-185",
+      "question": "W którym roku założono klub Stoke City F.C.?",
+      "answers": [
+        "1863",
+        "1867",
+        "1990",
+        "2008"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "1863",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18736",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18736",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-186",
+      "question": "W którym roku założono klub Ternana Calcio?",
+      "answers": [
+        "1949",
+        "1909",
+        "1920",
+        "1925"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1925",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q8623",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8623",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-187",
+      "question": "W którym roku założono klub SS Juve Stabia?",
+      "answers": [
+        "1901",
+        "1972",
+        "1934",
+        "1907"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1907",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q6748",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6748",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-188",
+      "question": "W którym roku założono klub Bolton Wanderers F.C.?",
+      "answers": [
+        "1983",
+        "1874",
+        "2008",
+        "1964"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "1874",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q19451",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19451",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-189",
+      "question": "W którym roku założono klub Norwich City F.C.?",
+      "answers": [
+        "1967",
+        "1962",
+        "1922",
+        "1902"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "1902",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q18721",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18721",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-190",
+      "question": "W którym roku założono klub Skënderbeu Korcza?",
+      "answers": [
+        "1995",
+        "1934",
+        "1909",
+        "1868"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "1909",
+      "category": "kluby — rok założenia",
+      "difficulty": "trudne",
+      "source": "Wikidata",
+      "sourceId": "Q73996",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q73996",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-191",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Oracle Park?",
+      "answers": [
+        "Port Elizabeth",
+        "Razgrad",
+        "East Rutherford",
+        "San Francisco"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "San Francisco",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q298585",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q298585",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-192",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Volksparkstadion?",
+      "answers": [
+        "Aoyuncun Subdistrict",
+        "Stanford",
+        "Altona",
+        "Xuhui District"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Altona",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q150933",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q150933",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-193",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Qinhuangdao Olympic Sports Center Stadium?",
+      "answers": [
+        "Al-Wakra",
+        "Kolumbia Brytyjska",
+        "Qinhuangdao",
+        "Faro"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Qinhuangdao",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q851446",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q851446",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-194",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Estadio Cuauhtémoc?",
+      "answers": [
+        "Puebla",
+        "Aoyuncun Subdistrict",
+        "Oslo",
+        "Hrabstwo Prince George's"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Puebla",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q124769",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q124769",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-195",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Turf Moor?",
+      "answers": [
+        "Royal Borough of Greenwich",
+        "Phokeng",
+        "Burnley",
+        "Nagai Kōen"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswer": "Burnley",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q683112",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q683112",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-196",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Estádio do Bessa?",
+      "answers": [
+        "Alicante",
+        "Ałmaty",
+        "Al-Chaur",
+        "Ramalde"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Ramalde",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q1058494",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1058494",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-197",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Ricoh Arena?",
+      "answers": [
+        "Mendoza",
+        "Werona",
+        "Saloniki",
+        "Coventry"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswer": "Coventry",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q842077",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q842077",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-198",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Estadio La Rosaleda?",
+      "answers": [
+        "La Rosaleda",
+        "Campanhã",
+        "Strasburg",
+        "Kozukuechō"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "La Rosaleda",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q695879",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q695879",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-199",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Carrow Road?",
+      "answers": [
+        "Norwich",
+        "Stanford",
+        "Bruksela",
+        "Indianapolis"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswer": "Norwich",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q123017",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q123017",
+      "verifiedAt": "2026-09-04"
+    },
+    {
+      "id": "WQ-200",
+      "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Sydney Football Stadium?",
+      "answers": [
+        "Genua",
+        "Sydney",
+        "Chōfu",
+        "Elche"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswer": "Sydney",
+      "category": "stadiony — lokalizacja",
+      "difficulty": "średnie",
+      "source": "Wikidata",
+      "sourceId": "Q1053447",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1053447",
+      "verifiedAt": "2026-09-04"
+    }
+  ]
+}
