@@ -7,7 +7,7 @@ definePageMeta({ allowedRoles: ['admin', 'coach'] })
 const { data, pending, error } = await useFetch<{ games: AdminGame[] }>('/api/coach/games', {
   default: () => ({ games: [] }),
 })
-const { locationLabel } = usePolishLocale()
+const { gameName, locationLabel } = usePolishLocale()
 const activeList = ref<'upcoming' | 'past'>('upcoming')
 const now = new Date()
 
@@ -81,7 +81,7 @@ function format(value: string) {
             :to="`/coach/games/${game.id}`"
             class="block border-b border-border px-4 py-5 transition-colors last:border-b-0 even:bg-brand-50/40 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-400"
           >
-            <p class="font-medium">{{ game.team.name }} – {{ game.opponent_name }}</p>
+            <p class="font-medium">{{ gameName(game.team.name, game.opponent_name, game.location_type) }}</p>
             <p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ format(game.scheduled_at) }} · {{ locationLabel(game.location_type) }}</p>
           </NuxtLink>
         </div>

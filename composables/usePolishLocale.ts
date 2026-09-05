@@ -9,6 +9,7 @@ const availabilityLabels: Record<AvailabilityStatus, string> = {
 }
 
 const gameStatusLabels: Record<GameStatus, string> = {
+  draft: 'Wersja robocza',
   scheduled: 'Zaplanowany',
   completed: 'Zakończony',
   postponed: 'Przełożony',
@@ -65,6 +66,7 @@ export function usePolishLocale() {
     dayDate,
     availabilityLabel: (value: AvailabilityStatus) => availabilityLabels[value],
     gameStatusLabel: (value: GameStatus) => gameStatusLabels[value],
+    gameName: (teamName: string, opponentName: string, location: GameLocationType) => location === 'away' ? `${opponentName} – ${teamName}` : `${teamName} – ${opponentName}`,
     locationLabel: (value: GameLocationType) => locationLabels[value],
     competitionTypeLabel: (value: CompetitionType) => competitionTypeLabels[value],
     selectionLabel: (value: SelectionStatus) => selectionLabels[value],

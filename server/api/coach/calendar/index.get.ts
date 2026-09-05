@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   // are limited to their assigned teams; parents intentionally see the club
   // calendar without requiring a player_parents assignment.
   const [games, trainings] = await Promise.all([
-    getGames(adminClient, { startsAt, endsBefore, ascending: true }),
+    getGames(adminClient, { startsAt, endsBefore, ascending: true, excludeDraft: true }),
     getTrainingSessions(adminClient, startsAt, endsBefore),
   ])
   let allowedTeamIds: Set<string> | null = null

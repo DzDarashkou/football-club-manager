@@ -29,7 +29,7 @@ const gameFields = z.object({
   scheduled_at: z.string().refine((value) => !Number.isNaN(Date.parse(value)), 'A valid kickoff date and time is required.'),
   matchday: z.coerce.number().int().positive().nullable().optional().default(null),
   round_label: z.string().trim().max(80).nullable().optional().default(null),
-  status: z.enum(['scheduled', 'completed', 'postponed', 'cancelled']).default('scheduled'),
+  status: z.enum(['draft', 'scheduled', 'completed', 'postponed', 'cancelled']).default('scheduled'),
   home_score: z.coerce.number().int().min(0).optional().default(0),
   away_score: z.coerce.number().int().min(0).optional().default(0),
   notes: z.string().trim().max(1000).nullable().optional().default(null),
@@ -94,6 +94,7 @@ type GameListOptions = {
   limit?: number
   ascending?: boolean
   includeAll?: boolean
+  excludeDraft?: boolean
 }
 
 export async function getGames(adminClient: AdminClient, options: GameListOptions = {}): Promise<AdminGame[]> {
@@ -104,6 +105,7 @@ export async function getGames(adminClient: AdminClient, options: GameListOption
 
   if (options.startsAt) gamesQuery = gamesQuery.gte('scheduled_at', options.startsAt)
   if (options.endsBefore) gamesQuery = gamesQuery.lt('scheduled_at', options.endsBefore)
+  if (options.excludeDraft) gamesQuery = gamesQuery.neq('status', 'draft')
   if (options.limit !== undefined) gamesQuery = gamesQuery.limit(options.limit)
   else if (!options.startsAt && !options.endsBefore && !options.includeAll) gamesQuery = gamesQuery.limit(100)
 

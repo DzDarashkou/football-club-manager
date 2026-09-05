@@ -38,7 +38,7 @@ export type AdminAgeGroupInput = Pick<AdminAgeGroup, 'name' | 'birth_year_from' 
 export type AdminTeamInput = Pick<AdminTeam, 'name' | 'age_group_id'> & { is_active?: boolean }
 export type AdminPlayerInput = Pick<AdminPlayer, 'full_name' | 'date_of_birth' | 'shirt_number'> & { team_ids: string[], is_active?: boolean }
 
-export type GameStatus = 'scheduled' | 'completed' | 'postponed' | 'cancelled'
+export type GameStatus = 'draft' | 'scheduled' | 'completed' | 'postponed' | 'cancelled'
 export type CompetitionType = 'league' | 'cup' | 'friendly' | 'tournament'
 export type GameLocationType = 'home' | 'away' | 'neutral'
 export type AdminSeason = { id: string, name: string, starts_on: string, ends_on: string, is_active: boolean }
