@@ -3,8 +3,7 @@ import { ArrowRight, CircleHelp, Heart, RotateCcw, Sparkles, Trophy } from 'luci
 import type { QuizOptionKey } from '@@/types/quiz'
 
 definePageMeta({
-  layout: 'public',
-  public: true,
+  allowedRoles: ['parent'],
 })
 
 const {
@@ -128,7 +127,7 @@ async function handleLeaderboardSubmit() {
             <CircleHelp class="h-5 w-5" aria-hidden="true" />
           </div>
           <div>
-            <p class="text-base font-medium text-foreground">{{ answerResult.is_correct ? `Brawo! +${answerResult.points_awarded} pkt` : 'Tym razem nie.' }}</p>
+            <p class="text-base font-medium text-foreground">{{ answerResult.is_correct ? `Brawo! +${answerResult.points_awarded} pkt` : 'Tym razem nie. −30 pkt (minimum 0).' }}</p>
             <p v-if="!answerResult.is_correct" class="mt-1 text-sm text-[color:var(--color-text-secondary)]">
               Poprawna odpowiedź: {{ answerLabels[answerResult.correct_option] }} — {{ question.options.find((option) => option.key === answerResult?.correct_option)?.text }}
             </p>
@@ -148,7 +147,9 @@ async function handleLeaderboardSubmit() {
           </div>
           <p class="eyebrow mt-4 text-brand-700">Koniec gry</p>
           <h1 class="mt-1">Twój wynik: {{ finalResult.score }} pkt</h1>
-          <p class="mt-2 text-sm text-[color:var(--color-text-secondary)]">Wykorzystałeś wszystkie trzy życia. Spróbuj pobić swój wynik!</p>
+          <p class="mt-2 text-sm text-[color:var(--color-text-secondary)]">
+            {{ livesRemaining === 0 ? 'Wykorzystałeś wszystkie trzy życia. Spróbuj pobić swój wynik!' : 'Odpowiedziałeś na wszystkie dostępne pytania. Spróbuj pobić swój wynik!' }}
+          </p>
         </section>
 
         <section v-if="qualifiesForLeaderboard" class="card border-brand-200 bg-brand-50">

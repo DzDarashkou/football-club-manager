@@ -3,7 +3,7 @@ import type { AppProfile, AppRole, AppUserStatus } from '@@/types/auth'
 export const APP_ROLES = ['admin', 'coach', 'parent'] as const satisfies readonly AppRole[]
 export const APP_USER_STATUSES = ['active', 'inactive'] as const satisfies readonly AppUserStatus[]
 
-export const PUBLIC_PATHS = ['/', '/login', '/forgot-password', '/update-password', '/test-tokens', '/quiz'] as const
+export const PUBLIC_PATHS = ['/', '/login', '/forgot-password', '/update-password', '/test-tokens'] as const
 
 export const ROLE_HOME: Record<AppRole, string> = {
   admin: '/admin',

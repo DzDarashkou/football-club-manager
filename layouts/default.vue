@@ -5,6 +5,7 @@ import { useSessionStorage } from '@vueuse/core'
 import {
   Bell,
   Calendar,
+  CircleHelp,
   Dumbbell,
   ChevronRight,
   LayoutDashboard,
@@ -42,6 +43,7 @@ const memberNavItems: NavItemWithIcon[] = [
   { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/games', role: ['parent'], hidden: true },
   { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
   { label: 'Kalendarz', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['parent', 'coach'] },
+  { label: 'Quiz', icon: 'CircleHelp', iconComponent: CircleHelp, to: '/parent/quiz', role: ['parent'] },
   { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['parent'], hidden: true },
   { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
 ]
