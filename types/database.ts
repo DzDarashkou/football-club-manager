@@ -1,8 +1,21 @@
 import type { AppRole, AppUserStatus } from '@@/types/auth'
+import type { StandingsGroup, StandingsSnapshot, StandingsTable } from '@@/types/standings'
 
 export type Database = {
   public: {
     Tables: {
+      team_competition_groups: {
+        Row: Pick<StandingsGroup, keyof StandingsGroup> & { created_at: string }
+        Insert: { id?: string, team_id: string, season_id: string, name: string, external_play_id?: string | null, created_at?: string }
+        Update: { external_play_id?: string | null }
+        Relationships: []
+      }
+      standings_snapshots: {
+        Row: Pick<StandingsSnapshot, keyof StandingsSnapshot>
+        Insert: { id?: string, group_id: string, imported_at?: string, imported_by: string, external_team_id: string, table_data: StandingsTable }
+        Update: never
+        Relationships: []
+      }
       training_weather_cache: {
         Row: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm: number, wind_speed_kmh: number, max_wind_gust_kmh: number, wind_direction_degrees: number, cloud_cover_percentage: number, condition: string, fetched_at: string, expires_at: string }
         Insert: { training_session_id: string, kickoff_at: string, latitude: number, longitude: number, temperature_min: number, temperature_max: number, precipitation_probability: number, precipitation_mm: number, max_rain_mm: number, snowfall_mm?: number, wind_speed_kmh?: number, max_wind_gust_kmh?: number, wind_direction_degrees?: number, cloud_cover_percentage?: number, condition: string, fetched_at?: string, expires_at: string }
@@ -225,6 +238,10 @@ export type Database = {
     }
     Views: Record<string, never>
     Functions: {
+      import_standings_snapshot: {
+        Args: { p_group_id: string, p_actor_id: string, p_external_team_id: string, p_table: StandingsTable }
+        Returns: string
+      }
       draw_quiz_question: {
         Args: { p_session_id: string }
         Returns: { id: string, question: string, option_a: string, option_b: string, option_c: string, option_d: string, difficulty: QuizDifficulty, topic: string }[]

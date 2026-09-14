@@ -44,6 +44,7 @@ const memberNavItems: NavItemWithIcon[] = [
   { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
   { label: 'Kalendarz', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['parent', 'coach'] },
   { label: 'Quiz', icon: 'CircleHelp', iconComponent: CircleHelp, to: '/parent/quiz', role: ['parent'] },
+  { label: 'Tabele', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['parent', 'coach'] },
   { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['parent'], hidden: true },
   { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
 ]
@@ -55,6 +56,8 @@ const adminNavItems: NavItemWithIcon[] = [
   { label: 'Zawodnicy', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
   { label: 'Mecze', icon: 'Calendar', iconComponent: Calendar, to: '/admin/games', role: ['admin'] },
   { label: 'Treningi', icon: 'Dumbbell', iconComponent: Dumbbell, to: '/admin/trainings', role: ['admin'] },
+  { label: 'Tabele ligowe', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['admin'] },
+  { label: 'Import tabel', icon: 'Trophy', iconComponent: Trophy, to: '/admin/standings', role: ['admin'] },
   { label: 'Trenerzy', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'], hidden: true },
   { label: 'Ustawienia', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'], hidden: true },
 ]
@@ -65,6 +68,7 @@ const coachNavItems: NavItemWithIcon[] = [
   { label: 'Zawodnicy', icon: 'Users', iconComponent: Users, to: '/coach/players', role: ['coach'] },
   { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
   { label: 'Kalendarz', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['coach'] },
+  { label: 'Tabele', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['coach'] },
   { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'], hidden: true },
 ]
 
@@ -116,6 +120,13 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
         <ClubLogo variant="full" />
       </div>
       <div class="flex items-center gap-2">
+        <NuxtLink
+          v-if="role === 'parent' || role === 'coach'"
+          to="/standings"
+          class="hidden min-h-11 items-center gap-2 rounded-full px-3 text-sm text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 lg:inline-flex"
+        >
+          <Trophy class="h-5 w-5" />Tabele ligowe
+        </NuxtLink>
         <NuxtLink
           v-if="role === 'parent'"
           to="/coach/calendar"
