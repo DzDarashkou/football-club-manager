@@ -29,9 +29,9 @@ export type Database = {
         Relationships: []
       }
       training_sessions: {
-        Row: { id: string, series_id: string, team_id: string, venue_id: string | null, scheduled_at: string, duration_minutes: number, status: string, notes: string | null, created_at: string, updated_at: string }
-        Insert: { id?: string, series_id: string, team_id: string, venue_id?: string | null, scheduled_at: string, duration_minutes: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
-        Update: { id?: string, series_id?: string, team_id?: string, venue_id?: string | null, scheduled_at?: string, duration_minutes?: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Row: { original_scheduled_at: string | null, id: string, series_id: string, team_id: string, venue_id: string | null, scheduled_at: string, duration_minutes: number, status: string, notes: string | null, created_at: string, updated_at: string }
+        Insert: { original_scheduled_at?: string | null, id?: string, series_id: string, team_id: string, venue_id?: string | null, scheduled_at: string, duration_minutes: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { original_scheduled_at?: string | null, id?: string, series_id?: string, team_id?: string, venue_id?: string | null, scheduled_at?: string, duration_minutes?: number, status?: string, notes?: string | null, created_at?: string, updated_at?: string }
         Relationships: []
       }
       weather_location_cache: {
@@ -89,9 +89,9 @@ export type Database = {
         Relationships: []
       }
       games: {
-        Row: { id: string, team_id: string, season_id: string, competition_id: string | null, venue_id: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday: number | null, round_label: string | null, status: string, home_score: number, away_score: number, notes: string | null, created_at: string, updated_at: string }
-        Insert: { id?: string, team_id: string, season_id: string, competition_id?: string | null, venue_id?: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
-        Update: { id?: string, team_id?: string, season_id?: string, competition_id?: string | null, venue_id?: string | null, opponent_name?: string, location_type?: string, scheduled_at?: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Row: { has_broadcast: boolean, broadcast_url: string | null, id: string, team_id: string, season_id: string, competition_id: string | null, venue_id: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday: number | null, round_label: string | null, status: string, home_score: number, away_score: number, notes: string | null, created_at: string, updated_at: string }
+        Insert: { has_broadcast?: boolean, broadcast_url?: string | null, id?: string, team_id: string, season_id: string, competition_id?: string | null, venue_id?: string | null, opponent_name: string, location_type: string, scheduled_at: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
+        Update: { has_broadcast?: boolean, broadcast_url?: string | null, id?: string, team_id?: string, season_id?: string, competition_id?: string | null, venue_id?: string | null, opponent_name?: string, location_type?: string, scheduled_at?: string, matchday?: number | null, round_label?: string | null, status?: string, home_score?: number, away_score?: number, notes?: string | null, created_at?: string, updated_at?: string }
         Relationships: []
       }
       age_groups: {

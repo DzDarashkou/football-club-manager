@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   if (!records?.length) return { player, games: [] }
 
   const gameIds = records.map((record) => record.game_id)
-  let gamesRequest = adminClient.from('games').select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes').in('id', gameIds).order('scheduled_at', { ascending: false })
+  let gamesRequest = adminClient.from('games').select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes').in('id', gameIds).order('scheduled_at', { ascending: false })
   if (allowedTeamIds) gamesRequest = gamesRequest.in('team_id', [...allowedTeamIds])
   const [{ data: gameRows, error: gamesError }, setup] = await Promise.all([gamesRequest, getGameSetup(adminClient)])
 

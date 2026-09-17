@@ -7,18 +7,20 @@ import { CalendarDays, ChevronLeft, ChevronRight, Dumbbell, MapPin } from 'lucid
 import type { CalendarOptions, DayCellContentArg, DayCellMountArg } from '@fullcalendar/core'
 import type { DateClickArg } from '@fullcalendar/interaction'
 import type { AdminGame, AdminTrainingSession } from '@@/types/admin-club'
+import { trainingDateToIso, warsawDateTime } from '@@/shared/utils/training-time'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({ allowedRoles: ['admin', 'coach', 'parent'] })
 
-const { month, time, dayDate, gameStatusLabel } = usePolishLocale()
-const today = new Date()
+const { month, dayDate, gameStatusLabel } = usePolishLocale()
+const today = new Date(`${warsawDateTime(new Date().toISOString()).slice(0, 10)}T12:00`)
 const currentMonth = ref(new Date(today.getFullYear(), today.getMonth(), 1))
 const selectedDate = ref(toDateKey(today))
 const gamesSection = ref<HTMLElement | null>(null)
 
 function toDateKey(value: Date | string) {
-  const date = typeof value === 'string' ? new Date(value) : value
+  if (typeof value === 'string') return warsawDateTime(value).slice(0, 10)
+  const date = value
   const parts = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(date)
   const part = (type: string) => parts.find((item) => item.type === type)?.value
   return `${part('year')}-${part('month')}-${part('day')}`
@@ -27,7 +29,7 @@ function toDateKey(value: Date | string) {
 const range = computed(() => {
   const start = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth(), 1)
   const end = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() + 1, 1)
-  return { startsAt: start.toISOString(), endsBefore: end.toISOString() }
+  return { startsAt: trainingDateToIso(`${toDateKey(start)}T00:00`), endsBefore: trainingDateToIso(`${toDateKey(end)}T00:00`) }
 })
 
 const { data, pending, error } = await useFetch<{ games: AdminGame[], trainings: AdminTrainingSession[] }>('/api/coach/calendar', {
@@ -101,7 +103,7 @@ async function selectDateAndShowGames(date: string) {
 }
 
 function formatTime(value: string) {
-  return time(value)
+  return new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' }).format(new Date(value))
 }
 
 function formatSelectedDate(value: string) {
@@ -139,9 +141,9 @@ function formatSelectedDate(value: string) {
         <div class="flex items-start gap-3"><CalendarDays class="mt-0.5 h-5 w-5 text-brand-700" /><div><h2>{{ formatSelectedDate(selectedDate) }}</h2><p class="mt-1 text-sm text-[color:var(--color-text-secondary)]">{{ selectedEvents.length ? `Zaplanowane wydarzenia: ${selectedEvents.length}` : 'Brak zaplanowanych wydarzeń' }}</p></div></div>
         <p v-if="!selectedEvents.length" class="rounded-lg bg-[var(--color-surface-sunken)] p-4 text-sm text-[color:var(--color-text-secondary)]">Wybierz inną datę w kalendarzu, aby zobaczyć wydarzenia.</p>
         <NuxtLink v-for="item in selectedEvents" :key="`${item.eventType}-${item.id}`" :to="item.eventType === 'game' ? `/coach/calendar/${item.id}` : `/coach/calendar/trainings/${item.id}`" class="flex min-h-11 flex-col gap-2 rounded-lg border border-border p-3 transition hover:bg-brand-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:flex-row sm:items-center sm:gap-3">
-          <div class="flex items-center gap-3 sm:contents">
+          <div class="flex flex-wrap items-center gap-3 sm:contents">
             <component :is="item.eventType === 'game' ? CalendarDays : Dumbbell" class="h-4 w-4 shrink-0 text-brand-700" /><p class="w-12 shrink-0 text-sm font-medium text-brand-700">{{ formatTime(item.scheduled_at) }}</p>
-            <Badge v-if="item.eventType === 'game'" class="ml-auto sm:order-4 sm:ml-0" :status="item.status === 'completed' ? 'confirmed' : item.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(item.status) }}</Badge><Badge v-else class="ml-auto sm:order-4 sm:ml-0" :status="item.status === 'scheduled' ? 'confirmed' : 'declined'">{{ item.status === 'scheduled' ? 'Trening' : 'Odwołany' }}</Badge>
+            <AppBroadcastLink v-if="item.eventType === 'game'" :game="item" indicator-only /><Badge v-if="item.eventType === 'game'" class="ml-auto sm:order-4 sm:ml-0" :status="item.status === 'completed' ? 'confirmed' : item.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(item.status) }}</Badge><TrainingsStatusBadge v-else :status="item.status" class="ml-auto sm:ml-0" />
           </div>
           <div class="min-w-0 sm:order-3 sm:flex-1"><p class="font-medium sm:truncate">{{ item.eventType === 'game' ? `${item.team.name} – ${item.opponent_name}` : `${item.team.name} · Trening` }}</p><p class="mt-0.5 flex items-center gap-1 truncate text-sm text-[color:var(--color-text-secondary)]"><MapPin class="h-3.5 w-3.5 shrink-0" />{{ item.venue?.name || 'Miejsce do potwierdzenia' }}</p></div>
         </NuxtLink>

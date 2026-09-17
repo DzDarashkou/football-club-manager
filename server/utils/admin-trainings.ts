@@ -28,7 +28,7 @@ export async function validateTrainingReferences(client: AdminClient, payload: T
 }
 
 export async function getTrainingSessions(client: AdminClient, startsAt?: string, endsBefore?: string): Promise<AdminTrainingSession[]> {
-  let query = client.from('training_sessions').select('id, series_id, team_id, venue_id, scheduled_at, duration_minutes, status, notes').order('scheduled_at')
+  let query = client.from('training_sessions').select('id, series_id, team_id, venue_id, scheduled_at, duration_minutes, original_scheduled_at, status, notes').order('scheduled_at')
   if (startsAt) query = query.gte('scheduled_at', startsAt)
   if (endsBefore) query = query.lt('scheduled_at', endsBefore)
   const [sessions, teams, venues] = await Promise.all([query, getTeams(client), client.from('venues').select('id, name, address, city, latitude, longitude')])
@@ -39,7 +39,7 @@ export async function getTrainingSessions(client: AdminClient, startsAt?: string
     const team = teamMap.get(session.team_id)
     if (!team) return []
     const venue = session.venue_id ? venueMap.get(session.venue_id) ?? null : null
-    return [{ ...session, status: session.status as 'scheduled' | 'cancelled', team: { id: team.id, name: team.name }, venue: venue ? venue as AdminVenue : null }]
+    return [{ ...session, status: session.status as 'scheduled' | 'moved' | 'cancelled', team: { id: team.id, name: team.name }, venue: venue ? venue as AdminVenue : null }]
   })
 }
 

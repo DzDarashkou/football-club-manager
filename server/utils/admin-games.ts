@@ -20,6 +20,8 @@ const coordinatesProvidedTogether = (value: { latitude?: number | null, longitud
 }
 export const venueSchema = venueFields.superRefine(coordinatesProvidedTogether)
 const gameFields = z.object({
+  has_broadcast: z.boolean().default(false),
+  broadcast_url: z.string().trim().max(2048, 'Link do transmisji może mieć maksymalnie 2048 znaków.').url('Podaj prawidłowy link do transmisji.').regex(/^https?:\/\//i, 'Link musi zaczynać się od http:// lub https://.').nullable().optional().default(null),
   team_id: id,
   season_id: id,
   competition_id: nullableId,
@@ -35,6 +37,7 @@ const gameFields = z.object({
   notes: z.string().trim().max(1000).nullable().optional().default(null),
 })
 export const gameSchema = gameFields.superRefine((value, context) => {
+  if (value.has_broadcast !== Boolean(value.broadcast_url)) context.addIssue({ code: 'custom', path: ['broadcast_url'], message: 'Włącz transmisję i podaj link lub wyłącz transmisję i usuń link.' })
   if (value.status === 'completed' && (value.home_score === null || value.away_score === null)) {
     context.addIssue({ code: 'custom', path: ['home_score'], message: 'Completed games require both scores.' })
   }
@@ -100,7 +103,7 @@ type GameListOptions = {
 export async function getGames(adminClient: AdminClient, options: GameListOptions = {}): Promise<AdminGame[]> {
   let gamesQuery = adminClient
     .from('games')
-    .select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes')
+    .select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes')
     .order('scheduled_at', { ascending: options.ascending ?? false })
 
   if (options.startsAt) gamesQuery = gamesQuery.gte('scheduled_at', options.startsAt)

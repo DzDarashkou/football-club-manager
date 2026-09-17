@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const payload = gameUpdateSchema.parse(await readBody(event)
   )
   try {
-    const current = await adminClient.from('games').select('team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, status, home_score, away_score, notes').eq('id', id).maybeSingle()
+    const current = await adminClient.from('games').select('team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes').eq('id', id).maybeSingle()
     if (current.error) handleApiError(current.error, 'Unable to load the game.', 400)
     if (!current.data) throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
     const complete = { ...current.data, ...payload }

@@ -168,7 +168,7 @@ async function resolveCoordinates(client: WeatherClient, city: string): Promise<
 async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Promise<MatchWeatherResult> {
   const kickoff = new Date(match.kickoff)
   const now = new Date()
-  if (match.status !== 'scheduled' || Number.isNaN(kickoff.getTime())) return { status: 'unavailable' }
+  if ((match.status !== 'scheduled' && !(match.cacheKind === 'training' && match.status === 'moved')) || Number.isNaN(kickoff.getTime())) return { status: 'unavailable' }
   if (kickoff.getTime() - now.getTime() > FORECAST_LIMIT_MS) return { status: 'forecast-not-available-yet' }
 
   const cacheQuery = match.cacheKind === 'training'
@@ -218,9 +218,10 @@ async function loadMatchWeather(client: WeatherClient, match: MatchLocation): Pr
 
 /** Coalesces concurrent requests for one match within a server instance. */
 export function getMatchWeather(client: WeatherClient, match: MatchLocation): Promise<MatchWeatherResult> {
-  const pending = pendingWeatherRequests.get(match.gameId)
+  const requestKey = `${match.cacheKind ?? 'game'}:${match.gameId}:${match.kickoff}:${match.status}`
+  const pending = pendingWeatherRequests.get(requestKey)
   if (pending) return pending
-  const request = loadMatchWeather(client, match).finally(() => pendingWeatherRequests.delete(match.gameId))
-  pendingWeatherRequests.set(match.gameId, request)
+  const request = loadMatchWeather(client, match).finally(() => pendingWeatherRequests.delete(requestKey))
+  pendingWeatherRequests.set(requestKey, request)
   return request
 }
