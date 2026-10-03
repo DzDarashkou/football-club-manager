@@ -12,7 +12,7 @@ import { usePolishLocale } from '@@/composables/usePolishLocale'
 
 definePageMeta({ allowedRoles: ['admin', 'coach', 'parent'] })
 
-const { month, dayDate, gameStatusLabel } = usePolishLocale()
+const { month, dayDate, gameStatusLabel, gameName } = usePolishLocale()
 const today = new Date(`${warsawDateTime(new Date().toISOString()).slice(0, 10)}T12:00`)
 const currentMonth = ref(new Date(today.getFullYear(), today.getMonth(), 1))
 const selectedDate = ref(toDateKey(today))
@@ -145,7 +145,7 @@ function formatSelectedDate(value: string) {
             <component :is="item.eventType === 'game' ? CalendarDays : Dumbbell" class="h-4 w-4 shrink-0 text-brand-700" /><p class="w-12 shrink-0 text-sm font-medium text-brand-700">{{ formatTime(item.scheduled_at) }}</p>
             <AppBroadcastLink v-if="item.eventType === 'game'" :game="item" indicator-only /><Badge v-if="item.eventType === 'game'" class="ml-auto sm:order-4 sm:ml-0" :status="item.status === 'completed' ? 'confirmed' : item.status === 'cancelled' ? 'declined' : 'pending'">{{ gameStatusLabel(item.status) }}</Badge><TrainingsStatusBadge v-else :status="item.status" class="ml-auto sm:ml-0" />
           </div>
-          <div class="min-w-0 sm:order-3 sm:flex-1"><p class="font-medium sm:truncate">{{ item.eventType === 'game' ? `${item.team.name} – ${item.opponent_name}` : `${item.team.name} · Trening` }}</p><p class="mt-0.5 flex items-center gap-1 truncate text-sm text-[color:var(--color-text-secondary)]"><MapPin class="h-3.5 w-3.5 shrink-0" />{{ item.venue?.name || 'Miejsce do potwierdzenia' }}</p></div>
+          <div class="min-w-0 sm:order-3 sm:flex-1"><p class="font-medium sm:truncate">{{ item.eventType === 'game' ? gameName(item.team.name, item.opponent_name, item.location_type) : `${item.team.name} · Trening` }}</p><p class="mt-0.5 flex items-center gap-1 truncate text-sm text-[color:var(--color-text-secondary)]"><MapPin class="h-3.5 w-3.5 shrink-0" />{{ item.venue?.name || 'Miejsce do potwierdzenia' }}</p></div>
         </NuxtLink>
       </Card>
     </div>
