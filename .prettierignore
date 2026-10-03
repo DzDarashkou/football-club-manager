@@ -1,0 +1,11 @@
+node_modules/
+.nuxt/
+.output/
+.nitro/
+.data/
+.cache/
+dist/
+coverage/
+package-lock.json
+.env
+.env.*

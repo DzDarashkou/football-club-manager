@@ -37,7 +37,11 @@ nuxtApp.hook('page:loading:end', () => {
     aria-label="Loading page"
     aria-busy="true"
   >
-    <img src="/images/logo-trans.png" alt="" class="route-loading-logo h-28 w-28 opacity-30 sm:h-36 sm:w-36" />
+    <img
+      src="/images/logo-trans.png"
+      alt=""
+      class="route-loading-logo h-28 w-28 opacity-30 sm:h-36 sm:w-36"
+    />
   </div>
   <NuxtLayout>
     <NuxtPage />
@@ -55,13 +59,22 @@ nuxtApp.hook('page:loading:end', () => {
       aria-label="Dismiss install prompt"
       @click="pwa?.cancelInstall()"
     >
-      <X class="h-4 w-4" aria-hidden="true" />
+      <X
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </button>
     <div class="flex items-start gap-3 pr-8">
-      <img src="/images/logo-trans.png" alt="" class="h-12 w-12 shrink-0" />
+      <img
+        src="/images/logo-trans.png"
+        alt=""
+        class="h-12 w-12 shrink-0"
+      />
       <div>
         <p class="font-medium text-foreground">Install Sporting Wroclaw</p>
-        <p class="mt-1 text-sm text-muted-foreground">Add the app to your home screen for quicker access.</p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Add the app to your home screen for quicker access.
+        </p>
       </div>
     </div>
     <button
@@ -69,7 +82,10 @@ nuxtApp.hook('page:loading:end', () => {
       class="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
       @click="installApp"
     >
-      <Download class="h-4 w-4" aria-hidden="true" />
+      <Download
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
       Install app
     </button>
   </aside>
@@ -86,17 +102,31 @@ nuxtApp.hook('page:loading:end', () => {
       aria-label="Dismiss install instructions"
       @click="isIosInstallGuideVisible = false"
     >
-      <X class="h-4 w-4" aria-hidden="true" />
+      <X
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </button>
     <div class="flex items-start gap-3 pr-8">
-      <img src="/images/logo-trans.png" alt="" class="h-12 w-12 shrink-0" />
+      <img
+        src="/images/logo-trans.png"
+        alt=""
+        class="h-12 w-12 shrink-0"
+      />
       <div>
         <p class="font-medium text-foreground">Install Sporting Wroclaw</p>
-        <p class="mt-1 text-sm text-muted-foreground">In Safari, tap Share, then choose “Add to Home Screen”.</p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          In Safari, tap Share, then choose “Add to Home Screen”.
+        </p>
       </div>
     </div>
-    <div class="mt-4 flex items-center gap-2 text-sm font-medium text-brand-800">
-      <Share class="h-4 w-4" aria-hidden="true" />
+    <div
+      class="mt-4 flex items-center gap-2 text-sm font-medium text-brand-800"
+    >
+      <Share
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
       Add to Home Screen
     </div>
   </aside>
@@ -104,10 +134,19 @@ nuxtApp.hook('page:loading:end', () => {
 
 <style>
 @keyframes route-loading-heartbeat {
-  0%, 100% { transform: scale(1); }
-  20% { transform: scale(1.12); }
-  40% { transform: scale(1); }
-  60% { transform: scale(1.06); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.12);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.06);
+  }
 }
 
 .route-loading-logo {
@@ -115,6 +154,8 @@ nuxtApp.hook('page:loading:end', () => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .route-loading-logo { animation: none; }
+  .route-loading-logo {
+    animation: none;
+  }
 }
 </style>

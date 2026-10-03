@@ -20,13 +20,11 @@ export default defineNuxtPlugin(() => {
       if (authStore.isAuthenticated && authStore.role) {
         await refreshNuxtData()
       }
-    }
-    catch {
+    } catch {
       // A phone can regain focus before it has reconnected. Keep the current
       // in-memory profile in that case; the normal auth-state handler remains
       // responsible for clearing it after an actual sign-out.
-    }
-    finally {
+    } finally {
       refreshInFlight = false
     }
   }

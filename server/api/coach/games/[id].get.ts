@@ -9,8 +9,16 @@ export default defineEventHandler(async (event) => {
   const { adminClient } = await requireCoachGame(event, gameId)
   const game = (await getGames(adminClient)).find((item) => item.id === gameId)
 
-  if (!game) throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
+  if (!game)
+    throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
 
-  const weather = await getMatchWeather(adminClient, { gameId: game.id, kickoff: game.scheduled_at, status: game.status, city: game.venue?.city ?? null, latitude: game.venue?.latitude ?? null, longitude: game.venue?.longitude ?? null })
+  const weather = await getMatchWeather(adminClient, {
+    gameId: game.id,
+    kickoff: game.scheduled_at,
+    status: game.status,
+    city: game.venue?.city ?? null,
+    latitude: game.venue?.latitude ?? null,
+    longitude: game.venue?.longitude ?? null,
+  })
   return { game, weather, weatherAttribution: openMeteoAttribution }
 })

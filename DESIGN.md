@@ -6,23 +6,23 @@ Mobile-first PWA design spec for Vue 3 + Tailwind CSS + shadcn-vue.
 
 Derived from the club crest (navy/royal blue badge with coral accent for actions).
 
-| Token | Hex | Usage |
-|---|---|---|
-| `--brand-900` | `#042C53` | Darkest navy, text on light blue fills |
+| Token         | Hex       | Usage                                           |
+| ------------- | --------- | ----------------------------------------------- |
+| `--brand-900` | `#042C53` | Darkest navy, text on light blue fills          |
 | `--brand-800` | `#0C447C` | Top bar / sidebar background, headings on light |
-| `--brand-700` | `#185FA5` | Primary buttons, active nav state |
-| `--brand-400` | `#378ADD` | Hover/links |
-| `--brand-200` | `#85B7EB` | Secondary text on navy (eyebrow labels) |
-| `--brand-100` | `#B5D4F4` | Borders on navy surfaces |
-| `--brand-50`  | `#E6F1FB` | Avatar fills, light badges |
+| `--brand-700` | `#185FA5` | Primary buttons, active nav state               |
+| `--brand-400` | `#378ADD` | Hover/links                                     |
+| `--brand-200` | `#85B7EB` | Secondary text on navy (eyebrow labels)         |
+| `--brand-100` | `#B5D4F4` | Borders on navy surfaces                        |
+| `--brand-50`  | `#E6F1FB` | Avatar fills, light badges                      |
 
 ### Status colors (availability / attendance)
 
-| State | Fill | Border/Text |
-|---|---|---|
-| Confirmed | `#97C459` (bg) | `#27500A` text / `#639922` ring |
-| Declined | `#F0997B` (bg) | `#4A1B0C` text / `#D85A30` ring |
-| Pending | `#FAC775` (bg) | `#412402` text / `#BA7517` ring |
+| State                 | Fill           | Border/Text                     |
+| --------------------- | -------------- | ------------------------------- |
+| Confirmed             | `#97C459` (bg) | `#27500A` text / `#639922` ring |
+| Declined              | `#F0997B` (bg) | `#4A1B0C` text / `#D85A30` ring |
+| Pending               | `#FAC775` (bg) | `#412402` text / `#BA7517` ring |
 | Neutral / no response | `#D3D1C7` (bg) | `#2C2C2A` text / `#B4B2A9` ring |
 
 ### Tailwind config snippet
@@ -44,9 +44,9 @@ module.exports = {
         },
         status: {
           confirmed: { bg: '#97C459', text: '#27500A', ring: '#639922' },
-          declined:  { bg: '#F0997B', text: '#4A1B0C', ring: '#D85A30' },
-          pending:   { bg: '#FAC775', text: '#412402', ring: '#BA7517' },
-          neutral:   { bg: '#D3D1C7', text: '#2C2C2A', ring: '#B4B2A9' },
+          declined: { bg: '#F0997B', text: '#4A1B0C', ring: '#D85A30' },
+          pending: { bg: '#FAC775', text: '#412402', ring: '#BA7517' },
+          neutral: { bg: '#D3D1C7', text: '#2C2C2A', ring: '#B4B2A9' },
         },
       },
     },
@@ -74,9 +74,7 @@ Used **only** in the top bar / sidebar header, echoing the crest's circular word
 <div class="text-[10px] tracking-[1.5px] font-medium text-brand-200 uppercase">
   Klub Sportowy
 </div>
-<div class="text-sm font-medium tracking-wide text-white">
-  Sporting Wrocław
-</div>
+<div class="text-sm font-medium tracking-wide text-white">Sporting Wrocław</div>
 ```
 
 ## 3. Layout structure
@@ -101,6 +99,7 @@ Used **only** in the top bar / sidebar header, echoing the crest's circular word
 ### 4.1 Match / game card (Parent dashboard)
 
 Structure:
+
 - Eyebrow: "Next match" (`text-brand-700`, 11px, uppercase, tracking)
 - Title: opponent name, 16px/500
 - Meta line: date · time · location, 13px secondary
@@ -112,11 +111,13 @@ Structure:
 ### 4.2 Squad availability strip (signature element)
 
 Horizontal scrollable row of circular avatar chips:
+
 - 42px circle, initials, 13px/500
 - 2px ring colored by status (confirmed/declined/pending/neutral — see status colors)
 - 11px name label below, centered
 
 This circular-chip motif is the app's signature, echoing the crest's circular badge design. Reuse it for:
+
 - Game attendance lists (coach view)
 - Player rosters
 - Team member avatars throughout
@@ -147,8 +148,10 @@ Active state: `bg-brand-700` rounded pill behind icon+label.
 ### 4.6 Status pill / badge
 
 ```html
-<span class="text-xs font-medium px-2.5 py-1 rounded-md
-  bg-status-confirmed-bg text-status-confirmed-text">
+<span
+  class="text-xs font-medium px-2.5 py-1 rounded-md
+  bg-status-confirmed-bg text-status-confirmed-text"
+>
   In
 </span>
 ```
@@ -157,35 +160,35 @@ Active state: `bg-brand-700` rounded pill behind icon+label.
 
 Use an outline icon set (e.g. Tabler Icons via `@tabler/icons-vue` or lucide-vue-next as substitute). Key icons:
 
-| Purpose | Icon |
-|---|---|
-| Club/shield | `shield-star` |
-| Home/dashboard | `home` / `layout-dashboard` |
-| Children/roster | `users` |
-| Games/match | `ball-football` |
-| Calendar | `calendar` |
-| Profile | `user-circle` |
-| Notifications | `bell` |
-| Confirm | `check` |
-| Decline | `x` |
-| Teams | `shirt-sport` |
-| Coaches | `whistle` |
-| Settings | `settings` |
-| Navigate | `chevron-right` |
+| Purpose         | Icon                        |
+| --------------- | --------------------------- |
+| Club/shield     | `shield-star`               |
+| Home/dashboard  | `home` / `layout-dashboard` |
+| Children/roster | `users`                     |
+| Games/match     | `ball-football`             |
+| Calendar        | `calendar`                  |
+| Profile         | `user-circle`               |
+| Notifications   | `bell`                      |
+| Confirm         | `check`                     |
+| Decline         | `x`                         |
+| Teams           | `shirt-sport`               |
+| Coaches         | `whistle`                   |
+| Settings        | `settings`                  |
+| Navigate        | `chevron-right`             |
 
 ## 6. Page-to-component map
 
-| Route | Key components |
-|---|---|
-| `/login`, `/forgot-password` | Centered card, crest logo top, form inputs, primary button |
-| `/dashboard` (parent) | Top bar, match card (4.1), availability strip (4.2), upcoming list (4.3), bottom tabs |
-| `/my-children` | List of child cards, each with avatar + team + quick stats |
-| `/games` | List of game cards (date block + title + meta + RSVP status) |
-| `/calendar` | Month/week grid, color-coded by event type (match/training) |
-| `/profile` | Account card (avatar, name, email/phone rows), edit form |
-| `/coach`, `/coach/games` | Game list → attendance screen (4.4) |
-| `/coach/teams`, `/coach/players` | Roster table/list using avatar + status pill pattern |
-| `/admin/*` | Sidebar shell (3), metric cards row, data tables (4.5/4.6 patterns) |
+| Route                            | Key components                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| `/login`, `/forgot-password`     | Centered card, crest logo top, form inputs, primary button                            |
+| `/dashboard` (parent)            | Top bar, match card (4.1), availability strip (4.2), upcoming list (4.3), bottom tabs |
+| `/my-children`                   | List of child cards, each with avatar + team + quick stats                            |
+| `/games`                         | List of game cards (date block + title + meta + RSVP status)                          |
+| `/calendar`                      | Month/week grid, color-coded by event type (match/training)                           |
+| `/profile`                       | Account card (avatar, name, email/phone rows), edit form                              |
+| `/coach`, `/coach/games`         | Game list → attendance screen (4.4)                                                   |
+| `/coach/teams`, `/coach/players` | Roster table/list using avatar + status pill pattern                                  |
+| `/admin/*`                       | Sidebar shell (3), metric cards row, data tables (4.5/4.6 patterns)                   |
 
 ## 7. PWA notes
 

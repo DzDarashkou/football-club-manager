@@ -35,18 +35,22 @@ const confirmPasswordError = computed(() => {
     : 'Hasła nie są takie same.'
 })
 
-const isFormValid = computed(() => !passwordError.value && !confirmPasswordError.value)
+const isFormValid = computed(
+  () => !passwordError.value && !confirmPasswordError.value,
+)
 
 if (session.value) {
   recoveryReady.value = true
 }
 
 if (import.meta.client) {
-  const { data: authSubscription } = client.auth.onAuthStateChange((event, currentSession) => {
-    if (event === 'PASSWORD_RECOVERY' || currentSession) {
-      recoveryReady.value = true
-    }
-  })
+  const { data: authSubscription } = client.auth.onAuthStateChange(
+    (event, currentSession) => {
+      if (event === 'PASSWORD_RECOVERY' || currentSession) {
+        recoveryReady.value = true
+      }
+    },
+  )
 
   onBeforeUnmount(() => {
     authSubscription.subscription.unsubscribe()
@@ -58,7 +62,8 @@ async function handleSubmit() {
   successMessage.value = null
 
   if (!recoveryReady.value) {
-    errorMessage.value = 'Ten link do odzyskania hasła nie jest już aktywny. Poproś o nowy.'
+    errorMessage.value =
+      'Ten link do odzyskania hasła nie jest już aktywny. Poproś o nowy.'
     return
   }
 
@@ -84,13 +89,12 @@ async function handleSubmit() {
     }
 
     await client.auth.signOut()
-    successMessage.value = 'Hasło zostało zmienione. Przekierowujemy do logowania...'
+    successMessage.value =
+      'Hasło zostało zmienione. Przekierowujemy do logowania...'
     await router.push('/login?reset=success')
-  }
-  catch {
+  } catch {
     errorMessage.value = 'Nie udało się teraz zmienić hasła.'
-  }
-  finally {
+  } finally {
     isSubmitting.value = false
   }
 }
@@ -106,7 +110,10 @@ async function handleSubmit() {
       </p>
     </div>
 
-    <form class="space-y-4" @submit.prevent="handleSubmit">
+    <form
+      class="space-y-4"
+      @submit.prevent="handleSubmit"
+    >
       <div class="space-y-2">
         <Label for="password">Nowe hasło</Label>
         <Input
@@ -118,7 +125,10 @@ async function handleSubmit() {
           minlength="8"
           required
         />
-        <p v-if="passwordError" class="text-label text-[var(--status-declined-text)]">
+        <p
+          v-if="passwordError"
+          class="text-label text-[var(--status-declined-text)]"
+        >
           {{ passwordError }}
         </p>
       </div>
@@ -132,21 +142,37 @@ async function handleSubmit() {
           placeholder="Powtórz hasło"
           required
         />
-        <p v-if="confirmPasswordError" class="text-label text-[var(--status-declined-text)]">
+        <p
+          v-if="confirmPasswordError"
+          class="text-label text-[var(--status-declined-text)]"
+        >
           {{ confirmPasswordError }}
         </p>
       </div>
-      <p v-if="successMessage" class="text-label text-[var(--status-confirmed-text)]">
+      <p
+        v-if="successMessage"
+        class="text-label text-[var(--status-confirmed-text)]"
+      >
         {{ successMessage }}
       </p>
-      <p v-if="errorMessage" class="text-label text-[var(--status-declined-text)]">
+      <p
+        v-if="errorMessage"
+        class="text-label text-[var(--status-declined-text)]"
+      >
         {{ errorMessage }}
       </p>
-      <Button class="w-full" type="submit" :disabled="isSubmitting || !isFormValid">
+      <Button
+        class="w-full"
+        type="submit"
+        :disabled="isSubmitting || !isFormValid"
+      >
         {{ isSubmitting ? 'Zapisywanie...' : 'Zmień hasło' }}
       </Button>
-      <p class="text-center text-label text-[color:var(--color-text-secondary)]">
-        Jeśli ten link wygasł, poproś o nową wiadomość odzyskiwania na ekranie logowania.
+      <p
+        class="text-center text-label text-[color:var(--color-text-secondary)]"
+      >
+        Jeśli ten link wygasł, poproś o nową wiadomość odzyskiwania na ekranie
+        logowania.
       </p>
     </form>
   </div>

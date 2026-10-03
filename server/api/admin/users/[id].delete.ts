@@ -10,7 +10,11 @@ export default defineEventHandler(async (event) => {
   const userId = adminUserIdSchema.parse(event.context.params?.id)
 
   if (userId === actorId) {
-    handleApiError(new Error('Administrators cannot delete their own account.'), 'Unable to delete the user.', 403)
+    handleApiError(
+      new Error('Administrators cannot delete their own account.'),
+      'Unable to delete the user.',
+      403,
+    )
   }
 
   try {
@@ -25,8 +29,7 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
     }
-  }
-  catch (error) {
+  } catch (error) {
     handleApiError(error, 'Unable to delete the user.', 400)
   }
 })

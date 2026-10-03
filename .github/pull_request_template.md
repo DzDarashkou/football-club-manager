@@ -26,9 +26,9 @@ Issue:
 
 Describe the implementation.
 
-- 
-- 
-- 
+-
+-
+-
 
 ---
 

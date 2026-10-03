@@ -28,6 +28,14 @@ yarn install
 bun install
 ```
 
+## Formatting
+
+Run `npm run format` to format the project, or `npm run format:check` to check
+formatting without changing files.
+
+In VS Code, install the recommended **Prettier - Code formatter** extension to
+enable the workspace's format-on-save settings.
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:

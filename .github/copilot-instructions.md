@@ -6,18 +6,18 @@ Football Club Manager is a Progressive Web Application (PWA) for managing a yout
 
 Primary users:
 
-* Admin
-* Coach
-* Parent
+- Admin
+- Coach
+- Parent
 
 The application is designed for mobile-first usage and should work efficiently on phones, tablets, and desktops.
 
 Typical usage scenarios:
 
-* Coach creates games and manages attendance.
-* Parents confirm player availability.
-* Admin manages club structure.
-* Users view upcoming matches and schedules.
+- Coach creates games and manages attendance.
+- Parents confirm player availability.
+- Admin manages club structure.
+- Users view upcoming matches and schedules.
 
 The application must remain simple, fast, secure, and maintainable.
 
@@ -27,25 +27,25 @@ The application must remain simple, fast, secure, and maintainable.
 
 ## Frontend
 
-* Nuxt 4
-* Vue 3
-* TypeScript
-* Tailwind CSS
-* shadcn-vue
-* Pinia
-* VueUse
+- Nuxt 4
+- Vue 3
+- TypeScript
+- Tailwind CSS
+- shadcn-vue
+- Pinia
+- VueUse
 
 ## Backend
 
-* Supabase
-* PostgreSQL
-* Supabase Auth
-* Supabase Storage
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Supabase Storage
 
 ## Infrastructure
 
-* Vercel
-* Vite PWA
+- Vercel
+- Vite PWA
 
 ---
 
@@ -53,19 +53,19 @@ The application must remain simple, fast, secure, and maintainable.
 
 Always prefer:
 
-* Simplicity
-* Readability
-* Maintainability
-* Strong typing
-* Reusability
+- Simplicity
+- Readability
+- Maintainability
+- Strong typing
+- Reusability
 
 Avoid:
 
-* Premature optimization
-* Unnecessary abstractions
-* Overengineering
-* Deep inheritance chains
-* Large monolithic components
+- Premature optimization
+- Unnecessary abstractions
+- Overengineering
+- Deep inheritance chains
+- Large monolithic components
 
 ---
 
@@ -73,13 +73,13 @@ Avoid:
 
 The project should:
 
-* Be mobile-first
-* Be installable as a PWA
-* Support multiple age groups
-* Support multiple teams
-* Support multiple coaches
-* Support parent communication
-* Scale to additional teams without redesign
+- Be mobile-first
+- Be installable as a PWA
+- Support multiple age groups
+- Support multiple teams
+- Support multiple coaches
+- Support parent communication
+- Scale to additional teams without redesign
 
 ---
 
@@ -89,9 +89,9 @@ The project should:
 
 Examples:
 
-* Orlik (2015-2016)
-* Żak (2017-2018)
-* Skrzat (2019-2020)
+- Orlik (2015-2016)
+- Żak (2017-2018)
+- Skrzat (2019-2020)
 
 Each age group can contain multiple teams.
 
@@ -101,8 +101,8 @@ Each age group can contain multiple teams.
 
 Examples:
 
-* Sporting Wroclaw A
-* Sporting Wroclaw B
+- Sporting Wroclaw A
+- Sporting Wroclaw B
 
 Each team belongs to one age group.
 
@@ -112,9 +112,9 @@ Each team belongs to one age group.
 
 A player:
 
-* can be assigned to one or more teams
-* has one or more parents
-* participates in games
+- can be assigned to one or more teams
+- has one or more parents
+- participates in games
 
 ---
 
@@ -122,10 +122,10 @@ A player:
 
 A parent:
 
-* owns one user account
-* may manage multiple children
-* can confirm attendance
-* can add attendance notes
+- owns one user account
+- may manage multiple children
+- can confirm attendance
+- can add attendance notes
 
 ---
 
@@ -133,10 +133,10 @@ A parent:
 
 A coach:
 
-* manages assigned teams
-* creates games
-* manages attendance
-* views player information
+- manages assigned teams
+- creates games
+- manages attendance
+- views player information
 
 ---
 
@@ -144,11 +144,11 @@ A coach:
 
 An admin:
 
-* manages all data
-* manages users
-* manages teams
-* manages coaches
-* manages age groups
+- manages all data
+- manages users
+- manages teams
+- manages coaches
+- manages age groups
 
 ---
 
@@ -166,8 +166,8 @@ Never hardcode role checks in UI only.
 
 All authorization must be enforced through:
 
-* Supabase RLS
-* Server-side validation
+- Supabase RLS
+- Server-side validation
 
 ---
 
@@ -270,10 +270,10 @@ forgot-password
 
 Components should:
 
-* have a single responsibility
-* remain small
-* be reusable
-* be typed
+- have a single responsibility
+- remain small
+- be reusable
+- be typed
 
 If a component exceeds approximately 250 lines, consider splitting it.
 
@@ -281,9 +281,9 @@ Avoid business logic inside UI components.
 
 Move business logic into:
 
-* composables
-* services
-* server functions
+- composables
+- services
+- server functions
 
 ---
 
@@ -335,9 +335,9 @@ Attendance.ts
 
 Always:
 
-* use strict mode
-* use explicit interfaces
-* use typed return values
+- use strict mode
+- use explicit interfaces
+- use typed return values
 
 Avoid:
 
@@ -359,14 +359,14 @@ with proper narrowing.
 
 Use:
 
-* VeeValidate
-* Zod
+- VeeValidate
+- Zod
 
 Requirements:
 
-* client validation
-* server validation
-* user-friendly messages
+- client validation
+- server validation
+- user-friendly messages
 
 Never trust client validation alone.
 
@@ -378,9 +378,9 @@ Use Pinia.
 
 Global state should only contain:
 
-* authenticated user
-* permissions
-* cached application state
+- authenticated user
+- permissions
+- cached application state
 
 Avoid storing form state globally.
 
@@ -390,14 +390,14 @@ Avoid storing form state globally.
 
 Prefer:
 
-* server-side loading
-* composables
-* Supabase queries
+- server-side loading
+- composables
+- Supabase queries
 
 Avoid:
 
-* duplicate requests
-* fetching inside deeply nested components
+- duplicate requests
+- fetching inside deeply nested components
 
 ---
 
@@ -405,13 +405,13 @@ Avoid:
 
 Use:
 
-* Tailwind utilities
-* shadcn-vue components
+- Tailwind utilities
+- shadcn-vue components
 
 Avoid:
 
-* inline styles
-* custom CSS when utility classes are sufficient
+- inline styles
+- custom CSS when utility classes are sufficient
 
 ---
 
@@ -419,16 +419,16 @@ Avoid:
 
 Every feature must be usable on:
 
-* Android phones
-* iPhones
-* tablets
+- Android phones
+- iPhones
+- tablets
 
 Important:
 
-* large buttons
-* large touch targets
-* responsive tables
-* readable outdoors
+- large buttons
+- large touch targets
+- responsive tables
+- readable outdoors
 
 Never design desktop-first.
 
@@ -438,10 +438,10 @@ Never design desktop-first.
 
 Always:
 
-* use semantic HTML
-* provide labels
-* provide keyboard navigation
-* provide ARIA attributes where needed
+- use semantic HTML
+- provide labels
+- provide keyboard navigation
+- provide ARIA attributes where needed
 
 The application should be usable by non-technical users.
 
@@ -451,16 +451,16 @@ The application should be usable by non-technical users.
 
 Never:
 
-* expose service role keys
-* expose secrets
-* bypass RLS
-* trust client-side authorization
+- expose service role keys
+- expose secrets
+- bypass RLS
+- trust client-side authorization
 
 Always:
 
-* validate input
-* sanitize user content
-* enforce permissions server-side
+- validate input
+- sanitize user content
+- enforce permissions server-side
 
 Security is more important than convenience.
 
@@ -470,16 +470,16 @@ Security is more important than convenience.
 
 Prefer:
 
-* lazy loading
-* code splitting
-* pagination
-* optimized queries
+- lazy loading
+- code splitting
+- pagination
+- optimized queries
 
 Avoid:
 
-* loading entire tables
-* unnecessary watchers
-* unnecessary reactive state
+- loading entire tables
+- unnecessary watchers
+- unnecessary reactive state
 
 ---
 
@@ -509,10 +509,10 @@ only when required.
 
 Every async operation must handle:
 
-* loading state
-* success state
-* error state
-* empty state
+- loading state
+- success state
+- error state
+- empty state
 
 Never ignore exceptions.
 
@@ -524,11 +524,11 @@ Critical features should be testable.
 
 Priority areas:
 
-* authentication
-* authorization
-* attendance
-* game creation
-* role restrictions
+- authentication
+- authorization
+- attendance
+- game creation
+- role restrictions
 
 ---
 
@@ -536,10 +536,10 @@ Priority areas:
 
 The application must:
 
-* be installable
-* support offline caching where possible
-* have a valid manifest
-* support Android home screen installation
+- be installable
+- support offline caching where possible
+- have a valid manifest
+- support Android home screen installation
 
 The PWA experience is a first-class feature.
 
@@ -549,16 +549,16 @@ The PWA experience is a first-class feature.
 
 Planned future functionality:
 
-* push notifications
-* multilingual support
-* training attendance
-* player statistics
-* player evaluations
-* match reports
-* AI-generated summaries
-* tournament management
-* payments
-* document uploads
+- push notifications
+- multilingual support
+- training attendance
+- player statistics
+- player evaluations
+- match reports
+- AI-generated summaries
+- tournament management
+- payments
+- document uploads
 
 Design code with future expansion in mind, but do not overengineer current solutions.
 
@@ -581,10 +581,10 @@ When generating code:
 
 Before suggesting implementation:
 
-* verify type safety
-* verify permissions
-* verify responsive behavior
-* verify error handling
-* verify maintainability
+- verify type safety
+- verify permissions
+- verify responsive behavior
+- verify error handling
+- verify maintainability
 
 If multiple solutions exist, prefer the simplest solution that satisfies requirements.

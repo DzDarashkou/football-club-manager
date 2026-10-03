@@ -6,32 +6,58 @@ import type { AdminManagedUser, ManagedAppRole } from '@@/types/admin-users'
 import type { AppUserStatus } from '@@/types/auth'
 import type { Database } from '@@/types/database'
 
-const MANAGED_ROLES = ['coach', 'parent'] as const satisfies readonly ManagedAppRole[]
-const USER_STATUSES = ['active', 'inactive'] as const satisfies readonly AppUserStatus[]
+const MANAGED_ROLES = [
+  'coach',
+  'parent',
+] as const satisfies readonly ManagedAppRole[]
+const USER_STATUSES = [
+  'active',
+  'inactive',
+] as const satisfies readonly AppUserStatus[]
 
 const managedRoleSchema = z.enum(MANAGED_ROLES)
 const userStatusSchema = z.enum(USER_STATUSES)
 
 export const adminUserCreateSchema = z.object({
   email: z.email().transform((value) => value.trim().toLowerCase()),
-  full_name: z.string().trim().min(1, 'Full name is required.').max(120, 'Full name is too long.'),
+  full_name: z
+    .string()
+    .trim()
+    .min(1, 'Full name is required.')
+    .max(120, 'Full name is too long.'),
   role: managedRoleSchema,
   status: userStatusSchema.default('active'),
 })
 
-export const adminUserUpdateSchema = z.object({
-  email: z.email().transform((value) => value.trim().toLowerCase()).optional(),
-  full_name: z.string().trim().min(1, 'Full name is required.').max(120, 'Full name is too long.').optional(),
-  role: managedRoleSchema.optional(),
-  status: userStatusSchema.optional(),
-}).refine((value) => Object.keys(value).length > 0, {
-  message: 'At least one field must be updated.',
-})
+export const adminUserUpdateSchema = z
+  .object({
+    email: z
+      .email()
+      .transform((value) => value.trim().toLowerCase())
+      .optional(),
+    full_name: z
+      .string()
+      .trim()
+      .min(1, 'Full name is required.')
+      .max(120, 'Full name is too long.')
+      .optional(),
+    role: managedRoleSchema.optional(),
+    status: userStatusSchema.optional(),
+  })
+  .refine((value) => Object.keys(value).length > 0, {
+    message: 'At least one field must be updated.',
+  })
 
 export const adminUserListQuerySchema = z.object({
   q: z.string().trim().max(120).optional().default(''),
-  role: z.union([managedRoleSchema, z.literal('all')]).optional().default('all'),
-  status: z.union([userStatusSchema, z.literal('all')]).optional().default('all'),
+  role: z
+    .union([managedRoleSchema, z.literal('all')])
+    .optional()
+    .default('all'),
+  status: z
+    .union([userStatusSchema, z.literal('all')])
+    .optional()
+    .default('all'),
 })
 
 export const adminUserIdSchema = z.uuid('User id must be a valid UUID.')
@@ -39,7 +65,11 @@ export const adminUserIdSchema = z.uuid('User id must be a valid UUID.')
 type ProfileRow = Database['public']['Tables']['profiles']['Row']
 
 function mapProfileRow(row: ProfileRow): AdminManagedUser {
-  if (!isAppRole(row.role) || row.role === 'admin' || !isAppUserStatus(row.status)) {
+  if (
+    !isAppRole(row.role) ||
+    row.role === 'admin' ||
+    !isAppUserStatus(row.status)
+  ) {
     throw createError({
       statusCode: 500,
       statusMessage: 'Unexpected user record shape.',
@@ -57,17 +87,22 @@ function mapProfileRow(row: ProfileRow): AdminManagedUser {
   }
 }
 
-function toApiError(error: unknown, fallbackMessage: string, fallbackStatusCode = 500): never {
+function toApiError(
+  error: unknown,
+  fallbackMessage: string,
+  fallbackStatusCode = 500,
+): never {
   if (typeof error === 'object' && error !== null && 'statusCode' in error) {
     throw error
   }
 
-  const details = error as { code?: string, message?: string } | null
+  const details = error as { code?: string; message?: string } | null
   const message = details?.message || fallbackMessage
   const duplicateErrorCodes = new Set(['23505', 'email_exists'])
-  const statusCode = details?.code && duplicateErrorCodes.has(details.code)
-    ? 409
-    : fallbackStatusCode
+  const statusCode =
+    details?.code && duplicateErrorCodes.has(details.code)
+      ? 409
+      : fallbackStatusCode
 
   throw createError({
     statusCode,
@@ -75,7 +110,9 @@ function toApiError(error: unknown, fallbackMessage: string, fallbackStatusCode 
   })
 }
 
-export async function requireAdminAccess(event: Parameters<typeof serverSupabaseUser>[0]) {
+export async function requireAdminAccess(
+  event: Parameters<typeof serverSupabaseUser>[0],
+) {
   const authUser = await serverSupabaseUser(event)
   const authUserId = extractUserId(authUser)
 
@@ -139,8 +176,13 @@ export async function sendSetupEmail(
   adminClient: ReturnType<typeof serverSupabaseServiceRole<Database>>,
   email: string,
 ) {
-  const redirectTo = new URL('/update-password', getRequestURL(event).origin).toString()
-  const { error } = await adminClient.auth.resetPasswordForEmail(email, { redirectTo })
+  const redirectTo = new URL(
+    '/update-password',
+    getRequestURL(event).origin,
+  ).toString()
+  const { error } = await adminClient.auth.resetPasswordForEmail(email, {
+    redirectTo,
+  })
 
   if (error) {
     return {
@@ -155,7 +197,11 @@ export async function sendSetupEmail(
   }
 }
 
-export function handleApiError(error: unknown, fallbackMessage: string, fallbackStatusCode = 500): never {
+export function handleApiError(
+  error: unknown,
+  fallbackMessage: string,
+  fallbackStatusCode = 500,
+): never {
   throw toApiError(error, fallbackMessage, fallbackStatusCode)
 }
 

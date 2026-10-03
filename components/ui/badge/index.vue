@@ -41,11 +41,11 @@ const statusClasses: Record<StatusKey, string> = {
   neutral: 'badge-base badge-neutral',
 }
 
-const classes = computed(() => (
+const classes = computed(() =>
   props.status
     ? cn(statusClasses[props.status], props.class)
-    : cn(badgeVariants({ variant: props.variant }), props.class)
-))
+    : cn(badgeVariants({ variant: props.variant }), props.class),
+)
 </script>
 
 <template>

@@ -9,11 +9,19 @@ interface LabelProps {
 }
 
 const props = defineProps<LabelProps>()
-const classes = computed(() => cn('text-label font-medium text-[color:var(--color-text-primary)]', props.class))
+const classes = computed(() =>
+  cn(
+    'text-label font-medium text-[color:var(--color-text-primary)]',
+    props.class,
+  ),
+)
 </script>
 
 <template>
-  <label :for="props.for" :class="classes">
+  <label
+    :for="props.for"
+    :class="classes"
+  >
     <slot />
   </label>
 </template>

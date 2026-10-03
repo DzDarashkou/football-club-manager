@@ -3,43 +3,114 @@ import { serverSupabaseServiceRole } from '#supabase/server'
 import { z } from 'zod'
 import { handleApiError } from '@@/server/utils/admin-users'
 import { getTeams } from '@@/server/utils/admin-club'
-import type { AdminCompetition, AdminGame, AdminGameSetupResponse, AdminSeason, AdminVenue, CompetitionType, GameLocationType, GameStatus } from '@@/types/admin-club'
+import type {
+  AdminCompetition,
+  AdminGame,
+  AdminGameSetupResponse,
+  AdminSeason,
+  AdminVenue,
+  CompetitionType,
+  GameLocationType,
+  GameStatus,
+} from '@@/types/admin-club'
 import type { Database } from '@@/types/database'
 
 type AdminClient = ReturnType<typeof serverSupabaseServiceRole<Database>>
 const name = z.string().trim().min(2).max(120)
 const id = z.uuid('A valid record id is required.')
 const nullableId = z.union([id, z.null()]).optional().default(null)
-const seasonFields = z.object({ name, starts_on: z.iso.date(), ends_on: z.iso.date() })
-export const seasonSchema = seasonFields.refine((value) => value.ends_on >= value.starts_on, { path: ['ends_on'], message: 'Season end date must be after its start date.' })
-export const competitionSchema = z.object({ season_id: id, name, type: z.enum(['league', 'cup', 'friendly', 'tournament']) })
+const seasonFields = z.object({
+  name,
+  starts_on: z.iso.date(),
+  ends_on: z.iso.date(),
+})
+export const seasonSchema = seasonFields.refine(
+  (value) => value.ends_on >= value.starts_on,
+  {
+    path: ['ends_on'],
+    message: 'Season end date must be after its start date.',
+  },
+)
+export const competitionSchema = z.object({
+  season_id: id,
+  name,
+  type: z.enum(['league', 'cup', 'friendly', 'tournament']),
+})
 const coordinate = z.coerce.number().finite()
-const venueFields = z.object({ name, address: z.string().trim().max(200).nullable().optional().default(null), city: z.string().trim().max(80).nullable().optional().default(null), latitude: coordinate.min(-90).max(90).nullable().optional().default(null), longitude: coordinate.min(-180).max(180).nullable().optional().default(null) })
-const coordinatesProvidedTogether = (value: { latitude?: number | null, longitude?: number | null }, context: z.RefinementCtx) => {
-  if ((value.latitude === null) !== (value.longitude === null)) context.addIssue({ code: 'custom', path: ['latitude'], message: 'Latitude and longitude must be provided together.' })
+const venueFields = z.object({
+  name,
+  address: z.string().trim().max(200).nullable().optional().default(null),
+  city: z.string().trim().max(80).nullable().optional().default(null),
+  latitude: coordinate.min(-90).max(90).nullable().optional().default(null),
+  longitude: coordinate.min(-180).max(180).nullable().optional().default(null),
+})
+const coordinatesProvidedTogether = (
+  value: { latitude?: number | null; longitude?: number | null },
+  context: z.RefinementCtx,
+) => {
+  if ((value.latitude === null) !== (value.longitude === null))
+    context.addIssue({
+      code: 'custom',
+      path: ['latitude'],
+      message: 'Latitude and longitude must be provided together.',
+    })
 }
 export const venueSchema = venueFields.superRefine(coordinatesProvidedTogether)
 const gameFields = z.object({
   has_broadcast: z.boolean().default(false),
-  broadcast_url: z.string().trim().max(2048, 'Link do transmisji może mieć maksymalnie 2048 znaków.').url('Podaj prawidłowy link do transmisji.').regex(/^https?:\/\//i, 'Link musi zaczynać się od http:// lub https://.').nullable().optional().default(null),
+  broadcast_url: z
+    .string()
+    .trim()
+    .max(2048, 'Link do transmisji może mieć maksymalnie 2048 znaków.')
+    .url('Podaj prawidłowy link do transmisji.')
+    .regex(/^https?:\/\//i, 'Link musi zaczynać się od http:// lub https://.')
+    .nullable()
+    .optional()
+    .default(null),
   team_id: id,
   season_id: id,
   competition_id: nullableId,
   venue_id: nullableId,
   opponent_name: name,
   location_type: z.enum(['home', 'away', 'neutral']),
-  scheduled_at: z.string().refine((value) => !Number.isNaN(Date.parse(value)), 'A valid kickoff date and time is required.'),
-  matchday: z.coerce.number().int().positive().nullable().optional().default(null),
+  scheduled_at: z
+    .string()
+    .refine(
+      (value) => !Number.isNaN(Date.parse(value)),
+      'A valid kickoff date and time is required.',
+    ),
+  matchday: z.coerce
+    .number()
+    .int()
+    .positive()
+    .nullable()
+    .optional()
+    .default(null),
   round_label: z.string().trim().max(80).nullable().optional().default(null),
-  status: z.enum(['draft', 'scheduled', 'completed', 'postponed', 'cancelled']).default('scheduled'),
+  status: z
+    .enum(['draft', 'scheduled', 'completed', 'postponed', 'cancelled'])
+    .default('scheduled'),
   home_score: z.coerce.number().int().min(0).optional().default(0),
   away_score: z.coerce.number().int().min(0).optional().default(0),
   notes: z.string().trim().max(1000).nullable().optional().default(null),
 })
 export const gameSchema = gameFields.superRefine((value, context) => {
-  if (value.has_broadcast !== Boolean(value.broadcast_url)) context.addIssue({ code: 'custom', path: ['broadcast_url'], message: 'Włącz transmisję i podaj link lub wyłącz transmisję i usuń link.' })
-  if (value.status === 'completed' && (value.home_score === null || value.away_score === null)) {
-    context.addIssue({ code: 'custom', path: ['home_score'], message: 'Completed games require both scores.' })
+  if (value.has_broadcast !== Boolean(value.broadcast_url))
+    context.addIssue({
+      code: 'custom',
+      path: ['broadcast_url'],
+      message:
+        'Włącz transmisję i podaj link lub wyłącz transmisję i usuń link.',
+    })
+  if (
+    value.status === 'completed' &&
+    (value.home_score === null || value.away_score === null)
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['home_score'],
+      message: 'Completed games require both scores.',
+    })
   }
 })
 
@@ -49,11 +120,21 @@ function updateSchema<T extends z.ZodObject<z.ZodRawShape>>(schema: T) {
   })
 }
 
-export const seasonUpdateSchema = updateSchema(seasonFields).refine((value) => !value.starts_on || !value.ends_on || value.ends_on >= value.starts_on, {
-  path: ['ends_on'], message: 'Season end date must be after its start date.',
-})
+export const seasonUpdateSchema = updateSchema(seasonFields).refine(
+  (value) =>
+    !value.starts_on || !value.ends_on || value.ends_on >= value.starts_on,
+  {
+    path: ['ends_on'],
+    message: 'Season end date must be after its start date.',
+  },
+)
 export const competitionUpdateSchema = updateSchema(competitionSchema)
-export const venueUpdateSchema = venueFields.partial().refine((value) => Object.keys(value).length > 0, { message: 'At least one field must be updated.' }).superRefine(coordinatesProvidedTogether)
+export const venueUpdateSchema = venueFields
+  .partial()
+  .refine((value) => Object.keys(value).length > 0, {
+    message: 'At least one field must be updated.',
+  })
+  .superRefine(coordinatesProvidedTogether)
 export const gameUpdateSchema = updateSchema(gameFields)
 
 export const gameResultSchema = z.object({
@@ -62,33 +143,96 @@ export const gameResultSchema = z.object({
   status: z.literal('completed'),
 })
 
-function fail(error: unknown, message: string): never { handleApiError(error, message, 400) }
+function fail(error: unknown, message: string): never {
+  handleApiError(error, message, 400)
+}
 
-export async function getGameSetup(adminClient: AdminClient): Promise<AdminGameSetupResponse> {
-  const [seasonResult, competitionResult, venueResult, teams] = await Promise.all([
-    adminClient.from('seasons').select('id, name, starts_on, ends_on, is_active').order('starts_on', { ascending: false }),
-    adminClient.from('competitions').select('id, season_id, name, type, is_active').order('name'),
-    adminClient.from('venues').select('id, name, address, city, latitude, longitude, is_active').order('name'),
-    getTeams(adminClient),
-  ])
+export async function getGameSetup(
+  adminClient: AdminClient,
+): Promise<AdminGameSetupResponse> {
+  const [seasonResult, competitionResult, venueResult, teams] =
+    await Promise.all([
+      adminClient
+        .from('seasons')
+        .select('id, name, starts_on, ends_on, is_active')
+        .order('starts_on', { ascending: false }),
+      adminClient
+        .from('competitions')
+        .select('id, season_id, name, type, is_active')
+        .order('name'),
+      adminClient
+        .from('venues')
+        .select('id, name, address, city, latitude, longitude, is_active')
+        .order('name'),
+      getTeams(adminClient),
+    ])
   if (seasonResult.error) fail(seasonResult.error, 'Unable to load seasons.')
-  if (competitionResult.error) fail(competitionResult.error, 'Unable to load competitions.')
+  if (competitionResult.error)
+    fail(competitionResult.error, 'Unable to load competitions.')
   if (venueResult.error) fail(venueResult.error, 'Unable to load venues.')
   const seasons = seasonResult.data ?? []
   const seasonById = new Map(seasons.map((season) => [season.id, season]))
-  const competitions: AdminCompetition[] = (competitionResult.data ?? []).flatMap((competition) => {
+  const competitions: AdminCompetition[] = (
+    competitionResult.data ?? []
+  ).flatMap((competition) => {
     const season = seasonById.get(competition.season_id)
-    return season ? [{ ...competition, type: competition.type as CompetitionType, season: { id: season.id, name: season.name } }] : []
+    return season
+      ? [
+          {
+            ...competition,
+            type: competition.type as CompetitionType,
+            season: { id: season.id, name: season.name },
+          },
+        ]
+      : []
   })
   return { seasons, competitions, venues: venueResult.data ?? [], teams }
 }
 
-export async function validateGameReferences(adminClient: AdminClient, payload: z.infer<typeof gameSchema>) {
+export async function validateGameReferences(
+  adminClient: AdminClient,
+  payload: z.infer<typeof gameSchema>,
+) {
   const setup = await getGameSetup(adminClient)
-  if (!setup.teams.some((team) => team.id === payload.team_id && team.is_active)) throw createError({ statusCode: 400, statusMessage: 'Select an active team.' })
-  if (!setup.seasons.some((season) => season.id === payload.season_id && season.is_active)) throw createError({ statusCode: 400, statusMessage: 'Select an active season.' })
-  if (payload.competition_id && !setup.competitions.some((competition) => competition.id === payload.competition_id && competition.is_active && competition.season_id === payload.season_id)) throw createError({ statusCode: 400, statusMessage: 'Select an active competition from the selected season.' })
-  if (payload.venue_id && !setup.venues.some((venue) => venue.id === payload.venue_id && venue.is_active)) throw createError({ statusCode: 400, statusMessage: 'Select an active venue.' })
+  if (
+    !setup.teams.some((team) => team.id === payload.team_id && team.is_active)
+  )
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Select an active team.',
+    })
+  if (
+    !setup.seasons.some(
+      (season) => season.id === payload.season_id && season.is_active,
+    )
+  )
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Select an active season.',
+    })
+  if (
+    payload.competition_id &&
+    !setup.competitions.some(
+      (competition) =>
+        competition.id === payload.competition_id &&
+        competition.is_active &&
+        competition.season_id === payload.season_id,
+    )
+  )
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Select an active competition from the selected season.',
+    })
+  if (
+    payload.venue_id &&
+    !setup.venues.some(
+      (venue) => venue.id === payload.venue_id && venue.is_active,
+    )
+  )
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Select an active venue.',
+    })
 }
 
 type GameListOptions = {
@@ -100,17 +244,25 @@ type GameListOptions = {
   excludeDraft?: boolean
 }
 
-export async function getGames(adminClient: AdminClient, options: GameListOptions = {}): Promise<AdminGame[]> {
+export async function getGames(
+  adminClient: AdminClient,
+  options: GameListOptions = {},
+): Promise<AdminGame[]> {
   let gamesQuery = adminClient
     .from('games')
-    .select('id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes')
+    .select(
+      'id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes',
+    )
     .order('scheduled_at', { ascending: options.ascending ?? false })
 
-  if (options.startsAt) gamesQuery = gamesQuery.gte('scheduled_at', options.startsAt)
-  if (options.endsBefore) gamesQuery = gamesQuery.lt('scheduled_at', options.endsBefore)
+  if (options.startsAt)
+    gamesQuery = gamesQuery.gte('scheduled_at', options.startsAt)
+  if (options.endsBefore)
+    gamesQuery = gamesQuery.lt('scheduled_at', options.endsBefore)
   if (options.excludeDraft) gamesQuery = gamesQuery.neq('status', 'draft')
   if (options.limit !== undefined) gamesQuery = gamesQuery.limit(options.limit)
-  else if (!options.startsAt && !options.endsBefore && !options.includeAll) gamesQuery = gamesQuery.limit(100)
+  else if (!options.startsAt && !options.endsBefore && !options.includeAll)
+    gamesQuery = gamesQuery.limit(100)
 
   const [gameResult, setup] = await Promise.all([
     gamesQuery,
@@ -119,13 +271,43 @@ export async function getGames(adminClient: AdminClient, options: GameListOption
   if (gameResult.error) fail(gameResult.error, 'Unable to load games.')
   const teams = new Map(setup.teams.map((item) => [item.id, item]))
   const seasons = new Map(setup.seasons.map((item) => [item.id, item]))
-  const competitions = new Map(setup.competitions.map((item) => [item.id, item]))
+  const competitions = new Map(
+    setup.competitions.map((item) => [item.id, item]),
+  )
   const venues = new Map(setup.venues.map((item) => [item.id, item]))
   return (gameResult.data ?? []).flatMap((game) => {
-    const team = teams.get(game.team_id); const season = seasons.get(game.season_id)
+    const team = teams.get(game.team_id)
+    const season = seasons.get(game.season_id)
     if (!team || !season) return []
-    const competition = game.competition_id ? competitions.get(game.competition_id) ?? null : null
-    const venue = game.venue_id ? venues.get(game.venue_id) ?? null : null
-    return [{ ...game, location_type: game.location_type as GameLocationType, status: game.status as GameStatus, team: { id: team.id, name: team.name }, season: { id: season.id, name: season.name }, competition: competition ? { id: competition.id, name: competition.name, type: competition.type } : null, venue: venue ? { id: venue.id, name: venue.name, address: venue.address, city: venue.city, latitude: venue.latitude, longitude: venue.longitude } : null }]
+    const competition = game.competition_id
+      ? (competitions.get(game.competition_id) ?? null)
+      : null
+    const venue = game.venue_id ? (venues.get(game.venue_id) ?? null) : null
+    return [
+      {
+        ...game,
+        location_type: game.location_type as GameLocationType,
+        status: game.status as GameStatus,
+        team: { id: team.id, name: team.name },
+        season: { id: season.id, name: season.name },
+        competition: competition
+          ? {
+              id: competition.id,
+              name: competition.name,
+              type: competition.type,
+            }
+          : null,
+        venue: venue
+          ? {
+              id: venue.id,
+              name: venue.name,
+              address: venue.address,
+              city: venue.city,
+              latitude: venue.latitude,
+              longitude: venue.longitude,
+            }
+          : null,
+      },
+    ]
   })
 }

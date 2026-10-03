@@ -18,8 +18,7 @@ export default defineNuxtPlugin(() => {
 
       try {
         await authStore.initialize({ force: true })
-      }
-      catch {
+      } catch {
         authStore.reset()
       }
     },

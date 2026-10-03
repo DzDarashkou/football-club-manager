@@ -7,5 +7,8 @@ const route = useRoute()
 </script>
 
 <template>
-  <CoachGameDetails :key="String(route.params.id)" :game-id="String(route.params.id)" />
+  <CoachGameDetails
+    :key="String(route.params.id)"
+    :game-id="String(route.params.id)"
+  />
 </template>

@@ -10,5 +10,13 @@ const states = {
 </script>
 
 <template>
-  <Badge :status="states[status].color" class="inline-flex items-center gap-1"><component :is="states[status].icon" class="h-4 w-4" aria-hidden="true" />{{ states[status].label }}</Badge>
+  <Badge
+    :status="states[status].color"
+    class="inline-flex items-center gap-1"
+    ><component
+      :is="states[status].icon"
+      class="h-4 w-4"
+      aria-hidden="true"
+    />{{ states[status].label }}</Badge
+  >
 </template>

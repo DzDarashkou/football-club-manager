@@ -8,7 +8,8 @@ definePageMeta({
 })
 
 const router = useRouter()
-const { authError, isInitializing, role, signInWithPassword, signOut } = useAppAuth()
+const { authError, isInitializing, role, signInWithPassword, signOut } =
+  useAppAuth()
 
 const form = reactive<LoginCredentials>({
   email: '',
@@ -22,7 +23,8 @@ const route = useRoute()
 
 watchEffect(() => {
   if (route.query.reason === 'inactive') {
-    errorMessage.value = 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
+    errorMessage.value =
+      'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
     return
   }
 
@@ -54,11 +56,11 @@ async function handleSubmit() {
     }
 
     await router.push(getRoleHome(role.value))
-  }
-  catch {
-    errorMessage.value = authError.value || 'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
-  }
-  finally {
+  } catch {
+    errorMessage.value =
+      authError.value ||
+      'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
+  } finally {
     isSubmitting.value = false
   }
 }
@@ -75,14 +77,42 @@ function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
       <p class="eyebrow text-brand-700">Witamy ponownie</p>
       <h1>Zaloguj się</h1>
     </div>
-    <div v-if="!selectedRole" class="grid gap-3">
-      <Button class="w-full" @click="selectRole('parent')">Logowanie rodzica</Button>
-      <Button class="w-full" variant="outline" @click="selectRole('admin')">Logowanie administratora</Button>
+    <div
+      v-if="!selectedRole"
+      class="grid gap-3"
+    >
+      <Button
+        class="w-full"
+        @click="selectRole('parent')"
+        >Logowanie rodzica</Button
+      >
+      <Button
+        class="w-full"
+        variant="outline"
+        @click="selectRole('admin')"
+        >Logowanie administratora</Button
+      >
     </div>
-    <form v-else class="space-y-4" @submit.prevent="handleSubmit">
+    <form
+      v-else
+      class="space-y-4"
+      @submit.prevent="handleSubmit"
+    >
       <div class="flex items-center justify-between gap-3">
-        <p class="text-sm font-medium text-[color:var(--color-text-primary)]">{{ selectedRole === 'parent' ? 'Logowanie rodzica' : 'Logowanie administratora' }}</p>
-        <Button type="button" variant="ghost" size="sm" @click="selectedRole = null">Zmień rolę</Button>
+        <p class="text-sm font-medium text-[color:var(--color-text-primary)]">
+          {{
+            selectedRole === 'parent'
+              ? 'Logowanie rodzica'
+              : 'Logowanie administratora'
+          }}
+        </p>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          @click="selectedRole = null"
+          >Zmień rolę</Button
+        >
       </div>
       <div class="space-y-2">
         <Label for="email">Email</Label>
@@ -106,17 +136,32 @@ function selectRole(value: Extract<AppRole, 'admin' | 'parent'>) {
           required
         />
       </div>
-      <p v-if="errorMessage" class="text-label text-[var(--status-declined-text)]">
+      <p
+        v-if="errorMessage"
+        class="text-label text-[var(--status-declined-text)]"
+      >
         {{ errorMessage }}
       </p>
-      <p v-if="route.query.reset === 'success'" class="text-label text-[var(--status-confirmed-text)]">
+      <p
+        v-if="route.query.reset === 'success'"
+        class="text-label text-[var(--status-confirmed-text)]"
+      >
         Twoje hasło zostało zmienione. Zaloguj się nowym hasłem.
       </p>
-      <Button class="w-full" type="submit" :disabled="isSubmitting || isInitializing">
+      <Button
+        class="w-full"
+        type="submit"
+        :disabled="isSubmitting || isInitializing"
+      >
         {{ isSubmitting ? 'Logowanie...' : 'Kontynuuj' }}
       </Button>
-      <p class="text-center text-label text-[color:var(--color-text-secondary)]">
-        <NuxtLink to="/forgot-password" class="font-medium text-brand-700 hover:text-brand-800">
+      <p
+        class="text-center text-label text-[color:var(--color-text-secondary)]"
+      >
+        <NuxtLink
+          to="/forgot-password"
+          class="font-medium text-brand-700 hover:text-brand-800"
+        >
           Nie pamiętasz hasła?
         </NuxtLink>
       </p>

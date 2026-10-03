@@ -15,12 +15,17 @@ export default defineEventHandler(async (event) => {
     const emailResult = await sendSetupEmail(event, adminClient, user.email)
 
     if (!emailResult.setupEmailSent) {
-      handleApiError(new Error(emailResult.setupEmailError || 'Unable to send the setup email.'), 'Unable to send the setup email.', 400)
+      handleApiError(
+        new Error(
+          emailResult.setupEmailError || 'Unable to send the setup email.',
+        ),
+        'Unable to send the setup email.',
+        400,
+      )
     }
 
     return emailResult
-  }
-  catch (error) {
+  } catch (error) {
     handleApiError(error, 'Unable to send the setup email.', 400)
   }
 })

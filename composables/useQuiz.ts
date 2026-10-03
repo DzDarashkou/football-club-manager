@@ -1,5 +1,10 @@
 import { computed, ref } from 'vue'
-import type { QuizAnswerResult, QuizLeaderboardEntry, QuizOptionKey, QuizQuestion } from '@@/types/quiz'
+import type {
+  QuizAnswerResult,
+  QuizLeaderboardEntry,
+  QuizOptionKey,
+  QuizQuestion,
+} from '@@/types/quiz'
 
 type QuizPhase = 'intro' | 'question' | 'feedback' | 'finished'
 
@@ -12,12 +17,17 @@ type StartQuizResponse = {
 type AnswerQuizResponse = { result: QuizAnswerResult }
 type NextQuizResponse = { question: QuizQuestion | null }
 type LeaderboardResponse = { entries: QuizLeaderboardEntry[] }
-type SubmitLeaderboardResponse = { submitted: boolean, qualifies: boolean }
+type SubmitLeaderboardResponse = { submitted: boolean; qualifies: boolean }
 
 function getErrorMessage(error: unknown, fallback: string): string {
   if (typeof error === 'object' && error !== null && 'data' in error) {
     const data = error.data
-    if (typeof data === 'object' && data !== null && 'statusMessage' in data && typeof data.statusMessage === 'string') {
+    if (
+      typeof data === 'object' &&
+      data !== null &&
+      'statusMessage' in data &&
+      typeof data.statusMessage === 'string'
+    ) {
       return data.statusMessage
     }
   }
@@ -36,7 +46,9 @@ export function useQuiz() {
   const errorMessage = ref<string | null>(null)
   const leaderboardSubmitted = ref(false)
 
-  const finalResult = computed(() => answerResult.value?.finished ? answerResult.value : null)
+  const finalResult = computed(() =>
+    answerResult.value?.finished ? answerResult.value : null,
+  )
   const qualifiesForLeaderboard = computed(() => {
     if (!finalResult.value || leaderboardSubmitted.value) return false
     const tenthPlace = leaderboard.value[9]
@@ -45,11 +57,15 @@ export function useQuiz() {
 
   async function loadLeaderboard() {
     try {
-      const response = await $fetch<LeaderboardResponse>('/api/quiz/leaderboard')
+      const response = await $fetch<LeaderboardResponse>(
+        '/api/quiz/leaderboard',
+      )
       leaderboard.value = response.entries
-    }
-    catch (error) {
-      errorMessage.value = getErrorMessage(error, 'Nie udało się pobrać tabeli wyników.')
+    } catch (error) {
+      errorMessage.value = getErrorMessage(
+        error,
+        'Nie udało się pobrać tabeli wyników.',
+      )
     }
   }
 
@@ -60,16 +76,19 @@ export function useQuiz() {
     leaderboardSubmitted.value = false
 
     try {
-      const response = await $fetch<StartQuizResponse>('/api/quiz/start', { method: 'POST' })
+      const response = await $fetch<StartQuizResponse>('/api/quiz/start', {
+        method: 'POST',
+      })
       question.value = response.question
       score.value = response.score
       livesRemaining.value = response.lives_remaining
       phase.value = 'question'
-    }
-    catch (error) {
-      errorMessage.value = getErrorMessage(error, 'Nie udało się rozpocząć quizu.')
-    }
-    finally {
+    } catch (error) {
+      errorMessage.value = getErrorMessage(
+        error,
+        'Nie udało się rozpocząć quizu.',
+      )
+    } finally {
       isLoading.value = false
     }
   }
@@ -95,11 +114,12 @@ export function useQuiz() {
       if (response.result.finished) {
         await loadLeaderboard()
       }
-    }
-    catch (error) {
-      errorMessage.value = getErrorMessage(error, 'Nie udało się sprawdzić odpowiedzi.')
-    }
-    finally {
+    } catch (error) {
+      errorMessage.value = getErrorMessage(
+        error,
+        'Nie udało się sprawdzić odpowiedzi.',
+      )
+    } finally {
       isLoading.value = false
     }
   }
@@ -114,22 +134,24 @@ export function useQuiz() {
     isLoading.value = true
     errorMessage.value = null
     try {
-      const response = await $fetch<NextQuizResponse>('/api/quiz/next', { method: 'POST' })
+      const response = await $fetch<NextQuizResponse>('/api/quiz/next', {
+        method: 'POST',
+      })
       if (response.question) {
         question.value = response.question
         answerResult.value = null
         phase.value = 'question'
-      }
-      else {
+      } else {
         answerResult.value = { ...answerResult.value, finished: true }
         await loadLeaderboard()
         phase.value = 'finished'
       }
-    }
-    catch (error) {
-      errorMessage.value = getErrorMessage(error, 'Nie udało się pobrać kolejnego pytania.')
-    }
-    finally {
+    } catch (error) {
+      errorMessage.value = getErrorMessage(
+        error,
+        'Nie udało się pobrać kolejnego pytania.',
+      )
+    } finally {
       isLoading.value = false
     }
   }
@@ -140,24 +162,29 @@ export function useQuiz() {
     isLoading.value = true
     errorMessage.value = null
     try {
-      const response = await $fetch<SubmitLeaderboardResponse>('/api/quiz/leaderboard', {
-        method: 'POST',
-        body: { display_name: displayName },
-      })
+      const response = await $fetch<SubmitLeaderboardResponse>(
+        '/api/quiz/leaderboard',
+        {
+          method: 'POST',
+          body: { display_name: displayName },
+        },
+      )
       leaderboardSubmitted.value = response.submitted
       await loadLeaderboard()
 
       if (!response.submitted) {
-        errorMessage.value = 'Ten wynik właśnie przestał mieścić się w najlepszej dziesiątce.'
+        errorMessage.value =
+          'Ten wynik właśnie przestał mieścić się w najlepszej dziesiątce.'
       }
 
       return response.submitted
-    }
-    catch (error) {
-      errorMessage.value = getErrorMessage(error, 'Nie udało się zapisać wyniku.')
+    } catch (error) {
+      errorMessage.value = getErrorMessage(
+        error,
+        'Nie udało się zapisać wyniku.',
+      )
       return false
-    }
-    finally {
+    } finally {
       isLoading.value = false
     }
   }

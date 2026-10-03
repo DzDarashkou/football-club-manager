@@ -18,7 +18,9 @@ export function useLayout() {
   })
 
   const hasTopbar = computed(() => role.value !== 'public')
-  const hasBottomNav = computed(() => role.value === 'parent' || role.value === 'coach')
+  const hasBottomNav = computed(
+    () => role.value === 'parent' || role.value === 'coach',
+  )
   const hasSidebar = computed(() => role.value === 'admin')
 
   return { role, hasTopbar, hasBottomNav, hasSidebar }

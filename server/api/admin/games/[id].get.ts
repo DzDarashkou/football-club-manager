@@ -9,7 +9,20 @@ export default defineEventHandler(async (event) => {
   const gameId = z.uuid().parse(event.context.params?.id)
   const { adminClient } = await requireAdminAccess(event)
   const game = (await getGames(adminClient)).find((item) => item.id === gameId)
-  if (!game) throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
-  const weather = await getMatchWeather(adminClient, { gameId: game.id, kickoff: game.scheduled_at, status: game.status, city: game.venue?.city ?? null, latitude: game.venue?.latitude ?? null, longitude: game.venue?.longitude ?? null })
-  return { game, players: await getGamePlayers(adminClient, gameId), weather, weatherAttribution: openMeteoAttribution }
+  if (!game)
+    throw createError({ statusCode: 404, statusMessage: 'Game not found.' })
+  const weather = await getMatchWeather(adminClient, {
+    gameId: game.id,
+    kickoff: game.scheduled_at,
+    status: game.status,
+    city: game.venue?.city ?? null,
+    latitude: game.venue?.latitude ?? null,
+    longitude: game.venue?.longitude ?? null,
+  })
+  return {
+    game,
+    players: await getGamePlayers(adminClient, gameId),
+    weather,
+    weatherAttribution: openMeteoAttribution,
+  }
 })

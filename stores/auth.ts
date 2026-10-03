@@ -56,7 +56,8 @@ export const useAuthStore = defineStore('auth', () => {
     if (!data || !isAppRole(data.role) || !isAppUserStatus(data.status)) {
       profile.value = null
       loadedUserId.value = null
-      authError.value = 'Twoje konto nie ma roli w aplikacji. Skontaktuj się z administratorem klubu.'
+      authError.value =
+        'Twoje konto nie ma roli w aplikacji. Skontaktuj się z administratorem klubu.'
       await client.auth.signOut()
       return
     }
@@ -64,7 +65,8 @@ export const useAuthStore = defineStore('auth', () => {
     if (data.status !== 'active') {
       profile.value = null
       loadedUserId.value = null
-      authError.value = 'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
+      authError.value =
+        'Twoje konto jest nieaktywne. Skontaktuj się z administratorem klubu.'
       await client.auth.signOut()
       return
     }
@@ -102,13 +104,16 @@ export const useAuthStore = defineStore('auth', () => {
           return
         }
 
-        if (!options.force && loadedUserId.value === activeUserId && profile.value) {
+        if (
+          !options.force &&
+          loadedUserId.value === activeUserId &&
+          profile.value
+        ) {
           return
         }
 
         await loadProfileForUser(activeUserId)
-      }
-      finally {
+      } finally {
         isInitializing.value = false
         initializationPromise.value = null
       }
@@ -123,14 +128,17 @@ export const useAuthStore = defineStore('auth', () => {
     const { data, error } = await client.auth.signInWithPassword(credentials)
 
     if (error) {
-      authError.value = 'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
+      authError.value =
+        'Nie udało się zalogować przy użyciu tego adresu e-mail i hasła.'
       throw error
     }
 
-    const signedInUserId = extractUserId(data.user) ?? extractUserId(data.session?.user)
+    const signedInUserId =
+      extractUserId(data.user) ?? extractUserId(data.session?.user)
 
     if (!signedInUserId) {
-      authError.value = 'Sign-in succeeded, but the authenticated user could not be resolved.'
+      authError.value =
+        'Sign-in succeeded, but the authenticated user could not be resolved.'
       throw new Error('Authenticated user ID missing after sign-in.')
     }
 
@@ -152,7 +160,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-    return {
+  return {
     authError,
     initialize,
     isActive,

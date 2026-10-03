@@ -13,13 +13,19 @@ const props = withDefaults(defineProps<SeparatorProps>(), {
   class: undefined,
 })
 
-const classes = computed(() => cn(
-  'shrink-0 bg-border',
-  props.orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
-  props.class,
-))
+const classes = computed(() =>
+  cn(
+    'shrink-0 bg-border',
+    props.orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
+    props.class,
+  ),
+)
 </script>
 
 <template>
-  <div :class="classes" :aria-orientation="orientation" role="separator" />
+  <div
+    :class="classes"
+    :aria-orientation="orientation"
+    role="separator"
+  />
 </template>

@@ -28,8 +28,15 @@ const statuses: StatusKey[] = ['confirmed', 'declined', 'pending', 'neutral']
         <h1>Strona testowa tokenów</h1>
       </div>
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Card v-for="swatch in brandSwatches" :key="swatch.name" class="space-y-4">
-          <div class="h-24 rounded-lg" :class="swatch.className" />
+        <Card
+          v-for="swatch in brandSwatches"
+          :key="swatch.name"
+          class="space-y-4"
+        >
+          <div
+            class="h-24 rounded-lg"
+            :class="swatch.className"
+          />
           <div class="flex items-center justify-between">
             <span class="text-sm font-medium">{{ swatch.name }}</span>
             <Badge variant="secondary">{{ swatch.name }}</Badge>
@@ -41,7 +48,11 @@ const statuses: StatusKey[] = ['confirmed', 'declined', 'pending', 'neutral']
     <section class="space-y-3">
       <h2>Odznaki statusu</h2>
       <div class="flex flex-wrap gap-3">
-        <Badge v-for="status in statuses" :key="status" :status="status">
+        <Badge
+          v-for="status in statuses"
+          :key="status"
+          :status="status"
+        >
           {{ status }}
         </Badge>
       </div>
@@ -50,9 +61,17 @@ const statuses: StatusKey[] = ['confirmed', 'declined', 'pending', 'neutral']
     <section class="space-y-3">
       <h2>Typografia</h2>
       <Card class="space-y-3">
-        <p class="text-xs2 uppercase tracking-[0.12em] text-[color:var(--color-text-secondary)]">mikroetykieta xs2</p>
-        <p class="text-label text-[color:var(--color-text-secondary)]">drugorzędne metadane etykiety</p>
-        <p class="text-body">tekst główny korzysta z domyślnej, czytelnej wysokości wiersza.</p>
+        <p
+          class="text-xs2 uppercase tracking-[0.12em] text-[color:var(--color-text-secondary)]"
+        >
+          mikroetykieta xs2
+        </p>
+        <p class="text-label text-[color:var(--color-text-secondary)]">
+          drugorzędne metadane etykiety
+        </p>
+        <p class="text-body">
+          tekst główny korzysta z domyślnej, czytelnej wysokości wiersza.
+        </p>
         <h3>Token nagłówka trzeciego poziomu</h3>
         <h2>Token nagłówka drugiego poziomu</h2>
         <h1>Token nagłówka pierwszego poziomu</h1>
@@ -67,8 +86,14 @@ const statuses: StatusKey[] = ['confirmed', 'declined', 'pending', 'neutral']
           <ClubLogo variant="mark" />
         </Card>
         <Card class="space-y-4">
-          <ClubLogo variant="full" :inverted="false" />
-          <ClubLogo variant="mark" :inverted="false" />
+          <ClubLogo
+            variant="full"
+            :inverted="false"
+          />
+          <ClubLogo
+            variant="mark"
+            :inverted="false"
+          />
         </Card>
       </div>
     </section>

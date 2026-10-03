@@ -17,15 +17,26 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   class: undefined,
 })
 
-const classes = computed(() => cn(
-  'relative inline-flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-50 text-brand-700',
-  props.class,
-))
+const classes = computed(() =>
+  cn(
+    'relative inline-flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-50 text-brand-700',
+    props.class,
+  ),
+)
 </script>
 
 <template>
   <div :class="classes">
-    <img v-if="src" :src="src" :alt="alt" class="h-full w-full object-cover">
-    <span v-else class="text-label font-medium">{{ fallback }}</span>
+    <img
+      v-if="src"
+      :src="src"
+      :alt="alt"
+      class="h-full w-full object-cover"
+    />
+    <span
+      v-else
+      class="text-label font-medium"
+      >{{ fallback }}</span
+    >
   </div>
 </template>

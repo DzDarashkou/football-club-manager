@@ -19,12 +19,16 @@ export default defineEventHandler(async (event) => {
       .select('player_id')
       .maybeSingle()
 
-    if (error) handleApiError(error, 'Unable to remove player from the game.', 400)
-    if (!data) throw createError({ statusCode: 404, statusMessage: 'Player is not in this game squad.' })
+    if (error)
+      handleApiError(error, 'Unable to remove player from the game.', 400)
+    if (!data)
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Player is not in this game squad.',
+      })
 
     return { success: true }
-  }
-  catch (error) {
+  } catch (error) {
     handleApiError(error, 'Unable to remove player from the game.', 400)
   }
 })

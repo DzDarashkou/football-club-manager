@@ -10,10 +10,13 @@ export default defineNuxtConfig({
   css: ['@@/assets/css/main.css'],
   modules: [
     '@nuxtjs/tailwindcss',
-    ['shadcn-nuxt', {
-      prefix: '',
-      componentDir: '~~/components/ui',
-    }],
+    [
+      'shadcn-nuxt',
+      {
+        prefix: '',
+        componentDir: '~~/components/ui',
+      },
+    ],
     '@nuxtjs/supabase',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
@@ -43,7 +46,10 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#0C447C' },
         { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
-        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        {
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: 'black-translucent',
+        },
         { name: 'apple-mobile-web-app-title', content: 'Sporting Wrocław' },
       ],
       link: [
@@ -67,7 +73,8 @@ export default defineNuxtConfig({
       id: '/',
       name: 'Menedżer Klubu Piłkarskiego Sporting Wrocław',
       short_name: 'Sporting',
-      description: 'Zarządzaj drużynami, zawodnikami, meczami i obecnością w Sporting Wrocław.',
+      description:
+        'Zarządzaj drużynami, zawodnikami, meczami i obecnością w Sporting Wrocław.',
       start_url: '/',
       scope: '/',
       theme_color: '#0C447C',

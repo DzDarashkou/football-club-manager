@@ -10,8 +10,8 @@ export interface StandingsGroup {
   external_play_id: string | null
 }
 export interface StandingsSetup {
-  teams: Array<{ id: string, name: string }>
-  seasons: Array<{ id: string, name: string }>
+  teams: Array<{ id: string; name: string }>
+  seasons: Array<{ id: string; name: string }>
   groups: StandingsGroup[]
 }
 export interface StandingsSnapshot {
@@ -31,7 +31,7 @@ export interface StandingsTrendSnapshot {
   id: string
   imported_at: string
   external_team_id: string
-  teams: Array<{ id: string, name: string, points: number, position: number }>
+  teams: Array<{ id: string; name: string; points: number; position: number }>
 }
 export interface StandingsTrends {
   snapshots: StandingsTrendSnapshot[]

@@ -1,8 +1,18 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { chronologicalSnapshots, teamValues, metricDomain, chartY } from '../utils/standings-trends.ts'
+import {
+  chronologicalSnapshots,
+  teamValues,
+  metricDomain,
+  chartY,
+} from '../utils/standings-trends.ts'
 
-const snapshot = (id, date, teams) => ({ id, imported_at: date, external_team_id: 'club', teams })
+const snapshot = (id, date, teams) => ({
+  id,
+  imported_at: date,
+  external_team_id: 'club',
+  teams,
+})
 const team = (id, points, position) => ({ id, name: id, points, position })
 test('orders imports chronologically and deduplicates overlapping pages without mutating input', () => {
   const older = snapshot('a', '2026-09-01T12:00:00Z', [])
@@ -15,7 +25,9 @@ test('uses stable team IDs, preserves official standings and leaves gaps', () =>
   const snapshots = [
     snapshot('a', '2026-09-01', [team('club', -3, 8), team('other', 5, 1)]),
     snapshot('b', '2026-09-02', [team('other', 5, 1)]),
-    snapshot('c', '2026-09-03', [{ ...team('club', 0, 6), name: 'Renamed club' }]),
+    snapshot('c', '2026-09-03', [
+      { ...team('club', 0, 6), name: 'Renamed club' },
+    ]),
   ]
   assert.deepEqual(teamValues(snapshots, 'club', 'points'), [-3, null, 0])
   assert.deepEqual(teamValues(snapshots, 'club', 'position'), [8, null, 6])

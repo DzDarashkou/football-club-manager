@@ -30,61 +30,245 @@ const route = useRoute()
 const router = useRouter()
 const drawerOpen = ref(false)
 type AdminNavigationMode = 'admin' | 'coach'
-const adminNavigationMode = useSessionStorage<AdminNavigationMode>('sporting-admin-navigation-mode', 'admin')
+const adminNavigationMode = useSessionStorage<AdminNavigationMode>(
+  'sporting-admin-navigation-mode',
+  'admin',
+)
 const { role, hasTopbar, hasBottomNav, hasSidebar } = useLayout()
 const { profile, signOut } = useAppAuth()
 
-type NavItemWithIcon = NavItem & { iconComponent: Component, hidden?: boolean }
+type NavItemWithIcon = NavItem & { iconComponent: Component; hidden?: boolean }
 
 const memberNavItems: NavItemWithIcon[] = [
-  { label: 'Panel główny', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/dashboard', role: ['parent'], hidden: true },
-  { label: 'Panel główny', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'] },
-  { label: 'Moje dzieci', icon: 'Users', iconComponent: Users, to: '/my-children', role: ['parent'], hidden: true },
-  { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/games', role: ['parent'], hidden: true },
-  { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
-  { label: 'Kalendarz', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['parent', 'coach'] },
-  { label: 'Quiz', icon: 'CircleHelp', iconComponent: CircleHelp, to: '/parent/quiz', role: ['parent'] },
-  { label: 'Tabele', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['parent', 'coach'] },
-  { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['parent'], hidden: true },
-  { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'] },
+  {
+    label: 'Panel główny',
+    icon: 'LayoutDashboard',
+    iconComponent: LayoutDashboard,
+    to: '/dashboard',
+    role: ['parent'],
+    hidden: true,
+  },
+  {
+    label: 'Panel główny',
+    icon: 'LayoutDashboard',
+    iconComponent: LayoutDashboard,
+    to: '/coach',
+    role: ['coach'],
+  },
+  {
+    label: 'Moje dzieci',
+    icon: 'Users',
+    iconComponent: Users,
+    to: '/my-children',
+    role: ['parent'],
+    hidden: true,
+  },
+  {
+    label: 'Mecze',
+    icon: 'Volleyball',
+    iconComponent: Volleyball,
+    to: '/games',
+    role: ['parent'],
+    hidden: true,
+  },
+  {
+    label: 'Mecze',
+    icon: 'Volleyball',
+    iconComponent: Volleyball,
+    to: '/coach/games',
+    role: ['coach'],
+  },
+  {
+    label: 'Kalendarz',
+    icon: 'Calendar',
+    iconComponent: Calendar,
+    to: '/coach/calendar',
+    role: ['parent', 'coach'],
+  },
+  {
+    label: 'Quiz',
+    icon: 'CircleHelp',
+    iconComponent: CircleHelp,
+    to: '/parent/quiz',
+    role: ['parent'],
+  },
+  {
+    label: 'Tabele',
+    icon: 'Trophy',
+    iconComponent: Trophy,
+    to: '/standings',
+    role: ['parent', 'coach'],
+  },
+  {
+    label: 'Profil',
+    icon: 'UserCircle2',
+    iconComponent: UserCircle2,
+    to: '/profile',
+    role: ['parent'],
+    hidden: true,
+  },
+  {
+    label: 'Profil',
+    icon: 'UserCircle2',
+    iconComponent: UserCircle2,
+    to: '/profile',
+    role: ['coach'],
+  },
 ]
 
 const adminNavItems: NavItemWithIcon[] = [
-  { label: 'Przegląd', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/admin', role: ['admin'] },
-  { label: 'Użytkownicy', icon: 'Users', iconComponent: Users, to: '/admin/users', role: ['admin'] },
-  { label: 'Drużyny', icon: 'Shirt', iconComponent: Shirt, to: '/admin/teams', role: ['admin'] },
-  { label: 'Zawodnicy', icon: 'Volleyball', iconComponent: Volleyball, to: '/admin/players', role: ['admin'] },
-  { label: 'Mecze', icon: 'Calendar', iconComponent: Calendar, to: '/admin/games', role: ['admin'] },
-  { label: 'Treningi', icon: 'Dumbbell', iconComponent: Dumbbell, to: '/admin/trainings', role: ['admin'] },
-  { label: 'Tabele ligowe', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['admin'] },
-  { label: 'Import tabel', icon: 'Trophy', iconComponent: Trophy, to: '/admin/standings', role: ['admin'] },
-  { label: 'Trenerzy', icon: 'Trophy', iconComponent: Trophy, to: '/admin/coaches', role: ['admin'], hidden: true },
-  { label: 'Ustawienia', icon: 'Settings', iconComponent: Settings, to: '/admin/settings', role: ['admin'], hidden: true },
+  {
+    label: 'Przegląd',
+    icon: 'LayoutDashboard',
+    iconComponent: LayoutDashboard,
+    to: '/admin',
+    role: ['admin'],
+  },
+  {
+    label: 'Użytkownicy',
+    icon: 'Users',
+    iconComponent: Users,
+    to: '/admin/users',
+    role: ['admin'],
+  },
+  {
+    label: 'Drużyny',
+    icon: 'Shirt',
+    iconComponent: Shirt,
+    to: '/admin/teams',
+    role: ['admin'],
+  },
+  {
+    label: 'Zawodnicy',
+    icon: 'Volleyball',
+    iconComponent: Volleyball,
+    to: '/admin/players',
+    role: ['admin'],
+  },
+  {
+    label: 'Mecze',
+    icon: 'Calendar',
+    iconComponent: Calendar,
+    to: '/admin/games',
+    role: ['admin'],
+  },
+  {
+    label: 'Treningi',
+    icon: 'Dumbbell',
+    iconComponent: Dumbbell,
+    to: '/admin/trainings',
+    role: ['admin'],
+  },
+  {
+    label: 'Tabele ligowe',
+    icon: 'Trophy',
+    iconComponent: Trophy,
+    to: '/standings',
+    role: ['admin'],
+  },
+  {
+    label: 'Import tabel',
+    icon: 'Trophy',
+    iconComponent: Trophy,
+    to: '/admin/standings',
+    role: ['admin'],
+  },
+  {
+    label: 'Trenerzy',
+    icon: 'Trophy',
+    iconComponent: Trophy,
+    to: '/admin/coaches',
+    role: ['admin'],
+    hidden: true,
+  },
+  {
+    label: 'Ustawienia',
+    icon: 'Settings',
+    iconComponent: Settings,
+    to: '/admin/settings',
+    role: ['admin'],
+    hidden: true,
+  },
 ]
 
 const coachNavItems: NavItemWithIcon[] = [
-  { label: 'Panel główny', icon: 'LayoutDashboard', iconComponent: LayoutDashboard, to: '/coach', role: ['coach'], hidden: true },
-  { label: 'Drużyny', icon: 'Shirt', iconComponent: Shirt, to: '/coach/teams', role: ['coach'], hidden: true },
-  { label: 'Zawodnicy', icon: 'Users', iconComponent: Users, to: '/coach/players', role: ['coach'] },
-  { label: 'Mecze', icon: 'Volleyball', iconComponent: Volleyball, to: '/coach/games', role: ['coach'] },
-  { label: 'Kalendarz', icon: 'Calendar', iconComponent: Calendar, to: '/coach/calendar', role: ['coach'] },
-  { label: 'Tabele', icon: 'Trophy', iconComponent: Trophy, to: '/standings', role: ['coach'] },
-  { label: 'Profil', icon: 'UserCircle2', iconComponent: UserCircle2, to: '/profile', role: ['coach'], hidden: true },
+  {
+    label: 'Panel główny',
+    icon: 'LayoutDashboard',
+    iconComponent: LayoutDashboard,
+    to: '/coach',
+    role: ['coach'],
+    hidden: true,
+  },
+  {
+    label: 'Drużyny',
+    icon: 'Shirt',
+    iconComponent: Shirt,
+    to: '/coach/teams',
+    role: ['coach'],
+    hidden: true,
+  },
+  {
+    label: 'Zawodnicy',
+    icon: 'Users',
+    iconComponent: Users,
+    to: '/coach/players',
+    role: ['coach'],
+  },
+  {
+    label: 'Mecze',
+    icon: 'Volleyball',
+    iconComponent: Volleyball,
+    to: '/coach/games',
+    role: ['coach'],
+  },
+  {
+    label: 'Kalendarz',
+    icon: 'Calendar',
+    iconComponent: Calendar,
+    to: '/coach/calendar',
+    role: ['coach'],
+  },
+  {
+    label: 'Tabele',
+    icon: 'Trophy',
+    iconComponent: Trophy,
+    to: '/standings',
+    role: ['coach'],
+  },
+  {
+    label: 'Profil',
+    icon: 'UserCircle2',
+    iconComponent: UserCircle2,
+    to: '/profile',
+    role: ['coach'],
+    hidden: true,
+  },
 ]
 
 const filteredBottomNavItems = computed(() =>
-  memberNavItems.filter((item) => item.role.includes(role.value as AppRole) && !item.hidden),
+  memberNavItems.filter(
+    (item) => item.role.includes(role.value as AppRole) && !item.hidden,
+  ),
 )
-const activeSidebarNavItems = computed(() => (adminNavigationMode.value === 'coach' ? coachNavItems : adminNavItems).filter((item) => !item.hidden))
+const activeSidebarNavItems = computed(() =>
+  (adminNavigationMode.value === 'coach'
+    ? coachNavItems
+    : adminNavItems
+  ).filter((item) => !item.hidden),
+)
 
 const mainClass = computed(() => [
   'min-h-screen bg-[var(--color-surface-sunken)] px-4 py-4 sm:px-5',
   hasTopbar.value ? 'pt-[calc(var(--topbar-height)+1rem)]' : '',
-  hasBottomNav.value ? 'pb-[calc(var(--bottomnav-height)+env(safe-area-inset-bottom)+1rem)]' : '',
+  hasBottomNav.value
+    ? 'pb-[calc(var(--bottomnav-height)+env(safe-area-inset-bottom)+1rem)]'
+    : '',
   hasSidebar.value ? 'lg:page-with-sidebar lg:px-6 lg:pb-6 lg:pt-6' : '',
 ])
 
-const isCurrent = (to: string) => route.path === to || route.path.startsWith(`${to}/`)
+const isCurrent = (to: string) =>
+  route.path === to || route.path.startsWith(`${to}/`)
 const displayName = computed(() => getProfileDisplayName(profile.value))
 const initials = computed(() => getProfileInitials(profile.value))
 const email = computed(() => profile.value?.email ?? '')
@@ -105,7 +289,11 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
 
 <template>
   <div class="min-h-screen bg-[var(--color-surface-sunken)]">
-    <header v-if="hasTopbar" class="app-topbar" :class="{ 'lg:hidden': hasSidebar }">
+    <header
+      v-if="hasTopbar"
+      class="app-topbar"
+      :class="{ 'lg:hidden': hasSidebar }"
+    >
       <div class="flex items-center gap-3">
         <button
           v-if="role === 'admin'"
@@ -114,8 +302,14 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
           aria-label="Otwórz lub zamknij nawigację administratora"
           @click="drawerOpen = !drawerOpen"
         >
-          <Menu v-if="!drawerOpen" class="h-5 w-5" />
-          <X v-else class="h-5 w-5" />
+          <Menu
+            v-if="!drawerOpen"
+            class="h-5 w-5"
+          />
+          <X
+            v-else
+            class="h-5 w-5"
+          />
         </button>
         <ClubLogo variant="full" />
       </div>
@@ -134,7 +328,10 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
           :class="{ 'bg-white/10': isCurrent('/parent/quiz') }"
           :aria-current="isCurrent('/parent/quiz') ? 'page' : undefined"
         >
-          <CircleHelp class="h-5 w-5" aria-hidden="true" />Quiz
+          <CircleHelp
+            class="h-5 w-5"
+            aria-hidden="true"
+          />Quiz
         </NuxtLink>
         <NuxtLink
           v-if="role === 'parent'"
@@ -164,12 +361,40 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
       </div>
     </header>
 
-    <aside v-if="hasSidebar" class="app-sidebar hidden lg:flex">
+    <aside
+      v-if="hasSidebar"
+      class="app-sidebar hidden lg:flex"
+    >
       <div class="border-b border-white/15 px-4 py-8">
         <ClubLogo variant="full" />
-        <div class="mt-5 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs" aria-label="Tryb nawigacji">
-          <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'admin' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('admin')">Admin</button>
-          <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'coach' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('coach')">Trener</button>
+        <div
+          class="mt-5 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs"
+          aria-label="Tryb nawigacji"
+        >
+          <button
+            type="button"
+            class="min-h-9 rounded-md px-2 text-brand-100 transition"
+            :class="
+              adminNavigationMode === 'admin'
+                ? 'bg-white text-brand-800'
+                : 'hover:text-white'
+            "
+            @click="setAdminNavigationMode('admin')"
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            class="min-h-9 rounded-md px-2 text-brand-100 transition"
+            :class="
+              adminNavigationMode === 'coach'
+                ? 'bg-white text-brand-800'
+                : 'hover:text-white'
+            "
+            @click="setAdminNavigationMode('coach')"
+          >
+            Trener
+          </button>
         </div>
       </div>
       <nav class="flex-1 space-y-2 px-4 py-6">
@@ -180,18 +405,25 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
           class="app-sidebar-item"
           :class="{ active: isCurrent(item.to) }"
         >
-          <component :is="item.iconComponent" class="h-5 w-5" />
+          <component
+            :is="item.iconComponent"
+            class="h-5 w-5"
+          />
           <span>{{ item.label }}</span>
         </NuxtLink>
       </nav>
       <div class="border-t border-white/15 px-4 py-5">
         <div class="flex items-center justify-between gap-3">
           <div class="flex min-w-0 items-center gap-3">
-            <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white">
+            <div
+              class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-brand-700 text-sm font-medium text-white"
+            >
               {{ initials }}
             </div>
             <div class="min-w-0">
-              <p class="truncate text-sm font-medium text-white">{{ displayName }}</p>
+              <p class="truncate text-sm font-medium text-white">
+                {{ displayName }}
+              </p>
               <p class="truncate text-label text-brand-100">{{ email }}</p>
             </div>
           </div>
@@ -216,7 +448,10 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
       leave-from-class="translate-x-0 opacity-100"
       leave-to-class="-translate-x-full opacity-0"
     >
-      <div v-if="hasSidebar && drawerOpen" class="fixed inset-0 z-40 lg:hidden">
+      <div
+        v-if="hasSidebar && drawerOpen"
+        class="fixed inset-0 z-40 lg:hidden"
+      >
         <button
           type="button"
           class="absolute inset-0 bg-brand-900/40"
@@ -236,9 +471,34 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
                 <X class="h-5 w-5" />
               </button>
             </div>
-            <div class="mt-4 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs" aria-label="Tryb nawigacji">
-              <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'admin' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('admin')">Admin</button>
-              <button type="button" class="min-h-9 rounded-md px-2 text-brand-100 transition" :class="adminNavigationMode === 'coach' ? 'bg-white text-brand-800' : 'hover:text-white'" @click="setAdminNavigationMode('coach')">Trener</button>
+            <div
+              class="mt-4 grid grid-cols-2 rounded-lg bg-white/10 p-1 text-xs"
+              aria-label="Tryb nawigacji"
+            >
+              <button
+                type="button"
+                class="min-h-9 rounded-md px-2 text-brand-100 transition"
+                :class="
+                  adminNavigationMode === 'admin'
+                    ? 'bg-white text-brand-800'
+                    : 'hover:text-white'
+                "
+                @click="setAdminNavigationMode('admin')"
+              >
+                Admin
+              </button>
+              <button
+                type="button"
+                class="min-h-9 rounded-md px-2 text-brand-100 transition"
+                :class="
+                  adminNavigationMode === 'coach'
+                    ? 'bg-white text-brand-800'
+                    : 'hover:text-white'
+                "
+                @click="setAdminNavigationMode('coach')"
+              >
+                Trener
+              </button>
             </div>
           </div>
           <nav class="flex-1 space-y-2 px-4 py-6">
@@ -250,7 +510,10 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
               :class="{ active: isCurrent(item.to) }"
               @click="drawerOpen = false"
             >
-              <component :is="item.iconComponent" class="h-5 w-5" />
+              <component
+                :is="item.iconComponent"
+                class="h-5 w-5"
+              />
               <span>{{ item.label }}</span>
             </NuxtLink>
           </nav>
@@ -272,7 +535,10 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
       <slot />
     </main>
 
-    <nav v-if="hasBottomNav" class="app-bottomnav">
+    <nav
+      v-if="hasBottomNav"
+      class="app-bottomnav"
+    >
       <NuxtLink
         v-for="item in filteredBottomNavItems"
         :key="item.to"
@@ -280,7 +546,10 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
         class="app-bottomnav-item"
         :class="{ active: isCurrent(item.to) }"
       >
-        <component :is="item.iconComponent" class="h-5 w-5" />
+        <component
+          :is="item.iconComponent"
+          class="h-5 w-5"
+        />
         <span>{{ item.label }}</span>
       </NuxtLink>
     </nav>

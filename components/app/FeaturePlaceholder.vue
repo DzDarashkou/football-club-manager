@@ -34,7 +34,9 @@ const props = withDefaults(defineProps<FeaturePlaceholderProps>(), {
           :key="item.label"
           class="rounded-xl border border-border bg-[var(--color-surface-subtle)] p-4"
         >
-          <p class="text-label text-[color:var(--color-text-secondary)]">{{ item.label }}</p>
+          <p class="text-label text-[color:var(--color-text-secondary)]">
+            {{ item.label }}
+          </p>
           <p class="mt-1 text-h3">{{ item.value }}</p>
         </div>
       </div>

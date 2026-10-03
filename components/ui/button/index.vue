@@ -11,9 +11,11 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-secondary',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-brand-700',
-        outline: 'border border-border bg-surface text-foreground hover:bg-muted',
+        outline:
+          'border border-border bg-surface text-foreground hover:bg-muted',
         ghost: 'text-foreground hover:bg-muted',
-        destructive: 'bg-destructive text-destructive-foreground hover:opacity-90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:opacity-90',
       },
       size: {
         default: 'min-h-[44px] px-4 py-2',
@@ -29,7 +31,8 @@ const buttonVariants = cva(
   },
 )
 
-type ButtonVariant = 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'
+type ButtonVariant =
+  'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'
 type ButtonSize = 'default' | 'sm' | 'lg' | 'icon'
 
 type ButtonProps = {
@@ -45,11 +48,17 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 })
 
 const attrs = useAttrs()
-const classes = computed(() => cn(buttonVariants({ variant: props.variant, size: props.size }), props.class))
+const classes = computed(() =>
+  cn(buttonVariants({ variant: props.variant, size: props.size }), props.class),
+)
 </script>
 
 <template>
-  <component :is="as" v-bind="attrs" :class="classes">
+  <component
+    :is="as"
+    v-bind="attrs"
+    :class="classes"
+  >
     <slot />
   </component>
 </template>

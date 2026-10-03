@@ -17,7 +17,10 @@ const classes = computed(() => cn('card', props.class))
 </script>
 
 <template>
-  <component :is="as" :class="classes">
+  <component
+    :is="as"
+    :class="classes"
+  >
     <slot />
   </component>
 </template>

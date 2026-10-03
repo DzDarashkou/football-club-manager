@@ -1,9 +1,22 @@
 import type { AppProfile, AppRole, AppUserStatus } from '@@/types/auth'
 
-export const APP_ROLES = ['admin', 'coach', 'parent'] as const satisfies readonly AppRole[]
-export const APP_USER_STATUSES = ['active', 'inactive'] as const satisfies readonly AppUserStatus[]
+export const APP_ROLES = [
+  'admin',
+  'coach',
+  'parent',
+] as const satisfies readonly AppRole[]
+export const APP_USER_STATUSES = [
+  'active',
+  'inactive',
+] as const satisfies readonly AppUserStatus[]
 
-export const PUBLIC_PATHS = ['/', '/login', '/forgot-password', '/update-password', '/test-tokens'] as const
+export const PUBLIC_PATHS = [
+  '/',
+  '/login',
+  '/forgot-password',
+  '/update-password',
+  '/test-tokens',
+] as const
 
 export const ROLE_HOME: Record<AppRole, string> = {
   admin: '/admin',
@@ -16,11 +29,14 @@ export function isAppRole(value: unknown): value is AppRole {
 }
 
 export function isAppUserStatus(value: unknown): value is AppUserStatus {
-  return typeof value === 'string' && APP_USER_STATUSES.includes(value as AppUserStatus)
+  return (
+    typeof value === 'string' &&
+    APP_USER_STATUSES.includes(value as AppUserStatus)
+  )
 }
 
 export function isPublicPath(path: string) {
-  return PUBLIC_PATHS.includes(path as typeof PUBLIC_PATHS[number])
+  return PUBLIC_PATHS.includes(path as (typeof PUBLIC_PATHS)[number])
 }
 
 export function getRoleHome(role: AppRole) {
@@ -32,7 +48,7 @@ export function extractUserId(candidate: unknown) {
     return null
   }
 
-  const value = candidate as { id?: unknown, sub?: unknown }
+  const value = candidate as { id?: unknown; sub?: unknown }
 
   if (typeof value.id === 'string' && value.id.length > 0) {
     return value.id
@@ -45,7 +61,9 @@ export function extractUserId(candidate: unknown) {
   return null
 }
 
-export function getProfileDisplayName(profile: Pick<AppProfile, 'full_name' | 'email'> | null) {
+export function getProfileDisplayName(
+  profile: Pick<AppProfile, 'full_name' | 'email'> | null,
+) {
   if (!profile) {
     return 'Sporting User'
   }
@@ -53,7 +71,9 @@ export function getProfileDisplayName(profile: Pick<AppProfile, 'full_name' | 'e
   return profile.full_name?.trim() || profile.email
 }
 
-export function getProfileInitials(profile: Pick<AppProfile, 'full_name' | 'email'> | null) {
+export function getProfileInitials(
+  profile: Pick<AppProfile, 'full_name' | 'email'> | null,
+) {
   const source = profile?.full_name?.trim() || profile?.email || 'Sporting User'
   const parts = source
     .split(/[\s@._-]+/)

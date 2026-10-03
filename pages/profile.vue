@@ -8,7 +8,10 @@ definePageMeta({
 const { profile } = useAppAuth()
 
 const items = computed(() => [
-  { label: 'Zalogowano jako', value: profile.value?.email ?? 'Nieznany użytkownik' },
+  {
+    label: 'Zalogowano jako',
+    value: profile.value?.email ?? 'Nieznany użytkownik',
+  },
   { label: 'Aktualna rola', value: profile.value?.role ?? 'Nieznana' },
 ])
 </script>

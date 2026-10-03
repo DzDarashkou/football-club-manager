@@ -9,12 +9,7 @@
     {
       "id": "WQ-001",
       "question": "Który kraj reprezentuje lub reprezentował Xabi Alonso?",
-      "answers": [
-        "Grecja",
-        "Peru",
-        "Hiszpania",
-        "Chorwacja"
-      ],
+      "answers": ["Grecja", "Peru", "Hiszpania", "Chorwacja"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hiszpania",
       "category": "zawodnicy — reprezentacja",
@@ -45,12 +40,7 @@
     {
       "id": "WQ-003",
       "question": "Który kraj reprezentuje lub reprezentował Edwin van der Sar?",
-      "answers": [
-        "Anglia",
-        "Chorwacja",
-        "Holandia",
-        "Czarnogóra"
-      ],
+      "answers": ["Anglia", "Chorwacja", "Holandia", "Czarnogóra"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Holandia",
       "category": "zawodnicy — reprezentacja",
@@ -63,12 +53,7 @@
     {
       "id": "WQ-004",
       "question": "Który kraj reprezentuje lub reprezentował Cristiano Ronaldo?",
-      "answers": [
-        "Kamerun",
-        "Portugalia",
-        "Korea Południowa",
-        "Austria"
-      ],
+      "answers": ["Kamerun", "Portugalia", "Korea Południowa", "Austria"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Portugalia",
       "category": "zawodnicy — reprezentacja",
@@ -81,12 +66,7 @@
     {
       "id": "WQ-005",
       "question": "Który kraj reprezentuje lub reprezentował Ałan Dzagojew?",
-      "answers": [
-        "Szwajcaria",
-        "Rosja",
-        "Urugwaj",
-        "Niemcy"
-      ],
+      "answers": ["Szwajcaria", "Rosja", "Urugwaj", "Niemcy"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Rosja",
       "category": "zawodnicy — reprezentacja",
@@ -99,12 +79,7 @@
     {
       "id": "WQ-006",
       "question": "Który kraj reprezentuje lub reprezentował Christian Panucci?",
-      "answers": [
-        "Szkocja",
-        "Ukraina",
-        "Czarnogóra",
-        "Włochy"
-      ],
+      "answers": ["Szkocja", "Ukraina", "Czarnogóra", "Włochy"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Włochy",
       "category": "zawodnicy — reprezentacja",
@@ -117,12 +92,7 @@
     {
       "id": "WQ-007",
       "question": "Który kraj reprezentuje lub reprezentował Thomas Hitzlsperger?",
-      "answers": [
-        "Bośnia i Hercegowina",
-        "Gruzja",
-        "Niemcy",
-        "Dania"
-      ],
+      "answers": ["Bośnia i Hercegowina", "Gruzja", "Niemcy", "Dania"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Niemcy",
       "category": "zawodnicy — reprezentacja",
@@ -135,12 +105,7 @@
     {
       "id": "WQ-008",
       "question": "Który kraj reprezentuje lub reprezentował Henrik Larsson?",
-      "answers": [
-        "Polska",
-        "Togo",
-        "Serbia",
-        "Szwecja"
-      ],
+      "answers": ["Polska", "Togo", "Serbia", "Szwecja"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Szwecja",
       "category": "zawodnicy — reprezentacja",
@@ -153,12 +118,7 @@
     {
       "id": "WQ-009",
       "question": "Który kraj reprezentuje lub reprezentował Niko Kranjčar?",
-      "answers": [
-        "Dania",
-        "Togo",
-        "Chorwacja",
-        "Szkocja"
-      ],
+      "answers": ["Dania", "Togo", "Chorwacja", "Szkocja"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Chorwacja",
       "category": "zawodnicy — reprezentacja",
@@ -171,12 +131,7 @@
     {
       "id": "WQ-010",
       "question": "Który kraj reprezentuje lub reprezentował Jonny Evans?",
-      "answers": [
-        "Ghana",
-        "Irlandia Północna",
-        "Słowenia",
-        "Serbia"
-      ],
+      "answers": ["Ghana", "Irlandia Północna", "Słowenia", "Serbia"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Irlandia Północna",
       "category": "zawodnicy — reprezentacja",
@@ -189,12 +144,7 @@
     {
       "id": "WQ-011",
       "question": "Który kraj reprezentuje lub reprezentował Fabio Cannavaro?",
-      "answers": [
-        "Norwegia",
-        "Południowa Afryka",
-        "Ekwador",
-        "Włochy"
-      ],
+      "answers": ["Norwegia", "Południowa Afryka", "Ekwador", "Włochy"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Włochy",
       "category": "zawodnicy — reprezentacja",
@@ -207,12 +157,7 @@
     {
       "id": "WQ-012",
       "question": "Który kraj reprezentuje lub reprezentował Andrés Iniesta?",
-      "answers": [
-        "Maroko",
-        "Hiszpania",
-        "Togo",
-        "Mali"
-      ],
+      "answers": ["Maroko", "Hiszpania", "Togo", "Mali"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Hiszpania",
       "category": "zawodnicy — reprezentacja",
@@ -225,12 +170,7 @@
     {
       "id": "WQ-013",
       "question": "Który kraj reprezentuje lub reprezentował Rui Costa?",
-      "answers": [
-        "Chorwacja",
-        "Portugalia",
-        "Bułgaria",
-        "Chile"
-      ],
+      "answers": ["Chorwacja", "Portugalia", "Bułgaria", "Chile"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Portugalia",
       "category": "zawodnicy — reprezentacja",
@@ -243,12 +183,7 @@
     {
       "id": "WQ-014",
       "question": "Który kraj reprezentuje lub reprezentował Deco?",
-      "answers": [
-        "Liberia",
-        "Hiszpania",
-        "Portugalia",
-        "Czarnogóra"
-      ],
+      "answers": ["Liberia", "Hiszpania", "Portugalia", "Czarnogóra"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Portugalia",
       "category": "zawodnicy — reprezentacja",
@@ -261,12 +196,7 @@
     {
       "id": "WQ-015",
       "question": "Który kraj reprezentuje lub reprezentował Aaron Ramsey?",
-      "answers": [
-        "Maroko",
-        "Czarnogóra",
-        "Niemcy",
-        "Walia"
-      ],
+      "answers": ["Maroko", "Czarnogóra", "Niemcy", "Walia"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Walia",
       "category": "zawodnicy — reprezentacja",
@@ -279,12 +209,7 @@
     {
       "id": "WQ-016",
       "question": "Który kraj reprezentuje lub reprezentował Klaas-Jan Huntelaar?",
-      "answers": [
-        "Portugalia",
-        "Stany Zjednoczone",
-        "Holandia",
-        "Anglia"
-      ],
+      "answers": ["Portugalia", "Stany Zjednoczone", "Holandia", "Anglia"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Holandia",
       "category": "zawodnicy — reprezentacja",
@@ -297,12 +222,7 @@
     {
       "id": "WQ-017",
       "question": "Który kraj reprezentuje lub reprezentował Adriano Leite Ribeiro?",
-      "answers": [
-        "Urugwaj",
-        "Niemcy",
-        "Francja",
-        "Brazylia"
-      ],
+      "answers": ["Urugwaj", "Niemcy", "Francja", "Brazylia"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Brazylia",
       "category": "zawodnicy — reprezentacja",
@@ -315,12 +235,7 @@
     {
       "id": "WQ-018",
       "question": "Który kraj reprezentuje lub reprezentował Sergio Romero?",
-      "answers": [
-        "Anglia",
-        "Argentyna",
-        "Holandia",
-        "Gruzja"
-      ],
+      "answers": ["Anglia", "Argentyna", "Holandia", "Gruzja"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Argentyna",
       "category": "zawodnicy — reprezentacja",
@@ -333,12 +248,7 @@
     {
       "id": "WQ-019",
       "question": "Który kraj reprezentuje lub reprezentował Jürgen Kohler?",
-      "answers": [
-        "Argentyna",
-        "Niemcy",
-        "Polska",
-        "Białoruś"
-      ],
+      "answers": ["Argentyna", "Niemcy", "Polska", "Białoruś"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Niemcy",
       "category": "zawodnicy — reprezentacja",
@@ -351,12 +261,7 @@
     {
       "id": "WQ-020",
       "question": "Który kraj reprezentuje lub reprezentował Clarence Seedorf?",
-      "answers": [
-        "Mali",
-        "Holandia",
-        "Kostaryka",
-        "Algieria"
-      ],
+      "answers": ["Mali", "Holandia", "Kostaryka", "Algieria"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Holandia",
       "category": "zawodnicy — reprezentacja",
@@ -369,12 +274,7 @@
     {
       "id": "WQ-021",
       "question": "Który kraj reprezentuje lub reprezentował Vedran Ćorluka?",
-      "answers": [
-        "Chorwacja",
-        "Stany Zjednoczone",
-        "Peru",
-        "Rosja"
-      ],
+      "answers": ["Chorwacja", "Stany Zjednoczone", "Peru", "Rosja"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Chorwacja",
       "category": "zawodnicy — reprezentacja",
@@ -387,12 +287,7 @@
     {
       "id": "WQ-022",
       "question": "Który kraj reprezentuje lub reprezentował Ashley Cole?",
-      "answers": [
-        "Anglia",
-        "Ukraina",
-        "Francja",
-        "Austria"
-      ],
+      "answers": ["Anglia", "Ukraina", "Francja", "Austria"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Anglia",
       "category": "zawodnicy — reprezentacja",
@@ -423,12 +318,7 @@
     {
       "id": "WQ-024",
       "question": "Który kraj reprezentuje lub reprezentował Jérémy Ménez?",
-      "answers": [
-        "Austria",
-        "Francja",
-        "Czarnogóra",
-        "Polska"
-      ],
+      "answers": ["Austria", "Francja", "Czarnogóra", "Polska"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Francja",
       "category": "zawodnicy — reprezentacja",
@@ -459,12 +349,7 @@
     {
       "id": "WQ-026",
       "question": "Który kraj reprezentuje lub reprezentował Samuel Umtiti?",
-      "answers": [
-        "Serbia",
-        "Bułgaria",
-        "Francja",
-        "Ukraina"
-      ],
+      "answers": ["Serbia", "Bułgaria", "Francja", "Ukraina"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Francja",
       "category": "zawodnicy — reprezentacja",
@@ -477,12 +362,7 @@
     {
       "id": "WQ-027",
       "question": "Który kraj reprezentuje lub reprezentował Éver Banega?",
-      "answers": [
-        "Słowenia",
-        "Argentyna",
-        "Dania",
-        "Irlandia Północna"
-      ],
+      "answers": ["Słowenia", "Argentyna", "Dania", "Irlandia Północna"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Argentyna",
       "category": "zawodnicy — reprezentacja",
@@ -495,12 +375,7 @@
     {
       "id": "WQ-028",
       "question": "Który kraj reprezentuje lub reprezentował Emre Belözoğlu?",
-      "answers": [
-        "Urugwaj",
-        "Niemcy",
-        "Turcja",
-        "Anglia"
-      ],
+      "answers": ["Urugwaj", "Niemcy", "Turcja", "Anglia"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Turcja",
       "category": "zawodnicy — reprezentacja",
@@ -513,12 +388,7 @@
     {
       "id": "WQ-029",
       "question": "Który kraj reprezentuje lub reprezentował Claudio Caniggia?",
-      "answers": [
-        "Kostaryka",
-        "Turcja",
-        "Czarnogóra",
-        "Argentyna"
-      ],
+      "answers": ["Kostaryka", "Turcja", "Czarnogóra", "Argentyna"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Argentyna",
       "category": "zawodnicy — reprezentacja",
@@ -531,12 +401,7 @@
     {
       "id": "WQ-030",
       "question": "Który kraj reprezentuje lub reprezentował Gianfranco Zola?",
-      "answers": [
-        "Algieria",
-        "Liberia",
-        "Nigeria",
-        "Włochy"
-      ],
+      "answers": ["Algieria", "Liberia", "Nigeria", "Włochy"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Włochy",
       "category": "zawodnicy — reprezentacja",
@@ -549,12 +414,7 @@
     {
       "id": "WQ-031",
       "question": "Który kraj reprezentuje lub reprezentował Pep Guardiola?",
-      "answers": [
-        "Indie",
-        "Stany Zjednoczone",
-        "Hiszpania",
-        "Chile"
-      ],
+      "answers": ["Indie", "Stany Zjednoczone", "Hiszpania", "Chile"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hiszpania",
       "category": "zawodnicy — reprezentacja",
@@ -567,12 +427,7 @@
     {
       "id": "WQ-032",
       "question": "Który kraj reprezentuje lub reprezentował David Beckham?",
-      "answers": [
-        "Brazylia",
-        "Anglia",
-        "Urugwaj",
-        "Argentyna"
-      ],
+      "answers": ["Brazylia", "Anglia", "Urugwaj", "Argentyna"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Anglia",
       "category": "zawodnicy — reprezentacja",
@@ -585,12 +440,7 @@
     {
       "id": "WQ-033",
       "question": "Który kraj reprezentuje lub reprezentował Nemanja Matić?",
-      "answers": [
-        "Serbia",
-        "Niemcy",
-        "Ghana",
-        "Argentyna"
-      ],
+      "answers": ["Serbia", "Niemcy", "Ghana", "Argentyna"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Serbia",
       "category": "zawodnicy — reprezentacja",
@@ -603,12 +453,7 @@
     {
       "id": "WQ-034",
       "question": "Który kraj reprezentuje lub reprezentował Gilberto Silva?",
-      "answers": [
-        "Brazylia",
-        "Bośnia i Hercegowina",
-        "Turcja",
-        "Kostaryka"
-      ],
+      "answers": ["Brazylia", "Bośnia i Hercegowina", "Turcja", "Kostaryka"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Brazylia",
       "category": "zawodnicy — reprezentacja",
@@ -621,12 +466,7 @@
     {
       "id": "WQ-035",
       "question": "Który kraj reprezentuje lub reprezentował Rüştü Reçber?",
-      "answers": [
-        "Szwecja",
-        "Ekwador",
-        "Turcja",
-        "Maroko"
-      ],
+      "answers": ["Szwecja", "Ekwador", "Turcja", "Maroko"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Turcja",
       "category": "zawodnicy — reprezentacja",
@@ -639,12 +479,7 @@
     {
       "id": "WQ-036",
       "question": "Który kraj reprezentuje lub reprezentował Ali Daei?",
-      "answers": [
-        "Serbia",
-        "Ekwador",
-        "Czarnogóra",
-        "Iran"
-      ],
+      "answers": ["Serbia", "Ekwador", "Czarnogóra", "Iran"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Iran",
       "category": "zawodnicy — reprezentacja",
@@ -657,12 +492,7 @@
     {
       "id": "WQ-037",
       "question": "Który kraj reprezentuje lub reprezentował Enner Valencia?",
-      "answers": [
-        "Ekwador",
-        "Meksyk",
-        "Wybrzeże Kości Słoniowej",
-        "Czechy"
-      ],
+      "answers": ["Ekwador", "Meksyk", "Wybrzeże Kości Słoniowej", "Czechy"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Ekwador",
       "category": "zawodnicy — reprezentacja",
@@ -675,12 +505,7 @@
     {
       "id": "WQ-038",
       "question": "Który kraj reprezentuje lub reprezentował Fabio Grosso?",
-      "answers": [
-        "Szwajcaria",
-        "Włochy",
-        "Mali",
-        "Argentyna"
-      ],
+      "answers": ["Szwajcaria", "Włochy", "Mali", "Argentyna"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Włochy",
       "category": "zawodnicy — reprezentacja",
@@ -693,12 +518,7 @@
     {
       "id": "WQ-039",
       "question": "Który kraj reprezentuje lub reprezentował Ernesto Valverde?",
-      "answers": [
-        "Białoruś",
-        "Ukraina",
-        "Hiszpania",
-        "Szwajcaria"
-      ],
+      "answers": ["Białoruś", "Ukraina", "Hiszpania", "Szwajcaria"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hiszpania",
       "category": "zawodnicy — reprezentacja",
@@ -711,12 +531,7 @@
     {
       "id": "WQ-040",
       "question": "Który kraj reprezentuje lub reprezentował Riyad Mahrez?",
-      "answers": [
-        "Ukraina",
-        "Algieria",
-        "Chorwacja",
-        "Iran"
-      ],
+      "answers": ["Ukraina", "Algieria", "Chorwacja", "Iran"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Algieria",
       "category": "zawodnicy — reprezentacja",
@@ -729,12 +544,7 @@
     {
       "id": "WQ-041",
       "question": "Który kraj reprezentuje lub reprezentował Michael Owen?",
-      "answers": [
-        "Słowenia",
-        "Brazylia",
-        "Anglia",
-        "Turcja"
-      ],
+      "answers": ["Słowenia", "Brazylia", "Anglia", "Turcja"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Anglia",
       "category": "zawodnicy — reprezentacja",
@@ -747,12 +557,7 @@
     {
       "id": "WQ-042",
       "question": "Który kraj reprezentuje lub reprezentował Hiroshi Nanami?",
-      "answers": [
-        "Kostaryka",
-        "Japonia",
-        "Włochy",
-        "Kamerun"
-      ],
+      "answers": ["Kostaryka", "Japonia", "Włochy", "Kamerun"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Japonia",
       "category": "zawodnicy — reprezentacja",
@@ -765,12 +570,7 @@
     {
       "id": "WQ-043",
       "question": "Który kraj reprezentuje lub reprezentował Miroslav Klose?",
-      "answers": [
-        "Holandia",
-        "Rumunia",
-        "Czarnogóra",
-        "Niemcy"
-      ],
+      "answers": ["Holandia", "Rumunia", "Czarnogóra", "Niemcy"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Niemcy",
       "category": "zawodnicy — reprezentacja",
@@ -783,12 +583,7 @@
     {
       "id": "WQ-044",
       "question": "Który kraj reprezentuje lub reprezentował Sol Campbell?",
-      "answers": [
-        "Anglia",
-        "Portugalia",
-        "Włochy",
-        "Kostaryka"
-      ],
+      "answers": ["Anglia", "Portugalia", "Włochy", "Kostaryka"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Anglia",
       "category": "zawodnicy — reprezentacja",
@@ -801,12 +596,7 @@
     {
       "id": "WQ-045",
       "question": "Który kraj reprezentuje lub reprezentował Martín Cáceres?",
-      "answers": [
-        "Urugwaj",
-        "Chile",
-        "Serbia",
-        "Niemcy"
-      ],
+      "answers": ["Urugwaj", "Chile", "Serbia", "Niemcy"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Urugwaj",
       "category": "zawodnicy — reprezentacja",
@@ -819,12 +609,7 @@
     {
       "id": "WQ-046",
       "question": "W którym roku urodził się Steven Pienaar?",
-      "answers": [
-        "1948",
-        "2004",
-        "1982",
-        "1949"
-      ],
+      "answers": ["1948", "2004", "1982", "1949"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1982",
       "category": "zawodnicy — rok urodzenia",
@@ -837,12 +622,7 @@
     {
       "id": "WQ-047",
       "question": "W którym roku urodził się Fabio Cannavaro?",
-      "answers": [
-        "1964",
-        "1973",
-        "1977",
-        "1943"
-      ],
+      "answers": ["1964", "1973", "1977", "1943"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1973",
       "category": "zawodnicy — rok urodzenia",
@@ -855,12 +635,7 @@
     {
       "id": "WQ-048",
       "question": "W którym roku urodził się Riyad Mahrez?",
-      "answers": [
-        "2003",
-        "1965",
-        "1991",
-        "1952"
-      ],
+      "answers": ["2003", "1965", "1991", "1952"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1991",
       "category": "zawodnicy — rok urodzenia",
@@ -873,12 +648,7 @@
     {
       "id": "WQ-049",
       "question": "W którym roku urodził się Ronaldinho?",
-      "answers": [
-        "1944",
-        "1987",
-        "1980",
-        "1959"
-      ],
+      "answers": ["1944", "1987", "1980", "1959"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1980",
       "category": "zawodnicy — rok urodzenia",
@@ -891,12 +661,7 @@
     {
       "id": "WQ-050",
       "question": "W którym roku urodził się Emre Belözoğlu?",
-      "answers": [
-        "1952",
-        "1979",
-        "1980",
-        "1993"
-      ],
+      "answers": ["1952", "1979", "1980", "1993"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1980",
       "category": "zawodnicy — rok urodzenia",
@@ -909,12 +674,7 @@
     {
       "id": "WQ-051",
       "question": "W którym roku urodził się Seigō Narazaki?",
-      "answers": [
-        "1981",
-        "1962",
-        "1976",
-        "1936"
-      ],
+      "answers": ["1981", "1962", "1976", "1936"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1976",
       "category": "zawodnicy — rok urodzenia",
@@ -927,12 +687,7 @@
     {
       "id": "WQ-052",
       "question": "W którym roku urodził się Yūki Ōtsu?",
-      "answers": [
-        "1990",
-        "1983",
-        "1994",
-        "1968"
-      ],
+      "answers": ["1990", "1983", "1994", "1968"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1990",
       "category": "zawodnicy — rok urodzenia",
@@ -945,12 +700,7 @@
     {
       "id": "WQ-053",
       "question": "W którym roku urodził się Dino Zoff?",
-      "answers": [
-        "1990",
-        "1961",
-        "2001",
-        "1942"
-      ],
+      "answers": ["1990", "1961", "2001", "1942"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1942",
       "category": "zawodnicy — rok urodzenia",
@@ -963,12 +713,7 @@
     {
       "id": "WQ-054",
       "question": "W którym roku urodził się Keylor Navas?",
-      "answers": [
-        "1991",
-        "1971",
-        "1986",
-        "1994"
-      ],
+      "answers": ["1991", "1971", "1986", "1994"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1986",
       "category": "zawodnicy — rok urodzenia",
@@ -981,12 +726,7 @@
     {
       "id": "WQ-055",
       "question": "W którym roku urodził się Masashi Ōguro?",
-      "answers": [
-        "1972",
-        "1962",
-        "1973",
-        "1980"
-      ],
+      "answers": ["1972", "1962", "1973", "1980"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1980",
       "category": "zawodnicy — rok urodzenia",
@@ -999,12 +739,7 @@
     {
       "id": "WQ-056",
       "question": "W którym roku urodził się Diego Simeone?",
-      "answers": [
-        "1970",
-        "1972",
-        "1995",
-        "2004"
-      ],
+      "answers": ["1970", "1972", "1995", "2004"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1970",
       "category": "zawodnicy — rok urodzenia",
@@ -1017,12 +752,7 @@
     {
       "id": "WQ-057",
       "question": "W którym roku urodził się Niko Kovač?",
-      "answers": [
-        "2003",
-        "1971",
-        "1960",
-        "1964"
-      ],
+      "answers": ["2003", "1971", "1960", "1964"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1971",
       "category": "zawodnicy — rok urodzenia",
@@ -1035,12 +765,7 @@
     {
       "id": "WQ-058",
       "question": "W którym roku urodził się Miloš Krasić?",
-      "answers": [
-        "1958",
-        "1964",
-        "1947",
-        "1984"
-      ],
+      "answers": ["1958", "1964", "1947", "1984"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1984",
       "category": "zawodnicy — rok urodzenia",
@@ -1053,12 +778,7 @@
     {
       "id": "WQ-059",
       "question": "W którym roku urodził się Angelos Charisteas?",
-      "answers": [
-        "1946",
-        "2001",
-        "1980",
-        "1994"
-      ],
+      "answers": ["1946", "2001", "1980", "1994"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1980",
       "category": "zawodnicy — rok urodzenia",
@@ -1071,12 +791,7 @@
     {
       "id": "WQ-060",
       "question": "W którym roku urodził się Lucas Neill?",
-      "answers": [
-        "1997",
-        "1941",
-        "1949",
-        "1978"
-      ],
+      "answers": ["1997", "1941", "1949", "1978"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1978",
       "category": "zawodnicy — rok urodzenia",
@@ -1089,12 +804,7 @@
     {
       "id": "WQ-061",
       "question": "W którym roku urodził się James Milner?",
-      "answers": [
-        "1948",
-        "1986",
-        "1987",
-        "1971"
-      ],
+      "answers": ["1948", "1986", "1987", "1971"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1986",
       "category": "zawodnicy — rok urodzenia",
@@ -1107,12 +817,7 @@
     {
       "id": "WQ-062",
       "question": "W którym roku urodził się Thomas Vermaelen?",
-      "answers": [
-        "1985",
-        "1984",
-        "1974",
-        "1981"
-      ],
+      "answers": ["1985", "1984", "1974", "1981"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1985",
       "category": "zawodnicy — rok urodzenia",
@@ -1125,12 +830,7 @@
     {
       "id": "WQ-063",
       "question": "W którym roku urodził się Marc Overmars?",
-      "answers": [
-        "1973",
-        "1944",
-        "1983",
-        "1995"
-      ],
+      "answers": ["1973", "1944", "1983", "1995"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1973",
       "category": "zawodnicy — rok urodzenia",
@@ -1143,12 +843,7 @@
     {
       "id": "WQ-064",
       "question": "W którym roku urodził się Cafu?",
-      "answers": [
-        "1981",
-        "1993",
-        "1937",
-        "1970"
-      ],
+      "answers": ["1981", "1993", "1937", "1970"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1970",
       "category": "zawodnicy — rok urodzenia",
@@ -1161,12 +856,7 @@
     {
       "id": "WQ-065",
       "question": "W którym roku urodził się Ibrahim Afellay?",
-      "answers": [
-        "1950",
-        "1998",
-        "1973",
-        "1986"
-      ],
+      "answers": ["1950", "1998", "1973", "1986"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1986",
       "category": "zawodnicy — rok urodzenia",
@@ -1179,12 +869,7 @@
     {
       "id": "WQ-066",
       "question": "W którym roku urodził się Claudio Caniggia?",
-      "answers": [
-        "1968",
-        "2002",
-        "1979",
-        "1967"
-      ],
+      "answers": ["1968", "2002", "1979", "1967"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1967",
       "category": "zawodnicy — rok urodzenia",
@@ -1197,12 +882,7 @@
     {
       "id": "WQ-067",
       "question": "W którym roku urodził się Esteban Cambiasso?",
-      "answers": [
-        "1983",
-        "1940",
-        "1980",
-        "1988"
-      ],
+      "answers": ["1983", "1940", "1980", "1988"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1980",
       "category": "zawodnicy — rok urodzenia",
@@ -1215,12 +895,7 @@
     {
       "id": "WQ-068",
       "question": "W którym roku urodził się John Obi Mikel?",
-      "answers": [
-        "1941",
-        "1987",
-        "1997",
-        "2006"
-      ],
+      "answers": ["1941", "1987", "1997", "2006"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1987",
       "category": "zawodnicy — rok urodzenia",
@@ -1233,12 +908,7 @@
     {
       "id": "WQ-069",
       "question": "W którym roku urodził się Javier Mascherano?",
-      "answers": [
-        "1972",
-        "1955",
-        "1939",
-        "1984"
-      ],
+      "answers": ["1972", "1955", "1939", "1984"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1984",
       "category": "zawodnicy — rok urodzenia",
@@ -1251,12 +921,7 @@
     {
       "id": "WQ-070",
       "question": "W którym roku urodził się Dimitri Payet?",
-      "answers": [
-        "1941",
-        "1992",
-        "1983",
-        "1987"
-      ],
+      "answers": ["1941", "1992", "1983", "1987"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1987",
       "category": "zawodnicy — rok urodzenia",
@@ -1269,12 +934,7 @@
     {
       "id": "WQ-071",
       "question": "W którym roku urodził się Miroslav Klose?",
-      "answers": [
-        "1965",
-        "1978",
-        "1984",
-        "1998"
-      ],
+      "answers": ["1965", "1978", "1984", "1998"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1978",
       "category": "zawodnicy — rok urodzenia",
@@ -1287,12 +947,7 @@
     {
       "id": "WQ-072",
       "question": "W którym roku urodził się Jari Litmanen?",
-      "answers": [
-        "1971",
-        "2001",
-        "1984",
-        "2005"
-      ],
+      "answers": ["1971", "2001", "1984", "2005"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1971",
       "category": "zawodnicy — rok urodzenia",
@@ -1305,12 +960,7 @@
     {
       "id": "WQ-073",
       "question": "W którym roku urodził się Paulo Wanchope?",
-      "answers": [
-        "1974",
-        "1976",
-        "2000",
-        "1937"
-      ],
+      "answers": ["1974", "1976", "2000", "1937"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1976",
       "category": "zawodnicy — rok urodzenia",
@@ -1323,12 +973,7 @@
     {
       "id": "WQ-074",
       "question": "W którym roku urodził się Ángel Di María?",
-      "answers": [
-        "1967",
-        "1983",
-        "1975",
-        "1988"
-      ],
+      "answers": ["1967", "1983", "1975", "1988"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1988",
       "category": "zawodnicy — rok urodzenia",
@@ -1341,12 +986,7 @@
     {
       "id": "WQ-075",
       "question": "W którym roku urodził się Jordan Ayew?",
-      "answers": [
-        "1945",
-        "1991",
-        "1986",
-        "2001"
-      ],
+      "answers": ["1945", "1991", "1986", "2001"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1991",
       "category": "zawodnicy — rok urodzenia",
@@ -1359,12 +999,7 @@
     {
       "id": "WQ-076",
       "question": "W którym roku urodził się Frank de Boer?",
-      "answers": [
-        "1984",
-        "1970",
-        "1960",
-        "1994"
-      ],
+      "answers": ["1984", "1970", "1960", "1994"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1970",
       "category": "zawodnicy — rok urodzenia",
@@ -1377,12 +1012,7 @@
     {
       "id": "WQ-077",
       "question": "W którym roku urodził się Iker Casillas?",
-      "answers": [
-        "1995",
-        "1972",
-        "1981",
-        "1989"
-      ],
+      "answers": ["1995", "1972", "1981", "1989"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1981",
       "category": "zawodnicy — rok urodzenia",
@@ -1395,12 +1025,7 @@
     {
       "id": "WQ-078",
       "question": "W którym roku urodził się Teddy Sheringham?",
-      "answers": [
-        "1986",
-        "2001",
-        "1966",
-        "1938"
-      ],
+      "answers": ["1986", "2001", "1966", "1938"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1966",
       "category": "zawodnicy — rok urodzenia",
@@ -1413,12 +1038,7 @@
     {
       "id": "WQ-079",
       "question": "W którym roku urodził się Toshihiro Hattori?",
-      "answers": [
-        "1985",
-        "1961",
-        "2002",
-        "1973"
-      ],
+      "answers": ["1985", "1961", "2002", "1973"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1973",
       "category": "zawodnicy — rok urodzenia",
@@ -1431,12 +1051,7 @@
     {
       "id": "WQ-080",
       "question": "W którym roku urodził się Leroy Sané?",
-      "answers": [
-        "1970",
-        "1996",
-        "1995",
-        "1936"
-      ],
+      "answers": ["1970", "1996", "1995", "1936"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1996",
       "category": "zawodnicy — rok urodzenia",
@@ -1449,12 +1064,7 @@
     {
       "id": "WQ-081",
       "question": "W którym roku urodził się Sylvain Wiltord?",
-      "answers": [
-        "1984",
-        "1974",
-        "1991",
-        "1980"
-      ],
+      "answers": ["1984", "1974", "1991", "1980"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1974",
       "category": "zawodnicy — rok urodzenia",
@@ -1467,12 +1077,7 @@
     {
       "id": "WQ-082",
       "question": "W którym roku urodził się Bastian Schweinsteiger?",
-      "answers": [
-        "1981",
-        "1959",
-        "1984",
-        "1941"
-      ],
+      "answers": ["1981", "1959", "1984", "1941"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1984",
       "category": "zawodnicy — rok urodzenia",
@@ -1485,12 +1090,7 @@
     {
       "id": "WQ-083",
       "question": "W którym roku urodził się Gary Neville?",
-      "answers": [
-        "1975",
-        "1937",
-        "1981",
-        "1997"
-      ],
+      "answers": ["1975", "1937", "1981", "1997"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1975",
       "category": "zawodnicy — rok urodzenia",
@@ -1503,12 +1103,7 @@
     {
       "id": "WQ-084",
       "question": "W którym roku urodził się David Villa?",
-      "answers": [
-        "1977",
-        "1992",
-        "1973",
-        "1981"
-      ],
+      "answers": ["1977", "1992", "1973", "1981"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1981",
       "category": "zawodnicy — rok urodzenia",
@@ -1521,12 +1116,7 @@
     {
       "id": "WQ-085",
       "question": "W którym roku urodził się Jérémy Toulalan?",
-      "answers": [
-        "1949",
-        "1992",
-        "1983",
-        "1955"
-      ],
+      "answers": ["1949", "1992", "1983", "1955"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1983",
       "category": "zawodnicy — rok urodzenia",
@@ -1539,12 +1129,7 @@
     {
       "id": "WQ-086",
       "question": "W jakim mieście lub miejscowości urodził się Frank de Boer?",
-      "answers": [
-        "Taszkent",
-        "Armthorpe",
-        "Hoorn",
-        "Warszawa"
-      ],
+      "answers": ["Taszkent", "Armthorpe", "Hoorn", "Warszawa"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hoorn",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1557,12 +1142,7 @@
     {
       "id": "WQ-087",
       "question": "W jakim mieście lub miejscowości urodził się Davor Šuker?",
-      "answers": [
-        "Helsingborg",
-        "Karlsruhe",
-        "Osijek",
-        "Antwerpia"
-      ],
+      "answers": ["Helsingborg", "Karlsruhe", "Osijek", "Antwerpia"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Osijek",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1575,12 +1155,7 @@
     {
       "id": "WQ-088",
       "question": "W jakim mieście lub miejscowości urodził się Niko Kranjčar?",
-      "answers": [
-        "Utrecht",
-        "São Bernardo do Campo",
-        "Zagrzeb",
-        "São Vicente"
-      ],
+      "answers": ["Utrecht", "São Bernardo do Campo", "Zagrzeb", "São Vicente"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Zagrzeb",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1593,12 +1168,7 @@
     {
       "id": "WQ-089",
       "question": "W jakim mieście lub miejscowości urodził się Giovanni van Bronckhorst?",
-      "answers": [
-        "Leicester",
-        "Rotterdam",
-        "Sendai",
-        "Podgorica"
-      ],
+      "answers": ["Leicester", "Rotterdam", "Sendai", "Podgorica"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Rotterdam",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1611,12 +1181,7 @@
     {
       "id": "WQ-090",
       "question": "W jakim mieście lub miejscowości urodził się Gilberto Silva?",
-      "answers": [
-        "Fuentealbilla",
-        "Lagoa da Prata",
-        "Sens",
-        "Pampeluna"
-      ],
+      "answers": ["Fuentealbilla", "Lagoa da Prata", "Sens", "Pampeluna"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Lagoa da Prata",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1629,12 +1194,7 @@
     {
       "id": "WQ-091",
       "question": "W jakim mieście lub miejscowości urodził się Berti Vogts?",
-      "answers": [
-        "Büttgen",
-        "Błagojewgrad",
-        "Chimay",
-        "Haltern am See"
-      ],
+      "answers": ["Büttgen", "Błagojewgrad", "Chimay", "Haltern am See"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Büttgen",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1647,12 +1207,7 @@
     {
       "id": "WQ-092",
       "question": "W jakim mieście lub miejscowości urodził się Jan Vertonghen?",
-      "answers": [
-        "Tourcoing",
-        "Katwijk",
-        "Barking",
-        "Sint-Niklaas"
-      ],
+      "answers": ["Tourcoing", "Katwijk", "Barking", "Sint-Niklaas"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Sint-Niklaas",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1665,12 +1220,7 @@
     {
       "id": "WQ-093",
       "question": "W jakim mieście lub miejscowości urodził się Nemanja Matić?",
-      "answers": [
-        "Monrovia",
-        "Huyton",
-        "L’Hospitalet de Llobregat",
-        "Šabac"
-      ],
+      "answers": ["Monrovia", "Huyton", "L’Hospitalet de Llobregat", "Šabac"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Šabac",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1701,12 +1251,7 @@
     {
       "id": "WQ-095",
       "question": "W jakim mieście lub miejscowości urodził się Luiz Gustavo?",
-      "answers": [
-        "Pindamonhangaba",
-        "Aliança",
-        "Narashino",
-        "Eskilstuna"
-      ],
+      "answers": ["Pindamonhangaba", "Aliança", "Narashino", "Eskilstuna"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Pindamonhangaba",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1719,12 +1264,7 @@
     {
       "id": "WQ-096",
       "question": "W jakim mieście lub miejscowości urodził się Makoto Hasebe?",
-      "answers": [
-        "Emst",
-        "Praga",
-        "Fujieda",
-        "Warszawa"
-      ],
+      "answers": ["Emst", "Praga", "Fujieda", "Warszawa"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Fujieda",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1737,12 +1277,7 @@
     {
       "id": "WQ-097",
       "question": "W jakim mieście lub miejscowości urodził się Claudio Pizarro?",
-      "answers": [
-        "Beckton",
-        "Katwijk",
-        "Lavelanet",
-        "Callao"
-      ],
+      "answers": ["Beckton", "Katwijk", "Lavelanet", "Callao"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Callao",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1755,12 +1290,7 @@
     {
       "id": "WQ-098",
       "question": "W jakim mieście lub miejscowości urodził się Yohan Cabaye?",
-      "answers": [
-        "Tourcoing",
-        "Prefektura Kagoshima",
-        "Dortmund",
-        "Barcelona"
-      ],
+      "answers": ["Tourcoing", "Prefektura Kagoshima", "Dortmund", "Barcelona"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Tourcoing",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1773,12 +1303,7 @@
     {
       "id": "WQ-099",
       "question": "W jakim mieście lub miejscowości urodził się Romário?",
-      "answers": [
-        "Adapazarı",
-        "Rio de Janeiro",
-        "Ciudadela",
-        "Lambsheim"
-      ],
+      "answers": ["Adapazarı", "Rio de Janeiro", "Ciudadela", "Lambsheim"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Rio de Janeiro",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1791,12 +1316,7 @@
     {
       "id": "WQ-100",
       "question": "W jakim mieście lub miejscowości urodził się Joan Capdevila?",
-      "answers": [
-        "Würselen",
-        "Tàrrega",
-        "Macclesfield",
-        "Kolbermoor"
-      ],
+      "answers": ["Würselen", "Tàrrega", "Macclesfield", "Kolbermoor"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Tàrrega",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1809,12 +1329,7 @@
     {
       "id": "WQ-101",
       "question": "W jakim mieście lub miejscowości urodził się Łukasz Fabiański?",
-      "answers": [
-        "Kostrzyn nad Odrą",
-        "São Paulo",
-        "Morioka",
-        "Maasbracht"
-      ],
+      "answers": ["Kostrzyn nad Odrą", "São Paulo", "Morioka", "Maasbracht"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Kostrzyn nad Odrą",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1845,12 +1360,7 @@
     {
       "id": "WQ-103",
       "question": "W jakim mieście lub miejscowości urodził się Darwin Núñez?",
-      "answers": [
-        "Hiroszima",
-        "Gladbeck",
-        "Artigas (miasto)",
-        "Les Ulis"
-      ],
+      "answers": ["Hiroszima", "Gladbeck", "Artigas (miasto)", "Les Ulis"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Artigas (miasto)",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1863,12 +1373,7 @@
     {
       "id": "WQ-104",
       "question": "W jakim mieście lub miejscowości urodził się Raúl González Blanco?",
-      "answers": [
-        "Santiago",
-        "Kono",
-        "Madryt",
-        "Fukuyama"
-      ],
+      "answers": ["Santiago", "Kono", "Madryt", "Fukuyama"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Madryt",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1899,12 +1404,7 @@
     {
       "id": "WQ-106",
       "question": "W jakim mieście lub miejscowości urodził się Robin van Persie?",
-      "answers": [
-        "Kawachinagano",
-        "Rotterdam",
-        "São Paulo",
-        "Belgrad"
-      ],
+      "answers": ["Kawachinagano", "Rotterdam", "São Paulo", "Belgrad"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Rotterdam",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1917,12 +1417,7 @@
     {
       "id": "WQ-107",
       "question": "W jakim mieście lub miejscowości urodził się Alessandro Del Piero?",
-      "answers": [
-        "Salto",
-        "Rotherham",
-        "Tambow",
-        "Conegliano"
-      ],
+      "answers": ["Salto", "Rotherham", "Tambow", "Conegliano"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Conegliano",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1935,12 +1430,7 @@
     {
       "id": "WQ-108",
       "question": "W jakim mieście lub miejscowości urodził się Edin Džeko?",
-      "answers": [
-        "Emst",
-        "Reykjavík",
-        "Sarajewo",
-        "Seul"
-      ],
+      "answers": ["Emst", "Reykjavík", "Sarajewo", "Seul"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Sarajewo",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1953,12 +1443,7 @@
     {
       "id": "WQ-109",
       "question": "W jakim mieście lub miejscowości urodził się Martín Cáceres?",
-      "answers": [
-        "Noheji",
-        "Fiesole",
-        "Bamako",
-        "Montevideo"
-      ],
+      "answers": ["Noheji", "Fiesole", "Bamako", "Montevideo"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Montevideo",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1971,12 +1456,7 @@
     {
       "id": "WQ-110",
       "question": "W jakim mieście lub miejscowości urodził się Kazumichi Takagi?",
-      "answers": [
-        "Ōita",
-        "Henderson",
-        "Yasu",
-        "Kono"
-      ],
+      "answers": ["Ōita", "Henderson", "Yasu", "Kono"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Yasu",
       "category": "zawodnicy — miejsce urodzenia",
@@ -1989,12 +1469,7 @@
     {
       "id": "WQ-111",
       "question": "W jakim mieście lub miejscowości urodził się Cristiano Ronaldo?",
-      "answers": [
-        "Ontario",
-        "Bedum",
-        "Maasbracht",
-        "Funchal"
-      ],
+      "answers": ["Ontario", "Bedum", "Maasbracht", "Funchal"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Funchal",
       "category": "zawodnicy — miejsce urodzenia",
@@ -2007,12 +1482,7 @@
     {
       "id": "WQ-112",
       "question": "W jakim mieście lub miejscowości urodził się Alessandro Nesta?",
-      "answers": [
-        "Oumé",
-        "Rzym",
-        "Neuilly-sur-Marne",
-        "Kushiro"
-      ],
+      "answers": ["Oumé", "Rzym", "Neuilly-sur-Marne", "Kushiro"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Rzym",
       "category": "zawodnicy — miejsce urodzenia",
@@ -2025,12 +1495,7 @@
     {
       "id": "WQ-113",
       "question": "W jakim mieście lub miejscowości urodził się Daiki Niwa?",
-      "answers": [
-        "Wodonga",
-        "Würselen",
-        "Johannesburg",
-        "Kawachinagano"
-      ],
+      "answers": ["Wodonga", "Würselen", "Johannesburg", "Kawachinagano"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Kawachinagano",
       "category": "zawodnicy — miejsce urodzenia",
@@ -2043,12 +1508,7 @@
     {
       "id": "WQ-114",
       "question": "W jakim mieście lub miejscowości urodził się Keita Suzuki?",
-      "answers": [
-        "Samtredia",
-        "Jaunde",
-        "Praga",
-        "Shimizu-ku"
-      ],
+      "answers": ["Samtredia", "Jaunde", "Praga", "Shimizu-ku"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Shimizu-ku",
       "category": "zawodnicy — miejsce urodzenia",
@@ -2061,12 +1521,7 @@
     {
       "id": "WQ-115",
       "question": "W jakim mieście lub miejscowości urodził się Fabio Grosso?",
-      "answers": [
-        "Rzym",
-        "Rubineia",
-        "Madryt",
-        "Pelotas"
-      ],
+      "answers": ["Rzym", "Rubineia", "Madryt", "Pelotas"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Rzym",
       "category": "zawodnicy — miejsce urodzenia",
@@ -2169,12 +1624,7 @@
     {
       "id": "WQ-121",
       "question": "Na jakiej pozycji występował lub występuje Wynton Rufer?",
-      "answers": [
-        "środkowy napastnik",
-        "bramkarz",
-        "pomocnik",
-        "napastnik"
-      ],
+      "answers": ["środkowy napastnik", "bramkarz", "pomocnik", "napastnik"],
       "correctAnswerIndex": 3,
       "correctAnswer": "napastnik",
       "category": "zawodnicy — pozycja",
@@ -2205,12 +1655,7 @@
     {
       "id": "WQ-123",
       "question": "Na jakiej pozycji występował lub występuje Gabriel Heinze?",
-      "answers": [
-        "pomocnik",
-        "środkowy obrońca",
-        "obrońca",
-        "skrzydłowy"
-      ],
+      "answers": ["pomocnik", "środkowy obrońca", "obrońca", "skrzydłowy"],
       "correctAnswerIndex": 2,
       "correctAnswer": "obrońca",
       "category": "zawodnicy — pozycja",
@@ -2259,12 +1704,7 @@
     {
       "id": "WQ-126",
       "question": "Na jakiej pozycji występował lub występuje Takayuki Morimoto?",
-      "answers": [
-        "bramkarz",
-        "skrzydłowy",
-        "napastnik",
-        "lewy skrzydłowy"
-      ],
+      "answers": ["bramkarz", "skrzydłowy", "napastnik", "lewy skrzydłowy"],
       "correctAnswerIndex": 2,
       "correctAnswer": "napastnik",
       "category": "zawodnicy — pozycja",
@@ -2295,12 +1735,7 @@
     {
       "id": "WQ-128",
       "question": "Na jakiej pozycji występował lub występuje Paul Scholes?",
-      "answers": [
-        "bramkarz",
-        "pomocnik",
-        "libero",
-        "środkowy pomocnik"
-      ],
+      "answers": ["bramkarz", "pomocnik", "libero", "środkowy pomocnik"],
       "correctAnswerIndex": 1,
       "correctAnswer": "pomocnik",
       "category": "zawodnicy — pozycja",
@@ -2421,12 +1856,7 @@
     {
       "id": "WQ-135",
       "question": "Na jakiej pozycji występował lub występuje Sokratis Papastatopulos?",
-      "answers": [
-        "napastnik",
-        "libero",
-        "boczny obrońca",
-        "środkowy obrońca"
-      ],
+      "answers": ["napastnik", "libero", "boczny obrońca", "środkowy obrońca"],
       "correctAnswerIndex": 3,
       "correctAnswer": "środkowy obrońca",
       "category": "zawodnicy — pozycja",
@@ -2475,12 +1905,7 @@
     {
       "id": "WQ-138",
       "question": "Na jakiej pozycji występował lub występuje Eduardo da Silva?",
-      "answers": [
-        "boczny obrońca",
-        "środkowy pomocnik",
-        "napastnik",
-        "libero"
-      ],
+      "answers": ["boczny obrońca", "środkowy pomocnik", "napastnik", "libero"],
       "correctAnswerIndex": 2,
       "correctAnswer": "napastnik",
       "category": "zawodnicy — pozycja",
@@ -2529,12 +1954,7 @@
     {
       "id": "WQ-141",
       "question": "W jakim kraju ma siedzibę klub CD Lugo?",
-      "answers": [
-        "Czechy",
-        "Hiszpania",
-        "Ukraina",
-        "Brazylia"
-      ],
+      "answers": ["Czechy", "Hiszpania", "Ukraina", "Brazylia"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Hiszpania",
       "category": "kluby — kraj",
@@ -2565,12 +1985,7 @@
     {
       "id": "WQ-143",
       "question": "W jakim kraju ma siedzibę klub CA Osasuna?",
-      "answers": [
-        "Arabia Saudyjska",
-        "Gruzja",
-        "Hiszpania",
-        "Francja"
-      ],
+      "answers": ["Arabia Saudyjska", "Gruzja", "Hiszpania", "Francja"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hiszpania",
       "category": "kluby — kraj",
@@ -2583,12 +1998,7 @@
     {
       "id": "WQ-144",
       "question": "W jakim kraju ma siedzibę klub Portsmouth F.C.?",
-      "answers": [
-        "Ukraina",
-        "Urugwaj",
-        "Grecja",
-        "Wielka Brytania"
-      ],
+      "answers": ["Ukraina", "Urugwaj", "Grecja", "Wielka Brytania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2601,12 +2011,7 @@
     {
       "id": "WQ-145",
       "question": "W jakim kraju ma siedzibę klub Bolton Wanderers F.C.?",
-      "answers": [
-        "Wielka Brytania",
-        "Słowacja",
-        "Niemcy",
-        "Hiszpania"
-      ],
+      "answers": ["Wielka Brytania", "Słowacja", "Niemcy", "Hiszpania"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2619,12 +2024,7 @@
     {
       "id": "WQ-146",
       "question": "W jakim kraju ma siedzibę klub FC United of Manchester?",
-      "answers": [
-        "Austria",
-        "Gruzja",
-        "Grecja",
-        "Wielka Brytania"
-      ],
+      "answers": ["Austria", "Gruzja", "Grecja", "Wielka Brytania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2637,12 +2037,7 @@
     {
       "id": "WQ-147",
       "question": "W jakim kraju ma siedzibę klub 1. FC Kaiserslautern?",
-      "answers": [
-        "Niemcy",
-        "Albania",
-        "Macedonia Północna",
-        "Włochy"
-      ],
+      "answers": ["Niemcy", "Albania", "Macedonia Północna", "Włochy"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Niemcy",
       "category": "kluby — kraj",
@@ -2655,12 +2050,7 @@
     {
       "id": "WQ-148",
       "question": "W jakim kraju ma siedzibę klub West Bromwich Albion F.C.?",
-      "answers": [
-        "Francja",
-        "Brazylia",
-        "Wielka Brytania",
-        "Belgia"
-      ],
+      "answers": ["Francja", "Brazylia", "Wielka Brytania", "Belgia"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2673,12 +2063,7 @@
     {
       "id": "WQ-149",
       "question": "W jakim kraju ma siedzibę klub Udinese Calcio?",
-      "answers": [
-        "Tunezja",
-        "Włochy",
-        "Peru",
-        "Macedonia Północna"
-      ],
+      "answers": ["Tunezja", "Włochy", "Peru", "Macedonia Północna"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Włochy",
       "category": "kluby — kraj",
@@ -2691,12 +2076,7 @@
     {
       "id": "WQ-150",
       "question": "W jakim kraju ma siedzibę klub Dinamo Moskwa?",
-      "answers": [
-        "Turcja",
-        "Bośnia i Hercegowina",
-        "Wielka Brytania",
-        "Rosja"
-      ],
+      "answers": ["Turcja", "Bośnia i Hercegowina", "Wielka Brytania", "Rosja"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Rosja",
       "category": "kluby — kraj",
@@ -2709,12 +2089,7 @@
     {
       "id": "WQ-151",
       "question": "W jakim kraju ma siedzibę klub Getafe CF?",
-      "answers": [
-        "Niemcy",
-        "Ukraina",
-        "Hiszpania",
-        "Belgia"
-      ],
+      "answers": ["Niemcy", "Ukraina", "Hiszpania", "Belgia"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Hiszpania",
       "category": "kluby — kraj",
@@ -2727,12 +2102,7 @@
     {
       "id": "WQ-152",
       "question": "W jakim kraju ma siedzibę klub ND Triglav Kranj?",
-      "answers": [
-        "Japonia",
-        "Czechy",
-        "Słowacja",
-        "Słowenia"
-      ],
+      "answers": ["Japonia", "Czechy", "Słowacja", "Słowenia"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Słowenia",
       "category": "kluby — kraj",
@@ -2763,12 +2133,7 @@
     {
       "id": "WQ-154",
       "question": "W jakim kraju ma siedzibę klub FC Sochaux-Montbéliard?",
-      "answers": [
-        "Francja",
-        "Macedonia Północna",
-        "Kolumbia",
-        "Rosja"
-      ],
+      "answers": ["Francja", "Macedonia Północna", "Kolumbia", "Rosja"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Francja",
       "category": "kluby — kraj",
@@ -2781,12 +2146,7 @@
     {
       "id": "WQ-155",
       "question": "W jakim kraju ma siedzibę klub West Ham United F.C.?",
-      "answers": [
-        "Ukraina",
-        "Włochy",
-        "Macedonia Północna",
-        "Wielka Brytania"
-      ],
+      "answers": ["Ukraina", "Włochy", "Macedonia Północna", "Wielka Brytania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2799,12 +2159,7 @@
     {
       "id": "WQ-156",
       "question": "W jakim kraju ma siedzibę klub Tottenham Hotspur?",
-      "answers": [
-        "Rosja",
-        "Wielka Brytania",
-        "Macedonia Północna",
-        "Urugwaj"
-      ],
+      "answers": ["Rosja", "Wielka Brytania", "Macedonia Północna", "Urugwaj"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2817,12 +2172,7 @@
     {
       "id": "WQ-157",
       "question": "W jakim kraju ma siedzibę klub Dinamo Tirana?",
-      "answers": [
-        "Kirgistan",
-        "Tunezja",
-        "Hiszpania",
-        "Albania"
-      ],
+      "answers": ["Kirgistan", "Tunezja", "Hiszpania", "Albania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Albania",
       "category": "kluby — kraj",
@@ -2835,12 +2185,7 @@
     {
       "id": "WQ-158",
       "question": "W jakim kraju ma siedzibę klub Real Sociedad?",
-      "answers": [
-        "Kirgistan",
-        "Urugwaj",
-        "Gruzja",
-        "Hiszpania"
-      ],
+      "answers": ["Kirgistan", "Urugwaj", "Gruzja", "Hiszpania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Hiszpania",
       "category": "kluby — kraj",
@@ -2853,12 +2198,7 @@
     {
       "id": "WQ-159",
       "question": "W jakim kraju ma siedzibę klub FK Senica?",
-      "answers": [
-        "Austria",
-        "Holandia",
-        "Turcja",
-        "Słowacja"
-      ],
+      "answers": ["Austria", "Holandia", "Turcja", "Słowacja"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Słowacja",
       "category": "kluby — kraj",
@@ -2871,12 +2211,7 @@
     {
       "id": "WQ-160",
       "question": "W jakim kraju ma siedzibę klub ACR Siena 1904?",
-      "answers": [
-        "Kolumbia",
-        "Rosja",
-        "Włochy",
-        "Arabia Saudyjska"
-      ],
+      "answers": ["Kolumbia", "Rosja", "Włochy", "Arabia Saudyjska"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Włochy",
       "category": "kluby — kraj",
@@ -2889,12 +2224,7 @@
     {
       "id": "WQ-161",
       "question": "W jakim kraju ma siedzibę klub Doncaster Rovers F.C.?",
-      "answers": [
-        "Rosja",
-        "Wielka Brytania",
-        "Macedonia Północna",
-        "Włochy"
-      ],
+      "answers": ["Rosja", "Wielka Brytania", "Macedonia Północna", "Włochy"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2907,12 +2237,7 @@
     {
       "id": "WQ-162",
       "question": "W jakim kraju ma siedzibę klub Brentford F.C.?",
-      "answers": [
-        "Hiszpania",
-        "Wielka Brytania",
-        "Argentyna",
-        "Ukraina"
-      ],
+      "answers": ["Hiszpania", "Wielka Brytania", "Argentyna", "Ukraina"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2925,12 +2250,7 @@
     {
       "id": "WQ-163",
       "question": "W jakim kraju ma siedzibę klub Sampdoria Genua?",
-      "answers": [
-        "Czechy",
-        "Bośnia i Hercegowina",
-        "Grecja",
-        "Włochy"
-      ],
+      "answers": ["Czechy", "Bośnia i Hercegowina", "Grecja", "Włochy"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Włochy",
       "category": "kluby — kraj",
@@ -2943,12 +2263,7 @@
     {
       "id": "WQ-164",
       "question": "W jakim kraju ma siedzibę klub Hartlepool United F.C.?",
-      "answers": [
-        "Belgia",
-        "Tunezja",
-        "Japonia",
-        "Wielka Brytania"
-      ],
+      "answers": ["Belgia", "Tunezja", "Japonia", "Wielka Brytania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2961,12 +2276,7 @@
     {
       "id": "WQ-165",
       "question": "W jakim kraju ma siedzibę klub FC Crotone?",
-      "answers": [
-        "Niemcy",
-        "Wielka Brytania",
-        "Włochy",
-        "Kirgistan"
-      ],
+      "answers": ["Niemcy", "Wielka Brytania", "Włochy", "Kirgistan"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Włochy",
       "category": "kluby — kraj",
@@ -2979,12 +2289,7 @@
     {
       "id": "WQ-166",
       "question": "W jakim kraju ma siedzibę klub Colchester United F.C.?",
-      "answers": [
-        "Wielka Brytania",
-        "Peru",
-        "Niemcy",
-        "Rosja"
-      ],
+      "answers": ["Wielka Brytania", "Peru", "Niemcy", "Rosja"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -2997,12 +2302,7 @@
     {
       "id": "WQ-167",
       "question": "W jakim kraju ma siedzibę klub Preston North End F.C.?",
-      "answers": [
-        "Niemcy",
-        "Belgia",
-        "Rosja",
-        "Wielka Brytania"
-      ],
+      "answers": ["Niemcy", "Belgia", "Rosja", "Wielka Brytania"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -3015,12 +2315,7 @@
     {
       "id": "WQ-168",
       "question": "W jakim kraju ma siedzibę klub Charlton Athletic F.C.?",
-      "answers": [
-        "Ukraina",
-        "Arabia Saudyjska",
-        "Wielka Brytania",
-        "Peru"
-      ],
+      "answers": ["Ukraina", "Arabia Saudyjska", "Wielka Brytania", "Peru"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -3033,12 +2328,7 @@
     {
       "id": "WQ-169",
       "question": "W jakim kraju ma siedzibę klub Corporación Deportiva Once Caldas?",
-      "answers": [
-        "Kolumbia",
-        "Urugwaj",
-        "Kirgistan",
-        "Brazylia"
-      ],
+      "answers": ["Kolumbia", "Urugwaj", "Kirgistan", "Brazylia"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Kolumbia",
       "category": "kluby — kraj",
@@ -3051,12 +2341,7 @@
     {
       "id": "WQ-170",
       "question": "W jakim kraju ma siedzibę klub Huddersfield Town F.C.?",
-      "answers": [
-        "Wielka Brytania",
-        "Turcja",
-        "Ukraina",
-        "Tunezja"
-      ],
+      "answers": ["Wielka Brytania", "Turcja", "Ukraina", "Tunezja"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Wielka Brytania",
       "category": "kluby — kraj",
@@ -3069,12 +2354,7 @@
     {
       "id": "WQ-171",
       "question": "W którym roku założono klub AS Bari?",
-      "answers": [
-        "1860",
-        "1971",
-        "1930",
-        "1908"
-      ],
+      "answers": ["1860", "1971", "1930", "1908"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1908",
       "category": "kluby — rok założenia",
@@ -3087,12 +2367,7 @@
     {
       "id": "WQ-172",
       "question": "W którym roku założono klub Tamworth F.C.?",
-      "answers": [
-        "1933",
-        "1871",
-        "1934",
-        "1971"
-      ],
+      "answers": ["1933", "1871", "1934", "1971"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1933",
       "category": "kluby — rok założenia",
@@ -3105,12 +2380,7 @@
     {
       "id": "WQ-173",
       "question": "W którym roku założono klub Gateshead F.C.?",
-      "answers": [
-        "1989",
-        "1977",
-        "1941",
-        "1967"
-      ],
+      "answers": ["1989", "1977", "1941", "1967"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1977",
       "category": "kluby — rok założenia",
@@ -3123,12 +2393,7 @@
     {
       "id": "WQ-174",
       "question": "W którym roku założono klub VfB Stuttgart?",
-      "answers": [
-        "1893",
-        "1886",
-        "2000",
-        "1957"
-      ],
+      "answers": ["1893", "1886", "2000", "1957"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1893",
       "category": "kluby — rok założenia",
@@ -3141,12 +2406,7 @@
     {
       "id": "WQ-175",
       "question": "W którym roku założono klub Scunthorpe United F.C.?",
-      "answers": [
-        "1972",
-        "2008",
-        "1892",
-        "1899"
-      ],
+      "answers": ["1972", "2008", "1892", "1899"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1899",
       "category": "kluby — rok założenia",
@@ -3159,12 +2419,7 @@
     {
       "id": "WQ-176",
       "question": "W którym roku założono klub Dinamo Moskwa?",
-      "answers": [
-        "1984",
-        "1923",
-        "1897",
-        "1989"
-      ],
+      "answers": ["1984", "1923", "1897", "1989"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1923",
       "category": "kluby — rok założenia",
@@ -3177,12 +2432,7 @@
     {
       "id": "WQ-177",
       "question": "W którym roku założono klub Bayern Monachium?",
-      "answers": [
-        "1941",
-        "1876",
-        "1900",
-        "1994"
-      ],
+      "answers": ["1941", "1876", "1900", "1994"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1900",
       "category": "kluby — rok założenia",
@@ -3195,12 +2445,7 @@
     {
       "id": "WQ-178",
       "question": "W którym roku założono klub Leicester City?",
-      "answers": [
-        "1956",
-        "1884",
-        "1898",
-        "1933"
-      ],
+      "answers": ["1956", "1884", "1898", "1933"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1884",
       "category": "kluby — rok założenia",
@@ -3213,12 +2458,7 @@
     {
       "id": "WQ-179",
       "question": "W którym roku założono klub Atlético Madryt?",
-      "answers": [
-        "1903",
-        "1953",
-        "1949",
-        "1896"
-      ],
+      "answers": ["1903", "1953", "1949", "1896"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1903",
       "category": "kluby — rok założenia",
@@ -3231,12 +2471,7 @@
     {
       "id": "WQ-180",
       "question": "W którym roku założono klub Luton Town F.C.?",
-      "answers": [
-        "1938",
-        "1885",
-        "1994",
-        "1879"
-      ],
+      "answers": ["1938", "1885", "1994", "1879"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1885",
       "category": "kluby — rok założenia",
@@ -3249,12 +2484,7 @@
     {
       "id": "WQ-181",
       "question": "W którym roku założono klub FC United of Manchester?",
-      "answers": [
-        "1969",
-        "1935",
-        "1908",
-        "2005"
-      ],
+      "answers": ["1969", "1935", "1908", "2005"],
       "correctAnswerIndex": 3,
       "correctAnswer": "2005",
       "category": "kluby — rok założenia",
@@ -3267,12 +2497,7 @@
     {
       "id": "WQ-182",
       "question": "W którym roku założono klub Tottenham Hotspur?",
-      "answers": [
-        "1875",
-        "2015",
-        "1882",
-        "1944"
-      ],
+      "answers": ["1875", "2015", "1882", "1944"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1882",
       "category": "kluby — rok założenia",
@@ -3285,12 +2510,7 @@
     {
       "id": "WQ-183",
       "question": "W którym roku założono klub CD Mirandés?",
-      "answers": [
-        "2013",
-        "1921",
-        "2000",
-        "1927"
-      ],
+      "answers": ["2013", "1921", "2000", "1927"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1927",
       "category": "kluby — rok założenia",
@@ -3303,12 +2523,7 @@
     {
       "id": "WQ-184",
       "question": "W którym roku założono klub RCD Mallorca?",
-      "answers": [
-        "1916",
-        "1975",
-        "2003",
-        "1987"
-      ],
+      "answers": ["1916", "1975", "2003", "1987"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1916",
       "category": "kluby — rok założenia",
@@ -3321,12 +2536,7 @@
     {
       "id": "WQ-185",
       "question": "W którym roku założono klub Stoke City F.C.?",
-      "answers": [
-        "1863",
-        "1867",
-        "1990",
-        "2008"
-      ],
+      "answers": ["1863", "1867", "1990", "2008"],
       "correctAnswerIndex": 0,
       "correctAnswer": "1863",
       "category": "kluby — rok założenia",
@@ -3339,12 +2549,7 @@
     {
       "id": "WQ-186",
       "question": "W którym roku założono klub Ternana Calcio?",
-      "answers": [
-        "1949",
-        "1909",
-        "1920",
-        "1925"
-      ],
+      "answers": ["1949", "1909", "1920", "1925"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1925",
       "category": "kluby — rok założenia",
@@ -3357,12 +2562,7 @@
     {
       "id": "WQ-187",
       "question": "W którym roku założono klub SS Juve Stabia?",
-      "answers": [
-        "1901",
-        "1972",
-        "1934",
-        "1907"
-      ],
+      "answers": ["1901", "1972", "1934", "1907"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1907",
       "category": "kluby — rok założenia",
@@ -3375,12 +2575,7 @@
     {
       "id": "WQ-188",
       "question": "W którym roku założono klub Bolton Wanderers F.C.?",
-      "answers": [
-        "1983",
-        "1874",
-        "2008",
-        "1964"
-      ],
+      "answers": ["1983", "1874", "2008", "1964"],
       "correctAnswerIndex": 1,
       "correctAnswer": "1874",
       "category": "kluby — rok założenia",
@@ -3393,12 +2588,7 @@
     {
       "id": "WQ-189",
       "question": "W którym roku założono klub Norwich City F.C.?",
-      "answers": [
-        "1967",
-        "1962",
-        "1922",
-        "1902"
-      ],
+      "answers": ["1967", "1962", "1922", "1902"],
       "correctAnswerIndex": 3,
       "correctAnswer": "1902",
       "category": "kluby — rok założenia",
@@ -3411,12 +2601,7 @@
     {
       "id": "WQ-190",
       "question": "W którym roku założono klub Skënderbeu Korcza?",
-      "answers": [
-        "1995",
-        "1934",
-        "1909",
-        "1868"
-      ],
+      "answers": ["1995", "1934", "1909", "1868"],
       "correctAnswerIndex": 2,
       "correctAnswer": "1909",
       "category": "kluby — rok założenia",
@@ -3465,12 +2650,7 @@
     {
       "id": "WQ-193",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Qinhuangdao Olympic Sports Center Stadium?",
-      "answers": [
-        "Al-Wakra",
-        "Kolumbia Brytyjska",
-        "Qinhuangdao",
-        "Faro"
-      ],
+      "answers": ["Al-Wakra", "Kolumbia Brytyjska", "Qinhuangdao", "Faro"],
       "correctAnswerIndex": 2,
       "correctAnswer": "Qinhuangdao",
       "category": "stadiony — lokalizacja",
@@ -3519,12 +2699,7 @@
     {
       "id": "WQ-196",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Estádio do Bessa?",
-      "answers": [
-        "Alicante",
-        "Ałmaty",
-        "Al-Chaur",
-        "Ramalde"
-      ],
+      "answers": ["Alicante", "Ałmaty", "Al-Chaur", "Ramalde"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Ramalde",
       "category": "stadiony — lokalizacja",
@@ -3537,12 +2712,7 @@
     {
       "id": "WQ-197",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Ricoh Arena?",
-      "answers": [
-        "Mendoza",
-        "Werona",
-        "Saloniki",
-        "Coventry"
-      ],
+      "answers": ["Mendoza", "Werona", "Saloniki", "Coventry"],
       "correctAnswerIndex": 3,
       "correctAnswer": "Coventry",
       "category": "stadiony — lokalizacja",
@@ -3555,12 +2725,7 @@
     {
       "id": "WQ-198",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Estadio La Rosaleda?",
-      "answers": [
-        "La Rosaleda",
-        "Campanhã",
-        "Strasburg",
-        "Kozukuechō"
-      ],
+      "answers": ["La Rosaleda", "Campanhã", "Strasburg", "Kozukuechō"],
       "correctAnswerIndex": 0,
       "correctAnswer": "La Rosaleda",
       "category": "stadiony — lokalizacja",
@@ -3573,12 +2738,7 @@
     {
       "id": "WQ-199",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Carrow Road?",
-      "answers": [
-        "Norwich",
-        "Stanford",
-        "Bruksela",
-        "Indianapolis"
-      ],
+      "answers": ["Norwich", "Stanford", "Bruksela", "Indianapolis"],
       "correctAnswerIndex": 0,
       "correctAnswer": "Norwich",
       "category": "stadiony — lokalizacja",
@@ -3591,12 +2751,7 @@
     {
       "id": "WQ-200",
       "question": "W jakim mieście lub jednostce administracyjnej znajduje się stadion Sydney Football Stadium?",
-      "answers": [
-        "Genua",
-        "Sydney",
-        "Chōfu",
-        "Elche"
-      ],
+      "answers": ["Genua", "Sydney", "Chōfu", "Elche"],
       "correctAnswerIndex": 1,
       "correctAnswer": "Sydney",
       "category": "stadiony — lokalizacja",

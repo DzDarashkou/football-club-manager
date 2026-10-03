@@ -1,9 +1,16 @@
 /** datetime-local values always represent the club's timezone, regardless of the device timezone. */
 export function warsawDateTime(value: string): string {
   const parts = new Intl.DateTimeFormat('sv-SE', {
-    timeZone: 'Europe/Warsaw', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    timeZone: 'Europe/Warsaw',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
   }).formatToParts(new Date(value))
-  const part = (type: string) => parts.find(item => item.type === type)?.value ?? ''
+  const part = (type: string) =>
+    parts.find((item) => item.type === type)?.value ?? ''
   return `${part('year')}-${part('month')}-${part('day')}T${part('hour')}:${part('minute')}`
 }
 
