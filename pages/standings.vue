@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import StandingsFilters from '@@/components/standings/StandingsFilters.vue'
+import StandingsTrends from '@@/components/standings/StandingsTrends.vue'
 import StandingsTable from '@@/components/standings/StandingsTable.vue'
 import { useStandingsSelection } from '@@/composables/useStandingsSelection'
 import type { StandingsHistory, StandingsSnapshot } from '@@/types/standings'
@@ -67,6 +68,7 @@ function formatDate(value: string): string {
         </template>
         <p v-else class="py-8 text-center text-sm">Brak tabeli dla tej grupy. Pojawi się po pierwszym imporcie administratora.</p>
       </Card>
+      <StandingsTrends v-if="group" :key="group.id" :group-id="group.id" :snapshot-id="snapshotId" />
     </template>
   </div>
 </template>

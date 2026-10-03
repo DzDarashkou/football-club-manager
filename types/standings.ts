@@ -26,3 +26,14 @@ export interface StandingsHistory {
   snapshots: Array<Pick<StandingsSnapshot, 'id' | 'imported_at'>>
   hasMore: boolean
 }
+
+export interface StandingsTrendSnapshot {
+  id: string
+  imported_at: string
+  external_team_id: string
+  teams: Array<{ id: string, name: string, points: number, position: number }>
+}
+export interface StandingsTrends {
+  snapshots: StandingsTrendSnapshot[]
+  hasMore: boolean
+}

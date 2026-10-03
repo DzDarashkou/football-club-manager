@@ -129,6 +129,15 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
         </NuxtLink>
         <NuxtLink
           v-if="role === 'parent'"
+          to="/parent/quiz"
+          class="hidden min-h-11 items-center gap-2 rounded-full px-3 text-sm text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 lg:inline-flex"
+          :class="{ 'bg-white/10': isCurrent('/parent/quiz') }"
+          :aria-current="isCurrent('/parent/quiz') ? 'page' : undefined"
+        >
+          <CircleHelp class="h-5 w-5" aria-hidden="true" />Quiz
+        </NuxtLink>
+        <NuxtLink
+          v-if="role === 'parent'"
           to="/coach/calendar"
           class="inline-flex h-11 items-center gap-2 rounded-full px-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           aria-label="Otwórz kalendarz"
