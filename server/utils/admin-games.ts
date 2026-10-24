@@ -93,6 +93,7 @@ const gameFields = z.object({
   home_score: z.coerce.number().int().min(0).optional().default(0),
   away_score: z.coerce.number().int().min(0).optional().default(0),
   notes: z.string().trim().max(1000).nullable().optional().default(null),
+  external_id: z.string().trim().max(100).nullable().optional().default(null),
 })
 export const gameSchema = gameFields.superRefine((value, context) => {
   if (value.has_broadcast !== Boolean(value.broadcast_url))
@@ -251,7 +252,7 @@ export async function getGames(
   let gamesQuery = adminClient
     .from('games')
     .select(
-      'id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes',
+      'id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes, external_id',
     )
     .order('scheduled_at', { ascending: options.ascending ?? false })
 
