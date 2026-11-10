@@ -4,6 +4,7 @@ import {
   parsePzpnMatchesJson,
   parseStadiumInfo,
   parsePzpnDateTimeToUtcIso,
+  isFutureMatch,
   mapPzpnStateToGameStatus,
   extractScores,
 } from '../validators/pzpn-matches.ts'
@@ -124,3 +125,15 @@ test('converts PZPN Polish local date-time to valid ISO string', () => {
   assert.equal(date.getUTCDate(), 26)
 })
 
+test('identifies future matches based on reference date', () => {
+  const referenceDate = new Date('2026-10-24T12:00:00Z')
+
+  const pastIso = '2026-10-20T10:00:00.000Z'
+  const futureIso = '2026-10-25T15:00:00.000Z'
+  const exactIso = '2026-10-24T12:00:00.000Z'
+
+  assert.equal(isFutureMatch(pastIso, referenceDate), false)
+  assert.equal(isFutureMatch(exactIso, referenceDate), false)
+  assert.equal(isFutureMatch(futureIso, referenceDate), true)
+  assert.equal(isFutureMatch('invalid-date', referenceDate), false)
+})

@@ -17,6 +17,17 @@
       }
     },
     {
+      "label": "Sync PZPN (Preview Future Games Only)",
+      "type": "shell",
+      "command": "npm run sync:pzpn:future",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
       "label": "Sync PZPN (Commit to Database)",
       "type": "shell",
       "command": "npm run sync:pzpn:commit",
@@ -26,7 +37,17 @@
         "panel": "shared",
         "focus": true
       }
+    },
+    {
+      "label": "Sync PZPN (Commit Future Games Only)",
+      "type": "shell",
+      "command": "npm run sync:pzpn:commit:future",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
     }
   ]
 }
-

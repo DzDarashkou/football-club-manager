@@ -110,21 +110,46 @@ export function parsePzpnDateTimeToUtcIso(dateTimeStr: string): string {
 }
 
 /**
+ * Checks whether a given UTC ISO match date-time is in the future relative to a reference date.
+ */
+export function isFutureMatch(
+  scheduledAtIso: string,
+  referenceDate: Date = new Date(),
+): boolean {
+  const matchTime = new Date(scheduledAtIso).getTime()
+  return !Number.isNaN(matchTime) && matchTime > referenceDate.getTime()
+}
+
+/**
  * Maps PZPN state to GameStatus
  */
-export function mapPzpnStateToGameStatus(state: string | null | undefined): GameStatus {
+export function mapPzpnStateToGameStatus(
+  state: string | null | undefined,
+): GameStatus {
   if (!state) return 'scheduled'
   const lower = state.toLowerCase().trim()
-  if (lower.includes('odwołany') || lower.includes('anulowany') || lower.includes('cancelled')) {
+  if (
+    lower.includes('odwołany') ||
+    lower.includes('anulowany') ||
+    lower.includes('cancelled')
+  ) {
     return 'cancelled'
   }
   if (lower.includes('przełożony') || lower.includes('postponed')) {
     return 'postponed'
   }
-  if (lower.includes('nierozegrany') || lower.includes('zaplanowany') || lower.includes('scheduled')) {
+  if (
+    lower.includes('nierozegrany') ||
+    lower.includes('zaplanowany') ||
+    lower.includes('scheduled')
+  ) {
     return 'scheduled'
   }
-  if (lower.includes('zakończony') || lower.includes('rozegrany') || lower.includes('finished')) {
+  if (
+    lower.includes('zakończony') ||
+    lower.includes('rozegrany') ||
+    lower.includes('finished')
+  ) {
     return 'completed'
   }
   return 'scheduled'
@@ -146,7 +171,8 @@ export function extractScores(scores: Record<string, unknown>): {
   const guestVal = main.guest ?? main.guestScore ?? scores.guest
 
   const homeScore = typeof hostVal === 'number' ? hostVal : Number(hostVal) || 0
-  const awayScore = typeof guestVal === 'number' ? guestVal : Number(guestVal) || 0
+  const awayScore =
+    typeof guestVal === 'number' ? guestVal : Number(guestVal) || 0
 
   return { homeScore, awayScore }
 }

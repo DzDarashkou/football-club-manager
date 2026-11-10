@@ -7,9 +7,15 @@ import {
   mapPzpnStateToGameStatus,
   extractScores,
   parsePzpnMatchesJson,
+  isFutureMatch,
   type PzpnMatch,
 } from '@@/validators/pzpn-matches'
-import { scrapePzpnDataForTeams, DEFAULT_PZPN_TEAMS } from './pzpn-scraper'
+import {
+  scrapePzpnDataForTeams,
+  DEFAULT_PZPN_TEAMS,
+  type PzpnScrapeResult,
+} from './pzpn-scraper'
+import type { StandingsTable } from '@@/types/standings'
 import type { Database } from '@@/types/database'
 
 // 1. Load environment variables from .env if needed
@@ -52,6 +58,10 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 const isCommitMode = process.argv.includes('--commit')
+const isFutureOnly =
+  process.argv.includes('--future-only') ||
+  process.argv.includes('--future') ||
+  process.argv.includes('--upcoming')
 const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
 type VenueRecord = {
@@ -113,7 +123,9 @@ async function getOrAutoCreateVenue(
 
   // 2. If not found, create if commit mode
   if (isCommitMode) {
-    console.log(`[Venue] Creating new venue: "${parsed.name}" (${parsed.address || ''})`)
+    console.log(
+      `[Venue] Creating new venue: "${parsed.name}" (${parsed.address || ''})`,
+    )
     const { data, error } = await supabase
       .from('venues')
       .insert({
@@ -126,7 +138,10 @@ async function getOrAutoCreateVenue(
       .single()
 
     if (error) {
-      console.warn(`[Venue] Failed to create venue "${parsed.name}":`, error.message)
+      console.warn(
+        `[Venue] Failed to create venue "${parsed.name}":`,
+        error.message,
+      )
       return null
     }
 
@@ -135,7 +150,9 @@ async function getOrAutoCreateVenue(
       return data.id
     }
   } else {
-    console.log(`[Venue (Dry-Run)] Would create new venue: "${parsed.name}" (${parsed.address || ''})`)
+    console.log(
+      `[Venue (Dry-Run)] Would create new venue: "${parsed.name}" (${parsed.address || ''})`,
+    )
   }
 
   return null
@@ -169,39 +186,52 @@ function matchLocalTeam(
 async function runSync() {
   console.log('='.repeat(65))
   console.log(`⚽ ŁĄCZY NAS PIŁKA (PZPN) SYNCHRONIZER`)
-  console.log(`Mode: ${isCommitMode ? '🚀 COMMIT (APPLYING TO DB)' : '🔍 DRY-RUN (PREVIEW ONLY)'}`)
+  console.log(
+    `Mode: ${isCommitMode ? '🚀 COMMIT (APPLYING TO DB)' : '🔍 DRY-RUN (PREVIEW ONLY)'}`,
+  )
+  if (isFutureOnly) {
+    console.log(`Filter: ⏳ FUTURE GAMES ONLY (startDate > now)`)
+  }
   console.log('='.repeat(65))
 
   // 1. Fetch reference data from database
-  const [teamsRes, seasonsRes, venuesRes, groupsRes, adminRes] = await Promise.all([
-    supabase.from('teams').select('id, name, is_active').eq('is_active', true),
-    supabase
-      .from('seasons')
-      .select('id, name, starts_on, ends_on, is_active')
-      .eq('is_active', true)
-      .order('starts_on', { ascending: false })
-      .limit(1),
-    supabase
-      .from('venues')
-      .select('id, name, address, city, is_active'),
-    supabase
-      .from('team_competition_groups')
-      .select('id, team_id, season_id, name, external_play_id'),
-    supabase
-      .from('profiles')
-      .select('id')
-      .eq('role', 'admin')
-      .limit(1)
-      .maybeSingle(),
-  ])
+  const [teamsRes, seasonsRes, venuesRes, groupsRes, adminRes] =
+    await Promise.all([
+      supabase
+        .from('teams')
+        .select('id, name, is_active')
+        .eq('is_active', true),
+      supabase
+        .from('seasons')
+        .select('id, name, starts_on, ends_on, is_active')
+        .eq('is_active', true)
+        .order('starts_on', { ascending: false })
+        .limit(1),
+      supabase.from('venues').select('id, name, address, city, is_active'),
+      supabase
+        .from('team_competition_groups')
+        .select('id, team_id, season_id, name, external_play_id'),
+      supabase
+        .from('profiles')
+        .select('id')
+        .eq('role', 'admin')
+        .limit(1)
+        .maybeSingle(),
+    ])
 
   if (teamsRes.error || !teamsRes.data || teamsRes.data.length === 0) {
-    console.error('Error fetching teams:', teamsRes.error?.message || 'No teams found')
+    console.error(
+      'Error fetching teams:',
+      teamsRes.error?.message || 'No teams found',
+    )
     process.exit(1)
   }
 
   if (seasonsRes.error || !seasonsRes.data || seasonsRes.data.length === 0) {
-    console.error('Error fetching active season:', seasonsRes.error?.message || 'No active season')
+    console.error(
+      'Error fetching active season:',
+      seasonsRes.error?.message || 'No active season',
+    )
     process.exit(1)
   }
 
@@ -209,10 +239,13 @@ async function runSync() {
   const localTeams: TeamRecord[] = teamsRes.data
   const venues = (venuesRes.data || []) as VenueRecord[]
   const trackedGroups = groupsRes.data || []
-  const adminActorId = adminRes.data?.id || '00000000-0000-0000-0000-000000000000'
+  const adminActorId =
+    adminRes.data?.id || '00000000-0000-0000-0000-000000000000'
 
   console.log(`[Config] Active Season: ${activeSeason.name}`)
-  console.log(`[Config] Available Teams: ${localTeams.map((t) => t.name).join(', ')}`)
+  console.log(
+    `[Config] Available Teams: ${localTeams.map((t) => t.name).join(', ')}`,
+  )
   console.log(`[Config] Tracked Groups in DB: ${trackedGroups.length}`)
 
   // 2. Load existing games for active season
@@ -229,8 +262,12 @@ async function runSync() {
   if (gamesResWithExternal.error) {
     if (gamesResWithExternal.error.message.includes('external_id')) {
       hasExternalIdColumn = false
-      console.log('ℹ️  Note: Column games.external_id not found in DB. Falling back to matchday/opponent matching.')
-      console.log('    (Apply supabase/migrations/20261025090000_games_external_id.sql to enable external match IDs).')
+      console.log(
+        'ℹ️  Note: Column games.external_id not found in DB. Falling back to matchday/opponent matching.',
+      )
+      console.log(
+        '    (Apply supabase/migrations/20261025090000_games_external_id.sql to enable external match IDs).',
+      )
       const gamesResFallback = await supabase
         .from('games')
         .select(
@@ -239,7 +276,10 @@ async function runSync() {
         .eq('season_id', activeSeason.id)
 
       if (gamesResFallback.error) {
-        console.error('Error fetching existing games:', gamesResFallback.error.message)
+        console.error(
+          'Error fetching existing games:',
+          gamesResFallback.error.message,
+        )
         process.exit(1)
       }
       existingGames = (gamesResFallback.data || []).map((g) => ({
@@ -247,17 +287,23 @@ async function runSync() {
         external_id: null,
       })) as ExistingGame[]
     } else {
-      console.error('Error fetching existing games:', gamesResWithExternal.error.message)
+      console.error(
+        'Error fetching existing games:',
+        gamesResWithExternal.error.message,
+      )
       process.exit(1)
     }
   } else {
     existingGames = (gamesResWithExternal.data || []) as ExistingGame[]
   }
 
-  console.log(`[Config] Existing Games in DB for this season: ${existingGames.length}`)
+  console.log(
+    `[Config] Existing Games in DB for this season: ${existingGames.length}`,
+  )
 
   // 3. Obtain match & table data
-  let scrapeResults: Awaited<ReturnType<typeof scrapePzpnDataForTeams>> = []
+  let teamResults: PzpnScrapeResult[] = []
+  let tableResults: StandingsTable[] = []
 
   const fileArgIdx = process.argv.indexOf('--file')
   if (fileArgIdx !== -1 && process.argv[fileArgIdx + 1]) {
@@ -265,77 +311,139 @@ async function runSync() {
     console.log(`\n[Input] Reading match data from file: ${filePath}`)
     const content = readFileSync(filePath, 'utf-8')
     const parsedMatches = parsePzpnMatchesJson(content)
-    scrapeResults = [
+    teamResults = [
       {
-        teamId: DEFAULT_PZPN_TEAMS[0].teamId,
-        teamName: DEFAULT_PZPN_TEAMS[0].teamName,
+        teamId: DEFAULT_PZPN_TEAMS[0]!.teamId,
+        teamName: DEFAULT_PZPN_TEAMS[0]!.teamName,
         matches: parsedMatches,
         tables: [],
       },
     ]
   } else {
     console.log('\n[Scraper] Starting Playwright browser...')
-    scrapeResults = await scrapePzpnDataForTeams(DEFAULT_PZPN_TEAMS)
+    const scrapeOutput = await scrapePzpnDataForTeams(DEFAULT_PZPN_TEAMS)
+    teamResults = scrapeOutput.teamResults
+    tableResults = scrapeOutput.tables
   }
 
   // 4. Process Standings Tables
   console.log('\n--- STANDINGS / TABLES SYNC ---')
   let tablesUpdated = 0
-  for (const result of scrapeResults) {
-    for (const table of result.tables) {
-      const playId = table.play?.id
-      const matchingGroup = trackedGroups.find((g) => g.external_play_id === playId)
+  for (const table of tableResults) {
+    const playId = table.play?.id
+    const matchingGroup = trackedGroups.find(
+      (g) => g.external_play_id === playId,
+    )
 
-      if (!matchingGroup) {
-        console.log(`[Standings] Table for play "${table.play?.name}" (${playId}) is not yet tracked in team_competition_groups. (Add group via /admin/standings first).`)
-        continue
-      }
+    if (!matchingGroup) {
+      console.log(
+        `[Standings] Table for play "${table.play?.name}" (${playId}) is not yet tracked in team_competition_groups. (Add group via /admin/standings first).`,
+      )
+      continue
+    }
 
-      console.log(`[Standings] Found table for group "${matchingGroup.name}" (${table.rows.length} rows)`)
+    // Check if table has changed compared to the latest snapshot
+    const { data: latestSnapData } = await supabase
+      .from('standings_snapshots')
+      .select('id, imported_at, table_data')
+      .eq('group_id', matchingGroup.id)
+      .order('imported_at', { ascending: false })
+      .limit(1)
 
-      if (isCommitMode) {
-        // Find our club team's external team id in table
-        const ourRow = table.rows.find((r: { team: { name: string } }) =>
-          r.team.name.toLowerCase().includes('sporting'),
-        )
-        if (!ourRow) {
-          console.warn(`[Standings] Could not identify Sporting in table rows. Skipping snapshot import.`)
-          continue
+    const latestSnap = latestSnapData?.[0]
+    let hasChanged = true
+
+    if (latestSnap?.table_data) {
+      const prevRows = (latestSnap.table_data as any).rows || []
+      const currRows = table.rows || []
+      if (prevRows.length === currRows.length) {
+        const rowsEqual = prevRows.every((rPrev: any, idx: number) => {
+          const rCurr = currRows[idx]
+          if (!rCurr) return false
+          return (
+            rPrev.team?.id === rCurr.team?.id &&
+            rPrev.index === rCurr.index &&
+            rPrev.stats?.points === rCurr.stats?.points &&
+            rPrev.stats?.matchesCount === rCurr.stats?.matchesCount &&
+            rPrev.stats?.winsCount === rCurr.stats?.winsCount &&
+            rPrev.stats?.drawsCount === rCurr.stats?.drawsCount &&
+            rPrev.stats?.losesCount === rCurr.stats?.losesCount &&
+            rPrev.stats?.goalsCount === rCurr.stats?.goalsCount &&
+            rPrev.stats?.lostGoalsCount === rCurr.stats?.lostGoalsCount
+          )
+        })
+        if (rowsEqual) {
+          hasChanged = false
         }
+      }
+    }
 
-        // Call database RPC to import snapshot
-        const { error: rpcError } = await supabase.rpc('import_standings_snapshot', {
+    if (!hasChanged) {
+      console.log(
+        `  ✔️ [UP-TO-DATE] Standings for "${matchingGroup.name}" (${table.rows.length} rows) are identical to snapshot from ${latestSnap?.imported_at}. Skipping snapshot.`,
+      )
+      continue
+    }
+
+    console.log(
+      `  🔄 [NEW SNAPSHOT] Found updated standings for "${matchingGroup.name}" (${table.rows.length} rows)`,
+    )
+
+    // Find our club team's external team id in table
+    const ourRow = table.rows.find((r: { team: { name: string } }) =>
+      r.team.name.toLowerCase().includes('sporting'),
+    )
+    if (!ourRow) {
+      console.warn(
+        `[Standings] Could not identify Sporting in table rows for ${matchingGroup.name}. Skipping snapshot import.`,
+      )
+      continue
+    }
+
+    if (isCommitMode) {
+      // Call database RPC to import snapshot
+      const { error: rpcError } = await supabase.rpc(
+        'import_standings_snapshot',
+        {
           p_group_id: matchingGroup.id,
           p_actor_id: adminActorId,
           p_external_team_id: ourRow.team.id,
           p_table: table as any,
-        })
+        },
+      )
 
-        if (rpcError) {
-          // If RPC actor fails check, insert directly into standings_snapshots with service role
-          const { error: insertError } = await supabase
-            .from('standings_snapshots')
-            .insert({
-              group_id: matchingGroup.id,
-              imported_by: adminActorId,
-              external_team_id: ourRow.team.id,
-              table_data: table,
-            })
+      if (rpcError) {
+        // If RPC actor fails check, insert directly into standings_snapshots with service role
+        const { error: insertError } = await supabase
+          .from('standings_snapshots')
+          .insert({
+            group_id: matchingGroup.id,
+            imported_by: adminActorId,
+            external_team_id: ourRow.team.id,
+            table_data: table,
+          })
 
-          if (insertError) {
-            console.error(`[Standings] Error saving snapshot: ${insertError.message}`)
-          } else {
-            console.log(`[Standings] ✅ Successfully imported new snapshot for ${matchingGroup.name}!`)
-            tablesUpdated++
-          }
+        if (insertError) {
+          console.error(
+            `[Standings] Error saving snapshot: ${insertError.message}`,
+          )
         } else {
-          console.log(`[Standings] ✅ Successfully imported new snapshot for ${matchingGroup.name}!`)
+          console.log(
+            `[Standings] ✅ Successfully imported new snapshot version for ${matchingGroup.name}!`,
+          )
           tablesUpdated++
         }
       } else {
-        console.log(`[Standings (Dry-Run)] Would import new snapshot for ${matchingGroup.name} (${table.rows.length} teams).`)
+        console.log(
+          `[Standings] ✅ Successfully imported new snapshot version for ${matchingGroup.name}!`,
+        )
         tablesUpdated++
       }
+    } else {
+      console.log(
+        `[Standings (Dry-Run)] Would import new snapshot version for ${matchingGroup.name} (${table.rows.length} teams).`,
+      )
+      tablesUpdated++
     }
   }
 
@@ -344,15 +452,20 @@ async function runSync() {
   let newGamesCount = 0
   let updatedGamesCount = 0
   let unchangedGamesCount = 0
+  let skippedPastGamesCount = 0
 
-  for (const result of scrapeResults) {
+  for (const result of teamResults) {
     const defaultLocalTeam = matchLocalTeam(result.teamName, localTeams)
     if (!defaultLocalTeam) {
-      console.warn(`[Matches] Could not match local team for ${result.teamName}`)
+      console.warn(
+        `[Matches] Could not match local team for ${result.teamName}`,
+      )
       continue
     }
 
-    console.log(`\n📌 Checking matches for ${result.teamName} (DB Team: ${defaultLocalTeam.name}):`)
+    console.log(
+      `\n📌 Checking matches for ${result.teamName} (DB Team: ${defaultLocalTeam.name}):`,
+    )
 
     for (const match of result.matches) {
       const isSportingHost = match.host.name.toLowerCase().includes('sporting')
@@ -362,16 +475,31 @@ async function runSync() {
       const gameStatus = mapPzpnStateToGameStatus(match.state)
       const { homeScore, awayScore } = extractScores(match.scores)
 
+      // When future-only mode is active, skip matches where startDate <= now
+      if (isFutureOnly && !isFutureMatch(scheduledAtIso)) {
+        skippedPastGamesCount++
+        console.log(
+          `  ⏭️ [SKIPPED (PAST)] Kolejka ${match.queue ?? '?'}: vs ${opponentName} (${match.dateTime})`,
+        )
+        continue
+      }
+
       // Resolve venue
       const venueId = await getOrAutoCreateVenue(match.stadium, venues)
 
-      // Check existing game by external_id or matchday + opponent
+      // Check existing game by external_id or matchday + opponent (allowing substring / normalized match)
       const existing = existingGames.find(
         (g) =>
           (g.external_id && g.external_id === match.matchId) ||
           (g.team_id === defaultLocalTeam.id &&
             g.matchday === match.queue &&
-            g.opponent_name.toLowerCase() === opponentName.toLowerCase()),
+            (g.opponent_name.toLowerCase() === opponentName.toLowerCase() ||
+              g.opponent_name
+                .toLowerCase()
+                .includes(opponentName.toLowerCase()) ||
+              opponentName
+                .toLowerCase()
+                .includes(g.opponent_name.toLowerCase()))),
       )
 
       if (!existing) {
@@ -399,7 +527,9 @@ async function runSync() {
           if (hasExternalIdColumn) {
             insertPayload.external_id = match.matchId
           }
-          const { error: insertError } = await supabase.from('games').insert(insertPayload)
+          const { error: insertError } = await supabase
+            .from('games')
+            .insert(insertPayload)
 
           if (insertError) {
             console.error(`     ❌ Insert error: ${insertError.message}`)
@@ -410,20 +540,33 @@ async function runSync() {
       } else {
         // Check if anything changed
         const timeDiff =
-          Math.abs(new Date(existing.scheduled_at).getTime() - new Date(scheduledAtIso).getTime()) >
-          60000 // > 1 minute diff
+          Math.abs(
+            new Date(existing.scheduled_at).getTime() -
+              new Date(scheduledAtIso).getTime(),
+          ) > 60000 // > 1 minute diff
         const venueDiff = existing.venue_id !== venueId
         const statusDiff = existing.status !== gameStatus
         const scoreDiff =
           gameStatus === 'completed' &&
-          (existing.home_score !== homeScore || existing.away_score !== awayScore)
+          (existing.home_score !== homeScore ||
+            existing.away_score !== awayScore)
         const missingExternalId = !existing.external_id
 
-        if (timeDiff || venueDiff || statusDiff || scoreDiff || missingExternalId) {
+        if (
+          timeDiff ||
+          venueDiff ||
+          statusDiff ||
+          scoreDiff ||
+          missingExternalId
+        ) {
           updatedGamesCount++
-          console.log(`  🔄 [UPDATE] Kolejka ${match.queue ?? '?'}: vs ${opponentName}`)
+          console.log(
+            `  🔄 [UPDATE] Kolejka ${match.queue ?? '?'}: vs ${opponentName}`,
+          )
           if (timeDiff) {
-            console.log(`     Kickoff: ${existing.scheduled_at} -> ${scheduledAtIso}`)
+            console.log(
+              `     Kickoff: ${existing.scheduled_at} -> ${scheduledAtIso}`,
+            )
           }
           if (venueDiff) {
             console.log(`     Venue updated -> ${match.stadium || 'None'}`)
@@ -476,14 +619,24 @@ async function runSync() {
   console.log(`New matches detected:         ${newGamesCount}`)
   console.log(`Rescheduled / updated matches: ${updatedGamesCount}`)
   console.log(`Unchanged matches:            ${unchangedGamesCount}`)
+  if (isFutureOnly) {
+    console.log(`Past matches skipped:         ${skippedPastGamesCount}`)
+  }
   console.log(`Standings tables synced:      ${tablesUpdated}`)
   console.log('='.repeat(65))
 
   if (!isCommitMode) {
-    console.log('\n💡 Dry-run completed! No changes were written to the database.')
-    console.log('👉 To apply these changes, run with: npm run sync:pzpn:commit')
+    console.log(
+      '\n💡 Dry-run completed! No changes were written to the database.',
+    )
+    const commitCmd = isFutureOnly
+      ? 'npm run sync:pzpn:commit:future'
+      : 'npm run sync:pzpn:commit'
+    console.log(`👉 To apply these changes, run with: ${commitCmd}`)
   } else {
-    console.log('\n🎉 Synchronization complete! All updates were committed to Supabase.')
+    console.log(
+      '\n🎉 Synchronization complete! All updates were committed to Supabase.',
+    )
   }
 }
 
