@@ -96,6 +96,7 @@ export type AdminGame = {
   home_score: number
   away_score: number
   notes: string | null
+  external_id?: string | null
   team: Pick<AdminTeam, 'id' | 'name'>
   season: Pick<AdminSeason, 'id' | 'name'>
   competition: Pick<AdminCompetition, 'id' | 'name' | 'type'> | null

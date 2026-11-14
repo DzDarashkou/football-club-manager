@@ -463,6 +463,7 @@ export type Database = {
           home_score: number
           away_score: number
           notes: string | null
+          external_id?: string | null
           created_at: string
           updated_at: string
         }
@@ -483,6 +484,7 @@ export type Database = {
           home_score?: number
           away_score?: number
           notes?: string | null
+          external_id?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -503,6 +505,7 @@ export type Database = {
           home_score?: number
           away_score?: number
           notes?: string | null
+          external_id?: string | null
           created_at?: string
           updated_at?: string
         }
