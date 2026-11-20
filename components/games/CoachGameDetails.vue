@@ -7,8 +7,10 @@ import {
   MessageCircle,
   Trash2,
 } from 'lucide-vue-next'
-import type { AdminGame, GamePlayer } from '@@/types/admin-club'
+import type { AdminGame, GameEvent, GamePlayer } from '@@/types/admin-club'
 import type { MatchWeatherResult } from '@@/types/weather'
+import MatchReportCard from '@@/components/games/MatchReportCard.vue'
+import MatchReportEditor from '@@/components/games/MatchReportEditor.vue'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
 import { useCoachGameRoster } from '@@/composables/useCoachGameRoster'
 
@@ -43,6 +45,7 @@ const {
 } = await useFetch<{
   game: AdminGame
   players?: GamePlayer[]
+  events?: GameEvent[]
   weather: MatchWeatherResult
   weatherAttribution: { label: string; url: string }
 }>(() =>
@@ -56,6 +59,10 @@ const {
   error: rosterError,
   refresh,
 } = await useCoachGameRoster(gameId, canManageGame)
+
+async function refreshReport() {
+  await Promise.all([refreshGame(), refresh()])
+}
 
 const roster = computed(() =>
   canManageGame.value
@@ -334,6 +341,20 @@ async function saveResult() {
         class="text-sm text-[color:var(--color-text-secondary)]"
         >Prognoza pogody nie jest jeszcze dostępna.</Card
       >
+
+      <MatchReportCard
+        :game="gameData.game"
+        :players="roster"
+        :events="gameData.events ?? []"
+      />
+
+      <MatchReportEditor
+        v-if="canManageGame"
+        :game="gameData.game"
+        :players="roster"
+        :events="gameData.events ?? []"
+        @saved="refreshReport"
+      />
 
       <Card
         v-if="canManageGame"

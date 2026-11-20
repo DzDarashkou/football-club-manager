@@ -95,6 +95,12 @@ export type AdminGame = {
   status: GameStatus
   home_score: number
   away_score: number
+  home_possession?: number | null
+  away_possession?: number | null
+  halftime_home_score?: number | null
+  halftime_away_score?: number | null
+  summary?: string | null
+  report_source?: string | null
   notes: string | null
   external_id?: string | null
   team: Pick<AdminTeam, 'id' | 'name'>
@@ -165,6 +171,13 @@ export type PlayerParentAssignment = {
 export type AvailabilityStatus = 'pending' | 'available' | 'unavailable'
 export type SelectionStatus =
   'selected' | 'started' | 'substitute' | 'not_selected'
+export type LineupLine = 'goalkeeper' | 'defense' | 'midfield' | 'offense'
+export type GameEventType =
+  | 'goal'
+  | 'own_goal'
+  | 'penalty_goal'
+  | 'yellow_card'
+  | 'red_card'
 export type GamePlayer = {
   game_id: string
   player_id: string
@@ -172,6 +185,7 @@ export type GamePlayer = {
   availability_note: string | null
   responded_at: string | null
   selection_status: SelectionStatus
+  lineup_line?: LineupLine | null
   participated: boolean
   minutes_played: number
   goals: number
@@ -180,4 +194,21 @@ export type GamePlayer = {
   red_cards: number
   coach_note: string | null
   player: Pick<AdminPlayer, 'id' | 'full_name'>
+}
+export type GameEvent = {
+  id: string
+  game_id: string
+  half: 1 | 2
+  minute: number
+  event_type: GameEventType
+  is_our_team: boolean
+  player_id: string | null
+  player_name_override: string | null
+  assist_player_id: string | null
+  event_note: string | null
+  home_score_after: number | null
+  away_score_after: number | null
+  sort_order: number
+  player: Pick<AdminPlayer, 'id' | 'full_name'> | null
+  assist_player: Pick<AdminPlayer, 'id' | 'full_name'> | null
 }

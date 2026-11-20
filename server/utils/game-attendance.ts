@@ -237,7 +237,7 @@ export async function getGamePlayers(
     adminClient
       .from('game_players')
       .select(
-        'game_id, player_id, availability_status, availability_note, responded_at, selection_status, participated, minutes_played, goals, assists, yellow_cards, red_cards, coach_note',
+        'game_id, player_id, availability_status, availability_note, responded_at, selection_status, lineup_line, participated, minutes_played, goals, assists, yellow_cards, red_cards, coach_note',
       )
       .eq('game_id', gameId)
       .order('created_at'),
@@ -258,6 +258,8 @@ export async function getGamePlayers(
               record.availability_status as GamePlayer['availability_status'],
             selection_status:
               record.selection_status as GamePlayer['selection_status'],
+            lineup_line:
+              (record.lineup_line as GamePlayer['lineup_line']) ?? null,
             player,
           },
         ]

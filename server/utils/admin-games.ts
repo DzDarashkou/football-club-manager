@@ -252,7 +252,7 @@ export async function getGames(
   let gamesQuery = adminClient
     .from('games')
     .select(
-      'id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, notes, external_id',
+      'id, team_id, season_id, competition_id, venue_id, opponent_name, location_type, scheduled_at, matchday, round_label, has_broadcast, broadcast_url, status, home_score, away_score, home_possession, away_possession, halftime_home_score, halftime_away_score, summary, report_source, notes, external_id',
     )
     .order('scheduled_at', { ascending: options.ascending ?? false })
 

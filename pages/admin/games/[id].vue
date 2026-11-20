@@ -6,9 +6,12 @@ import type {
   AdminGame,
   AdminGameInput,
   AdminGameSetupResponse,
+  GameEvent,
   GamePlayer,
 } from '@@/types/admin-club'
 import type { MatchWeatherResult } from '@@/types/weather'
+import MatchReportCard from '@@/components/games/MatchReportCard.vue'
+import MatchReportEditor from '@@/components/games/MatchReportEditor.vue'
 definePageMeta({ allowedRoles: ['admin'] })
 const id = useRoute().params.id as string
 const { gameName } = usePolishLocale()
@@ -20,6 +23,7 @@ const {
 } = useFetch<{
   game: AdminGame
   players: GamePlayer[]
+  events?: GameEvent[]
   weather: MatchWeatherResult
   weatherAttribution: { label: string; url: string }
 }>(`/api/admin/games/${id}`, {
@@ -287,6 +291,19 @@ watch(
       >
         {{ error }}
       </div>
+      <MatchReportCard
+        v-if="!editing"
+        :game="data.game"
+        :players="data.players"
+        :events="data.events ?? []"
+      />
+      <MatchReportEditor
+        v-if="!editing"
+        :game="data.game"
+        :players="data.players"
+        :events="data.events ?? []"
+        @saved="refresh"
+      />
       <Card
         v-if="editing"
         class="space-y-4"

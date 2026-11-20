@@ -270,6 +270,7 @@ export type Database = {
           availability_note: string | null
           responded_at: string | null
           selection_status: string
+          lineup_line: string | null
           participated: boolean
           minutes_played: number
           goals: number
@@ -287,6 +288,7 @@ export type Database = {
           availability_note?: string | null
           responded_at?: string | null
           selection_status?: string
+          lineup_line?: string | null
           participated?: boolean
           minutes_played?: number
           goals?: number
@@ -304,6 +306,7 @@ export type Database = {
           availability_note?: string | null
           responded_at?: string | null
           selection_status?: string
+          lineup_line?: string | null
           participated?: boolean
           minutes_played?: number
           goals?: number
@@ -311,6 +314,60 @@ export type Database = {
           yellow_cards?: number
           red_cards?: number
           coach_note?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      game_events: {
+        Row: {
+          id: string
+          game_id: string
+          half: number
+          minute: number
+          event_type: string
+          is_our_team: boolean
+          player_id: string | null
+          player_name_override: string | null
+          assist_player_id: string | null
+          event_note: string | null
+          home_score_after: number | null
+          away_score_after: number | null
+          sort_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          game_id: string
+          half: number
+          minute: number
+          event_type: string
+          is_our_team?: boolean
+          player_id?: string | null
+          player_name_override?: string | null
+          assist_player_id?: string | null
+          event_note?: string | null
+          home_score_after?: number | null
+          away_score_after?: number | null
+          sort_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          game_id?: string
+          half?: number
+          minute?: number
+          event_type?: string
+          is_our_team?: boolean
+          player_id?: string | null
+          player_name_override?: string | null
+          assist_player_id?: string | null
+          event_note?: string | null
+          home_score_after?: number | null
+          away_score_after?: number | null
+          sort_order?: number
           created_at?: string
           updated_at?: string
         }
@@ -462,6 +519,12 @@ export type Database = {
           status: string
           home_score: number
           away_score: number
+          home_possession: number | null
+          away_possession: number | null
+          halftime_home_score: number | null
+          halftime_away_score: number | null
+          summary: string | null
+          report_source: string | null
           notes: string | null
           external_id?: string | null
           created_at: string
@@ -483,6 +546,12 @@ export type Database = {
           status?: string
           home_score?: number
           away_score?: number
+          home_possession?: number | null
+          away_possession?: number | null
+          halftime_home_score?: number | null
+          halftime_away_score?: number | null
+          summary?: string | null
+          report_source?: string | null
           notes?: string | null
           external_id?: string | null
           created_at?: string
@@ -504,6 +573,12 @@ export type Database = {
           status?: string
           home_score?: number
           away_score?: number
+          home_possession?: number | null
+          away_possession?: number | null
+          halftime_home_score?: number | null
+          halftime_away_score?: number | null
+          summary?: string | null
+          report_source?: string | null
           notes?: string | null
           external_id?: string | null
           created_at?: string
