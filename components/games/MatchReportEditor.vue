@@ -62,6 +62,7 @@ const syncPlayerStats = ref(true)
 const syncGameScore = ref(false)
 
 const starterLines = reactive<Record<string, LineupLine | ''>>({})
+const importedPlayerNames = reactive<Record<string, string>>({})
 const draftEvents = ref<DraftEvent[]>([])
 
 const newEvent = reactive({
@@ -97,16 +98,34 @@ const hasExistingReport = computed(
     ),
 )
 
-const sortedPlayers = computed(() =>
-  [...players].sort((a, b) =>
+const sortedPlayers = computed(() => {
+  const byId = new Map<string, { player_id: string; player: { id: string; full_name: string } }>()
+  for (const player of players) {
+    byId.set(player.player_id, {
+      player_id: player.player_id,
+      player: player.player,
+    })
+  }
+  for (const [playerId, fullName] of Object.entries(importedPlayerNames)) {
+    if (!byId.has(playerId) && fullName) {
+      byId.set(playerId, {
+        player_id: playerId,
+        player: { id: playerId, full_name: fullName },
+      })
+    }
+  }
+  return [...byId.values()].sort((a, b) =>
     a.player.full_name.localeCompare(b.player.full_name, 'pl'),
-  ),
-)
+  )
+})
 
 const playerNameMap = computed(
   () =>
     new Map(
-      players.map((player) => [player.player_id, player.player.full_name]),
+      sortedPlayers.value.map((player) => [
+        player.player_id,
+        player.player.full_name,
+      ]),
     ),
 )
 
@@ -134,6 +153,8 @@ function hydrateFromProps() {
   syncGameScore.value = false
 
   for (const key of Object.keys(starterLines)) delete starterLines[key]
+  for (const key of Object.keys(importedPlayerNames))
+    delete importedPlayerNames[key]
   for (const player of players) {
     starterLines[player.player_id] =
       player.selection_status === 'started' && player.lineup_line
@@ -340,11 +361,22 @@ async function importFromSource() {
     if (draft.starters.length) {
       for (const key of Object.keys(starterLines)) starterLines[key] = ''
       for (const starter of draft.starters) {
+        if (starter.player_name) {
+          importedPlayerNames[starter.player_id] = starter.player_name
+        }
         starterLines[starter.player_id] = starter.lineup_line
       }
     }
 
     if (draft.events.length) {
+      for (const evt of draft.events) {
+        if (evt.player_id && evt.player_name) {
+          importedPlayerNames[evt.player_id] = evt.player_name
+        }
+        if (evt.assist_player_id && evt.assist_player_name) {
+          importedPlayerNames[evt.assist_player_id] = evt.assist_player_name
+        }
+      }
       draftEvents.value = draft.events.map((evt, index) => ({
         localId: `imp-${Date.now()}-${index}`,
         half: evt.half,
@@ -356,6 +388,9 @@ async function importFromSource() {
         assist_player_id: evt.assist_player_id,
         event_note: evt.event_note,
       }))
+      if (draft.events.some((evt) => isGoalEvent(evt.event_type))) {
+        syncGameScore.value = true
+      }
     }
 
     importWarnings.value = warnings

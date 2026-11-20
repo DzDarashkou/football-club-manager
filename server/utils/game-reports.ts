@@ -226,41 +226,87 @@ export async function saveGameReport(
 
     if (existingError) fail(existingError, 'Unable to load game squad.')
 
-    const updates = (existingPlayers ?? []).map((record) => {
-      const update: Database['public']['Tables']['game_players']['Update'] = {}
+    const existingMap = new Map(
+      (existingPlayers ?? []).map((record) => [
+        record.player_id,
+        record.selection_status,
+      ]),
+    )
 
-      if (payload.starters.length) {
-        const line = starterMap.get(record.player_id) ?? null
-        update.selection_status = line
-          ? 'started'
-          : record.selection_status === 'started'
-            ? 'substitute'
-            : record.selection_status
-        update.lineup_line = line
-      }
+    const referencedIds = Array.from(
+      new Set([
+        ...payload.starters.map((item) => item.player_id),
+        ...payload.events
+          .flatMap((event) => [event.player_id, event.assist_player_id])
+          .filter((id): id is string => Boolean(id)),
+      ]),
+    )
+    const missingIds = referencedIds.filter((id) => !existingMap.has(id))
 
-      if (statMap) {
-        const stats = statMap.get(record.player_id) ?? {
-          goals: 0,
-          assists: 0,
-          yellow_cards: 0,
-          red_cards: 0,
-        }
-        update.goals = stats.goals
-        update.assists = stats.assists
-        update.yellow_cards = stats.yellow_cards
-        update.red_cards = stats.red_cards
-        if (stats.goals > 0 || stats.assists > 0) {
-          update.participated = true
-        }
-      }
-
-      return adminClient
+    if (missingIds.length) {
+      const { error: insertMissingError } = await adminClient
         .from('game_players')
-        .update(update)
-        .eq('game_id', gameId)
-        .eq('player_id', record.player_id)
-    })
+        .insert(
+          missingIds.map((playerId) => {
+            const line = starterMap.get(playerId) ?? null
+            return {
+              game_id: gameId,
+              player_id: playerId,
+              selection_status: line ? 'started' : 'selected',
+              lineup_line: line,
+              participated: true,
+            }
+          }),
+        )
+      if (insertMissingError)
+        fail(insertMissingError, 'Unable to add report players to game squad.')
+      for (const playerId of missingIds) {
+        existingMap.set(
+          playerId,
+          starterMap.has(playerId) ? 'started' : 'selected',
+        )
+      }
+    }
+
+    const updates = Array.from(existingMap.entries()).map(
+      ([playerId, currentSelectionStatus]) => {
+        const update: Database['public']['Tables']['game_players']['Update'] =
+          {}
+
+        if (payload.starters.length) {
+          const line = starterMap.get(playerId) ?? null
+          update.selection_status = line
+            ? 'started'
+            : currentSelectionStatus === 'started'
+              ? 'substitute'
+              : currentSelectionStatus
+          update.lineup_line = line
+          if (line) update.participated = true
+        }
+
+        if (statMap) {
+          const stats = statMap.get(playerId) ?? {
+            goals: 0,
+            assists: 0,
+            yellow_cards: 0,
+            red_cards: 0,
+          }
+          update.goals = stats.goals
+          update.assists = stats.assists
+          update.yellow_cards = stats.yellow_cards
+          update.red_cards = stats.red_cards
+          if (stats.goals > 0 || stats.assists > 0) {
+            update.participated = true
+          }
+        }
+
+        return adminClient
+          .from('game_players')
+          .update(update)
+          .eq('game_id', gameId)
+          .eq('player_id', playerId)
+      },
+    )
 
     const results = await Promise.all(updates)
     const failed = results.find((result) => result.error)

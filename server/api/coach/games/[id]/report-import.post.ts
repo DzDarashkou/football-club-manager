@@ -73,8 +73,24 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const teamPlayers = await getActiveTeamPlayers(adminClient, game.team_id)
-  return parseMatchReportText(rawText, teamPlayers, {
+  const [teamPlayers, allClubPlayersResult] = await Promise.all([
+    getActiveTeamPlayers(adminClient, game.team_id),
+    adminClient
+      .from('players')
+      .select('id, full_name')
+      .eq('is_active', true)
+      .order('full_name'),
+  ])
+
+  const seenIds = new Set(teamPlayers.map((player) => player.id))
+  const candidatePlayers = [
+    ...teamPlayers,
+    ...(allClubPlayersResult.data ?? []).filter(
+      (player) => !seenIds.has(player.id),
+    ),
+  ]
+
+  return parseMatchReportText(rawText, candidatePlayers, {
     locationType: game.location_type as GameLocationType,
     defaultSource,
   })
