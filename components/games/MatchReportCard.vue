@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Download } from 'lucide-vue-next'
 import {
   eventDisplayName,
   groupLineupStarters,
   isGoalEvent,
+  toPdfDownloadUrl,
 } from '@@/lib/game-report'
 import type { AdminGame, GameEvent, GamePlayer } from '@@/types/admin-club'
 import { usePolishLocale } from '@@/composables/usePolishLocale'
@@ -54,12 +56,15 @@ const secondHalfEvents = computed(() =>
   events.filter((event) => event.half === 2),
 )
 
+const pdfDownloadUrl = computed(() => toPdfDownloadUrl(game.report_pdf_url))
+
 const hasReportData = computed(
   () =>
     hasPossession.value ||
     lineupGroups.value.length > 0 ||
     events.length > 0 ||
-    Boolean(game.summary?.trim()),
+    Boolean(game.summary?.trim()) ||
+    Boolean(pdfDownloadUrl.value),
 )
 
 const formattedDateTime = computed(() => {
@@ -381,6 +386,34 @@ function formatEventSubtext(event: GameEvent): string | null {
           {{ game.summary }}
         </p>
       </section>
+
+      <!-- Download PDF Report Link -->
+      <div
+        v-if="pdfDownloadUrl"
+        class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-100 bg-brand-50/70 p-3.5"
+      >
+        <div>
+          <p class="text-sm font-medium text-brand-900">
+            Pełny raport meczowy (PDF)
+          </p>
+          <p class="text-xs text-[color:var(--color-text-secondary)]">
+            Pobierz szczegółowy przebieg spotkania w formacie PDF.
+          </p>
+        </div>
+        <a
+          :href="pdfDownloadUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+          class="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-brand-700 px-3.5 py-2 text-xs font-medium text-white hover:bg-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
+          <Download
+            class="h-4 w-4 shrink-0"
+            aria-hidden="true"
+          />
+          Pobierz raport PDF
+        </a>
+      </div>
     </div>
 
     <!-- Footer -->

@@ -20,6 +20,7 @@ const exports = {}
 runInNewContext(outputText, {
   exports,
   require: createRequire(import.meta.url),
+  URL,
 })
 
 const {
@@ -28,6 +29,7 @@ const {
   eventDisplayName,
   summarizePlayerEventStats,
   generateMatchSummaryDraft,
+  toPdfDownloadUrl,
 } = exports
 
 test('computeRunningScores sorts chronologically and computes home/away running scores', () => {
@@ -225,4 +227,25 @@ test('generateMatchSummaryDraft highlights hat-tricks and clean sheets', () => {
   assert.match(draft, /Pewna wygrana Sporting Wrocław II/)
   assert.match(draft, /Jan Dawiec zdobył hat-tricka/)
   assert.match(draft, /czyste konto/)
+})
+
+test('toPdfDownloadUrl converts Google Drive share links into direct download URLs', () => {
+  assert.equal(
+    toPdfDownloadUrl(
+      'https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz/view?usp=sharing',
+    ),
+    'https://drive.google.com/uc?export=download&id=1AbCdEfGhIjKlMnOpQrStUvWxYz',
+  )
+  assert.equal(
+    toPdfDownloadUrl(
+      'https://drive.google.com/open?id=1AbCdEfGhIjKlMnOpQrStUvWxYz',
+    ),
+    'https://drive.google.com/uc?export=download&id=1AbCdEfGhIjKlMnOpQrStUvWxYz',
+  )
+  assert.equal(
+    toPdfDownloadUrl('https://example.com/raport-meczu.pdf'),
+    'https://example.com/raport-meczu.pdf',
+  )
+  assert.equal(toPdfDownloadUrl('javascript:alert(1)'), null)
+  assert.equal(toPdfDownloadUrl(null), null)
 })

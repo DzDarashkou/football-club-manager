@@ -83,6 +83,15 @@ export const gameReportSchema = z
       .nullable()
       .optional()
       .default(null),
+    report_pdf_url: z
+      .string()
+      .trim()
+      .max(2048, 'Link do PDF może mieć maksymalnie 2048 znaków.')
+      .url('Podaj prawidłowy link do pliku PDF.')
+      .regex(/^https?:\/\//i, 'Link musi zaczynać się od http:// lub https://.')
+      .nullable()
+      .optional()
+      .default(null),
     starters: z.array(starterSchema).max(30).optional().default([]),
     events: z.array(eventSchema).max(100).optional().default([]),
     sync_player_stats: z.boolean().optional().default(true),
@@ -197,6 +206,7 @@ export async function saveGameReport(
     halftime_away_score: halftimeAway,
     summary: payload.summary,
     report_source: payload.report_source,
+    report_pdf_url: payload.report_pdf_url,
   }
   if (payload.sync_game_score) {
     gameUpdate.home_score = scored.homeScore

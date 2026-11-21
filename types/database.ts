@@ -525,6 +525,7 @@ export type Database = {
           halftime_away_score: number | null
           summary: string | null
           report_source: string | null
+          report_pdf_url: string | null
           notes: string | null
           external_id?: string | null
           created_at: string
@@ -552,6 +553,7 @@ export type Database = {
           halftime_away_score?: number | null
           summary?: string | null
           report_source?: string | null
+          report_pdf_url?: string | null
           notes?: string | null
           external_id?: string | null
           created_at?: string
@@ -579,6 +581,7 @@ export type Database = {
           halftime_away_score?: number | null
           summary?: string | null
           report_source?: string | null
+          report_pdf_url?: string | null
           notes?: string | null
           external_id?: string | null
           created_at?: string

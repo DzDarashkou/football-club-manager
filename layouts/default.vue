@@ -7,6 +7,7 @@ import {
   Calendar,
   CircleHelp,
   Dumbbell,
+  FileText,
   ChevronRight,
   LayoutDashboard,
   LogOut,
@@ -86,6 +87,13 @@ const memberNavItems: NavItemWithIcon[] = [
     role: ['parent', 'coach'],
   },
   {
+    label: 'Raporty',
+    icon: 'FileText',
+    iconComponent: FileText,
+    to: '/game-reports',
+    role: ['parent', 'coach'],
+  },
+  {
     label: 'Quiz',
     icon: 'CircleHelp',
     iconComponent: CircleHelp,
@@ -150,6 +158,13 @@ const adminNavItems: NavItemWithIcon[] = [
     icon: 'Calendar',
     iconComponent: Calendar,
     to: '/admin/games',
+    role: ['admin'],
+  },
+  {
+    label: 'Raporty meczowe',
+    icon: 'FileText',
+    iconComponent: FileText,
+    to: '/game-reports',
     role: ['admin'],
   },
   {
@@ -227,6 +242,13 @@ const coachNavItems: NavItemWithIcon[] = [
     icon: 'Calendar',
     iconComponent: Calendar,
     to: '/coach/calendar',
+    role: ['coach'],
+  },
+  {
+    label: 'Raporty',
+    icon: 'FileText',
+    iconComponent: FileText,
+    to: '/game-reports',
     role: ['coach'],
   },
   {
@@ -314,6 +336,13 @@ async function setAdminNavigationMode(mode: AdminNavigationMode) {
         <ClubLogo variant="full" />
       </div>
       <div class="flex items-center gap-2">
+        <NuxtLink
+          v-if="role === 'parent' || role === 'coach'"
+          to="/game-reports"
+          class="hidden min-h-11 items-center gap-2 rounded-full px-3 text-sm text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 lg:inline-flex"
+        >
+          <FileText class="h-5 w-5" />Raporty
+        </NuxtLink>
         <NuxtLink
           v-if="role === 'parent' || role === 'coach'"
           to="/standings"

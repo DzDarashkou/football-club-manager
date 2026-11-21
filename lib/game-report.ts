@@ -233,3 +233,40 @@ export function generateMatchSummaryDraft(
     ? `${headline}\n${highlights.join('; ')}.`
     : headline
 }
+
+export function extractGoogleDriveFileId(rawUrl: string): string | null {
+  try {
+    const url = new URL(rawUrl.trim())
+    if (
+      !url.hostname.endsWith('drive.google.com') &&
+      !url.hostname.endsWith('docs.google.com')
+    ) {
+      return null
+    }
+    const pathMatch = url.pathname.match(/\/(?:file|document)\/d\/([A-Za-z0-9_-]{10,})/)
+    if (pathMatch?.[1]) return pathMatch[1]
+
+    const idParam = url.searchParams.get('id')
+    if (idParam && /^[A-Za-z0-9_-]{10,}$/.test(idParam)) return idParam
+    return null
+  } catch {
+    return null
+  }
+}
+
+export function toPdfDownloadUrl(
+  rawUrl: string | null | undefined,
+): string | null {
+  if (!rawUrl?.trim()) return null
+  try {
+    const url = new URL(rawUrl.trim())
+    if (!['http:', 'https:'].includes(url.protocol)) return null
+    const driveId = extractGoogleDriveFileId(url.href)
+    if (driveId) {
+      return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(driveId)}`
+    }
+    return url.href
+  } catch {
+    return null
+  }
+}

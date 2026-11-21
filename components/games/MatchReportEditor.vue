@@ -58,6 +58,7 @@ const halftimeHome = ref<string | number>('')
 const halftimeAway = ref<string | number>('')
 const summary = ref('')
 const reportSource = ref('')
+const reportPdfUrl = ref('')
 const syncPlayerStats = ref(true)
 const syncGameScore = ref(false)
 
@@ -92,6 +93,7 @@ const hasExistingReport = computed(
     game.home_possession !== null ||
     events.length > 0 ||
     Boolean(game.summary?.trim()) ||
+    Boolean(game.report_pdf_url?.trim()) ||
     players.some(
       (player) =>
         player.selection_status === 'started' && Boolean(player.lineup_line),
@@ -149,6 +151,7 @@ function hydrateFromProps() {
   halftimeAway.value = game.halftime_away_score ?? ''
   summary.value = game.summary ?? ''
   reportSource.value = game.report_source ?? ''
+  reportPdfUrl.value = game.report_pdf_url ?? ''
   syncPlayerStats.value = true
   syncGameScore.value = false
 
@@ -274,6 +277,7 @@ async function saveReport() {
           halftimeAway.value === '' ? null : Number(halftimeAway.value),
         summary: summary.value.trim() || null,
         report_source: reportSource.value.trim() || null,
+        report_pdf_url: reportPdfUrl.value.trim() || null,
         starters,
         events: scoredPreview.value.events.map((event, index) => ({
           half: event.half,
@@ -591,6 +595,21 @@ async function importFromSource() {
               type="text"
               placeholder="np. szczegółowy przebieg przekazany w PDF"
             />
+          </div>
+          <div class="sm:col-span-3">
+            <Label for="report-pdf-url">
+              Link do pliku PDF (np. Dysk Google)
+            </Label>
+            <Input
+              id="report-pdf-url"
+              v-model="reportPdfUrl"
+              type="url"
+              placeholder="https://drive.google.com/file/d/.../view?usp=sharing"
+            />
+            <p class="mt-1 text-xs text-[color:var(--color-text-secondary)]">
+              Link z Dysku Google zostanie automatycznie zamieniony na gotowy
+              przycisk bezpośredniego pobierania PDF.
+            </p>
           </div>
         </div>
       </section>

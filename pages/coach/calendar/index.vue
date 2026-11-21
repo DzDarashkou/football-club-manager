@@ -31,6 +31,8 @@ const today = new Date(
 )
 const currentMonth = ref(new Date(today.getFullYear(), today.getMonth(), 1))
 const selectedDate = ref(toDateKey(today))
+const showGames = ref(true)
+const showTrainings = ref(false)
 const gamesSection = ref<HTMLElement | null>(null)
 
 function toDateKey(value: Date | string) {
@@ -73,8 +75,12 @@ const { data, pending, error } = await useFetch<{
   default: () => ({ games: [], trainings: [] }),
 })
 
-const games = computed(() => data.value?.games ?? [])
-const trainings = computed(() => data.value?.trainings ?? [])
+const games = computed(() =>
+  showGames.value ? (data.value?.games ?? []) : [],
+)
+const trainings = computed(() =>
+  showTrainings.value ? (data.value?.trainings ?? []) : [],
+)
 const selectedDayGames = computed(() =>
   games.value.filter(
     (game) => toDateKey(game.scheduled_at) === selectedDate.value,
@@ -207,13 +213,51 @@ function formatSelectedDate(value: string) {
 
 <template>
   <div class="mx-auto max-w-6xl space-y-5">
-    <div class="space-y-2">
-      <p class="eyebrow text-brand-700">Strefa trenera</p>
-      <h1>Kalendarz meczów</h1>
-      <p class="text-body text-[color:var(--color-text-secondary)]">
-        Wszystkie mecze klubu są widoczne tutaj. Wybierz mecz, aby sprawdzić
-        kadrę i zapisać dostępność.
-      </p>
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div class="space-y-2">
+        <p class="eyebrow text-brand-700">Strefa trenera</p>
+        <h1>Kalendarz</h1>
+        <p class="text-body text-[color:var(--color-text-secondary)]">
+          Przeglądaj mecze i treningi klubu. Wybierz wydarzenie, aby sprawdzić
+          szczegóły.
+        </p>
+      </div>
+
+      <div
+        class="flex flex-wrap items-center gap-2"
+        role="group"
+        aria-label="Filtruj wydarzenia w kalendarzu"
+      >
+        <button
+          type="button"
+          :aria-pressed="showGames"
+          class="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3.5 py-2 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          :class="
+            showGames
+              ? 'border-brand-700 bg-brand-700 text-white'
+              : 'border-input bg-surface text-[color:var(--color-text-secondary)] hover:bg-brand-50/60'
+          "
+          @click="showGames = !showGames"
+        >
+          <span aria-hidden="true">⚽</span>
+          <span>Mecze</span>
+        </button>
+
+        <button
+          type="button"
+          :aria-pressed="showTrainings"
+          class="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3.5 py-2 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          :class="
+            showTrainings
+              ? 'border-[#639922] bg-[#639922] text-white'
+              : 'border-input bg-surface text-[color:var(--color-text-secondary)] hover:bg-brand-50/60'
+          "
+          @click="showTrainings = !showTrainings"
+        >
+          <span aria-hidden="true">🏋</span>
+          <span>Treningi</span>
+        </button>
+      </div>
     </div>
 
     <p
@@ -260,7 +304,7 @@ function formatSelectedDate(value: string) {
       </div>
       <ClientOnly v-else>
         <FullCalendar
-          :key="`${range.startsAt}-${selectedDate}`"
+          :key="`${range.startsAt}-${selectedDate}-${showGames}-${showTrainings}`"
           class="coach-calendar"
           :options="calendarOptions"
         />
